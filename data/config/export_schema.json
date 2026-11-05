@@ -1,0 +1,160 @@
+{
+  "_doc": "Definisi kolom unduhan PDPSI. Dipakai pipeline (unduhan rilis) dan aplikasi web (unduhan sesuai filter) agar kolom dan keterangannya selalu sama. Lihat docs/DECISIONS.md bagian 1.",
+  "id_column": {
+    "title": "[Olahan PDPSI] ID Rekaman",
+    "path": "id",
+    "kind": "Olahan PDPSI",
+    "description": "ID internal PDPSI dari isi rekaman; tidak bergantung pada urutan baris."
+  },
+  "source_column_notes": {
+    "No": "Nomor urut baris di workbook ekstraksi. Bukan ID resmi dan tidak stabil antar-ekstraksi.",
+    "Region": "Bukan field GoKUPS. Diturunkan penyusun workbook dari provinsi (kelompok pulau).",
+    "Kesatuan Pengelola Hutan": "Disalin dari halaman detail SK. Ada isian 'KPHP BENGKULU UTARA' pada rekaman di luar Bengkulu; lihat penanda.",
+    "Luas Area Keseluruhan (Ha)": "Dibulatkan ke hektare penuh oleh sumber.",
+    "Anggota Keseluruhan": "Nilai sumber. Pada sebagian rekaman sama dengan anggota perempuan; lihat penanda. Tidak dipakai untuk perhitungan anggota.",
+    "Anggota Perempuan": "Nilai sumber. Nilai 0 bisa berarti tidak dicatat.",
+    "Kecamatan": "Teks sumber. Belum dicocokkan ke kode resmi."
+  },
+  "default_source_note": "Nilai kolom sumber apa adanya.",
+  "derived_columns": [
+    {
+      "title": "[Olahan PDPSI] Kode Skema",
+      "path": "derived.scheme_code",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Kode untuk 7 kategori skema sumber; kategori tidak digabung."
+    },
+    {
+      "title": "[Olahan PDPSI] Jenis Rekaman",
+      "path": "derived.record_kind",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "persetujuan, atau penetapan untuk Hutan Adat."
+    },
+    {
+      "title": "[Olahan PDPSI] Tahun SK",
+      "path": "derived.approval_year",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Tahun dari kolom Tanggal Surat Keputusan."
+    },
+    {
+      "title": "[Olahan PDPSI] Kode Provinsi",
+      "path": "derived.province_code",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Kode Kepmendagri 300.2.2-2138/2025."
+    },
+    {
+      "title": "[Olahan PDPSI] Provinsi (nama resmi)",
+      "path": "derived.province_name_official",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Nama resmi untuk kode di atas."
+    },
+    {
+      "title": "[Olahan PDPSI] Kode Kabupaten/Kota",
+      "path": "derived.regency_code",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Kode Kepmendagri 300.2.2-2138/2025."
+    },
+    {
+      "title": "[Olahan PDPSI] Kabupaten/Kota (nama resmi)",
+      "path": "derived.regency_name_official",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Nama resmi untuk kode di atas."
+    },
+    {
+      "title": "[Olahan PDPSI] Anggota Laki-Laki + Perempuan",
+      "path": "derived.members_male_plus_female",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Hasil penjumlahan; kosong bila tidak dapat dihitung."
+    },
+    {
+      "title": "[Olahan PDPSI] Status Perhitungan Anggota",
+      "path": "derived.members_calc_status",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "dihitung, nilai_negatif, atau komponen_kosong."
+    },
+    {
+      "title": "[Olahan PDPSI] Status Perhitungan Luas",
+      "path": "derived.area_calc_status",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "dihitung, nilai_negatif, atau kosong."
+    },
+    {
+      "title": "[Pemeriksaan PDPSI] Jumlah Rekaman dengan Nomor SK Sama",
+      "path": "quality.duplicate.record_count",
+      "transform": "default_1",
+      "kind": "Pemeriksaan PDPSI",
+      "description": "1 berarti nomor SK tidak dipakai rekaman lain."
+    },
+    {
+      "title": "[Pemeriksaan PDPSI] Tipe Duplikat",
+      "path": "quality.duplicate.type",
+      "transform": null,
+      "kind": "Pemeriksaan PDPSI",
+      "description": "identik atau atribut_berbeda; kosong bila bukan duplikat."
+    },
+    {
+      "title": "[Pemeriksaan PDPSI] ID Rekaman dengan Nomor SK Sama",
+      "path": "quality.duplicate.related_ids",
+      "transform": "join",
+      "kind": "Pemeriksaan PDPSI",
+      "description": "Semua ID rekaman lain dengan nomor SK sama."
+    },
+    {
+      "title": "[Pemeriksaan PDPSI] ID Rekaman dengan Nomor SK Beda Penulisan",
+      "path": "quality.sk_spacing_variant_ids",
+      "transform": "join",
+      "kind": "Pemeriksaan PDPSI",
+      "description": "Nomor SK hanya berbeda spasi atau huruf besar/kecil."
+    },
+    {
+      "title": "[Pemeriksaan PDPSI] Penanda",
+      "path": "quality.flags",
+      "transform": "join",
+      "kind": "Pemeriksaan PDPSI",
+      "description": "Kode penanda, dipisah titik koma. Arti tiap kode ada di metadata."
+    },
+    {
+      "title": "[Olahan PDPSI] Versi Rilis",
+      "path": "release_version",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "Versi rilis data PDPSI."
+    }
+  ],
+  "flag_docs": {
+    "duplicate_sk": "Duplikat: nomor SK (teks persis sama) juga dipakai rekaman lain. Semua rekaman tetap dihitung.",
+    "duplicate_identical": "Duplikat identik: semua kolom sumber selain No sama dengan rekaman lain bernomor SK sama.",
+    "duplicate_attributes_differ": "Duplikat dengan atribut berbeda: nomor SK sama, tetapi isi kolom lain berbeda.",
+    "sk_spacing_variant": "Nomor SK hanya berbeda spasi atau huruf besar/kecil dengan nomor SK rekaman lain; kemungkinan nomor SK sama dengan penulisan berbeda.",
+    "sk_year_truncated": "Tahun pada nomor SK tertulis 3 digit.",
+    "date_after_extraction": "Tanggal SK sesudah tanggal pengambilan data.",
+    "date_year_mismatch": "Tahun pada nomor SK berbeda dengan tahun tanggal SK.",
+    "area_zero": "Luas total di sumber bernilai 0.",
+    "area_component_mismatch": "Selisih luas total dan jumlah komponen luas lebih dari ambang penanda (5 ha). Luas tetap dihitung.",
+    "area_component_rounding": "Selisih luas total dan jumlah komponen 1 sampai 5 ha. Luas tetap dihitung.",
+    "area_missing": "Luas total kosong di sumber; tidak bisa dihitung.",
+    "area_negative": "Luas total negatif di sumber; tidak dihitung.",
+    "members_total_column_mismatch": "Anggota Keseluruhan di sumber tidak sama dengan laki-laki + perempuan.",
+    "members_total_equals_female": "Anggota Keseluruhan di sumber sama dengan jumlah anggota perempuan, padahal anggota laki-laki lebih dari 0.",
+    "members_negative": "Ada nilai anggota negatif di sumber; laki-laki + perempuan tidak dihitung.",
+    "members_component_missing": "Anggota laki-laki atau perempuan kosong di sumber; laki-laki + perempuan tidak tersedia.",
+    "institution_type_lphd_on_htr": "Bentuk lembaga tercatat Lembaga Pengelola Hutan Desa pada skema Hutan Tanaman Rakyat.",
+    "kph_bengkulu_utara_outside_bengkulu": "KPH tercatat KPHP Bengkulu Utara pada rekaman di luar Provinsi Bengkulu. Catatan workbook menyebut ini isian sumber GoKUPS yang perlu dikonfirmasi."
+  },
+  "texts": {
+    "unit": "Satu baris = satu rekaman persetujuan/penetapan Perhutanan Sosial pada tabular GoKUPS. Bukan jumlah kelompok atau lembaga.",
+    "fidelity": "Kolom sumber disajikan apa adanya dengan nama kolom asli. Kolom berawalan [Olahan PDPSI] dan [Pemeriksaan PDPSI] adalah hasil pengolahan dan pemeriksaan PDPSI, bukan bagian dari sumber.",
+    "aggregates": "Hasil pengolahan PDPSI dari data sumber, bukan angka resmi nasional.",
+    "csv_format": "Format CSV: UTF-8 dengan BOM, pemisah koma, desimal titik. Pengguna Excel berlokal Indonesia sebaiknya memakai file XLSX.",
+    "not_set": "Belum ditetapkan"
+  }
+}

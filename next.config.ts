@@ -11,7 +11,7 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/**": ["./data/releases/current.json", "./data/releases/*/approvals.json", "./data/releases/*/control_totals.json",
       "./data/releases/*/admin_areas.json", "./data/releases/*/schemes.json", "./data/releases/*/release.json",
-      "./data/releases/*/downloads/**", "./config/site.json"],
+      "./data/releases/*/downloads/**", "./config/site.json", "./data/config/export_schema.json"],
   },
   outputFileTracingExcludes: {
     "/**": ["./data/releases/*/internal/**", "./data/source/**", "./*.xlsx", "./pipeline/**"],

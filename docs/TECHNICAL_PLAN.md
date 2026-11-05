@@ -156,13 +156,14 @@ Perintah: `uv run pdpsi build --source data/source/<file>.xlsx --version 2026-11
 | `/data` | Tabel, pencarian, filter, paginasi, unduh hasil | Server (filter dari URL) |
 | `/data/[id]` | Detail rekaman | Server, cache per rilis |
 | `/download` | Unduhan lengkap & ringkasan | Statis per rilis |
-| `/download/export` | Route handler ekspor sesuai filter (CSV/XLSX) | Server |
+| `/unduh-hasil` | Route handler ekspor sesuai filter (CSV dalam ZIP / XLSX), parameter sama dengan `/data` | Server |
+| `/unduh-berkas/[file]` | File unduhan rilis dari manifes `release.json` | Server |
 | `/about` | Tentang data & metodologi | Statis |
 | `/en/...` | Versi Inggris dari semua rute di atas | |
 
 Halaman `/region/...` (opsional di PRD §5.1) **tidak dibangun di MVP**. Kebutuhannya sudah tertutup oleh panel peta dan `/data?province=…`. Bisa ditambahkan kemudian tanpa mengubah data.
 
-Semua state filter disimpan di URL (`?province=72&regency=72.09&scheme=HKm&year_from=2017&year_to=2024&q=…&page=2&sort=-area`). Akibatnya tautan dapat dibagikan, tombol kembali berfungsi, dan peta, statistik, serta data bisa saling menaut dengan filter yang sama.
+Semua state filter disimpan di URL (`?q=…&province=72&regency=72.09&type=HTR&year_from=2017&year_to=2024&flag=duplicate_sk&sort=area&dir=desc&page=2`). `type` menerima 5 kode jenis PS (HD, HKM, HTR, HA, KK) atau 3 kode subskema KK. Parameter tidak valid diabaikan dan disebutkan di halaman. Akibatnya tautan dapat dibagikan, tombol kembali berfungsi, dan peta, statistik, serta data bisa saling menaut dengan filter yang sama.
 
 ### 5.2 Satu modul agregasi
 

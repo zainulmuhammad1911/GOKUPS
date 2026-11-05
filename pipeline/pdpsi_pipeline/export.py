@@ -8,6 +8,7 @@ from pathlib import Path
 
 import pandas as pd
 
+from .config import PROJECT_ROOT
 from .ingest import EXCLUSION_REASON, EXPECTED_COLUMNS, PRIVATE_COLUMNS, PUBLISHED_COLUMNS
 from .quality import FLAG_DOCS
 
@@ -15,36 +16,22 @@ NOT_SET_ID = "Belum ditetapkan"
 DERIVED = "[Olahan PDPSI]"
 CHECK = "[Pemeriksaan PDPSI]"
 
-SOURCE_COLUMN_NOTES = {
-    "No": "Nomor urut baris di workbook ekstraksi. Bukan ID resmi dan tidak stabil antar-ekstraksi.",
-    "Region": "Bukan field GoKUPS. Diturunkan penyusun workbook dari provinsi (kelompok pulau).",
-    "Kesatuan Pengelola Hutan": "Disalin dari halaman detail SK. Ada isian 'KPHP BENGKULU UTARA' pada rekaman di luar Bengkulu; lihat penanda.",
-    "Luas Area Keseluruhan (Ha)": "Dibulatkan ke hektare penuh oleh sumber.",
-    "Anggota Keseluruhan": "Nilai sumber. Pada sebagian rekaman sama dengan anggota perempuan; lihat penanda. Tidak dipakai untuk perhitungan anggota.",
-    "Anggota Perempuan": "Nilai sumber. Nilai 0 bisa berarti tidak dicatat.",
-    "Kecamatan": "Teks sumber. Belum dicocokkan ke kode resmi.",
-}
+# Definisi kolom unduhan dibaca dari config bersama (juga dipakai aplikasi web untuk unduhan sesuai filter).
+SCHEMA: dict = json.loads((PROJECT_ROOT / "data" / "config" / "export_schema.json").read_text(encoding="utf-8"))
+ID_COLUMN: str = SCHEMA["id_column"]["title"]
+SOURCE_COLUMN_NOTES: dict[str, str] = SCHEMA["source_column_notes"]
 
-# (judul kolom, fungsi pengambil nilai, keterangan)
-DERIVED_COLUMNS = [
-    (f"{DERIVED} Kode Skema", lambda r: r["derived"]["scheme_code"], "Kode untuk 7 kategori skema sumber; kategori tidak digabung."),
-    (f"{DERIVED} Jenis Rekaman", lambda r: r["derived"]["record_kind"], "persetujuan, atau penetapan untuk Hutan Adat."),
-    (f"{DERIVED} Tahun SK", lambda r: r["derived"]["approval_year"], "Tahun dari kolom Tanggal Surat Keputusan."),
-    (f"{DERIVED} Kode Provinsi", lambda r: r["derived"]["province_code"], "Kode Kepmendagri 300.2.2-2138/2025."),
-    (f"{DERIVED} Provinsi (nama resmi)", lambda r: r["derived"]["province_name_official"], "Nama resmi untuk kode di atas."),
-    (f"{DERIVED} Kode Kabupaten/Kota", lambda r: r["derived"]["regency_code"], "Kode Kepmendagri 300.2.2-2138/2025."),
-    (f"{DERIVED} Kabupaten/Kota (nama resmi)", lambda r: r["derived"]["regency_name_official"], "Nama resmi untuk kode di atas."),
-    (f"{DERIVED} Anggota Laki-Laki + Perempuan", lambda r: r["derived"]["members_male_plus_female"], "Hasil penjumlahan; kosong bila tidak dapat dihitung."),
-    (f"{DERIVED} Status Perhitungan Anggota", lambda r: r["derived"]["members_calc_status"], "dihitung, nilai_negatif, atau komponen_kosong."),
-    (f"{DERIVED} Status Perhitungan Luas", lambda r: r["derived"]["area_calc_status"], "dihitung, nilai_negatif, atau kosong."),
-    (f"{CHECK} Jumlah Rekaman dengan Nomor SK Sama", lambda r: (r["quality"]["duplicate"] or {}).get("record_count", 1), "1 berarti nomor SK tidak dipakai rekaman lain."),
-    (f"{CHECK} Tipe Duplikat", lambda r: (r["quality"]["duplicate"] or {}).get("type"), "identik atau atribut_berbeda; kosong bila bukan duplikat."),
-    (f"{CHECK} ID Rekaman dengan Nomor SK Sama", lambda r: ";".join((r["quality"]["duplicate"] or {}).get("related_ids", [])), "Semua ID rekaman lain dengan nomor SK sama."),
-    (f"{CHECK} ID Rekaman dengan Nomor SK Beda Penulisan", lambda r: ";".join(r["quality"]["sk_spacing_variant_ids"]), "Nomor SK hanya berbeda spasi atau huruf besar/kecil."),
-    (f"{CHECK} Penanda", lambda r: ";".join(r["quality"]["flags"]), "Kode penanda, dipisah titik koma. Arti tiap kode ada di metadata."),
-    (f"{DERIVED} Versi Rilis", lambda r: r["release_version"], "Versi rilis data PDPSI."),
-]
-ID_COLUMN = f"{DERIVED} ID Rekaman"
+
+def get_path(record: dict, path: str, transform: str | None = None):
+    """Ambil nilai dari rekaman publik menurut jalur 'a.b.c'. Transformasi sama dengan aplikasi web."""
+    cur = record
+    for part in path.split("."):
+        cur = cur.get(part) if isinstance(cur, dict) else None
+    if transform == "join":
+        return ";".join(cur or [])
+    if transform == "default_1":
+        return 1 if cur is None else cur
+    return cur
 
 
 def records_table(records: list[dict]) -> pd.DataFrame:
@@ -52,15 +39,15 @@ def records_table(records: list[dict]) -> pd.DataFrame:
     for r in records:
         row = {ID_COLUMN: r["id"]}
         row.update({c: r["source"][c] for c in PUBLISHED_COLUMNS})
-        row.update({title: get(r) for title, get, _ in DERIVED_COLUMNS})
+        row.update({c["title"]: get_path(r, c["path"], c["transform"]) for c in SCHEMA["derived_columns"]})
         rows.append(row)
     return pd.DataFrame(rows)
 
 
 def dictionary_table() -> pd.DataFrame:
-    rows = [(ID_COLUMN, "Olahan PDPSI", "ID internal PDPSI dari isi rekaman; tidak bergantung pada urutan baris.")]
-    rows += [(c, "Sumber (apa adanya)", SOURCE_COLUMN_NOTES.get(c, "Nilai kolom sumber apa adanya.")) for c in PUBLISHED_COLUMNS]
-    rows += [(t, "Olahan PDPSI" if t.startswith(DERIVED) else "Pemeriksaan PDPSI", d) for t, _, d in DERIVED_COLUMNS]
+    rows = [(ID_COLUMN, SCHEMA["id_column"]["kind"], SCHEMA["id_column"]["description"])]
+    rows += [(c, "Sumber (apa adanya)", SOURCE_COLUMN_NOTES.get(c, SCHEMA["default_source_note"])) for c in PUBLISHED_COLUMNS]
+    rows += [(c["title"], c["kind"], c["description"]) for c in SCHEMA["derived_columns"]]
     rows += [(c, "Tidak dipublikasikan", EXCLUSION_REASON) for c in PRIVATE_COLUMNS]
     return pd.DataFrame(rows, columns=["Kolom", "Jenis", "Keterangan"])
 
@@ -80,10 +67,10 @@ def metadata_lines(release: dict, site: dict, title: str) -> list[tuple[str, str
         ("Sumber data", src.get("description") or NOT_SET_ID),
         ("Waktu pengambilan data sumber (UTC)", src["extracted_at"]),
         ("Waktu pembuatan rilis (UTC)", release["built_at"]),
-        ("Unit analisis", "Satu baris = satu rekaman persetujuan/penetapan Perhutanan Sosial pada tabular GoKUPS. Bukan jumlah kelompok atau lembaga."),
-        ("Kesetiaan pada sumber", "Kolom sumber disajikan apa adanya dengan nama kolom asli. Kolom berawalan [Olahan PDPSI] dan [Pemeriksaan PDPSI] adalah hasil pengolahan dan pemeriksaan PDPSI, bukan bagian dari sumber."),
+        ("Unit analisis", SCHEMA["texts"]["unit"]),
+        ("Kesetiaan pada sumber", SCHEMA["texts"]["fidelity"]),
         ("Kolom yang tidak dipublikasikan", f"{', '.join(PRIVATE_COLUMNS)}. {EXCLUSION_REASON} Karena itu file ini bukan salinan mentah sepenuhnya."),
-        ("Angka agregat", "Hasil pengolahan PDPSI dari data sumber, bukan angka resmi nasional."),
+        ("Angka agregat", SCHEMA["texts"]["aggregates"]),
         ("Institusi pengelola", _site_value(inst.get("name_id"))),
         ("Kontak", _site_value(inst.get("contact_email"))),
         ("Lisensi data", _site_value(lic.get("name"))),
@@ -99,7 +86,7 @@ def write_csv_zip(table: pd.DataFrame, meta: list[tuple[str, str]], path: Path, 
     readme = "\n".join(f"{k}: {v}" if v else k for k, v in meta)
     if dictionary is not None:
         readme += "\n\nKamus kolom:\n" + "\n".join(f"- {c} [{j}]: {d}" for c, j, d in dictionary.itertuples(index=False))
-    readme += "\n\nFormat CSV: UTF-8 dengan BOM, pemisah koma, desimal titik. Pengguna Excel berlokal Indonesia sebaiknya memakai file XLSX.\n"
+    readme += "\n\n" + SCHEMA["texts"]["csv_format"] + "\n"
     with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as z:
         z.writestr(csv_name, csv_bytes)
         z.writestr("BACA_SAYA.txt", readme.encode("utf-8"))

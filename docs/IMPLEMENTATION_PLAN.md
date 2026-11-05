@@ -1,6 +1,6 @@
 # Rencana Implementasi PDPSI
 
-**Status:** Tahap 0, 1, dan 2 selesai (2026-11-05), ditambah rekap provinsi × kabupaten/kota × jenis PS (rilis `2026-11-02.r3`); menunggu arahan untuk Tahap 3. Hasil Tahap 2: 7 rute dalam 2 bahasa terhubung ke rilis draf `2026-11-02.r2`; Vitest 9 lulus, Playwright + axe 51 lulus (375/768/1280 px), pytest pipeline 28 lulus.
+**Status:** Tahap 0, 1, 2, dan 4 selesai (2026-11-05). Tahap 3 (peta) menunggu K6. Rilis aktif: draf `2026-11-02.r3`. Pengujian terakhir: pytest 35, Vitest 22, Playwright + axe 74.
 **Urutan:** data dan peta lebih dulu, karena keduanya membawa risiko terbesar (PRD §14). Setiap tahap punya kriteria selesai yang bisa diperiksa. Tahap berikutnya dimulai setelah tahap sebelumnya disetujui.
 
 **Aturan permanen untuk semua tahap:** prinsip Source Fidelity & Data Transparency (PRD §1.1, DECISIONS.md bagian 1). Setiap fitur yang menampilkan data harus memakai nilai `source` apa adanya, memberi label pada hasil pengolahan, dan menampilkan penanda ketidaksesuaian.
@@ -79,7 +79,9 @@ Pekerjaan:
 
 Selesai jika: kriteria peta PRD §13 terpenuhi, angka panel sama dengan `/data` untuk filter yang sama (uji E2E), dan peta bisa dipakai di layar 375 px.
 
-## Tahap 4: Data, detail, dan unduhan
+## Tahap 4: Data, detail, dan unduhan (selesai 2026-11-05)
+
+Hasil: filter provinsi, kabupaten/kota (mengikuti provinsi), jenis PS + subskema KK, rentang tahun SK, dan catatan pemeriksaan; pencarian teks; urutan per kolom; paginasi yang mempertahankan filter; ringkasan hasil (rekaman, luas, anggota L+P dengan label hasil pengolahan); unduhan sesuai filter `/unduh-hasil` (CSV dalam ZIP + BACA_SAYA, XLSX dengan Metadata dan Kamus Kolom) dengan kolom yang sama persis dengan file rilis; angka di Statistik dan Peta menaut ke rekaman pembentuknya. Definisi kolom unduhan dipindah ke `data/config/export_schema.json` yang dipakai bersama pipeline dan web. Belum: halaman khusus untuk ID dari rilis lama (saat ini 404).
 
 Pekerjaan:
 1. `/data`: tabel dirender server, pencarian, filter provinsi/kabupaten/skema/tahun, sorting, paginasi, jumlah hasil, reset; tampilan kartu di ponsel.

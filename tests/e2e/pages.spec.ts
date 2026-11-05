@@ -1,11 +1,13 @@
 import { expect, test } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { readFileSync } from "node:fs";
+import { strFromU8, unzipSync } from "fflate";
+import ExcelJS from "exceljs";
 
 const VERSION: string = JSON.parse(readFileSync("data/releases/current.json", "utf-8")).version;
 
 const DUP_ID = "2d80cb80ba17"; // rekaman dengan nomor SK yang dipakai 3 rekaman (ID stabil antar-rilis)
-const PATHS = ["/", "/map", "/statistics", "/data", `/data/${DUP_ID}`, "/download", "/about"];
+const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", `/data/${DUP_ID}`, "/download", "/about"];
 const ROUTES = [...PATHS, ...PATHS.map((p) => (p === "/" ? "/en" : `/en${p}`))];
 const VIEWPORTS = [
   { name: "ponsel", width: 375, height: 812 },
@@ -116,4 +118,94 @@ test("statistik menampilkan 5 jenis PS dengan rincian Kemitraan Kehutanan", asyn
   for (const sub of ["KULIN KK", "KONSERVASI", "IPHPS"]) {
     await expect(table.getByRole("rowheader", { name: new RegExp(sub) })).toBeVisible();
   }
+});
+
+test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
+  test("filter lewat form menghasilkan alamat ringkas dan jumlah yang benar", async ({ page }) => {
+    await page.goto("/data");
+    const form = page.getByRole("search");
+    await form.getByLabel("Provinsi", { exact: true }).selectOption("72");
+    // Daftar kabupaten/kota mengikuti provinsi terpilih (13 kabupaten/kota + opsi "Semua").
+    await expect(form.getByLabel("Kabupaten/Kota", { exact: true }).locator("option")).toHaveCount(14);
+    await form.getByLabel("Jenis PS", { exact: true }).selectOption("HTR");
+    await form.getByRole("button", { name: "Terapkan" }).click();
+    await expect(page).toHaveURL(/\/data\?province=72&type=HTR$/);
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+  });
+
+  test("pencarian tidak peka huruf dan menampilkan nilai sumber apa adanya", async ({ page }) => {
+    await page.goto("/data?q=muara%20kilis");
+    await expect(page.getByRole("cell", { name: "KTH  MUARA KILIS" }).first()).toBeVisible();
+  });
+
+  test("tajuk kolom mengurutkan dan menandai aria-sort", async ({ page }) => {
+    await page.goto("/data?province=72");
+    await page.getByRole("link", { name: /^Luas \(ha\)/ }).click();
+    // dir=asc adalah bawaan, jadi tidak ditulis di alamat.
+    await expect(page).toHaveURL(/province=72&sort=area$/);
+    await expect(page.locator("th[aria-sort=ascending]")).toHaveText(/Luas/);
+  });
+
+  test("parameter tidak dikenal diabaikan dengan catatan", async ({ page }) => {
+    await page.goto("/data?province=99");
+    await expect(page.getByText(/tidak dikenali dan diabaikan: province/)).toBeVisible();
+  });
+
+  test("hasil kosong menampilkan keadaan kosong", async ({ page }) => {
+    await page.goto("/data?q=zzzzzz");
+    await expect(page.getByText("Tidak ada rekaman yang cocok")).toBeVisible();
+    await expect(page.getByRole("link", { name: /rekaman ini/ })).toHaveCount(0);
+  });
+
+  test("unduhan CSV sesuai filter: jumlah baris, kolom sama dengan rilis, metadata filter", async ({ request }) => {
+    const res = await request.get("/unduh-hasil?province=72&type=HTR&format=csv");
+    expect(res.status()).toBe(200);
+    const files = unzipSync(new Uint8Array(await res.body()));
+    const csvName = Object.keys(files).find((n) => n.endsWith(".csv"))!;
+    const csv = strFromU8(files[csvName]!).replace(/^\uFEFF/, "");
+    const lines = csv.trimEnd().split("\r\n");
+    expect(lines.length).toBe(1085 + 1);
+    const readme = strFromU8(files["BACA_SAYA.txt"]!);
+    expect(readme).toContain("Provinsi: Sulawesi Tengah (72)");
+    expect(readme).toContain("Jumlah rekaman dalam file: 1085");
+    expect(readme).toContain("bukan salinan mentah sepenuhnya");
+    // Judul kolom sama persis dengan file rilis lengkap dari pipeline.
+    const full = unzipSync(readFileSync(`data/releases/${VERSION}/downloads/pdpsi_${VERSION}_rekaman_lengkap_csv.zip`));
+    const fullCsv = strFromU8(full[Object.keys(full).find((n) => n.endsWith(".csv"))!]!).replace(/^\uFEFF/, "");
+    expect(lines[0]).toBe(fullCsv.split(/\r?\n/)[0]);
+  });
+
+  test("unduhan XLSX sesuai filter", async ({ request }) => {
+    const res = await request.get("/unduh-hasil?type=KK_IPHPS&format=xlsx");
+    expect(res.status()).toBe(200);
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.load((await res.body()) as unknown as ArrayBuffer);
+    expect(wb.worksheets.map((w) => w.name)).toEqual(["Data", "Metadata", "Kamus Kolom"]);
+    expect(wb.getWorksheet("Data")!.actualRowCount).toBe(6 + 1);
+    const meta = wb.getWorksheet("Metadata")!.getColumn(2).values.join(" ");
+    expect(meta).toContain("Jenis PS: KEMITRAAN KEHUTANAN ~ IPHPS (KK_IPHPS)");
+  });
+
+  test("format unduhan tidak valid ditolak", async ({ request }) => {
+    expect((await request.get("/unduh-hasil?format=exe")).status()).toBe(400);
+  });
+
+  test("angka di Statistik menaut ke rekaman pembentuknya", async ({ page }) => {
+    await page.goto("/statistics");
+    await page.getByRole("link", { name: /rekaman: Hutan Tanaman Rakyat, Sulawesi Tengah/ }).click();
+    await expect(page).toHaveURL(/province=72/);
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+  });
+
+  test.describe("ponsel", () => {
+    test.use({ viewport: { width: 375, height: 812 } });
+    test("panel filter dibuka dengan tombol", async ({ page }) => {
+      await page.goto("/data");
+      const toggle = page.getByRole("button", { name: /Filter dan pencarian/ });
+      await expect(page.getByRole("search")).toBeHidden();
+      await toggle.click();
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+      await expect(page.getByRole("search")).toBeVisible();
+    });
+  });
 });

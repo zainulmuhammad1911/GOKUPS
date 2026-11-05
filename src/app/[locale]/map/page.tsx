@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { DataNote, PageHeading, SectionHeading } from "@/components/data/blocks";
 import { loadRelease } from "@/lib/data/release";
 import { formatDateTime, formatNumber } from "@/lib/data/format";
@@ -29,7 +30,7 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
       <p className="mt-2 text-caption text-ink-muted">
         {t("common.processed")} {t("common.sourceLine", { date: formatDateTime(meta.source.extracted_at, locale), version: meta.version })}
       </p>
-      <div className="mt-4 overflow-x-auto" role="region" aria-labelledby="tabel-provinsi" tabIndex={0}>
+      <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="tabel-provinsi" tabIndex={0}>
         <table className="w-full min-w-[560px] border-collapse text-small">
           <thead className="bg-surface-sunken text-left">
             <tr>
@@ -49,7 +50,12 @@ export default async function MapPage({ params }: { params: Promise<{ locale: st
                   <th scope="row" className="px-3 py-2 text-left font-normal">{p.name}</th>
                   {row ? (
                     <>
-                      <td className="px-3 py-2 text-right">{n(row.records)}</td>
+                      <td className="px-3 py-2 text-right">
+                        <Link href={{ pathname: "/data", query: { province: p.code } }} className="tabular">
+                          {n(row.records)}
+                          <span className="sr-only"> {t("statistics.recordsOf", { context: p.name })}</span>
+                        </Link>
+                      </td>
                       <td className="px-3 py-2 text-right">{n(row.area_ha)}</td>
                       <td className="px-3 py-2 text-right">{n(row.members_male_plus_female)}</td>
                     </>

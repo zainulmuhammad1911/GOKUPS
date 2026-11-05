@@ -53,3 +53,20 @@ export function loadSiteConfig(): SiteConfig {
   site ??= readJson<SiteConfig>(path.join(ROOT, "config", "site.json"));
   return site;
 }
+
+export interface ExportSchema {
+  id_column: { title: string; path: string; kind: string; description: string };
+  source_column_notes: Record<string, string>;
+  default_source_note: string;
+  derived_columns: { title: string; path: string; transform: "join" | "default_1" | null; kind: string; description: string }[];
+  flag_docs: Record<string, string>;
+  texts: { unit: string; fidelity: string; aggregates: string; csv_format: string; not_set: string };
+}
+
+let exportSchema: ExportSchema | null = null;
+
+/** Definisi kolom unduhan yang sama dengan pipeline (data/config/export_schema.json). */
+export function loadExportSchema(): ExportSchema {
+  exportSchema ??= readJson<ExportSchema>(path.join(ROOT, "data", "config", "export_schema.json"));
+  return exportSchema;
+}

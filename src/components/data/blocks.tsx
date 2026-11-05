@@ -88,3 +88,25 @@ export function DuplicateBadge({ label }: { label: string }) {
 export function EmptyValue({ children }: { children: ReactNode }) {
   return <span className="text-ink-muted italic">{children}</span>;
 }
+
+/**
+ * Teks panjang tanpa spasi (mis. nomor SK) diberi titik patah setelah "/" agar tidak terpotong
+ * di tengah kata. <wbr> tidak menambah karakter, jadi teks yang disalin tetap sama dengan sumber.
+ */
+export function BreakableText({ text }: { text: string }) {
+  const parts = text.split("/");
+  return (
+    <>
+      {parts.map((p, i) => (
+        <span key={i}>
+          {p}
+          {i < parts.length - 1 && (
+            <>
+              /<wbr />
+            </>
+          )}
+        </span>
+      ))}
+    </>
+  );
+}

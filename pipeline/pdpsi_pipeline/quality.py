@@ -7,7 +7,11 @@ diubah dan tidak ada rekaman yang dihapus atau dikeluarkan karena penanda
 """
 from __future__ import annotations
 
+import json
+
 import pandas as pd
+
+from .config import PROJECT_ROOT
 
 SK = "Nomor Surat Keputusan"
 AREA_PARTS = [
@@ -21,26 +25,8 @@ AREA_PARTS = [
 AREA_TOTAL = "Luas Area Keseluruhan (Ha)"
 M, F, T = "Anggota Laki-Laki", "Anggota Perempuan", "Anggota Keseluruhan"
 
-FLAG_DOCS = {
-    "duplicate_sk": "Duplikat: nomor SK (teks persis sama) juga dipakai rekaman lain. Semua rekaman tetap dihitung.",
-    "duplicate_identical": "Duplikat identik: semua kolom sumber selain No sama dengan rekaman lain bernomor SK sama.",
-    "duplicate_attributes_differ": "Duplikat dengan atribut berbeda: nomor SK sama, tetapi isi kolom lain berbeda.",
-    "sk_spacing_variant": "Nomor SK hanya berbeda spasi atau huruf besar/kecil dengan nomor SK rekaman lain; kemungkinan nomor SK sama dengan penulisan berbeda.",
-    "sk_year_truncated": "Tahun pada nomor SK tertulis 3 digit.",
-    "date_after_extraction": "Tanggal SK sesudah tanggal pengambilan data.",
-    "date_year_mismatch": "Tahun pada nomor SK berbeda dengan tahun tanggal SK.",
-    "area_zero": "Luas total di sumber bernilai 0.",
-    "area_component_mismatch": "Selisih luas total dan jumlah komponen luas lebih dari ambang penanda (5 ha). Luas tetap dihitung.",
-    "area_component_rounding": "Selisih luas total dan jumlah komponen 1 sampai 5 ha. Luas tetap dihitung.",
-    "area_missing": "Luas total kosong di sumber; tidak bisa dihitung.",
-    "area_negative": "Luas total negatif di sumber; tidak dihitung.",
-    "members_total_column_mismatch": "Anggota Keseluruhan di sumber tidak sama dengan laki-laki + perempuan.",
-    "members_total_equals_female": "Anggota Keseluruhan di sumber sama dengan jumlah anggota perempuan, padahal anggota laki-laki lebih dari 0.",
-    "members_negative": "Ada nilai anggota negatif di sumber; laki-laki + perempuan tidak dihitung.",
-    "members_component_missing": "Anggota laki-laki atau perempuan kosong di sumber; laki-laki + perempuan tidak tersedia.",
-    "institution_type_lphd_on_htr": "Bentuk lembaga tercatat Lembaga Pengelola Hutan Desa pada skema Hutan Tanaman Rakyat.",
-    "kph_bengkulu_utara_outside_bengkulu": "KPH tercatat KPHP Bengkulu Utara pada rekaman di luar Provinsi Bengkulu. Catatan workbook menyebut ini isian sumber GoKUPS yang perlu dikonfirmasi.",
-}
+# Arti setiap penanda ada di data/config/export_schema.json (dipakai bersama aplikasi web).
+FLAG_DOCS: dict[str, str] = json.loads((PROJECT_ROOT / "data" / "config" / "export_schema.json").read_text(encoding="utf-8"))["flag_docs"]
 
 
 def duplicate_info(df: pd.DataFrame, compare_cols: list[str], ids: pd.Series, sk_norm: pd.Series) -> pd.DataFrame:

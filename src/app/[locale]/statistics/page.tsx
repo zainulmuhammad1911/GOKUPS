@@ -39,9 +39,20 @@ export default async function StatisticsPage({ params }: { params: Promise<{ loc
     version: meta.version,
   })}`;
 
-  const cells = (row: AggregateBlock | undefined) => (
+  // Setiap angka rekaman menaut ke rekaman pembentuknya di halaman Data (prinsip keterlacakan).
+  const countLink = (count: number, query: Record<string, string>, context: string) =>
+    count > 0 ? (
+      <Link href={{ pathname: "/data", query }} className="tabular">
+        {n(count)}
+        <span className="sr-only"> {t("statistics.recordsOf", { context })}</span>
+      </Link>
+    ) : (
+      n(0)
+    );
+
+  const cells = (row: AggregateBlock | undefined, query: Record<string, string>, context: string) => (
     <>
-      <td className="px-3 py-2 text-right">{n(row?.records ?? 0)}</td>
+      <td className="px-3 py-2 text-right">{countLink(row?.records ?? 0, query, context)}</td>
       <td className="px-3 py-2 text-right">{n(row?.area_ha ?? 0)}</td>
       <td className="px-3 py-2 text-right">{n(row?.members_male_plus_female ?? 0)}</td>
     </>
@@ -54,7 +65,7 @@ export default async function StatisticsPage({ params }: { params: Promise<{ loc
 
       <SectionHeading id="rekap-nasional">{t("statistics.tableCaption")}</SectionHeading>
       <p className="mt-2 text-caption text-ink-muted">{source}</p>
-      <div className="mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-nasional" tabIndex={0}>
+      <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-nasional" tabIndex={0}>
         <table className="w-full min-w-[640px] border-collapse text-small">
           <thead className="bg-surface-sunken text-left">
             <tr>
@@ -76,7 +87,7 @@ export default async function StatisticsPage({ params }: { params: Promise<{ loc
                     </span>
                   </th>
                   <td className="px-3 py-2">{t(`kind.${code === "HA" ? "penetapan" : "persetujuan"}`)}</td>
-                  {cells(byJenis.get(code))}
+                  {cells(byJenis.get(code), { type: code }, jenisLabel(code))}
                 </tr>
                 {code === "KK" &&
                   KK_SUB.map((sub) => (
@@ -91,7 +102,7 @@ export default async function StatisticsPage({ params }: { params: Promise<{ loc
                         </span>
                       </th>
                       <td className="px-3 py-2">{t("kind.persetujuan")}</td>
-                      {cells(byScheme.get(sub))}
+                      {cells(byScheme.get(sub), { type: sub }, scheme.get(sub)?.scheme_original ?? sub)}
                     </tr>
                   ))}
               </Fragment>
@@ -100,7 +111,7 @@ export default async function StatisticsPage({ params }: { params: Promise<{ loc
           <tfoot>
             <tr className="font-bold">
               <th scope="row" colSpan={2} className="px-3 py-2 text-left">{t("statistics.total")}</th>
-              {cells(totals.national)}
+              {cells(totals.national, {}, t("statistics.total"))}
             </tr>
           </tfoot>
         </table>
@@ -108,7 +119,7 @@ export default async function StatisticsPage({ params }: { params: Promise<{ loc
 
       <SectionHeading id="rekap-provinsi">{t("statistics.provinceCaption")}</SectionHeading>
       <p className="mt-2 text-caption text-ink-muted">{source}</p>
-      <div className="mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-provinsi" tabIndex={0}>
+      <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-provinsi" tabIndex={0}>
         <table className="w-full min-w-[900px] border-collapse text-small">
           <thead className="bg-surface-sunken text-left">
             <tr>
@@ -129,18 +140,25 @@ export default async function StatisticsPage({ params }: { params: Promise<{ loc
               <tr key={p.code} className="border-b border-rule">
                 <th scope="row" className="px-3 py-2 text-left font-normal">{p.name}</th>
                 {JENIS.map((c) => (
-                  <td key={c} className="px-3 py-2 text-right">{n(provJenis.get(`${p.code}|${c}`) ?? 0)}</td>
+                  <td key={c} className="px-3 py-2 text-right">
+                    {countLink(provJenis.get(`${p.code}|${c}`) ?? 0, { province: p.code, type: c }, `${jenisLabel(c)}, ${p.name}`)}
+                  </td>
                 ))}
                 {KK_SUB.map((c) => (
-                  <td key={c} className="px-3 py-2 text-right text-ink-muted">{n(provScheme.get(`${p.code}|${c}`) ?? 0)}</td>
+                  <td key={c} className="px-3 py-2 text-right text-ink-muted">
+                    {countLink(provScheme.get(`${p.code}|${c}`) ?? 0, { province: p.code, type: c }, `${scheme.get(c)?.scheme_original}, ${p.name}`)}
+                  </td>
                 ))}
-                <td className="px-3 py-2 text-right font-bold">{n(provTotal.get(p.code) ?? 0)}</td>
+                <td className="px-3 py-2 text-right font-bold">
+                  {countLink(provTotal.get(p.code) ?? 0, { province: p.code }, p.name)}
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p className="mt-3 text-small">
+      <p className="mt-3 text-small">{t("statistics.linkHint")}</p>
+      <p className="mt-1 text-small">
         {t("statistics.regencyHint")} <Link href="/download">{t("statistics.toDownload")}</Link>
       </p>
     </>

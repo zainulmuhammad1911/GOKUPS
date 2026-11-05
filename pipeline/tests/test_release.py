@@ -309,3 +309,12 @@ def test_downloads(release_dir, release_meta):
 def test_manifest_hashes(release_dir, release_meta):
     for f in release_meta["files"]:
         assert hashlib.sha256((release_dir / f["path"]).read_bytes()).hexdigest() == f["sha256"]
+
+
+def test_no_formula_like_source_text(approvals):
+    """Ekspor CSV di aplikasi web menetralkan teks berawalan = + - @ agar tidak dieksekusi spreadsheet.
+    Uji ini memastikan rilis saat ini tidak punya nilai seperti itu, jadi penetralan tidak mengubah data apa pun.
+    Bila uji ini gagal di rilis baru, catatan penetralan wajib disebut di metadata unduhan."""
+    bad = [(a["id"], k) for a in approvals for k, v in a["source"].items()
+           if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r")]
+    assert not bad, bad[:5]
