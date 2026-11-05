@@ -38,6 +38,7 @@ export function DataFilters({
   flags,
   years,
   activeCount,
+  minimal = false,
 }: {
   action: string;
   resetHref: string;
@@ -49,6 +50,8 @@ export function DataFilters({
   flags: Option[];
   years: number[];
   activeCount: number;
+  /** Tanpa pencarian, catatan pemeriksaan, dan urutan (dipakai halaman Statistik). */
+  minimal?: boolean;
 }) {
   const t = useTranslations("data");
   const [open, setOpen] = useState(false);
@@ -84,21 +87,23 @@ export function DataFilters({
         role="search"
         aria-label={t("filters")}
         onSubmit={(e) => {
+          const form = e.currentTarget;
           // Alamat lebih ringkas: kolom kosong dan urutan bawaan tidak ikut dikirim.
-          for (const el of Array.from(e.currentTarget.elements)) {
+          for (const el of Array.from(form.elements)) {
             if (!(el instanceof HTMLInputElement || el instanceof HTMLSelectElement)) continue;
             const isDefault = el.value === "" || (el.name === "sort" && el.value === "no") || (el.name === "dir" && el.value === "asc");
             if (el.name && isDefault) el.disabled = true;
           }
           // Aktifkan kembali setelah navigasi dimulai, untuk kasus kembali dengan bfcache.
           setTimeout(() => {
-            for (const el of Array.from(e.currentTarget?.elements ?? [])) {
+            for (const el of Array.from(form.elements)) {
               if (el instanceof HTMLInputElement || el instanceof HTMLSelectElement) el.disabled = false;
             }
           }, 0);
         }}
         className={`${open ? "grid" : "hidden"} gap-4 border-t border-rule p-4 lg:grid lg:border-t-0 lg:grid-cols-4`}
       >
+        {!minimal && (
         <div className={`${field} lg:col-span-2`}>
           <label htmlFor={`${panelId}-q`} className="font-bold">{t("search")}</label>
           <input
@@ -112,6 +117,7 @@ export function DataFilters({
           />
           <span id={`${panelId}-hint`} className="text-caption text-ink-muted">{t("searchHint")}</span>
         </div>
+        )}
 
         <div className={field}>
           <label htmlFor={`${panelId}-province`} className="font-bold">{t("province")}</label>
@@ -183,6 +189,7 @@ export function DataFilters({
           </div>
         </fieldset>
 
+        {!minimal && (
         <div className={field}>
           <label htmlFor={`${panelId}-flag`} className="font-bold">{t("flag")}</label>
           <select
@@ -194,7 +201,9 @@ export function DataFilters({
             ))}
           </select>
         </div>
+        )}
 
+        {!minimal && (
         <fieldset className="grid grid-cols-2 gap-2">
           <legend className="mb-1 text-small font-bold">{t("sortBy")}</legend>
           <div className={field}>
@@ -213,6 +222,7 @@ export function DataFilters({
             </select>
           </div>
         </fieldset>
+        )}
 
         <div className="flex flex-wrap items-end gap-3 lg:col-span-4">
           <button

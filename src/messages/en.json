@@ -57,7 +57,10 @@
     "next": "Continue to",
     "toMap": "Distribution by province",
     "toData": "Browse {count} records",
-    "toDownload": "Download the release data"
+    "toDownload": "Download the release data",
+    "chartJenis": "Distribution by PS type",
+    "chartTopProvinces": "Top 10 provinces",
+    "toStatistics": "Statistics by region and PS type"
   },
   "map": {
     "title": "Distribution map",
@@ -70,18 +73,27 @@
   },
   "statistics": {
     "title": "Statistics",
-    "lead": "Summary of Social Forestry approval/designation records by PS type and by province. Kemitraan Kehutanan (forestry partnership) is shown with its three source subtypes.",
-    "tableCaption": "Summary by PS type",
+    "lead": "Summary of Social Forestry approval/designation records by PS type and by region. Filter by region, PS type, or decree year; every chart and table below follows the same filters.",
+    "tableCaption": "Summary by PS type, {scope}",
     "kind": "Type",
     "unitNote": "Figures on this page count decree records for approval/designation holders, not groups. Some Hutan Tanaman Rakyat records are individual permits, and some institutions appear under more than one decree number. Hutan Adat (customary forest) is a designation.",
     "jenis": "PS type",
     "detailOf": "Forestry partnership subtype:",
     "total": "Total",
-    "provinceCaption": "Records per province and PS type",
     "regencyHint": "A summary per regency/city (records and area) is available in the summary Excel file.",
     "toDownload": "Go to Download",
     "recordsOf": "records: {context}",
-    "linkHint": "Select a record count to see the records behind it."
+    "linkHint": "Select a record count or a chart bar to see the records behind it.",
+    "perProvince": "by province",
+    "perRegency": "by regency/city",
+    "indonesia": "Indonesia",
+    "scopeLine": "{count} records · {scope}",
+    "toRecords": "See these {count} records on the Data page",
+    "chartJenis": "Distribution by PS type, {scope}",
+    "chartRegion": "Distribution {level}, {scope}",
+    "chartTop10": "Top 10 regencies/cities, {scope}",
+    "chartComposition": "PS type composition {level}, {scope}",
+    "regionTableCaption": "Records {level} and PS type, {scope}"
   },
   "columns": {
     "records": "Records",
@@ -273,5 +285,19 @@
     "members_component_missing": "Member component empty",
     "institution_type_lphd_on_htr": "LPHD under HTR scheme",
     "kph_bengkulu_utara_outside_bengkulu": "KPHP Bengkulu Utara outside Bengkulu"
+  },
+  "charts": {
+    "records": "Records",
+    "area": "Area",
+    "members": "Members (M+W)",
+    "people": "people",
+    "showTable": "Show data table",
+    "failed": "The chart could not be loaded. The figures are in the data table below.",
+    "empty": "No data for these filters.",
+    "measure": "Measure shown",
+    "legend": "Colour key",
+    "total": "Total",
+    "ariaRanked": "{title}. Measure: {metric}. Highest: {top}, {value}. Full figures are in the data table.",
+    "ariaStacked": "{title}. {count} regions; most records in {top}. Figures per PS type are in the data table."
   }
 }

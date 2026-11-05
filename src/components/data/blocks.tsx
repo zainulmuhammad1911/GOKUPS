@@ -21,7 +21,7 @@ export function DataSheetStat({
     <div className="rule-top flex flex-col gap-2 pt-4">
       <dt className="text-small font-bold text-ink">{label}</dt>
       <dd className="flex flex-col gap-2">
-        <span className="tabular text-[2.25rem] leading-[2.5rem] font-bold tracking-tight md:text-display md:leading-[var(--text-display--line-height)]">
+        <span className="text-[2.25rem] leading-[2.5rem] font-bold tracking-tight md:text-display md:leading-[var(--text-display--line-height)]">
           {value}
           {unit && <span className="ml-2 text-h3 font-normal text-ink-muted">{unit}</span>}
         </span>
@@ -61,19 +61,26 @@ export function SectionHeading({ id, children }: { id?: string; children: ReactN
   );
 }
 
-const SCHEME_COLOR: Record<string, string> = {
-  HKM: "bg-scheme-hkm",
-  HTR: "bg-scheme-htr",
-  HD: "bg-scheme-hd",
-  KK_KULIN: "bg-scheme-kk-kulin",
-  KK_KONSERVASI: "bg-scheme-kk-konservasi",
-  KK_IPHPS: "bg-scheme-kk-iphps",
-  HA: "bg-scheme-ha",
+/** Warna 5 jenis PS (DESIGN.md §3.2). Subskema KK memakai warna KK. */
+export const JENIS_COLOR_HEX: Record<string, string> = {
+  HD: "#2f8f5b",
+  HKM: "#2f6fb0",
+  HTR: "#cf5f3a",
+  HA: "#9a5aa8",
+  KK: "#d08a1a",
+};
+const SWATCH_CLASS: Record<string, string> = {
+  HD: "bg-jenis-hd",
+  HKM: "bg-jenis-hkm",
+  HTR: "bg-jenis-htr",
+  HA: "bg-jenis-ha",
+  KK: "bg-jenis-kk",
 };
 
-/** Tanda warna skema. Selalu disertai teks; warna bukan satu-satunya pembeda. */
+/** Tanda warna jenis PS. Selalu disertai teks; warna bukan satu-satunya pembeda. */
 export function SchemeSwatch({ code }: { code: string }) {
-  return <span aria-hidden="true" className={`inline-block size-3 shrink-0 rounded-[1px] ${SCHEME_COLOR[code] ?? "bg-rule-strong"}`} />;
+  const key = code.startsWith("KK") ? "KK" : code;
+  return <span aria-hidden="true" className={`inline-block size-3 shrink-0 rounded-[1px] ${SWATCH_CLASS[key] ?? "bg-rule-strong"}`} />;
 }
 
 /** Penanda "Duplikat" dengan teks, bukan hanya warna. */

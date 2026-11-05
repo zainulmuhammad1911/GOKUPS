@@ -1,6 +1,7 @@
 # DESIGN.md: Pusat Data Perhutanan Sosial Indonesia (PDPSI)
 
-**Status:** v0.2, 2026-11-04. Arah ditetapkan pemilik produk (DECISIONS.md bagian 3, keputusan F): Swiss minimal dan editorial, Atkinson Hyperlegible Next, mode terang saja untuk MVP. Nilai token sudah diuji kontras dan keamanan buta warna. v0.2: palet skema diperluas ke 7 kategori.
+**Status:** v0.3, 2026-11-05. v0.3: palet diganti menjadi 5 warna jenis PS yang divalidasi untuk urutan rekap.
+v0.2, 2026-11-04. Arah ditetapkan pemilik produk (DECISIONS.md bagian 3, keputusan F): Swiss minimal dan editorial, Atkinson Hyperlegible Next, mode terang saja untuk MVP. Nilai token sudah diuji kontras dan keamanan buta warna. v0.2: palet skema diperluas ke 7 kategori.
 **Dipakai bersama:** `/antislop` mode *during* (filter), `/ui-ux-pro-max` (pedoman UX), `docs/MAP_DATA_AUDIT.md` (aturan peta).
 
 ---
@@ -50,27 +51,21 @@ Semua nilai di bawah sudah diuji: rasio teks dengan `antislop-human/contrast-che
 
 Palet inti: hijau hutan + netral hangat, ditambah satu aksen (R-29). Tidak ada gradien, glow, atau glassmorphism.
 
-### 3.2 Warna skema (kategorikal)
+### 3.2 Warna jenis PS (kategorikal)
 
-Urutan tetap dan tidak pernah dirotasi. Warna mengikuti skema, bukan peringkat. Bila filter mengurangi jumlah skema, warna skema yang tersisa tidak berubah.
+Rekap dan grafik memakai 5 jenis PS (DECISIONS.md K8). Satu warna = satu jenis PS di seluruh aplikasi. Tiga subskema Kemitraan Kehutanan memakai warna Kemitraan Kehutanan dan dibedakan dengan label teks, karena ketiganya adalah rincian dari satu jenis.
 
-Tujuh kategori skema sumber ditampilkan terpisah (DECISIONS.md K8: kategori tidak digabung), jadi palet berisi tujuh warna.
+| Urutan | Jenis PS | Kode | Hex |
+|--------|----------|------|-----|
+| 1 | Hutan Desa | HD | `#2F8F5B` |
+| 2 | Hutan Kemasyarakatan | HKM | `#2F6FB0` |
+| 3 | Hutan Tanaman Rakyat | HTR | `#CF5F3A` |
+| 4 | Hutan Adat | HA | `#9A5AA8` |
+| 5 | Kemitraan Kehutanan (+ 3 subskema) | KK | `#D08A1A` |
 
-| Slot | Kategori sumber | Kode | Hex |
-|------|-----------------|------|-----|
-| 1 | HUTAN KEMASYARAKATAN | HKM | `#2F6FB0` |
-| 2 | HUTAN TANAMAN RAKYAT | HTR | `#2F8F5B` |
-| 3 | HUTAN DESA | HD | `#9A5AA8` |
-| 4 | KEMITRAAN KEHUTANAN ~ KULIN KK | KK_KULIN | `#CF5F3A` |
-| 5 | KEMITRAAN KEHUTANAN ~ KONSERVASI | KK_KONSERVASI | `#1F9FAE` |
-| 6 | KEMITRAAN KEHUTANAN ~ IPHPS | KK_IPHPS | `#D08A1A` |
-| 7 | HUTAN ADAT (penetapan) | HA | `#B34B86` |
+Cara memilih (v0.3, 2026-11-05): palet 7 kategori versi sebelumnya gagal untuk urutan 5 jenis PS (Hutan Desa dan Hutan Kemasyarakatan nyaris sama bagi pembaca protan, ΔE 1,8). Semua 2.520 cara menempatkan 5 dari 7 warna tervalidasi ke urutan di atas diuji dengan validator dataviz, lalu dipilih yang jarak buta warna terburuknya terbesar. Hasil (mode terang, surface `#FAF8F3` dan `#FFFFFF`, pasangan bersebelahan): pita lightness PASS, chroma PASS, CVD ΔE terburuk 17,5 (HD↔HKM, deutan) PASS, normal-vision ΔE 18,6 PASS. Kontras KK terhadap surface 2,7:1 (di bawah 3:1).
 
-Urutan dipilih dengan mencoba semua 720 susunan slot 2 sampai 7 di validator dataviz, lalu diambil yang jarak buta warna terburuknya paling besar. Hasil (mode terang, surface `#FAF8F3`, pasangan bersebelahan): pita lightness PASS, chroma PASS, CVD ΔE terburuk 12,3 (HD↔HTR, deutan) PASS, normal-vision ΔE 18,6 PASS. Kontras KK_KONSERVASI 2,98:1 dan KK_IPHPS 2,7:1 terhadap surface (di bawah 3:1).
-
-**Grafik 5 jenis PS (Tahap 5):** urutan 5 jenis PS (HD, HKm, HTR, HA, KK) berbeda dari urutan 7 kategori di atas, sehingga pasangan warna yang bersebelahan berubah. Palet 5 warna untuk grafik jenis PS harus divalidasi ulang dengan validator dataviz sebelum dipakai. Di tabel, HD dan HA saat ini tampak mirip (ungu dan magenta), tetapi selalu diberi label teks.
-
-**Kewajiban karena kontras di atas:** setiap grafik skema wajib punya legenda, label langsung pada segmen yang cukup lebar, jarak 2 px antar-segmen, dan tampilan tabel. Teks label memakai `--ink`, bukan warna skema. Bentuk "semua pasangan" (scatter, peta kategori) tidak dipakai untuk tujuh kategori ini.
+**Kewajiban karena kontras KK:** grafik bertumpuk wajib punya legenda, tooltip, jarak 2 px antar-segmen, dan tampilan tabel. Teks label memakai `--ink`, bukan warna jenis PS. Grafik satu seri (mis. rekaman per provinsi) memakai satu warna `--forest` tanpa legenda.
 
 ### 3.3 Skala choropleth (sekuensial)
 
@@ -104,7 +99,7 @@ Validator ordinal: lightness monoton, selisih antar-kelas ≥ 0,06, satu hue (se
 
 | Peran | Ukuran / tinggi baris | Bobot | Catatan |
 |-------|----------------------|-------|---------|
-| Display (angka utama beranda) | 48/52 px (ponsel 36/40) | 700 | `tabular-nums`, tracking −0,01em |
+| Display (angka utama beranda) | 48/52 px (ponsel 36/40) | 700 | Angka proporsional (bukan tabular, agar tidak renggang di ukuran besar), tracking −0,01em |
 | H1 | 36/44 px (ponsel 28/36) | 700 | Satu per halaman |
 | H2 | 24/32 px | 650 | Garis rambut 1 px `--rule` di atasnya, jarak 12 px |
 | H3 | 18/26 px | 650 | |
@@ -146,7 +141,10 @@ Larangan: label huruf kapital dengan tracking lebar, monospace dekoratif, judul 
 - Batang tipis dengan ujung data membulat 4 px menempel di baseline, jarak 2 px antar-segmen. Grid dan sumbu samar (`--rule`). Label langsung hanya pada nilai penting, bukan setiap batang.
 - Setiap grafik: judul berupa kalimat yang menyebut ukuran dan satuan ("Luas persetujuan per provinsi, hektare"), baris sumber, cakupan, tooltip saat hover/fokus, dan tombol "Tampilkan tabel".
 - Grafik nominal satu seri (misalnya rekaman per provinsi) memakai satu warna `--forest`, tanpa legenda. Warna skema hanya dipakai bila seri adalah skema.
-- Renderer SVG, impor modular `echarts/core`.
+- Renderer SVG, impor modular `echarts/core`, dimuat setelah halaman tampil dengan ruang yang sudah dipesan.
+- Label sumbu dan nilai minimal 13 px; semua label kategori selalu tampil (ECharts tidak boleh menyembunyikannya otomatis).
+- Grafik satu seri memakai `--forest`; hanya grafik komposisi bertumpuk yang memakai 5 warna jenis PS.
+- Klik batang membuka halaman Data dengan filter yang sama.
 
 ## 8. Peta (MapLibre)
 

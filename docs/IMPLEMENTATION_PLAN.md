@@ -1,6 +1,6 @@
 # Rencana Implementasi PDPSI
 
-**Status:** Tahap 0, 1, 2, dan 4 selesai (2026-11-05). Tahap 3 (peta) menunggu K6. Rilis aktif: draf `2026-11-02.r3`. Pengujian terakhir: pytest 35, Vitest 22, Playwright + axe 74.
+**Status:** Tahap 0, 1, 2, 4, dan 5 selesai (2026-11-05). Tahap 3 (peta) menunggu K6. Rilis aktif: draf `2026-11-02.r3`. Pengujian terakhir: pytest 35, Vitest 25, Playwright + axe 92.
 **Urutan:** data dan peta lebih dulu, karena keduanya membawa risiko terbesar (PRD §14). Setiap tahap punya kriteria selesai yang bisa diperiksa. Tahap berikutnya dimulai setelah tahap sebelumnya disetujui.
 
 **Aturan permanen untuk semua tahap:** prinsip Source Fidelity & Data Transparency (PRD §1.1, DECISIONS.md bagian 1). Setiap fitur yang menampilkan data harus memakai nilai `source` apa adanya, memberi label pada hasil pengolahan, dan menampilkan penanda ketidaksesuaian.
@@ -90,7 +90,9 @@ Pekerjaan:
 
 Selesai jika: hasil unduhan terfilter sama persis dengan isi tabel untuk filter yang sama (uji otomatis), dan CSV serta XLSX terbuka benar di Excel dan LibreOffice.
 
-## Tahap 5: Beranda dan statistik
+## Tahap 5: Beranda dan statistik (selesai 2026-11-05)
+
+Hasil: Statistik memuat filter wilayah, jenis PS, dan tahun SK yang berlaku untuk semua grafik dan tabel; empat grafik sesuai PRD §6.3 (sebaran per jenis PS; sebaran per provinsi, atau per kabupaten/kota bila provinsi dipilih; 10 kabupaten/kota teratas; komposisi jenis PS per wilayah), masing-masing dengan pilihan ukuran rekaman/luas/anggota L+P, ringkasan untuk pembaca layar, dan tabel data. Batang grafik dan angka tabel menaut ke rekaman pembentuknya. Beranda memuat grafik sebaran per jenis PS dan 10 provinsi teratas. Palet 5 jenis PS divalidasi ulang (DESIGN.md §3.2). Belum: peta mini Beranda (menunggu K6).
 
 Pekerjaan:
 1. Beranda: 4 kartu (rekaman persetujuan, provinsi tercakup, luas, anggota bila K1 disetujui), peta mini SVG, komposisi skema, wilayah teratas, tautan ke Peta/Data/Unduh, sumber dan tanggal.

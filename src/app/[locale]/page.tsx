@@ -1,6 +1,9 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DataSheetStat, PageHeading } from "@/components/data/blocks";
+import { MetricChart } from "@/components/charts/ChartFigures";
+import { getPathname } from "@/i18n/navigation";
+import { jenisStats, regionStats } from "@/lib/data/stats";
 import { loadRelease } from "@/lib/data/release";
 import { countFlag } from "@/lib/data/aggregate";
 import { formatDateTime, formatNumber } from "@/lib/data/format";
@@ -9,7 +12,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
-  const { meta, totals, approvals, adminAreas } = loadRelease();
+  const { meta, totals, approvals, adminAreas, schemes } = loadRelease();
   const nat = totals.national;
   const n = (v: number) => formatNumber(v, locale);
 
@@ -23,6 +26,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     .join("; ");
   const source = t("common.sourceLine", { date: formatDateTime(meta.source.extracted_at, locale), version: meta.version });
   const processed = t("common.processed");
+  const jenisLabel = (code: string) => {
+    const s = schemes.find((x) => x.jenis_ps_code === code);
+    return (locale === "en" ? s?.jenis_ps_label_en : s?.jenis_ps_label_id) ?? code;
+  };
+  const metrics = [
+    { key: "records", label: t("charts.records"), unit: t("common.records") },
+    { key: "area", label: t("charts.area"), unit: t("common.hectare"), digits: 2 },
+    { key: "members", label: t("charts.members"), unit: t("charts.people") },
+  ];
 
   return (
     <>
@@ -52,11 +64,40 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </DataSheetStat>
       </dl>
 
+      <MetricChart
+        id="beranda-jenis"
+        title={t("home.chartJenis")}
+        caption={`${processed} ${source}`}
+        metrics={metrics}
+        categoryHeader={t("statistics.jenis")}
+        color="#1e5a3a"
+        rows={jenisStats(approvals).map((j) => ({
+          label: jenisLabel(j.code),
+          href: getPathname({ href: { pathname: "/data", query: { type: j.code } }, locale }),
+          values: { records: j.records, area: j.area, members: j.members },
+        }))}
+      />
+      <MetricChart
+        id="beranda-provinsi"
+        title={t("home.chartTopProvinces")}
+        caption={`${processed} ${source}`}
+        metrics={metrics}
+        categoryHeader={t("map.province")}
+        color="#1e5a3a"
+        topN={10}
+        rows={regionStats(approvals, "province", adminAreas).map((r) => ({
+          label: r.name,
+          href: getPathname({ href: { pathname: "/data", query: { province: r.code } }, locale }),
+          values: { records: r.records, area: r.area, members: r.members },
+        }))}
+      />
+
       <nav aria-labelledby="lanjut" className="rule-top mt-14 pt-4">
         <h2 id="lanjut" className="text-small font-bold text-ink-muted">
           {t("home.next")}
         </h2>
         <ul className="mt-2 flex flex-col gap-1 text-h3 md:flex-row md:gap-8">
+          <li><Link href="/statistics" className="inline-flex min-h-11 items-center">{t("home.toStatistics")}</Link></li>
           <li><Link href="/map" className="inline-flex min-h-11 items-center">{t("home.toMap")}</Link></li>
           <li><Link href="/data" className="inline-flex min-h-11 items-center">{t("home.toData", { count: n(nat.records) })}</Link></li>
           <li><Link href="/download" className="inline-flex min-h-11 items-center">{t("home.toDownload")}</Link></li>

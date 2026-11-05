@@ -16,14 +16,12 @@
   --color-forest-hover: #174a2f;
   --color-earth: #8a4b1e;
 
-  /* Warna 7 kategori skema (DESIGN.md §3.2); hanya untuk tanda warna, bukan teks. */
-  --color-scheme-hkm: #2f6fb0;
-  --color-scheme-htr: #2f8f5b;
-  --color-scheme-hd: #9a5aa8;
-  --color-scheme-kk-kulin: #cf5f3a;
-  --color-scheme-kk-konservasi: #1f9fae;
-  --color-scheme-kk-iphps: #d08a1a;
-  --color-scheme-ha: #b34b86;
+  /* Warna 5 jenis PS (DESIGN.md §3.2); hanya untuk tanda warna dan tanda grafik, bukan teks. */
+  --color-jenis-hd: #2f8f5b;
+  --color-jenis-hkm: #2f6fb0;
+  --color-jenis-htr: #cf5f3a;
+  --color-jenis-ha: #9a5aa8;
+  --color-jenis-kk: #d08a1a;
 
   --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
 

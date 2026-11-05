@@ -72,3 +72,29 @@ describe("pencarian, urutan, validasi", () => {
     expect(p.rows.length).toBe(approvals.length - 402 * 25);
   });
 });
+
+import { jenisStats, regionStats } from "@/lib/data/stats";
+
+describe("data grafik = total kontrol", () => {
+  it("per jenis PS", () => {
+    const js = jenisStats(approvals);
+    for (const row of totals.by_jenis_ps) {
+      const s = js.find((j) => j.code === row.jenis_ps_code)!;
+      expect([s.records, s.area, s.members]).toEqual([row.records, row.area_ha, row.members_male_plus_female]);
+    }
+  });
+  it("per provinsi, komposisi jenis PS menjumlah ke total wilayah", () => {
+    const rs = regionStats(approvals, "province", adminAreas);
+    expect(rs.length).toBe(totals.provinces_with_records);
+    for (const r of rs) {
+      const row = totals.by_province.find((p) => p.province_code === r.code)!;
+      expect(r.records).toBe(row.records);
+      expect(Object.values(r.byJenis).reduce((a, b) => a + b, 0)).toBe(r.records);
+    }
+  });
+  it("per kabupaten/kota di dalam provinsi terfilter", () => {
+    const rs = regionStats(run({ province: "72" }), "regency", adminAreas);
+    expect(rs.every((r) => r.code.startsWith("72."))).toBe(true);
+    expect(rs.reduce((a, r) => a + r.records, 0)).toBe(totals.by_province.find((p) => p.province_code === "72")!.records);
+  });
+});

@@ -15,6 +15,7 @@
     "node": ">=20.9"
   },
   "dependencies": {
+    "echarts": "6.1.0",
     "exceljs": "4.4.0",
     "fflate": "0.8.3",
     "next": "16.4.5",

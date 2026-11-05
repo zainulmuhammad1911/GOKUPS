@@ -7,7 +7,7 @@ import ExcelJS from "exceljs";
 const VERSION: string = JSON.parse(readFileSync("data/releases/current.json", "utf-8")).version;
 
 const DUP_ID = "2d80cb80ba17"; // rekaman dengan nomor SK yang dipakai 3 rekaman (ID stabil antar-rilis)
-const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", `/data/${DUP_ID}`, "/download", "/about"];
+const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", "/statistics?province=72", "/statistics?type=KK&year_from=2017", `/data/${DUP_ID}`, "/download", "/about"];
 const ROUTES = [...PATHS, ...PATHS.map((p) => (p === "/" ? "/en" : `/en${p}`))];
 const VIEWPORTS = [
   { name: "ponsel", width: 375, height: 812 },
@@ -48,7 +48,7 @@ test.describe("menu ponsel", () => {
     const button = page.getByRole("button", { name: "Menu" });
     await button.click();
     await expect(page.getByRole("button", { name: "Tutup menu" })).toHaveAttribute("aria-expanded", "true");
-    await expect(page.getByRole("link", { name: "Statistik" })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Statistik", exact: true })).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Menu" })).toHaveAttribute("aria-expanded", "false");
     await expect(page.getByRole("button", { name: "Menu" })).toBeFocused();
@@ -207,5 +207,57 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
       await expect(toggle).toHaveAttribute("aria-expanded", "true");
       await expect(page.getByRole("search")).toBeVisible();
     });
+  });
+});
+
+test.describe("Tahap 5: grafik", () => {
+  test("Statistik: empat grafik tampil sebagai SVG dengan ringkasan aksesibel", async ({ page }) => {
+    await page.goto("/statistics");
+    for (const id of ["grafik-jenis", "grafik-wilayah", "grafik-top10", "grafik-komposisi"]) {
+      const fig = page.locator(`figure[aria-labelledby="${id}-title"]`);
+      await expect(fig.locator("[role=img] svg")).toHaveCount(1);
+      await expect(fig.locator("[role=img]")).toHaveAttribute("aria-label", /.+/);
+    }
+  });
+
+  test("pilihan ukuran mengganti grafik dan menandai tombol aktif", async ({ page }) => {
+    await page.goto("/statistics");
+    const fig = page.locator('figure[aria-labelledby="grafik-jenis-title"]');
+    await fig.getByRole("button", { name: "Luas" }).click();
+    await expect(fig.getByRole("button", { name: "Luas" })).toHaveAttribute("aria-pressed", "true");
+    await expect(fig.locator("[role=img]")).toHaveAttribute("aria-label", /Ukuran: Luas\. Tertinggi: Hutan Desa/);
+  });
+
+  test("tabel data grafik sama dengan angka pipeline", async ({ page }) => {
+    await page.goto("/statistics");
+    const fig = page.locator('figure[aria-labelledby="grafik-jenis-title"]');
+    await fig.getByText("Tampilkan tabel data").click();
+    const row = fig.getByRole("row", { name: /Hutan Kemasyarakatan/ });
+    await expect(row).toContainText("3.907");
+    await expect(row).toContainText("1.479.288");
+  });
+
+  test("filter provinsi mengubah tingkat wilayah ke kabupaten/kota", async ({ page }) => {
+    await page.goto("/statistics?province=72&type=HTR");
+    await expect(page.getByText("1.085 rekaman · Sulawesi Tengah")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Sebaran per kabupaten/kota, Sulawesi Tengah" })).toBeVisible();
+    await page.getByRole("link", { name: "Lihat 1.085 rekaman ini di halaman Data" }).click();
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+  });
+
+  test("Beranda: dua grafik tampil", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.locator("figure [role=img] svg")).toHaveCount(2);
+  });
+});
+
+test.describe("grafik di ponsel", () => {
+  test.use({ viewport: { width: 375, height: 812 } });
+  test("semua label kategori tampil (tidak disembunyikan otomatis)", async ({ page }) => {
+    await page.goto("/");
+    const svg = page.locator('figure[aria-labelledby="beranda-jenis-title"] [role=img] svg');
+    await expect(svg).toHaveCount(1);
+    const text = (await svg.locator("text").allTextContents()).join(" ");
+    for (const word of ["Kemasyarakatan", "Tanaman", "Desa", "Kemitraan", "Adat"]) expect(text).toContain(word);
   });
 });

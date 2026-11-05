@@ -57,7 +57,10 @@
     "next": "Lanjutkan ke",
     "toMap": "Sebaran per provinsi",
     "toData": "Telusuri {count} rekaman",
-    "toDownload": "Unduh data rilis"
+    "toDownload": "Unduh data rilis",
+    "chartJenis": "Sebaran per jenis PS",
+    "chartTopProvinces": "10 provinsi teratas",
+    "toStatistics": "Statistik per wilayah dan jenis PS"
   },
   "map": {
     "title": "Peta sebaran",
@@ -70,18 +73,27 @@
   },
   "statistics": {
     "title": "Statistik",
-    "lead": "Rekapitulasi penerima persetujuan/penetapan Perhutanan Sosial per jenis PS dan per provinsi. Kemitraan Kehutanan ditampilkan bersama rincian tiga subskemanya.",
-    "tableCaption": "Rekap per jenis PS",
+    "lead": "Rekapitulasi penerima persetujuan/penetapan Perhutanan Sosial per jenis PS dan per wilayah. Saring menurut wilayah, jenis PS, atau tahun SK; semua grafik dan tabel di bawah mengikuti filter yang sama.",
+    "tableCaption": "Rekap per jenis PS, {scope}",
     "kind": "Jenis",
     "unitNote": "Angka di halaman ini adalah jumlah rekaman SK penerima persetujuan/penetapan, bukan jumlah kelompok. Sebagian rekaman Hutan Tanaman Rakyat adalah izin perorangan, dan sebagian lembaga tercatat pada lebih dari satu nomor SK. Hutan Adat adalah penetapan.",
     "jenis": "Jenis PS",
     "detailOf": "Rincian Kemitraan Kehutanan:",
     "total": "Total",
-    "provinceCaption": "Jumlah rekaman per provinsi dan jenis PS",
     "regencyHint": "Rekap per kabupaten/kota (jumlah rekaman dan luas) tersedia dalam file Excel rekap.",
     "toDownload": "Ke halaman Unduh",
     "recordsOf": "rekaman: {context}",
-    "linkHint": "Klik angka rekaman untuk melihat daftar rekaman pembentuknya."
+    "linkHint": "Klik angka rekaman atau batang grafik untuk melihat daftar rekaman pembentuknya.",
+    "perProvince": "per provinsi",
+    "perRegency": "per kabupaten/kota",
+    "indonesia": "Indonesia",
+    "scopeLine": "{count} rekaman · {scope}",
+    "toRecords": "Lihat {count} rekaman ini di halaman Data",
+    "chartJenis": "Sebaran per jenis PS, {scope}",
+    "chartRegion": "Sebaran {level}, {scope}",
+    "chartTop10": "10 kabupaten/kota teratas, {scope}",
+    "chartComposition": "Komposisi jenis PS {level}, {scope}",
+    "regionTableCaption": "Jumlah rekaman {level} dan jenis PS, {scope}"
   },
   "columns": {
     "records": "Rekaman",
@@ -273,5 +285,19 @@
     "members_component_missing": "Komponen anggota kosong",
     "institution_type_lphd_on_htr": "LPHD pada skema HTR",
     "kph_bengkulu_utara_outside_bengkulu": "KPHP Bengkulu Utara di luar Bengkulu"
+  },
+  "charts": {
+    "records": "Rekaman",
+    "area": "Luas",
+    "members": "Anggota L+P",
+    "people": "orang",
+    "showTable": "Tampilkan tabel data",
+    "failed": "Grafik tidak dapat dimuat. Angkanya tersedia di tabel data di bawah.",
+    "empty": "Tidak ada data untuk filter ini.",
+    "measure": "Ukuran yang ditampilkan",
+    "legend": "Keterangan warna",
+    "total": "Total",
+    "ariaRanked": "{title}. Ukuran: {metric}. Tertinggi: {top}, {value}. Rincian lengkap ada di tabel data.",
+    "ariaStacked": "{title}. {count} wilayah; rekaman terbanyak di {top}. Rincian per jenis PS ada di tabel data."
   }
 }
