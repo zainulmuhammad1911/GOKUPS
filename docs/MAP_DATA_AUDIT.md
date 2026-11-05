@@ -3,6 +3,8 @@
 **Tanggal:** 2026-11-04
 **Dasar:** PRD §6.2, §12, §15; hasil `docs/DATA_AUDIT.md`; pemeriksaan langsung layanan BIG, HDX, geoBoundaries, dan repositori kode wilayah.
 
+> **Pembaruan 2026-11-05 (K6 ditetapkan):** sumber yang dipakai adalah opsi cadangan pada §4, yaitu batas kabupaten/kota BPS 2020 melalui OCHA ROAP/HDX dalam versi geoBoundaries gbOpen IDN ADM2 (commit 9469f09, CC BY 3.0 IGO). Data BIG tidak dipakai karena ketentuan penggunaannya belum jelas. Penerapan dan hasilnya ada di §10. Bagian 1 sampai 9 di bawah adalah audit awal dan tidak diubah.
+
 ---
 
 ## 1. Kesimpulan singkat
@@ -155,3 +157,20 @@ Kecamatan tidak dibuat drill-down: 33% kosong, belum dicocokkan, dan PRD tidak m
 2. Penanganan fitur khusus BIG (wilayah terapung, area bermasalah).
 3. Indikator bawaan saat peta dibuka. Usulan: luas (ha), karena tidak terlalu terdistorsi oleh izin HTR perorangan.
 4. Penanggung jawab verifikasi crosswalk kode wilayah.
+
+## 10. Penerapan (2026-11-05)
+
+| Butir | Keputusan dan hasil |
+|-------|---------------------|
+| Sumber | geoBoundaries gbOpen IDN ADM2 (BPS 2020 via OCHA ROAP/HDX), CC BY 3.0 IGO, commit 9469f09. SHA-256 file sumber dicatat di `boundary_release.json` |
+| Kode wilayah | 519 fitur sumber: 503 cocok lewat nama ke kode Kepmendagri 300.2.2-2138/2025, 11 lewat alias tertulis (`data/config/geo_aliases.csv`), 5 fitur danau/kawasan hutan dikeluarkan. Hasil: 514 kabupaten/kota |
+| Provinsi | 38, dibentuk dengan menggabungkan kabupaten/kota menurut kode 2025 (termasuk empat provinsi baru Papua) |
+| Penyederhanaan | mapshaper: kabupaten/kota 3%, provinsi 1%, peta mini 0,12% (pulau < 150 km² dibuang hanya di peta mini) |
+| Ukuran | provinsi 464 KB (153 KB gzip), kabupaten/kota per provinsi terbesar 129 KB, peta mini 56 KB |
+| Versi batas | `bps-2020-gb9469f09-kemendagri2025`, di `public/geo/<versi>/` dengan `current.json` |
+| Indikator bawaan | jumlah rekaman (sama dengan unit hitung utama di halaman lain); luas dan anggota L+P bisa dipilih |
+| Atribusi | tampil di legenda peta, peta mini, dan halaman Tentang; batas dinyatakan indikatif |
+| Fitur khusus BIG | tidak relevan karena BIG tidak dipakai |
+| Verifikasi crosswalk (K7) | cek silang otomatis lolos; pemeriksaan manusia masih menunggu |
+
+Perintah: `uv run --project pipeline pdpsi geo` (lihat `README.md`). Uji: `pipeline/tests/test_geo.py`.

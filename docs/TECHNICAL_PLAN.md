@@ -1,6 +1,6 @@
 # Rencana Teknis PDPSI
 
-**Status:** usulan Tahap 0, menunggu persetujuan
+**Status:** disetujui dan diterapkan; diperbarui 2026-11-05 setelah Tahap 7 (bagian 3, 7, 8, 9, 11 mengikuti hasil implementasi)
 **Dasar:** `PRD_PDPSI.md`, `docs/DATA_AUDIT.md`, `docs/MAP_DATA_AUDIT.md`, pemeriksaan environment 2026-11-04
 
 ---
@@ -56,9 +56,9 @@ Tidak ada basis data server, layanan terpisah, antrean, atau tile server di MVP.
 | ORM | Tidak dipakai | Tidak ada basis data relasional di MVP |
 | Pengolahan data | **Python 3.12 + pandas + openpyxl**, dikelola dengan `uv` | Sesuai PRD; Python sistem 3.9.6 sudah tidak didukung |
 | Geometri | **GeoJSON statis**, disederhanakan dengan **mapshaper** (npm) | Tidak perlu GDAL/PostGIS; lihat MAP_DATA_AUDIT §5 |
-| i18n | **next-intl**, Indonesia di `/` dan Inggris di `/en/...` | URL Indonesia tetap seperti PRD §5.1 |
+| i18n | **next-intl**, Indonesia di `/` dan Inggris di `/en/...` | URL Indonesia tetap seperti PRD §5.1. Tanpa middleware: `/statistics` dilayani `/id/statistics` lewat `rewrites` di `next.config.ts`, dan `/id/...` dialihkan ke `/...`. Middleware next-intl menyebabkan pengalihan berulang di belakang proxy/Docker (QA_REPORT §4) |
 | Ekspor Excel | **exceljs** di server | Lisensi MIT; mendukung sheet metadata |
-| Validasi input | **zod** untuk query string filter | PRD §12 keamanan |
+| Validasi input | Daftar putih di `src/lib/data/query.ts` (kode wilayah, jenis PS, tahun, panjang teks) | PRD §12 keamanan. zod tidak dipakai karena aturannya cukup sederhana |
 | Uji | **pytest** (pipeline), **Vitest** (logika), **Playwright + axe-core** (E2E, aksesibilitas) | Lihat §10 |
 
 ### 3.1 Yang sengaja tidak dipakai di MVP
@@ -214,29 +214,31 @@ Mode terang saja untuk MVP: palet peta dan grafik cukup diuji untuk satu tema, d
 ## 7. Peta (ringkas)
 
 Rincian ada di `docs/MAP_DATA_AUDIT.md`. Ringkasnya:
+- Batas: BPS 2020 melalui OCHA/geoBoundaries (CC BY 3.0 IGO), dibentuk ulang ke 38 provinsi berkode Kepmendagri 2025 oleh `pdpsi geo` (K6).
 - `provinces.geojson` dimuat saat `/map` dibuka. File kabupaten per provinsi dimuat saat drill-down.
-- Angka indikator digabung di klien berdasarkan `code` dari endpoint agregat yang sama dengan halaman Statistik.
-- Komponen peta dibungkus error boundary. Jika WebGL atau geometri gagal dimuat, yang tampil adalah tabel wilayah.
+- Angka indikator per wilayah dan per jenis PS dihitung di server oleh modul agregasi yang sama dengan halaman Statistik, lalu dikirim ke komponen klien bersama halaman.
+- Worker MapLibre disalin ke `public/vendor/` (`scripts/copy-vendor.mjs`) dan didaftarkan dengan `setWorkerUrl`, sehingga worker dimuat dari domain sendiri dan tetap berjalan di bawah CSP.
+- Jika WebGL atau geometri gagal dimuat, yang tampil adalah pesan dan tabel wilayah. Tabel wilayah juga selalu tersedia sebagai alternatif.
 
-## 8. Kinerja (target)
+## 8. Kinerja (target dan hasil terukur)
 
-| Halaman | Target JS awal (gzip) | Catatan |
-|---------|----------------------:|---------|
-| Beranda | < 120 KB | Tanpa MapLibre/ECharts; peta mini berupa SVG |
-| `/data` | < 100 KB | Tabel dirender di server |
-| `/statistics` | < 250 KB | ECharts modular |
-| `/map` | < 350 KB + GeoJSON provinsi < 150 KB | MapLibre dimuat lazy |
+| Halaman | Target awal JS (gzip) | Terukur 2026-11-05 | Catatan |
+|---------|----------------------:|-------------------:|---------|
+| Beranda | < 120 KB | 157 KB | Peta mini SVG; ECharts dimuat saat grafik mendekati layar |
+| `/data` | < 100 KB | 160 KB | Tabel dirender di server |
+| `/statistics` | < 250 KB | 337 KB | ECharts modular, renderer SVG |
+| `/map` | < 350 KB + GeoJSON provinsi < 150 KB | 453 KB + 153 KB | MapLibre hanya di halaman ini |
 
-LCP < 2,5 detik pada profil "Fast 4G" Lighthouse untuk beranda dan `/data`.
+Target awal JS tidak realistis: React 19, Next.js 16, dan next-intl sendiri sekitar 155 KB gzip. Anggaran baru = angka terukur di atas; kenaikan lebih dari 10% perlu alasan. Target pengalaman pengguna tercapai: LCP 0,8 sampai 1,1 detik, CLS 0, dan skor performa Lighthouse ponsel 100 di semua halaman utama (QA_REPORT §2).
 
 ## 9. Keamanan dan privasi
 
 - Kolom `Ketua Lembaga`, `Pra-Pendamping`, `Pendamping`, dan sheet `Pendamping` tidak pernah masuk `approvals.json`, bundle klien, atau unduhan (PRD §6.5; alasan dan cakupan di DECISIONS.md bagian 1). Nama lembaga, termasuk nama pemegang izin HTR, ditampilkan apa adanya (K3).
 - Ekspor CSV/XLSX dari aplikasi harus menetralkan sel yang diawali `=`, `+`, `-`, atau `@` agar tidak dieksekusi sebagai rumus spreadsheet. Rilis r2 tidak memuat sel seperti itu (sudah diperiksa); pemeriksaan ini tetap wajib di ekspor terfilter Tahap 4.
 - Workbook sumber dan `internal/` masuk `.gitignore`. Workbook memuat nama orang, sehingga repositori publik tidak boleh berisi file tersebut.
-- Semua parameter filter divalidasi dengan zod (daftar kode wilayah dan skema yang diizinkan, panjang teks pencarian dibatasi).
+- Semua parameter filter divalidasi dengan daftar putih (kode wilayah dan skema yang diizinkan, panjang teks pencarian dibatasi); parameter tidak dikenal diabaikan dan disebutkan di halaman.
 - Tanpa cookie pelacak dan tanpa analitik pihak ketiga di MVP. Jika analitik dibutuhkan, pilih yang tidak mengumpulkan data pribadi.
-- Header keamanan dasar: CSP, `X-Content-Type-Options`, `Referrer-Policy`.
+- Header keamanan: CSP (produksi; semua sumber dari domain sendiri), `X-Content-Type-Options`, `Referrer-Policy`, `X-Frame-Options: DENY`, `Permissions-Policy`. Tanpa cookie.
 - Tidak ada endpoint admin atau impor di aplikasi web.
 
 ## 10. Pengujian dan validasi angka
@@ -252,7 +254,7 @@ LCP < 2,5 detik pada profil "Fast 4G" Lighthouse untuk beranda dan `/data`.
 
 ## 11. Hosting dan rilis data
 
-- Aplikasi: Vercel, atau server institusi dengan Node (`next build` mode `standalone`, bisa dikemas Docker). Pilihan bergantung pada kebijakan institusi.
+- Aplikasi: `next build` mode `standalone` (diterapkan) dan `Dockerfile` multi-stage dengan pengguna non-root. Bisa dijalankan di server institusi, Docker, atau layanan hosting Node. Pilihan hosting bergantung pada kebijakan institusi (K9). Langkah deploy ada di `README.md`.
 - Rilis data: pengelola menjalankan pipeline, meninjau laporan kualitas, lalu commit folder rilis baru dan memperbarui `current.json`. Deploy ulang membuat rilis baru tampil. Inilah alur "hybrid" pada PRD §4.2.
 - Setiap halaman data menampilkan versi rilis, tanggal ekstraksi sumber, dan tanggal publikasi.
 

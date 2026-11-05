@@ -1,5 +1,5 @@
 {
-  "_note": "Nilai null berarti belum ditetapkan (DECISIONS.md K6, K9). Jangan isi dengan nilai karangan. Keluaran menulis 'Belum ditetapkan' / 'Not yet specified' untuk nilai null.",
+  "_note": "Nilai null berarti belum ditetapkan (DECISIONS.md K9). Jangan isi dengan nilai karangan. Keluaran menulis 'Belum ditetapkan' / 'Not yet specified' untuk nilai null.",
   "product": {
     "name_id": "Pusat Data Perhutanan Sosial Indonesia",
     "name_en": "Indonesian Social Forestry Data Center",
@@ -20,11 +20,11 @@
     "terms_en": null
   },
   "boundary_data": {
-    "source_name": null,
-    "version": null,
-    "license": null,
-    "attribution": null,
-    "url": null,
-    "publication_allowed": false
+    "source_name": "Batas administrasi kabupaten/kota Indonesia (BPS, melalui OCHA ROAP/HDX), versi geoBoundaries gbOpen IDN ADM2",
+    "version": "bps-2020-gb9469f09-kemendagri2025",
+    "license": "CC BY 3.0 IGO",
+    "attribution": "Batas wilayah: BPS, OCHA ROAP, geoBoundaries (CC BY 3.0 IGO). Diolah PDPSI; batas bersifat indikatif.",
+    "url": "https://www.geoboundaries.org/",
+    "publication_allowed": true
   }
 }

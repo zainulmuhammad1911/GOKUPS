@@ -50,10 +50,12 @@ export function BarChart({ categories, series, unit, stacked = false, ariaLabel,
     let observer: ResizeObserver | null = null;
     const el = ref.current;
     if (!el) return;
+    let observer2: IntersectionObserver | null = null;
     const fmt = new Intl.NumberFormat(locale === "en" ? "en-GB" : "id-ID", { maximumFractionDigits: maxFractionDigits });
     const fontFamily = getComputedStyle(document.body).fontFamily;
 
-    import("./echarts-setup")
+    // ECharts baru dimuat saat grafik mendekati layar, agar halaman awal tetap ringan.
+    const load = () => import("./echarts-setup")
       .then(({ echarts }) => {
         if (disposed) return;
         const narrow = el.clientWidth < 520;
@@ -121,9 +123,22 @@ export function BarChart({ categories, series, unit, stacked = false, ariaLabel,
         observer.observe(el);
       })
       .catch(() => !disposed && setFailed(true));
+    if ("IntersectionObserver" in window) {
+      observer2 = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) {
+            observer2?.disconnect();
+            load();
+          }
+        },
+        { rootMargin: "400px 0px" },
+      );
+      observer2.observe(el);
+    } else load();
 
     return () => {
       disposed = true;
+      observer2?.disconnect();
       observer?.disconnect();
       chart?.dispose();
     };

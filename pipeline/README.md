@@ -26,6 +26,16 @@ uv run pdpsi build --source ../data/source/<nama-ekstraksi>/<file>.xlsx --versio
 
 Rilis lama tidak pernah ditimpa. `--force` hanya untuk pengembangan.
 
+## Batas wilayah untuk peta
+
+Sumber: geoBoundaries gbOpen IDN ADM2 (BPS 2020 via OCHA ROAP/HDX, CC BY 3.0 IGO), disimpan di `data/source/geo/` (tidak masuk git). Perintah ini mencocokkan fitur ke kode Kepmendagri 2025 (alias di `data/config/geo_aliases.csv`), membentuk 38 provinsi, menyederhanakan dengan mapshaper, dan menulis `public/geo/<versi>/` beserta `public/geo/current.json`. Butuh Node dan `npm install` di akar proyek (mapshaper).
+
+```bash
+uv run pdpsi geo --source ../data/source/geo/geoBoundaries-IDN-ADM2.geojson --version <versi-batas>
+```
+
+Wilayah baru di Kepmendagri yang tidak punya padanan nama di sumber harus ditambahkan ke `geo_aliases.csv`; perintah berhenti bila ada kabupaten/kota tanpa geometri.
+
 ## Isi folder rilis
 
 | File | Publik | Isi |

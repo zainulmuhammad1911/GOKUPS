@@ -1,0 +1,288 @@
+{
+  "version": "bps-2020-gb9469f09-kemendagri2025",
+  "built_at": "2026-11-05T01:59:18+00:00",
+  "source": {
+    "name": "Batas administrasi kabupaten/kota Indonesia (BPS, melalui OCHA ROAP/HDX), versi geoBoundaries gbOpen",
+    "provider": "Badan Pusat Statistik (BPS); OCHA ROAP; World Food Programme; geoBoundaries (William & Mary geoLab)",
+    "license": "CC BY 3.0 IGO",
+    "license_url": "https://creativecommons.org/licenses/by/3.0/igo/",
+    "url": "https://www.geoboundaries.org/ (IDN ADM2, gbOpen, commit 9469f09)",
+    "hdx_url": "https://data.humdata.org/dataset/cod-ab-idn",
+    "year_represented": "2020 (34 provinsi); dibentuk ulang menjadi 38 provinsi dengan kode Kepmendagri 300.2.2-2138/2025",
+    "attribution_id": "Batas wilayah: BPS, OCHA ROAP, geoBoundaries (CC BY 3.0 IGO). Diolah PDPSI; batas bersifat indikatif.",
+    "attribution_en": "Boundaries: BPS, OCHA ROAP, geoBoundaries (CC BY 3.0 IGO). Processed by PDPSI; boundaries are indicative."
+  },
+  "source_file": "geoBoundaries-IDN-ADM2.geojson",
+  "source_sha256": "947cedc058888c0c2b2628071d289956c85fe279adb369dcf1327ce2236a5602",
+  "simplify": {
+    "regency": "3%",
+    "province": "1%",
+    "province_mini": "0.12%"
+  },
+  "precision": "0.0001",
+  "counts": {
+    "source_features": 519,
+    "regencies": 514,
+    "provinces": 38
+  },
+  "matching": {
+    "matched_by_name": 503,
+    "matched_by_alias": [
+      {
+        "shape_name": "Kepulauan Seribu",
+        "code": "31.01"
+      },
+      {
+        "shape_name": "Kota Jakarta Barat",
+        "code": "31.73"
+      },
+      {
+        "shape_name": "Kota Jakarta Pusat",
+        "code": "31.71"
+      },
+      {
+        "shape_name": "Kota Jakarta Selatan",
+        "code": "31.74"
+      },
+      {
+        "shape_name": "Kota Jakarta Timur",
+        "code": "31.75"
+      },
+      {
+        "shape_name": "Kota Jakarta Utara",
+        "code": "31.72"
+      },
+      {
+        "shape_name": "Mahakam Hulu",
+        "code": "64.11"
+      },
+      {
+        "shape_name": "Maluku Tenggara Barat",
+        "code": "81.03"
+      },
+      {
+        "shape_name": "Mamuju Utara",
+        "code": "76.01"
+      },
+      {
+        "shape_name": "Siau Tagulandang Biaro",
+        "code": "71.09"
+      },
+      {
+        "shape_name": "Toba Samosir",
+        "code": "12.12"
+      }
+    ],
+    "excluded": [
+      "Danau",
+      "Danau Toba",
+      "Hutan",
+      "Waduk Cirata",
+      "Wadung Kedungombo"
+    ],
+    "unmatched": []
+  },
+  "files": [
+    {
+      "path": "provinces-mini.geojson",
+      "bytes": 57404,
+      "sha256": "373fd653167e00cb9f2d4e2b520d6d0b3ebfb686709ed4055782860da009aa1d"
+    },
+    {
+      "path": "provinces.geojson",
+      "bytes": 475284,
+      "sha256": "daf94f0ceb4799bcfff36c304ef0ea3e89eddebd392bd078e4a8f4ab9d078570"
+    },
+    {
+      "path": "regencies/11.geojson",
+      "bytes": 79523,
+      "sha256": "5f33a95cce7228ea77ff57b5c2deaa918c96d8a87489f1ab68a16a1befe45df7"
+    },
+    {
+      "path": "regencies/12.geojson",
+      "bytes": 125587,
+      "sha256": "5169dfe1e94c68a262379e979a02655f774ef40380f9accfc2d7db07fc906f5a"
+    },
+    {
+      "path": "regencies/13.geojson",
+      "bytes": 80124,
+      "sha256": "48a64c162931b8dd088365327c34d7d2bcc191f304bc34e70b18735eee60858e"
+    },
+    {
+      "path": "regencies/14.geojson",
+      "bytes": 73900,
+      "sha256": "882e1cf4856b438ffdc3c63380b7b2b3ad878275befd6ba048aa3ccfa61cdc3f"
+    },
+    {
+      "path": "regencies/15.geojson",
+      "bytes": 50678,
+      "sha256": "e418931f04f4aaa58b9579f9719987ecde3ca2738b44be8b9c351c813c721365"
+    },
+    {
+      "path": "regencies/16.geojson",
+      "bytes": 94648,
+      "sha256": "9bcf513b69dd78b895d0e3f337c21907c780618c581eaf2997cd6d4d5bf56de6"
+    },
+    {
+      "path": "regencies/17.geojson",
+      "bytes": 30750,
+      "sha256": "73208e5ed18f52dade07c347d7c04b26fd2ad317c849a5391c9b148c54e8a8b3"
+    },
+    {
+      "path": "regencies/18.geojson",
+      "bytes": 73161,
+      "sha256": "642d5e22bfef283c39fd0b3a2e18abacdcb1595864ced0b3ca1848d9a5baae03"
+    },
+    {
+      "path": "regencies/19.geojson",
+      "bytes": 38935,
+      "sha256": "9acd608f16fb7e65d2a1429309fa189e7da6a5f9d2bb9bea44104812aa92875f"
+    },
+    {
+      "path": "regencies/21.geojson",
+      "bytes": 78101,
+      "sha256": "bf77dc363315e92711aab41dfc59e3ce6a88f69fde8a83f42a5cef8d311cdf15"
+    },
+    {
+      "path": "regencies/31.geojson",
+      "bytes": 6270,
+      "sha256": "644390e5fe6d2fcbda4f68cff457518cb056d20775389497961c593e433266df"
+    },
+    {
+      "path": "regencies/32.geojson",
+      "bytes": 90579,
+      "sha256": "0e6a6139a19581530eab32ede9cdce1f68a7849642e03c0e70c68965824de9cf"
+    },
+    {
+      "path": "regencies/33.geojson",
+      "bytes": 100318,
+      "sha256": "1185f6182b152e972d34e112c50798cd749d634b817f448537818e72115cc371"
+    },
+    {
+      "path": "regencies/34.geojson",
+      "bytes": 10412,
+      "sha256": "b2f1f00fee76915b469c83592ff205162a63aef40829e12fbc440b22d55807c9"
+    },
+    {
+      "path": "regencies/35.geojson",
+      "bytes": 131485,
+      "sha256": "e8eb70461eb8df4f9d8d3976701976525975545a20df63946405d07edd637d73"
+    },
+    {
+      "path": "regencies/36.geojson",
+      "bytes": 27532,
+      "sha256": "085bdd9acc22d6409ca2eeff2a6e63e4836440b82b1cdb9a39e50bd47fefbeea"
+    },
+    {
+      "path": "regencies/51.geojson",
+      "bytes": 22630,
+      "sha256": "8a43e7484c3b83efb7e191d943b18f99fadbf8a9347af3124bea78e982efd274"
+    },
+    {
+      "path": "regencies/52.geojson",
+      "bytes": 54905,
+      "sha256": "37d72ab97d79500ee45b6407e1baf0521fd89c1bba903b08857ab7d2ab9f6894"
+    },
+    {
+      "path": "regencies/53.geojson",
+      "bytes": 110029,
+      "sha256": "fcda1a533bf141bd673faae43a6fac5ecc1b7814542f88a4e7a91d3426fa11ef"
+    },
+    {
+      "path": "regencies/61.geojson",
+      "bytes": 117669,
+      "sha256": "367e14e9d891adaab1945b6987efa90b3fa9833e9d77853dccc8c2642d1e31f2"
+    },
+    {
+      "path": "regencies/62.geojson",
+      "bytes": 60912,
+      "sha256": "09c89f37065af34d6602911c347fef16172b42574c5f68ee56dc21ce6da70327"
+    },
+    {
+      "path": "regencies/63.geojson",
+      "bytes": 54380,
+      "sha256": "59f07b3eb5c825f31e49732f792c2316833cf7c56a8b16eebd91b337a2f8e1f2"
+    },
+    {
+      "path": "regencies/64.geojson",
+      "bytes": 100573,
+      "sha256": "fb039c3893b37c79012d86162591706b97710355b6da718505045e2f8c548040"
+    },
+    {
+      "path": "regencies/65.geojson",
+      "bytes": 72206,
+      "sha256": "ddf4c43279cb2396bb446d381c797e62e6170ddcf0d64377b74b85a6df2c2615"
+    },
+    {
+      "path": "regencies/71.geojson",
+      "bytes": 51470,
+      "sha256": "2315a97c35e62d60f9da49adeed0fc5823423cc44348c5d6af27ebbb1d37dc69"
+    },
+    {
+      "path": "regencies/72.geojson",
+      "bytes": 115807,
+      "sha256": "cdeb7caccc537165fc518ba822b6e3a282cb4840b34f55c8a554ec2b489994d6"
+    },
+    {
+      "path": "regencies/73.geojson",
+      "bytes": 100010,
+      "sha256": "b1abe21aea63ac7138904ed85e96e23e28c164f514ee01ed5011e431f8065e08"
+    },
+    {
+      "path": "regencies/74.geojson",
+      "bytes": 81715,
+      "sha256": "4a69ea5691caa68243b619446e9c65fe7413ce69c8ceeb3dfe0ace2102a6b028"
+    },
+    {
+      "path": "regencies/75.geojson",
+      "bytes": 25550,
+      "sha256": "31e578fb23684ce44e89db83d5056946283927821c3cb6cf3c105b9e0d45d020"
+    },
+    {
+      "path": "regencies/76.geojson",
+      "bytes": 30589,
+      "sha256": "2b34b764d980c928a23465467361405ca709e3e59ed1095f558a0879e133e276"
+    },
+    {
+      "path": "regencies/81.geojson",
+      "bytes": 132312,
+      "sha256": "07c73bce02509df8ab54fec252ed3fa19286fde1f34c4440e911fd8f662c1ab2"
+    },
+    {
+      "path": "regencies/82.geojson",
+      "bytes": 92517,
+      "sha256": "29dd1e1b6db9ae5458340931f0a1a7433e7c01756424f114aab174c9f32d6e3c"
+    },
+    {
+      "path": "regencies/91.geojson",
+      "bytes": 68700,
+      "sha256": "2b70685ad00287d9022f34ac6d4cc558da23ced59108963a64feb446116c47c4"
+    },
+    {
+      "path": "regencies/92.geojson",
+      "bytes": 66671,
+      "sha256": "d7645b61e90d44c393f9ce8a20e7be76225696decaba90f91f915b275ebd3ea8"
+    },
+    {
+      "path": "regencies/93.geojson",
+      "bytes": 26685,
+      "sha256": "f8db5259c67c27670297738f2c75f12a265dd75ac710b1ae462df0fdc2f4a4c1"
+    },
+    {
+      "path": "regencies/94.geojson",
+      "bytes": 36256,
+      "sha256": "d6f28e67e8a356785292e732b6b675f1ba695db68cf4a3fabf5359140271940b"
+    },
+    {
+      "path": "regencies/95.geojson",
+      "bytes": 22999,
+      "sha256": "a68af029de41b62ea00e80efd339c9fd9ecef3578e4a40d99b9cb57e755bae8b"
+    },
+    {
+      "path": "regencies/96.geojson",
+      "bytes": 66087,
+      "sha256": "1d4b56f2de741cba5ae8bb1cdd6d0c86db834049452c6dbed6444d9ca432b578"
+    }
+  ],
+  "note": "Batas bersifat indikatif untuk visualisasi statistik, bukan rujukan batas hukum. Tidak ada koordinat lokasi kelompok."
+}

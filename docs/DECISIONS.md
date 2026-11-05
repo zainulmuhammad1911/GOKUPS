@@ -62,8 +62,8 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 - **Catatan:** Pada 1.127 rekaman, nilai `Anggota Keseluruhan` sama dengan nilai anggota perempuan. Ini ditampilkan sebagai catatan (`members_total_column_mismatch`), bukan diperbaiki.
 
 ### K2. Statistik gender
-- **Status:** Menunggu (keputusan G)
-- **Bawaan:** nilai laki-laki dan perempuan ditampilkan per rekaman sebagai nilai sumber. Tidak ada statistik atau rasio gender agregat.
+- **Status:** Ditetapkan (2026-11-05, persetujuan umum pemilik produk atas rekomendasi)
+- **Keputusan:** MVP tidak menampilkan statistik atau rasio gender agregat. Nilai laki-laki dan perempuan tetap ditampilkan per rekaman sebagai nilai sumber, dan ikut dalam unduhan. Alasan: anggota perempuan bernilai 0 pada 53% rekaman (hampir semua SK sebelum 2017), yang kemungkinan berarti tidak dicatat.
 
 ### K3. Nama lembaga dan pemegang izin HTR
 - **Status:** Ditetapkan (dikoreksi 2026-11-04, keputusan E). Menggantikan aturan penyamaran sebelumnya.
@@ -87,8 +87,12 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 - Indikator luas = jumlah `Luas Area Keseluruhan (Ha)` sumber pada semua rekaman yang nilainya tersedia.
 
 ### K6. Sumber dan lisensi batas wilayah
-- **Status:** Menunggu (keputusan G)
-- Geometri BIG tidak boleh dipublikasikan atau didistribusikan sebelum lisensinya dikonfirmasi. Jika tidak bisa dipastikan, alternatif berlisensi jelas dievaluasi. Tahap 2 tidak memuat geometri apa pun.
+- **Status:** Ditetapkan (2026-11-05) dengan jalur alternatif, sesuai keputusan C5.
+- Lisensi geometri BIG **tetap belum terkonfirmasi**, jadi geometri BIG tidak dipakai dan tidak didistribusikan.
+- Peta memakai batas kabupaten/kota **BPS (lewat OCHA ROAP/HDX, versi geoBoundaries gbOpen IDN ADM2, commit 9469f09)** dengan lisensi **CC BY 3.0 IGO**, yang mengizinkan redistribusi dengan atribusi. Batasnya mewakili tahun 2020 (34 provinsi). Setiap kabupaten/kota diberi kode Kepmendagri 2025, lalu batas provinsi dibentuk dengan menggabungkan kabupaten/kota menurut kode tersebut, sehingga peta memakai 38 provinsi.
+- 11 nama dicocokkan lewat alias (kabupaten yang berganti nama, misalnya Toba Samosir menjadi Toba, Mamuju Utara menjadi Pasangkayu, Maluku Tenggara Barat menjadi Kepulauan Tanimbar). 5 fitur bukan wilayah administratif (danau, waduk, hutan) tidak digambar. Rincian: `data/config/geo_aliases.csv` dan `public/geo/<versi>/boundary_release.json`.
+- Atribusi wajib tampil di peta dan di halaman Tentang. Batas bersifat indikatif untuk visualisasi statistik, bukan rujukan batas hukum.
+- Bila lisensi BIG kelak terkonfirmasi, sumber batas bisa diganti tanpa mengubah data rilis.
 
 ### K7. Verifikasi kode wilayah
 - **Status:** Sebagian. Kode resmi Kepmendagri 300.2.2-2138/2025 sebagai identitas administratif ditetapkan. Pemeriksa manusia belum ditunjuk.
@@ -103,7 +107,7 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 - **Unit rekap:** jumlah rekaman SK penerima persetujuan/penetapan, bukan jumlah kelompok. Sekitar 2.000 rekaman HTR adalah izin perorangan, dan 240 nama lembaga muncul pada lebih dari satu nomor SK. Hal ini dicatat di setiap rekap.
 
 ### K9. Identitas institusi, logo, kontak, atribusi, lisensi data
-- **Status:** Menunggu (keputusan G)
+- **Status:** Menunggu. Persetujuan umum pemilik produk (2026-11-05) tidak bisa mengisi nama institusi, kontak, atau lisensi data, karena nilai-nilai ini harus berasal dari institusi pengelola; mengarangnya melanggar keputusan G.
 - Semua nilai dibaca dari `config/site.json`. Nilai `null` tampil sebagai "Belum ditetapkan". Rilis berstatus `draft` dan tidak boleh diterbitkan sebagai rilis publik final sampai K9 terisi.
 
 ### K10. Git dan repositori
@@ -120,11 +124,11 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | Kode | Status |
 |------|--------|
 | K1 | Ditetapkan |
-| K2 | Menunggu |
+| K2 | Ditetapkan |
 | K3 | Ditetapkan |
 | K4 | Ditetapkan |
 | K5 | Ditetapkan |
-| K6 | Menunggu |
+| K6 | Ditetapkan (sumber alternatif) |
 | K7 | Sebagian |
 | K8 | Ditetapkan (diubah 2026-11-05) |
 | K9 | Menunggu |
@@ -138,3 +142,4 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | 2026-11-04 | K3 (versi awal): aturan penyamaran nama HTR dengan pengecualian penanda kelompok. K7: crosswalk final dari Kepmendagri 2025. |
 | 2026-11-04 | **Konsolidasi sebelum Tahap 2.** Prinsip Source Fidelity & Data Transparency ditetapkan. K1 dikoreksi: L+P dihitung termasuk bila 0. K3 diganti: tidak ada penyamaran nama. K4 ditetapkan: semua dihitung, penanda Duplikat dengan referensi. K5 ditetapkan: ambang hanya penanda. K8 ditetapkan: 7 kategori sumber tidak digabung. Nilai sumber mentah dipertahankan (tanpa perapian spasi atau koreksi ejaan). KPH dan Region dipublikasikan dengan catatan. Rilis `2026-11-02` (draf pertama, dengan penyamaran) digantikan rilis `2026-11-02.r2`. |
 | 2026-11-05 | **K8 diubah.** Instruksi rekap: rekapitulasi penerima persetujuan PS per provinsi, kabupaten/kota, dan jenis PS (HD, HKm, HTR, HA, KK). Kemitraan Kehutanan ditampilkan sebagai satu jenis PS dengan rincian 3 subskema yang selalu terlihat. Tujuh kategori sumber tetap disimpan. Rilis `2026-11-02.r3` menambahkan rekap ini. |
+| 2026-11-05 | Pemilik produk memberi persetujuan umum atas semua rekomendasi. **K2** ditetapkan (tanpa statistik gender di MVP). **K6** ditetapkan lewat sumber alternatif berlisensi jelas (BPS/OCHA, geoBoundaries, CC BY 3.0 IGO); BIG tidak dipakai. K7, K9, K10 tetap menunggu karena butuh tindakan atau informasi dari pihak lain. Rilis draf `2026-11-02` dan `2026-11-02.r2` dihapus dari working tree (masih ada di riwayat git). |

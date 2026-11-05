@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DataSheetStat, PageHeading } from "@/components/data/blocks";
 import { MetricChart } from "@/components/charts/ChartFigures";
+import { MiniMap } from "@/components/map/MiniMap";
 import { getPathname } from "@/i18n/navigation";
 import { jenisStats, regionStats } from "@/lib/data/stats";
 import { loadRelease } from "@/lib/data/release";
@@ -63,6 +64,22 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             })}
         </DataSheetStat>
       </dl>
+
+      <section aria-labelledby="peta-mini" className="rule-top mt-12 pt-3">
+        <h2 id="peta-mini" className="text-h2 font-bold">{t("home.miniMapTitle")}</h2>
+        <p className="mt-1 text-caption text-ink-muted">{`${processed} ${source}`}</p>
+        <div className="mt-4">
+          <MiniMap
+            values={Object.fromEntries(totals.by_province.map((p) => [p.province_code, p.records]))}
+            label={t("home.miniMapLabel", { count: totals.provinces_with_records })}
+            legendLabels={(from, to) => t("map.range", { from: n(from), to: n(to) })}
+            noRecordsLabel={t("map.noRecords")}
+          />
+        </div>
+        <p className="mt-2 text-small">
+          <Link href="/map" className="inline-flex min-h-11 items-center font-bold">{t("home.openMap")}</Link>
+        </p>
+      </section>
 
       <MetricChart
         id="beranda-jenis"

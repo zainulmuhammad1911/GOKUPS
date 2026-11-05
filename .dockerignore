@@ -1,0 +1,11 @@
+# Data sumber dan data internal (memuat nama orang) tidak boleh masuk image.
+*.xlsx
+data/source/
+data/releases/*/internal/
+pipeline/
+node_modules/
+.next/
+test-results/
+playwright-report/
+.git/
+.claude/

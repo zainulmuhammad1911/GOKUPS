@@ -2,10 +2,12 @@
 
   uv run pdpsi crosswalk --source <workbook>          buat draf crosswalk wilayah (sekali)
   uv run pdpsi build --source <workbook> --version V  buat rilis data baru
+  uv run pdpsi geo --source <geojson> --version V      buat batas wilayah untuk peta
 """
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import sys
 from datetime import datetime, timezone
@@ -19,7 +21,6 @@ from .config import Paths, load_json
 
 PENDING = [
     "K2: statistik gender belum disepakati; rilis tidak memuat statistik gender agregat.",
-    "K6: lisensi dan izin redistribusi geometri BIG (rilis ini tidak memuat geometri).",
     "K7: verifikasi manusia atas crosswalk kode wilayah.",
     "K9: institusi pengelola, kontak, dan lisensi publikasi data. Rilis tetap draf sampai terisi.",
 ]
@@ -143,6 +144,19 @@ def cmd_build(args, paths: Paths) -> int:
     return 0
 
 
+def cmd_geo(args, paths: Paths) -> int:
+    from .geo import build_geo
+
+    out = build_geo(Path(args.source), args.version)
+    meta = json.loads((out / "boundary_release.json").read_text())
+    print(f"Batas wilayah {args.version} ditulis ke {out}")
+    print(f"  {meta['counts']['regencies']} kabupaten/kota, {meta['counts']['provinces']} provinsi, "
+          f"alias {len(meta['matching']['matched_by_alias'])}, dikecualikan {len(meta['matching']['excluded'])}")
+    for f in meta["files"][:3] + meta["files"][-2:]:
+        print(f"  {f['path']}: {f['bytes'] / 1024:,.0f} KB")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="pdpsi")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -155,9 +169,12 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--out")
     b.add_argument("--force", action="store_true")
     b.add_argument("--no-current", action="store_true")
+    g = sub.add_parser("geo")
+    g.add_argument("--source", required=True)
+    g.add_argument("--version", required=True)
     args = p.parse_args(argv)
     paths = Paths()
-    return {"crosswalk": cmd_crosswalk, "build": cmd_build}[args.cmd](args, paths)
+    return {"crosswalk": cmd_crosswalk, "build": cmd_build, "geo": cmd_geo}[args.cmd](args, paths)
 
 
 if __name__ == "__main__":

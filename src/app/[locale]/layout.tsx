@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Atkinson_Hyperlegible_Next } from "next/font/google";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
@@ -40,6 +40,11 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const t = await getTranslations({ locale });
   const { meta } = loadRelease();
+  // Hanya teks yang dipakai komponen klien yang dikirim ke browser (menu, filter, grafik, peta).
+  const all = await getMessages();
+  const clientMessages = Object.fromEntries(
+    ["nav", "common", "data", "charts", "map"].map((ns) => [ns, (all as Record<string, unknown>)[ns]]),
+  );
 
   return (
     <html lang={locale} className={atkinson.variable}>
@@ -50,7 +55,7 @@ export default async function LocaleLayout({
         >
           {t("common.skipToContent")}
         </a>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={clientMessages}>
           {meta.status === "draft" && (
             <p className="border-b border-earth/40 bg-surface-sunken px-4 py-2 text-center text-caption text-ink">
               {t("draft.banner", { version: meta.version })}

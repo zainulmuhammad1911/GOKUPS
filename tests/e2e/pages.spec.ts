@@ -7,7 +7,7 @@ import ExcelJS from "exceljs";
 const VERSION: string = JSON.parse(readFileSync("data/releases/current.json", "utf-8")).version;
 
 const DUP_ID = "2d80cb80ba17"; // rekaman dengan nomor SK yang dipakai 3 rekaman (ID stabil antar-rilis)
-const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", "/statistics?province=72", "/statistics?type=KK&year_from=2017", `/data/${DUP_ID}`, "/download", "/about"];
+const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", "/statistics?province=72", "/statistics?type=KK&year_from=2017", "/map?province=72&indicator=area", `/data/${DUP_ID}`, "/download", "/about"];
 const ROUTES = [...PATHS, ...PATHS.map((p) => (p === "/" ? "/en" : `/en${p}`))];
 const VIEWPORTS = [
   { name: "ponsel", width: 375, height: 812 },
@@ -215,6 +215,7 @@ test.describe("Tahap 5: grafik", () => {
     await page.goto("/statistics");
     for (const id of ["grafik-jenis", "grafik-wilayah", "grafik-top10", "grafik-komposisi"]) {
       const fig = page.locator(`figure[aria-labelledby="${id}-title"]`);
+      await fig.scrollIntoViewIfNeeded(); // grafik dimuat saat mendekati layar
       await expect(fig.locator("[role=img] svg")).toHaveCount(1);
       await expect(fig.locator("[role=img]")).toHaveAttribute("aria-label", /.+/);
     }
@@ -223,6 +224,7 @@ test.describe("Tahap 5: grafik", () => {
   test("pilihan ukuran mengganti grafik dan menandai tombol aktif", async ({ page }) => {
     await page.goto("/statistics");
     const fig = page.locator('figure[aria-labelledby="grafik-jenis-title"]');
+    await fig.scrollIntoViewIfNeeded();
     await fig.getByRole("button", { name: "Luas" }).click();
     await expect(fig.getByRole("button", { name: "Luas" })).toHaveAttribute("aria-pressed", "true");
     await expect(fig.locator("[role=img]")).toHaveAttribute("aria-label", /Ukuran: Luas\. Tertinggi: Hutan Desa/);
@@ -247,6 +249,7 @@ test.describe("Tahap 5: grafik", () => {
 
   test("Beranda: dua grafik tampil", async ({ page }) => {
     await page.goto("/");
+    for (const fig of await page.locator("figure").all()) await fig.scrollIntoViewIfNeeded();
     await expect(page.locator("figure [role=img] svg")).toHaveCount(2);
   });
 });
@@ -255,6 +258,7 @@ test.describe("grafik di ponsel", () => {
   test.use({ viewport: { width: 375, height: 812 } });
   test("semua label kategori tampil (tidak disembunyikan otomatis)", async ({ page }) => {
     await page.goto("/");
+    await page.locator('figure[aria-labelledby="beranda-jenis-title"]').scrollIntoViewIfNeeded();
     const svg = page.locator('figure[aria-labelledby="beranda-jenis-title"] [role=img] svg');
     await expect(svg).toHaveCount(1);
     const text = (await svg.locator("text").allTextContents()).join(" ");
@@ -292,5 +296,69 @@ test.describe("Tahap 6: halaman Tentang", () => {
   test("versi Inggris memakai nama skema Indonesia dengan penjelasan", async ({ page }) => {
     await page.goto("/en/about");
     await expect(page.getByText(/Hutan Desa \(village forest\): forest area/)).toBeVisible();
+  });
+});
+
+test.describe("Tahap 3: peta", () => {
+  test("peta nasional dirender dan panel menampilkan total", async ({ page }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(String(e)));
+    await page.goto("/map");
+    await expect(page.locator("canvas.maplibregl-canvas")).toHaveCount(1);
+    await expect(page.locator("aside dd").first()).toHaveText("10.061");
+    await expect(page.getByText(/Peta menampilkan jumlah per wilayah administratif, bukan lokasi kelompok/)).toBeVisible();
+    await expect(page.getByText(/CC BY 3\.0 IGO/)).toBeVisible();
+    expect(errors).toEqual([]);
+  });
+
+  test("pilih provinsi: URL, remah roti, panel, dan tabel kabupaten/kota", async ({ page }) => {
+    await page.goto("/map");
+    await page.getByLabel("Wilayah", { exact: true }).selectOption("72");
+    await expect(page).toHaveURL(/\/map\?province=72$/);
+    await expect(page.getByRole("button", { name: "Kembali ke Indonesia" })).toBeVisible();
+    await expect(page.locator("aside h2")).toHaveText("Sulawesi Tengah");
+    await expect(page.locator("aside dd").first()).toHaveText("1.282");
+    await expect(page.getByRole("heading", { name: /per kabupaten\/kota di Sulawesi Tengah/ })).toBeVisible();
+    await page.getByRole("button", { name: "Kabupaten Tojo Una Una" }).click();
+    await expect(page).toHaveURL(/province=72&regency=72\.09/);
+    await expect(page.locator("aside h2")).toHaveText("Kabupaten Tojo Una Una");
+    await page.getByRole("button", { name: "Kembali ke Indonesia" }).click();
+    await expect(page).toHaveURL(/\/map$/);
+  });
+
+  test("ukuran dan jenis PS tersimpan di URL; tautan panel cocok dengan halaman Data", async ({ page }) => {
+    await page.goto("/map?province=72");
+    await page.getByRole("button", { name: "Luas" }).click();
+    await page.getByLabel("Jenis PS", { exact: true }).selectOption("HTR");
+    await expect(page).toHaveURL(/indicator=area&type=HTR&province=72/);
+    await page.locator("aside").getByRole("link", { name: /Lihat 1\.085 rekaman ini/ }).click();
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+  });
+
+  test("Beranda: peta mini memuat 38 provinsi", async ({ page }) => {
+    await page.goto("/");
+    const paths = page.locator('section[aria-labelledby="peta-mini"] svg path');
+    await expect(paths).toHaveCount(38);
+    // Tidak ada satu provinsi pun yang menutupi seluruh kanvas (cek urutan putar poligon).
+    const svgBox = (await page.locator('section[aria-labelledby="peta-mini"] svg').boundingBox())!;
+    for (const box of await paths.evaluateAll((els) => els.map((e) => { const b = (e as SVGGraphicsElement).getBBox(); return { width: b.width, height: b.height }; }))) {
+      expect(box.width * box.height).toBeLessThan(0.25 * 640 * 250);
+    }
+    expect(svgBox.width).toBeGreaterThan(0);
+  });
+});
+
+test.describe("perutean bahasa (regresi pengalihan berulang)", () => {
+  test("halaman Indonesia tanpa prefiks berhasil untuk host apa pun, tanpa cookie", async ({ request }) => {
+    for (const host of ["localhost:3200", "127.0.0.1:3200", "pdpsi.contoh.test"]) {
+      const res = await request.get("/statistics", { headers: { host }, maxRedirects: 0 });
+      expect(res.status(), host).toBe(200);
+      expect(res.headers()["set-cookie"], host).toBeUndefined();
+    }
+  });
+  test("/id/... dialihkan ke alamat tanpa prefiks", async ({ request }) => {
+    const res = await request.get("/id/data?province=72", { maxRedirects: 0 });
+    expect(res.status()).toBe(307);
+    expect(res.headers()["location"]).toBe("/data?province=72");
   });
 });

@@ -1,6 +1,6 @@
 # Rencana Implementasi PDPSI
 
-**Status:** Tahap 0, 1, 2, 4, 5, dan 6 selesai (2026-11-05). Tahap 3 (peta) menunggu K6; Tahap 7 (QA dan publikasi) menunggu K9 untuk publikasi. Rilis aktif: draf `2026-11-02.r3`. Pengujian terakhir: pytest 35, Vitest 25, Playwright + axe 96.
+**Status:** Tahap 0 sampai 6 selesai; Tahap 7 selesai untuk QA, publikasi menunggu K9 dan hosting (2026-11-05). Rilis aktif: draf `2026-11-02.r3`; batas wilayah `bps-2020-gb9469f09-kemendagri2025`. Pengujian terakhir: pytest 39, Vitest 25, Playwright + axe 108. Bukti QA: `docs/QA_REPORT.md`.
 **Urutan:** data dan peta lebih dulu, karena keduanya membawa risiko terbesar (PRD §14). Setiap tahap punya kriteria selesai yang bisa diperiksa. Tahap berikutnya dimulai setelah tahap sebelumnya disetujui.
 
 **Aturan permanen untuk semua tahap:** prinsip Source Fidelity & Data Transparency (PRD §1.1, DECISIONS.md bagian 1). Setiap fitur yang menampilkan data harus memakai nilai `source` apa adanya, memberi label pada hasil pengolahan, dan menampilkan penanda ketidaksesuaian.
@@ -18,13 +18,13 @@ Rincian lengkap, konsekuensi, dan nilai bawaan ada di `docs/DECISIONS.md`. Ringk
 | K3 | Nama lembaga/pemegang izin HTR | Ditetapkan | Ditampilkan sesuai sumber, tanpa penyamaran |
 | K4 | Nomor SK sama | Ditetapkan | Semua dihitung; penanda Duplikat + referensi ke semua rekaman terkait |
 | K5 | Anomali luas | Ditetapkan | Ambang 5 ha hanya penanda; tidak ada rekaman yang dikeluarkan |
-| K6 | Lisensi batas wilayah | Menunggu | Tidak ada geometri di aplikasi sampai lisensi jelas |
+| K6 | Lisensi batas wilayah | Ditetapkan 2026-11-05 | Batas BPS 2020 via OCHA/geoBoundaries (CC BY 3.0 IGO), dibentuk ulang ke 38 provinsi; data BIG tidak dipakai |
 | K7 | Verifikasi kode wilayah | Sebagian | Kode resmi; cek silang otomatis lolos; verifikasi manusia belum |
 | K8 | Kategori skema dan jenis PS | Ditetapkan (diubah 2026-11-05) | Rekap 5 jenis PS; Kemitraan Kehutanan dengan rincian 3 subskema; 7 kategori sumber tetap disimpan |
 | K9 | Institusi dan lisensi data | Menunggu | `config/site.json` berisi `null`; tampil "Belum ditetapkan"; rilis tetap draf |
-| K10 | Git | Sebagian | Repositori lokal + `.gitignore`; belum ada commit/remote |
+| K10 | Git | Sebagian | Repositori lokal dengan riwayat commit per tahap; belum ada remote |
 
-**K6 dan K9 harus selesai sebelum rilis publik final.** Pembangunan aplikasi boleh berjalan, tetapi tidak menerbitkan rilis publik final atau mendistribusikan geometri yang belum jelas lisensinya.
+**K9 (dan verifikasi K7) harus selesai sebelum rilis publik final.** K6 selesai. Pembangunan aplikasi boleh berjalan, tetapi tidak menerbitkan rilis publik final atau mendistribusikan geometri yang belum jelas lisensinya.
 
 ## Tahap 1: Pipeline data dan rilis pertama (selesai)
 
@@ -65,7 +65,9 @@ Bukan bagian Tahap 2: peta interaktif, grafik, filter dan pencarian tabel, ekspo
 
 Selesai jika: semua rute tampil dengan layout di dua bahasa, data rilis terbaca di server, uji konsistensi angka hijau, axe tanpa pelanggaran, dan tidak ada data uji atau angka contoh di halaman.
 
-## Tahap 3: Peta
+## Tahap 3: Peta (selesai 2026-11-05)
+
+Hasil: pipeline `pdpsi geo` (`pipeline/pdpsi_pipeline/geo.py`) memetakan 519 fitur sumber ke 514 kabupaten/kota berkode Kepmendagri 2025 (503 lewat nama, 11 lewat alias di `data/config/geo_aliases.csv`, 5 fitur danau/hutan dikeluarkan) dan membentuk 38 provinsi. Keluaran di `public/geo/<versi>/`: provinsi 464 KB (153 KB gzip), kabupaten/kota per provinsi (terbesar 129 KB), peta mini 56 KB. Halaman Peta: choropleth MapLibre tanpa basemap, indikator rekaman/luas/anggota L+P, filter jenis PS, drill-down provinsi ke kabupaten/kota, panel wilayah dengan tautan ke rekaman, legenda kuantil, arsiran untuk nilai tidak valid, state di URL, tabel alternatif, atribusi batas. Beranda memuat peta mini SVG yang dirender di server.
 
 **Tujuan:** peta choropleth provinsi → kabupaten/kota yang mengikuti filter.
 
@@ -112,7 +114,9 @@ Pekerjaan:
 
 Selesai jika: tidak ada placeholder kecuali label "[Menunggu institusi]" yang disetujui (K9), dan semua halaman lengkap dalam dua bahasa.
 
-## Tahap 7: QA dan publikasi
+## Tahap 7: QA dan publikasi (QA selesai 2026-11-05; publikasi menunggu)
+
+Hasil: lihat `docs/QA_REPORT.md`. Langkah 1 sampai 4 selesai (Lighthouse ponsel 100 untuk performa, aksesibilitas, dan best practices di semua halaman utama; Delivery Gate `/antislop` PASS untuk rilis draf; tidak ada kebocoran kolom pribadi). Kesiapan deploy: build `standalone`, `Dockerfile`, header keamanan dan CSP, perutean bahasa tanpa middleware. Langkah 5 belum bisa dikerjakan: hosting, domain, institusi, dan lisensi data belum ditetapkan (K9).
 
 Pekerjaan:
 1. Playwright E2E di 375, 768, dan 1280 px; axe-core; uji keyboard manual pada peta, filter, dan tabel.
