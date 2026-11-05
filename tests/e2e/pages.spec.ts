@@ -261,3 +261,36 @@ test.describe("grafik di ponsel", () => {
     for (const word of ["Kemasyarakatan", "Tanaman", "Desa", "Kemitraan", "Adat"]) expect(text).toContain(word);
   });
 });
+
+test.describe("Tahap 6: halaman Tentang", () => {
+  test("daftar isi menaut ke semua bagian yang ada", async ({ page }) => {
+    await page.goto("/about");
+    const links = page.getByRole("navigation", { name: "Isi halaman" }).getByRole("link");
+    const count = await links.count();
+    expect(count).toBe(12);
+    for (let i = 0; i < count; i++) {
+      const href = (await links.nth(i).getAttribute("href"))!;
+      await expect(page.locator(href)).toHaveCount(1);
+    }
+  });
+
+  test("angka di halaman Tentang dihitung dari rilis", async ({ page }) => {
+    await page.goto("/about");
+    await expect(page.getByText(/136 nomor SK dipakai lebih dari satu rekaman, dengan total 282 rekaman/)).toBeVisible();
+    await expect(page.getByText(/24 rekaman isinya identik/)).toBeVisible();
+    await expect(page.getByRole("link", { name: "3.907 rekaman" })).toBeVisible();
+    await expect(page.getByText(/Total 6\.892\.023 ha dari 10\.061 rekaman/)).toBeVisible();
+  });
+
+  test("jumlah catatan pemeriksaan menaut ke rekaman yang sama", async ({ page }) => {
+    await page.goto("/about");
+    await page.getByRole("link", { name: /rekaman: Anggota Keseluruhan = perempuan/ }).click();
+    await expect(page).toHaveURL(/flag=members_total_equals_female/);
+    await expect(page.getByRole("heading", { name: /1\.127 dari 10\.061 rekaman/ })).toBeVisible();
+  });
+
+  test("versi Inggris memakai nama skema Indonesia dengan penjelasan", async ({ page }) => {
+    await page.goto("/en/about");
+    await expect(page.getByText(/Hutan Desa \(village forest\): forest area/)).toBeVisible();
+  });
+});

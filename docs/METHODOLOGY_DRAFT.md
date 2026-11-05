@@ -1,5 +1,7 @@
 # Draf Metodologi PDPSI (bahan halaman Tentang Data)
 
+**Catatan 2026-11-05:** teks final untuk publik kini ada di halaman Tentang (`src/app/[locale]/about/page.tsx`, teks di `src/messages/*.json`), dengan angka yang dihitung langsung dari rilis aktif. Dokumen ini tetap menjadi catatan teknis.
+
 **Status:** draf isi teknis untuk rilis `2026-11-02.r3` (draf, bukan rilis publik final). Ini bahan, bukan teks final. Teks antarmuka disusun di Tahap 6 dengan `/antislop` dan disunting dengan `/humanizer` tanpa mengubah angka atau definisi. Bagian bertanda **[Belum ditetapkan]** menunggu keputusan di `docs/DECISIONS.md`.
 
 ## Prinsip: kesetiaan pada sumber

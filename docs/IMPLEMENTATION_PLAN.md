@@ -1,6 +1,6 @@
 # Rencana Implementasi PDPSI
 
-**Status:** Tahap 0, 1, 2, 4, dan 5 selesai (2026-11-05). Tahap 3 (peta) menunggu K6. Rilis aktif: draf `2026-11-02.r3`. Pengujian terakhir: pytest 35, Vitest 25, Playwright + axe 92.
+**Status:** Tahap 0, 1, 2, 4, 5, dan 6 selesai (2026-11-05). Tahap 3 (peta) menunggu K6; Tahap 7 (QA dan publikasi) menunggu K9 untuk publikasi. Rilis aktif: draf `2026-11-02.r3`. Pengujian terakhir: pytest 35, Vitest 25, Playwright + axe 96.
 **Urutan:** data dan peta lebih dulu, karena keduanya membawa risiko terbesar (PRD §14). Setiap tahap punya kriteria selesai yang bisa diperiksa. Tahap berikutnya dimulai setelah tahap sebelumnya disetujui.
 
 **Aturan permanen untuk semua tahap:** prinsip Source Fidelity & Data Transparency (PRD §1.1, DECISIONS.md bagian 1). Setiap fitur yang menampilkan data harus memakai nilai `source` apa adanya, memberi label pada hasil pengolahan, dan menampilkan penanda ketidaksesuaian.
@@ -100,7 +100,9 @@ Pekerjaan:
 
 Selesai jika: setiap angka grafik sama dengan hasil agregasi modul tunggal untuk filter yang sama (uji Vitest + E2E).
 
-## Tahap 6: Konten dan bahasa
+## Tahap 6: Konten dan bahasa (selesai 2026-11-05)
+
+Hasil: halaman Tentang mencakup semua butir PRD §6.7 (tujuan, sumber dan periode, unit hitung, definisi 5 jenis PS dan 3 subskema KK, cara data diolah, cara angka dihitung, rekaman bernomor SK sama, tabel catatan pemeriksaan, keterbatasan, peta, kolom yang tidak dipublikasikan, pengelola dan lisensi) dengan daftar isi; semua angkanya dihitung dari rilis aktif. Teks antarmuka id/en ditulis ulang dengan `/antislop` (antislop-copywriting) dan disunting dengan `/humanizer`, tanpa mengubah angka, definisi, istilah kebijakan, atau nama kolom. Glosarium untuk tinjauan pakar: `docs/TERMINOLOGY.md`. Belum: tinjauan definisi dan terjemahan oleh orang yang memahami kebijakan PS.
 
 Pekerjaan:
 1. Halaman Tentang/Metodologi (PRD §6.7) dari draf Tahap 1.
