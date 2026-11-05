@@ -1,0 +1,30 @@
+{
+  "_note": "Nilai null berarti belum ditetapkan (DECISIONS.md K6, K9). Jangan isi dengan nilai karangan. Keluaran menulis 'Belum ditetapkan' / 'Not yet specified' untuk nilai null.",
+  "product": {
+    "name_id": "Pusat Data Perhutanan Sosial Indonesia",
+    "name_en": "Indonesian Social Forestry Data Center",
+    "short_name": "PDPSI"
+  },
+  "institution": {
+    "name_id": null,
+    "name_en": null,
+    "logo_path": null,
+    "website_url": null,
+    "contact_email": null,
+    "address": null
+  },
+  "data_license": {
+    "name": null,
+    "url": null,
+    "terms_id": null,
+    "terms_en": null
+  },
+  "boundary_data": {
+    "source_name": null,
+    "version": null,
+    "license": null,
+    "attribution": null,
+    "url": null,
+    "publication_allowed": false
+  }
+}

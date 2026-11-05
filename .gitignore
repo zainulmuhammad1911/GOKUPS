@@ -1,0 +1,36 @@
+# --- Data sumber dan data internal (memuat nama orang). Jangan pernah di-commit. ---
+# Workbook sumber di root proyek dan semua workbook/CSV mentah di data/source/
+/*.xlsx
+/*.xls
+/*.csv
+data/source/
+# Salinan baris mentah dan file internal setiap rilis
+data/releases/*/internal/
+# Berkas sementara Excel
+~$*.xlsx
+
+# --- Python ---
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# --- Node / Next.js (Tahap 2 dan seterusnya) ---
+node_modules/
+.next/
+out/
+
+# --- Rahasia dan lingkungan lokal ---
+.env
+.env.*
+!.env.example
+
+# --- Sistem ---
+.DS_Store
+
+# --- Pengujian web ---
+test-results/
+playwright-report/
+next-env.d.ts
+*.tsbuildinfo

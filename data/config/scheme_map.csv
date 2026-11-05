@@ -1,0 +1,8 @@
+scheme_original,scheme_code,scheme_label_id,scheme_label_en,scheme_parent,record_kind,sort_order,jenis_ps_code,jenis_ps_label_id,jenis_ps_label_en,jenis_ps_order
+HUTAN KEMASYARAKATAN,HKM,Hutan Kemasyarakatan,Hutan Kemasyarakatan (community forestry),,persetujuan,1,HKM,Hutan Kemasyarakatan,Hutan Kemasyarakatan (community forestry),2
+HUTAN TANAMAN RAKYAT,HTR,Hutan Tanaman Rakyat,Hutan Tanaman Rakyat (community plantation forest),,persetujuan,2,HTR,Hutan Tanaman Rakyat,Hutan Tanaman Rakyat (community plantation forest),3
+HUTAN DESA,HD,Hutan Desa,Hutan Desa (village forest),,persetujuan,3,HD,Hutan Desa,Hutan Desa (village forest),1
+KEMITRAAN KEHUTANAN ~ KULIN KK,KK_KULIN,Kemitraan Kehutanan ~ Kulin KK,Kemitraan Kehutanan ~ Kulin KK (forestry partnership),Kemitraan Kehutanan,persetujuan,4,KK,Kemitraan Kehutanan,Kemitraan Kehutanan (forestry partnership),5
+KEMITRAAN KEHUTANAN ~ KONSERVASI,KK_KONSERVASI,Kemitraan Kehutanan ~ Konservasi,Kemitraan Kehutanan ~ Konservasi (conservation partnership),Kemitraan Kehutanan,persetujuan,5,KK,Kemitraan Kehutanan,Kemitraan Kehutanan (forestry partnership),5
+KEMITRAAN KEHUTANAN ~ IPHPS,KK_IPHPS,Kemitraan Kehutanan ~ IPHPS,Kemitraan Kehutanan ~ IPHPS,Kemitraan Kehutanan,persetujuan,6,KK,Kemitraan Kehutanan,Kemitraan Kehutanan (forestry partnership),5
+HUTAN ADAT,HA,Hutan Adat,Hutan Adat (customary forest),,penetapan,7,HA,Hutan Adat,Hutan Adat (customary forest),4

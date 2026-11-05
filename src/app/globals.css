@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/*
+ * Token dari DESIGN.md §3 sampai §5. Semua pasangan teks sudah diuji kontras (WCAG AA).
+ * Mode terang saja untuk MVP (DESIGN.md §10).
+ */
+@theme {
+  --color-surface: #faf8f3;
+  --color-surface-raised: #ffffff;
+  --color-surface-sunken: #f1eee6;
+  --color-ink: #1f2420;
+  --color-ink-muted: #575e58;
+  --color-rule: #dad5ca;
+  --color-rule-strong: #8c8f87;
+  --color-forest: #1e5a3a;
+  --color-forest-hover: #174a2f;
+  --color-earth: #8a4b1e;
+
+  /* Warna 7 kategori skema (DESIGN.md §3.2); hanya untuk tanda warna, bukan teks. */
+  --color-scheme-hkm: #2f6fb0;
+  --color-scheme-htr: #2f8f5b;
+  --color-scheme-hd: #9a5aa8;
+  --color-scheme-kk-kulin: #cf5f3a;
+  --color-scheme-kk-konservasi: #1f9fae;
+  --color-scheme-kk-iphps: #d08a1a;
+  --color-scheme-ha: #b34b86;
+
+  --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+
+  --text-display: 3rem;
+  --text-display--line-height: 3.25rem;
+  --text-h1: 2.25rem;
+  --text-h1--line-height: 2.75rem;
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 2rem;
+  --text-h3: 1.125rem;
+  --text-h3--line-height: 1.625rem;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.75rem;
+  --text-small: 0.9375rem;
+  --text-small--line-height: 1.375rem;
+  --text-caption: 0.8125rem;
+  --text-caption--line-height: 1.25rem;
+
+  --radius-control: 2px;
+  --radius-panel: 4px;
+}
+
+@layer base {
+  html {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    min-height: 100dvh;
+  }
+  a {
+    color: var(--color-forest);
+    text-decoration-line: underline;
+    text-underline-offset: 0.18em;
+  }
+  a:hover {
+    color: var(--color-forest-hover);
+  }
+  /* Cincin fokus tunggal di seluruh UI: aksen tanah 2 px (DESIGN.md §6). */
+  :focus-visible {
+    outline: 2px solid var(--color-earth);
+    outline-offset: 2px;
+  }
+  table {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility rule-top {
+  border-top: 1px solid var(--color-rule);
+}

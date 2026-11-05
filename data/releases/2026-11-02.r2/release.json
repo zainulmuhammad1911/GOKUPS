@@ -1,0 +1,146 @@
+{
+  "version": "2026-11-02.r2",
+  "status": "draft",
+  "built_at": "2026-11-04T16:44:08+00:00",
+  "pipeline_version": "0.1.0",
+  "source": {
+    "name": "GoKUPS",
+    "description": "GoKUPS, https://gokups.hutsos.kehutanan.go.id (Tabular Perhutanan Sosial + halaman detail tiap SK; Statistik & Grafik > Pendamping)",
+    "url": "https://gokups.hutsos.kehutanan.go.id",
+    "file_name": "Data_SK_Perhutanan_Sosial_GoKUPS.xlsx",
+    "sha256": "99c05e22db11c31675fb086d56e71e1ec23f6df16285f71e6275f900cb597bd5",
+    "extracted_at": "2026-11-02T04:52:09.490000+00:00",
+    "records_total_reported_by_source": 10061
+  },
+  "unit_of_analysis": "rekaman persetujuan/penetapan",
+  "source_fidelity": {
+    "published_source_columns": [
+      "No",
+      "Nomor Surat Keputusan",
+      "Tanggal Surat Keputusan",
+      "Nama Lembaga",
+      "Skema",
+      "Bentuk Lembaga",
+      "Balai",
+      "Seksi Wilayah",
+      "Region",
+      "Provinsi",
+      "Kabupaten Kota",
+      "Kecamatan",
+      "Luas Area Hutan Lindung (Ha)",
+      "Luas Area Hutan Produksi (Ha)",
+      "Luas Area Hutan Produksi Konversi (Ha)",
+      "Luas Area Hutan Produksi Terbatas (Ha)",
+      "Luas Area Hutan Konservasi (Ha)",
+      "Luas Area Penggunaan Lain (Ha)",
+      "Luas Area Keseluruhan (Ha)",
+      "Anggota Laki-Laki",
+      "Anggota Perempuan",
+      "Anggota Keseluruhan",
+      "Kesatuan Pengelola Hutan"
+    ],
+    "excluded_columns": [
+      "Ketua Lembaga",
+      "Pra-Pendamping",
+      "Pendamping"
+    ],
+    "exclusion_reason": "Berisi nama orang. PRD §6.5: tidak ditampilkan secara default sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi.",
+    "is_full_raw_copy": false
+  },
+  "rules": {
+    "_doc": "Aturan pemeriksaan pipeline PDPSI. Prinsip Source Fidelity (docs/DECISIONS.md bagian 1): aturan di sini hanya menambah penanda dan menentukan apakah nilai bisa dihitung. Tidak ada nilai sumber yang diubah dan tidak ada rekaman yang dihapus.",
+    "area": {
+      "flag_component_diff_above_ha": 5,
+      "_decision": "K5: ambang hanya penanda; semua luas yang tersedia dan tidak negatif tetap dihitung"
+    },
+    "members": {
+      "use_source_total_column_for_calculation": false,
+      "_decision": "K1: L+P dihitung bila keduanya tersedia dan >= 0, termasuk 0; negatif = anomali, tidak diagregasi; kolom sumber tetap ditampilkan"
+    },
+    "duplicates": {
+      "_decision": "K4: semua rekaman dipertahankan dan dihitung; penanda Duplikat berdasarkan teks nomor SK yang persis sama"
+    }
+  },
+  "reference": {
+    "region_codes": "Kepmendagri No. 300.2.2-2138 Tahun 2025 (transkripsi cahyadsn/wilayah, dicek silang dengan atribut BIG 2023)",
+    "crosswalk_verified_by_human": false
+  },
+  "counts": {
+    "rows": 10061
+  },
+  "control_totals_national": {
+    "records": 10061,
+    "area_ha": 6892023.0,
+    "area_records_used": 10061,
+    "area_records_not_used": {},
+    "members_male_plus_female": 1288574,
+    "members_records_used": 10060,
+    "members_records_not_used": {
+      "nilai_negatif": 1
+    },
+    "members_source_total_column": 1227046,
+    "members_source_total_column_records": 10061
+  },
+  "files": [
+    {
+      "path": "admin_areas.json",
+      "bytes": 112813,
+      "sha256": "ca32b226e24954c31c40423c62a6ef154894efbbee7209603551a69a046aa7f5"
+    },
+    {
+      "path": "approvals.json",
+      "bytes": 13677515,
+      "sha256": "5422ad9c536734ca559f3084e8fefc60a35cbcac2cea0bf65c2e6965e08b43d3"
+    },
+    {
+      "path": "control_totals.json",
+      "bytes": 246031,
+      "sha256": "acd6d56c13826256887df9d0af7a7f34aa9f2ee02b56af3a9dd3f10d3c405715"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02.r2_rekaman_lengkap.xlsx",
+      "bytes": 1999818,
+      "sha256": "4d750b8b7379a5351b86db202d72f2c2603c32dc3b661876fa1805f75646c8f5"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02.r2_rekaman_lengkap_csv.zip",
+      "bytes": 547547,
+      "sha256": "94387c1980e5e5906f504031711168e1f80bdd14fd106163701d271c1de7b176"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02.r2_ringkasan_kabkota.xlsx",
+      "bytes": 28912,
+      "sha256": "9c334321a88beb6067b06403b965226ed6d28af6d6a37c0a18e04a326f6c42af"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02.r2_ringkasan_kabkota_csv.zip",
+      "bytes": 10197,
+      "sha256": "c3b26bc33417e6cf03d973c30bceeb31a201c8a6bc6f71a4209bb31f67d94f57"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02.r2_ringkasan_provinsi.xlsx",
+      "bytes": 9814,
+      "sha256": "82eec62a918b02d07acfc0494c8285e4324f0a7418c145f824d5936f6ffcd4c0"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02.r2_ringkasan_provinsi_csv.zip",
+      "bytes": 2850,
+      "sha256": "8236c0846703b7c35e6735ecdd197ba8023f203b9e8c31f463e6a514cd658fa4"
+    },
+    {
+      "path": "quality_report.json",
+      "bytes": 1316,
+      "sha256": "26403864e4ce24570c09568a9264ff48594cf09f9ebb388041d3c4a5db959543"
+    },
+    {
+      "path": "quality_report.md",
+      "bytes": 4097,
+      "sha256": "e119f200ca582b6af6432fba5a0417593dbfe1706d00828540e22c274e54d280"
+    },
+    {
+      "path": "schemes.json",
+      "bytes": 2039,
+      "sha256": "a320c77615395c41ebdee910b6bb41447aa9760a537956ba2eb03d659486a62c"
+    }
+  ]
+}

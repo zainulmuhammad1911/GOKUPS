@@ -1,0 +1,56 @@
+{
+  "rows": 10061,
+  "flag_counts": {
+    "sk_shared_by_several_records": 106,
+    "duplicate_review": 152,
+    "duplicate_exact_group": 24,
+    "duplicate_exact": 12,
+    "sk_spacing_variant": 24,
+    "sk_year_truncated": 4,
+    "date_after_extraction": 1,
+    "date_year_mismatch": 325,
+    "area_zero": 64,
+    "area_component_mismatch": 19,
+    "area_component_rounding": 26,
+    "members_total_column_mismatch": 1127,
+    "members_negative": 1,
+    "members_zero": 208,
+    "name_masked": 2121,
+    "institution_type_inconsistent": 2479
+  },
+  "duplicate_group_classes": {
+    "campuran": 75,
+    "beda_lembaga": 49,
+    "identik_penuh": 12
+  },
+  "duplicate_exact_extra_impact": {
+    "records": 12,
+    "area_ha": 38987.0,
+    "members_male_plus_female": 1417,
+    "excluded_from_aggregates": false
+  },
+  "include_counts": {
+    "records": 10061,
+    "area": 9981,
+    "members": 9852,
+    "year": 10060
+  },
+  "masking": {
+    "masked": 2121,
+    "by_reason": {
+      "pola_nama_orang_dengan_kelompok": 2000,
+      "anggota_maks_1": 121
+    }
+  },
+  "crosswalk": {
+    "pairs": 407,
+    "by_method": {
+      "nama_ternormalisasi": 406,
+      "alias_manual": 1
+    },
+    "big_2023_crosscheck": {
+      "nama_sama": 407
+    },
+    "verified_by_human": 0
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "_doc": "Aturan pemeriksaan pipeline PDPSI. Prinsip Source Fidelity (docs/DECISIONS.md bagian 1): aturan di sini hanya menambah penanda dan menentukan apakah nilai bisa dihitung. Tidak ada nilai sumber yang diubah dan tidak ada rekaman yang dihapus.",
+  "area": {
+    "flag_component_diff_above_ha": 5,
+    "_decision": "K5: ambang hanya penanda; semua luas yang tersedia dan tidak negatif tetap dihitung"
+  },
+  "members": {
+    "use_source_total_column_for_calculation": false,
+    "_decision": "K1: L+P dihitung bila keduanya tersedia dan >= 0, termasuk 0; negatif = anomali, tidak diagregasi; kolom sumber tetap ditampilkan"
+  },
+  "duplicates": {
+    "_decision": "K4: semua rekaman dipertahankan dan dihitung; penanda Duplikat berdasarkan teks nomor SK yang persis sama"
+  }
+}

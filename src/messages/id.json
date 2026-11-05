@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "title": "Pusat Data Perhutanan Sosial Indonesia (PDPSI)",
+    "description": "Data persetujuan dan penetapan Perhutanan Sosial dari tabular GoKUPS, disajikan sesuai sumber."
+  },
+  "nav": {
+    "label": "Navigasi utama",
+    "home": "Beranda",
+    "map": "Peta",
+    "statistics": "Statistik",
+    "data": "Data",
+    "download": "Unduh",
+    "about": "Tentang"
+  },
+  "common": {
+    "skipToContent": "Langsung ke konten",
+    "menu": "Menu",
+    "closeMenu": "Tutup menu",
+    "language": "Bahasa",
+    "notAvailable": "Tidak tersedia",
+    "emptyInSource": "Kosong di sumber",
+    "notSet": "Belum ditetapkan",
+    "processed": "Hasil pengolahan PDPSI dari data sumber, bukan angka resmi nasional.",
+    "sourceLine": "Sumber: GoKUPS, diambil {date}. Rilis {version}.",
+    "hectare": "ha",
+    "records": "rekaman",
+    "reason": {
+      "nilai_negatif": "ada nilai negatif",
+      "komponen_kosong": "komponen kosong",
+      "kosong": "kosong di sumber"
+    }
+  },
+  "draft": {
+    "banner": "Versi pengembangan. Data berasal dari rilis draf {version} dan belum diterbitkan sebagai rilis publik."
+  },
+  "footer": {
+    "about": "PDPSI menyajikan data persetujuan dan penetapan Perhutanan Sosial dari tabular GoKUPS sesuai sumbernya. Setiap ketidaksesuaian data diberi catatan, tidak diperbaiki diam-diam.",
+    "source": "Sumber data",
+    "extracted": "Diambil dari sumber",
+    "release": "Versi rilis",
+    "institution": "Institusi pengelola",
+    "methodology": "Cara data diolah"
+  },
+  "home": {
+    "title": "Pusat Data Perhutanan Sosial Indonesia",
+    "lead": "Data persetujuan dan penetapan Perhutanan Sosial dari GoKUPS, disajikan sesuai sumber. Lihat sebarannya per wilayah, telusuri setiap rekaman, dan unduh datanya.",
+    "recordsLabel": "Rekaman persetujuan/penetapan",
+    "recordsNote": "Satu rekaman adalah satu baris di tabular GoKUPS. Angka ini bukan jumlah kelompok atau lembaga.",
+    "provincesLabel": "Provinsi dengan rekaman",
+    "provincesValue": "{count} dari {total}",
+    "provincesNote": "Tanpa rekaman di sumber: {names}.",
+    "areaLabel": "Luas tercatat",
+    "areaNote": "Jumlah kolom Luas Area Keseluruhan dari {used} rekaman. {flagged} rekaman diberi catatan karena luas totalnya berbeda lebih dari 5 ha dari jumlah komponennya.",
+    "membersLabel": "Anggota laki-laki + perempuan tercatat",
+    "membersNote": "Dihitung dari {used} rekaman, termasuk yang bernilai 0. {notUsed} rekaman tidak dapat dihitung ({reasons}).",
+    "membersCompare": "Pembanding: kolom Anggota Keseluruhan di sumber berjumlah {sourceTotal}. Pada {mismatch} rekaman, kolom itu sama dengan jumlah anggota perempuan.",
+    "next": "Lanjutkan ke",
+    "toMap": "Sebaran per provinsi",
+    "toData": "Telusuri {count} rekaman",
+    "toDownload": "Unduh data rilis"
+  },
+  "map": {
+    "title": "Peta sebaran",
+    "unavailableTitle": "Peta belum dapat ditampilkan",
+    "unavailableBody": "Batas wilayah administratif untuk peta masih menunggu konfirmasi lisensi, jadi geometri belum dimuat. Angka per provinsi tersedia dalam tabel di bawah.",
+    "tableCaption": "Rekaman, luas, dan anggota per provinsi",
+    "province": "Provinsi",
+    "code": "Kode",
+    "noRecords": "Tidak ada rekaman"
+  },
+  "statistics": {
+    "title": "Statistik",
+    "lead": "Rekapitulasi penerima persetujuan/penetapan Perhutanan Sosial per jenis PS dan per provinsi. Kemitraan Kehutanan ditampilkan bersama rincian tiga subskemanya.",
+    "tableCaption": "Rekap per jenis PS",
+    "kind": "Jenis",
+    "unitNote": "Angka di halaman ini adalah jumlah rekaman SK penerima persetujuan/penetapan, bukan jumlah kelompok. Sebagian rekaman Hutan Tanaman Rakyat adalah izin perorangan, dan sebagian lembaga tercatat pada lebih dari satu nomor SK. Hutan Adat adalah penetapan.",
+    "jenis": "Jenis PS",
+    "detailOf": "Rincian Kemitraan Kehutanan:",
+    "total": "Total",
+    "provinceCaption": "Jumlah rekaman per provinsi dan jenis PS",
+    "regencyHint": "Rekap per kabupaten/kota (jumlah rekaman dan luas) tersedia dalam file Excel rekap.",
+    "toDownload": "Ke halaman Unduh"
+  },
+  "columns": {
+    "records": "Rekaman",
+    "area": "Luas (ha)",
+    "members": "Anggota L+P",
+    "membersUsed": "Rekaman dihitung (anggota)"
+  },
+  "kind": {
+    "persetujuan": "Persetujuan",
+    "penetapan": "Penetapan"
+  },
+  "data": {
+    "title": "Data rekaman",
+    "lead": "Semua {count} rekaman dari sumber, termasuk rekaman bernomor SK sama. Nilai ditampilkan apa adanya.",
+    "noFilters": "Pencarian dan filter belum tersedia di versi ini.",
+    "tableCaption": "Daftar rekaman, halaman {page} dari {pages}",
+    "sk": "Nomor SK",
+    "name": "Nama Lembaga",
+    "scheme": "Skema",
+    "province": "Provinsi",
+    "regency": "Kabupaten/Kota",
+    "date": "Tanggal SK",
+    "area": "Luas (ha)",
+    "page": "Halaman {page} dari {pages}",
+    "prev": "Halaman sebelumnya",
+    "next": "Halaman berikutnya",
+    "pagination": "Navigasi halaman",
+    "duplicate": "Duplikat",
+    "open": "Buka rekaman {id}",
+    "emptyPage": "Halaman ini tidak berisi rekaman.",
+    "backToFirst": "Kembali ke halaman 1"
+  },
+  "detail": {
+    "title": "Rekaman {id}",
+    "back": "Kembali ke daftar rekaman",
+    "sourceTitle": "Data sumber",
+    "sourceLead": "Nilai kolom workbook GoKUPS apa adanya, dengan nama kolom asli.",
+    "column": "Kolom",
+    "value": "Nilai",
+    "excluded": "Kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping tidak ditampilkan karena berisi nama orang dan publikasinya masih menunggu penilaian kelayakan.",
+    "derivedTitle": "Hasil pengolahan PDPSI",
+    "derivedLead": "Kolom ini dibuat PDPSI dari data sumber dan bukan bagian dari sumber.",
+    "checksTitle": "Catatan pemeriksaan",
+    "checksLead": "Catatan tidak mengubah nilai sumber dan tidak mengeluarkan rekaman dari perhitungan.",
+    "noChecks": "Tidak ada catatan pemeriksaan untuk rekaman ini.",
+    "duplicateTitle": "Duplikat",
+    "duplicateCount": "Nomor SK {sk} tercatat pada {count} rekaman.",
+    "duplicateIdentical": "Semua kolom sumber rekaman ini, selain nomor baris, sama dengan rekaman lain bernomor SK sama.",
+    "duplicateDiffers": "Nomor SK sama, tetapi isi kolom lain berbeda.",
+    "duplicateList": "Rekaman lain dengan nomor SK ini",
+    "spacingTitle": "Nomor SK dengan penulisan berbeda",
+    "spacingBody": "Rekaman berikut memiliki nomor SK yang hanya berbeda spasi atau huruf besar/kecil. PDPSI tidak menganggapnya sama.",
+    "notFound": "Rekaman {id} tidak ditemukan di rilis {version}.",
+    "release": "Rilis",
+    "d": {
+      "scheme_code": "Kode skema",
+      "record_kind": "Jenis rekaman",
+      "approval_year": "Tahun SK",
+      "province_code": "Kode provinsi",
+      "province_name_official": "Provinsi (nama resmi)",
+      "regency_code": "Kode kabupaten/kota",
+      "regency_name_official": "Kabupaten/kota (nama resmi)",
+      "members_male_plus_female": "Anggota laki-laki + perempuan",
+      "members_calc_status": "Status perhitungan anggota",
+      "area_calc_status": "Status perhitungan luas"
+    },
+    "status": {
+      "dihitung": "Dihitung",
+      "nilai_negatif": "Tidak dihitung: ada nilai negatif",
+      "komponen_kosong": "Tidak tersedia: komponen kosong",
+      "kosong": "Tidak tersedia: kosong di sumber"
+    }
+  },
+  "download": {
+    "title": "Unduh data",
+    "lead": "File rilis {version}. Kolom sumber disajikan dengan nama dan nilai asli. Kolom berawalan [Olahan PDPSI] dan [Pemeriksaan PDPSI] adalah hasil pengolahan.",
+    "draftNote": "Rilis ini masih draf dan belum diterbitkan sebagai rilis publik. Lisensi data belum ditetapkan.",
+    "notRaw": "File ini bukan salinan mentah sepenuhnya: kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping tidak disertakan.",
+    "csvNote": "CSV memakai UTF-8, pemisah koma, dan desimal titik. Untuk Excel berlokal Indonesia, gunakan file XLSX.",
+    "file": "File",
+    "format": "Format",
+    "size": "Ukuran",
+    "f": {
+      "rekaman_lengkap": "Seluruh rekaman",
+      "ringkasan_provinsi": "Ringkasan per provinsi (hasil pengolahan)",
+      "ringkasan_kabkota": "Ringkasan per kabupaten/kota (hasil pengolahan)",
+      "rekap_jenis_ps": "Rekapitulasi per provinsi, kabupaten/kota, dan jenis PS (hasil pengolahan)"
+    },
+    "zip": "CSV dalam ZIP, dengan BACA_SAYA.txt",
+    "xlsx": "Excel, dengan sheet Metadata",
+    "rekapNote": "File Excel rekap berisi lembar Rekap Nasional, Rekap Provinsi, Rekap Kabupaten-Kota (dengan subtotal provinsi), Data Panjang untuk pivot, dan Catatan."
+  },
+  "about": {
+    "title": "Tentang data",
+    "fidelityTitle": "Disajikan sesuai sumber",
+    "fidelityBody": "PDPSI tidak memperbaiki, merekonstruksi, atau memperkirakan nilai sumber. Nama, angka, tanggal, dan luas tampil apa adanya. Data kosong ditulis tidak tersedia, bukan nol. Rekaman bernomor SK sama tidak dihapus, dan tujuh kategori skema tidak digabung.",
+    "sourceTitle": "Sumber",
+    "sourceBody": "Tabular Perhutanan Sosial dan halaman detail SK di GoKUPS, diambil {date}. GoKUPS melaporkan {reported} SK saat pengambilan; {rows} baris berhasil diambil.",
+    "numbersTitle": "Cara angka dihitung",
+    "excludedTitle": "Kolom yang tidak dipublikasikan",
+    "excludedBody": "Ketua Lembaga, Pra-Pendamping, dan Pendamping berisi nama orang. Kolom ini tidak ditampilkan sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi. Karena itu data publik PDPSI bukan salinan mentah sepenuhnya.",
+    "managerTitle": "Pengelola dan lisensi",
+    "institution": "Institusi pengelola",
+    "license": "Lisensi data",
+    "contact": "Kontak"
+  },
+  "flags": {
+    "duplicate_sk": "Duplikat: nomor SK juga dipakai rekaman lain.",
+    "duplicate_identical": "Isi rekaman identik dengan rekaman lain bernomor SK sama.",
+    "duplicate_attributes_differ": "Nomor SK sama dengan rekaman lain, isi kolom lain berbeda.",
+    "sk_spacing_variant": "Nomor SK hanya berbeda spasi atau huruf besar/kecil dengan rekaman lain.",
+    "sk_year_truncated": "Tahun pada nomor SK tertulis 3 digit.",
+    "date_after_extraction": "Tanggal SK sesudah tanggal pengambilan data.",
+    "date_year_mismatch": "Tahun pada nomor SK berbeda dengan tahun tanggal SK.",
+    "area_zero": "Luas total di sumber bernilai 0.",
+    "area_component_mismatch": "Luas total berbeda lebih dari 5 ha dari jumlah komponen luas. Luas tetap dihitung.",
+    "area_component_rounding": "Luas total berbeda 1 sampai 5 ha dari jumlah komponen luas. Luas tetap dihitung.",
+    "area_missing": "Luas total kosong di sumber.",
+    "area_negative": "Luas total negatif di sumber.",
+    "members_total_column_mismatch": "Anggota Keseluruhan tidak sama dengan laki-laki + perempuan.",
+    "members_total_equals_female": "Anggota Keseluruhan sama dengan jumlah anggota perempuan.",
+    "members_negative": "Ada nilai anggota negatif.",
+    "members_component_missing": "Anggota laki-laki atau perempuan kosong di sumber.",
+    "institution_type_lphd_on_htr": "Bentuk lembaga tercatat Lembaga Pengelola Hutan Desa pada skema Hutan Tanaman Rakyat.",
+    "kph_bengkulu_utara_outside_bengkulu": "KPH tercatat KPHP Bengkulu Utara pada rekaman di luar Provinsi Bengkulu; perlu dikonfirmasi ke pengelola GoKUPS."
+  },
+  "notFound": {
+    "title": "Halaman tidak ditemukan",
+    "body": "Alamat ini tidak ada di PDPSI.",
+    "home": "Ke beranda"
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "version": "2026-11-02",
+  "status": "draft",
+  "built_at": "2026-11-04T16:26:10+00:00",
+  "pipeline_version": "0.1.0",
+  "source": {
+    "name": "GoKUPS",
+    "description": "GoKUPS, https://gokups.hutsos.kehutanan.go.id (Tabular Perhutanan Sosial + halaman detail tiap SK; Statistik & Grafik > Pendamping)",
+    "url": "https://gokups.hutsos.kehutanan.go.id",
+    "file_name": "Data_SK_Perhutanan_Sosial_GoKUPS.xlsx",
+    "sha256": "99c05e22db11c31675fb086d56e71e1ec23f6df16285f71e6275f900cb597bd5",
+    "extracted_at": "2026-11-02T04:52:09.490000+00:00",
+    "records_total_reported_by_source": 10061
+  },
+  "unit_of_analysis": "rekaman persetujuan/penetapan",
+  "rules": {
+    "_doc": "Aturan kualitas pipeline PDPSI. Setiap nilai merujuk ke docs/DECISIONS.md. Ubah di sini, bukan di kode.",
+    "duplicates": {
+      "exclude_exact_from_aggregates": false,
+      "_decision": "K4: sebagian; bawaan sementara tetap dihitung"
+    },
+    "area": {
+      "max_component_diff_ha": 5,
+      "exclude_zero_total": true,
+      "_decision": "K5: sebagian; ambang 5 ha menunggu konfirmasi"
+    },
+    "members": {
+      "use_source_total_column": false,
+      "min_male_plus_female": 1,
+      "_decision": "K1: ditetapkan; total = laki-laki + perempuan pada baris valid"
+    },
+    "masking": {
+      "scheme_codes": [
+        "HTR"
+      ],
+      "max_members_for_individual": 1,
+      "group_name_prefixes": [
+        "KTH",
+        "KT",
+        "KTHR",
+        "KELOMPOK",
+        "GAPOKTAN",
+        "GAPOKTANHUT",
+        "GABUNGAN",
+        "KOPERASI",
+        "KOP",
+        "KSU",
+        "KUD",
+        "KPHR",
+        "LMDH",
+        "LPHD",
+        "LPHK",
+        "LPHN",
+        "LD",
+        "BUMDES",
+        "BUMDESA",
+        "CV",
+        "PT",
+        "UD",
+        "ASOSIASI",
+        "PERKUMPULAN"
+      ],
+      "placeholder_id": "Izin HTR perorangan",
+      "placeholder_en": "Individual HTR permit",
+      "_decision": "K3: ditetapkan; nama pemegang izin HTR perorangan disamarkan di semua keluaran publik"
+    },
+    "dates": {
+      "exclude_after_extraction_from_year_filter": true
+    }
+  },
+  "reference": {
+    "region_codes": "Kepmendagri No. 300.2.2-2138 Tahun 2025 (transkripsi cahyadsn/wilayah, dicek silang dengan atribut BIG 2023)",
+    "crosswalk_verified_by_human": false
+  },
+  "counts": {
+    "rows": 10061
+  },
+  "control_totals_national": {
+    "records": 10061,
+    "area_ha": 6881152.0,
+    "area_records_included": 9981,
+    "area_records_excluded": 80,
+    "members": 1288574,
+    "members_records_included": 9852,
+    "members_records_excluded": 209
+  },
+  "files": [
+    {
+      "path": "admin_areas.json",
+      "bytes": 112813,
+      "sha256": "ca32b226e24954c31c40423c62a6ef154894efbbee7209603551a69a046aa7f5"
+    },
+    {
+      "path": "approvals.json",
+      "bytes": 11257097,
+      "sha256": "bae9e85a08a03515bdf3aead4075e19afe340e377fe8468a6ed6055d117f3a5b"
+    },
+    {
+      "path": "control_totals.json",
+      "bytes": 173065,
+      "sha256": "759520504fc2eb2bde01b2b2edf8e3343111843d7e941a4426f93d734ba1096f"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02_rekaman_lengkap.xlsx",
+      "bytes": 1603200,
+      "sha256": "e5bb8733e1e537cdd93399d97030122af8fb5c2a5f66b71289da2e286f4d5c71"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02_rekaman_lengkap_csv.zip",
+      "bytes": 452293,
+      "sha256": "ccecd129f140dce28cc6379fc7e2a6af3fcdb67595edd1d0c99eb1e392db94fd"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02_ringkasan_kabkota.xlsx",
+      "bytes": 26292,
+      "sha256": "5fbfb5bf9dc184a67609150e75b4405c73d4d54df829267f692f79de11a6f770"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02_ringkasan_kabkota_csv.zip",
+      "bytes": 9351,
+      "sha256": "dd5713f41451ee9d048b4207ad4ddf3d0f2a392be4fec8bfaa2329a5aa9ac2d8"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02_ringkasan_provinsi.xlsx",
+      "bytes": 9202,
+      "sha256": "b71535aaf216fc1ecd20aa600aed1932f085b915798861be12be046677325ee7"
+    },
+    {
+      "path": "downloads/pdpsi_2026-11-02_ringkasan_provinsi_csv.zip",
+      "bytes": 2427,
+      "sha256": "87008f094228ce4fab5df4172cd858777ca51b33d64bab6cabee298a282559d7"
+    },
+    {
+      "path": "quality_report.json",
+      "bytes": 1268,
+      "sha256": "a3fd87e3de55c06f33e23f6f3f9089bb8fa5127bbe9e0a6fd3c8fd9f57516e78"
+    },
+    {
+      "path": "quality_report.md",
+      "bytes": 3303,
+      "sha256": "4ebc21450395499ba197c67c19a2cd28bd5b05009a5de42d6371a6c1abc84989"
+    },
+    {
+      "path": "schemes.json",
+      "bytes": 1972,
+      "sha256": "9449b7bc3de5cf5bb3edd3b0eb3273835d6a7d06f53a266211d006d2c31199d5"
+    }
+  ]
+}

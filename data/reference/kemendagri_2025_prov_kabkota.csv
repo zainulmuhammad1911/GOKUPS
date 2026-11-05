@@ -1,0 +1,553 @@
+code,level,name,parent_code
+11,province,Aceh,
+12,province,Sumatera Utara,
+13,province,Sumatera Barat,
+14,province,Riau,
+15,province,Jambi,
+16,province,Sumatera Selatan,
+17,province,Bengkulu,
+18,province,Lampung,
+19,province,Kepulauan Bangka Belitung,
+21,province,Kepulauan Riau,
+31,province,Daerah Khusus Ibukota Jakarta,
+32,province,Jawa Barat,
+33,province,Jawa Tengah,
+34,province,Daerah Istimewa Yogyakarta,
+35,province,Jawa Timur,
+36,province,Banten,
+51,province,Bali,
+52,province,Nusa Tenggara Barat,
+53,province,Nusa Tenggara Timur,
+61,province,Kalimantan Barat,
+62,province,Kalimantan Tengah,
+63,province,Kalimantan Selatan,
+64,province,Kalimantan Timur,
+65,province,Kalimantan Utara,
+71,province,Sulawesi Utara,
+72,province,Sulawesi Tengah,
+73,province,Sulawesi Selatan,
+74,province,Sulawesi Tenggara,
+75,province,Gorontalo,
+76,province,Sulawesi Barat,
+81,province,Maluku,
+82,province,Maluku Utara,
+91,province,Papua,
+92,province,Papua Barat,
+93,province,Papua Selatan,
+94,province,Papua Tengah,
+95,province,Papua Pegunungan,
+96,province,Papua Barat Daya,
+11.01,regency,Kabupaten Aceh Selatan,11
+11.02,regency,Kabupaten Aceh Tenggara,11
+11.03,regency,Kabupaten Aceh Timur,11
+11.04,regency,Kabupaten Aceh Tengah,11
+11.05,regency,Kabupaten Aceh Barat,11
+11.06,regency,Kabupaten Aceh Besar,11
+11.07,regency,Kabupaten Pidie,11
+11.08,regency,Kabupaten Aceh Utara,11
+11.09,regency,Kabupaten Simeulue,11
+11.10,regency,Kabupaten Aceh Singkil,11
+11.11,regency,Kabupaten Bireuen,11
+11.12,regency,Kabupaten Aceh Barat Daya,11
+11.13,regency,Kabupaten Gayo Lues,11
+11.14,regency,Kabupaten Aceh Jaya,11
+11.15,regency,Kabupaten Nagan Raya,11
+11.16,regency,Kabupaten Aceh Tamiang,11
+11.17,regency,Kabupaten Bener Meriah,11
+11.18,regency,Kabupaten Pidie Jaya,11
+11.71,regency,Kota Banda Aceh,11
+11.72,regency,Kota Sabang,11
+11.73,regency,Kota Lhokseumawe,11
+11.74,regency,Kota Langsa,11
+11.75,regency,Kota Subulussalam,11
+12.01,regency,Kabupaten Tapanuli Tengah,12
+12.02,regency,Kabupaten Tapanuli Utara,12
+12.03,regency,Kabupaten Tapanuli Selatan,12
+12.04,regency,Kabupaten Nias,12
+12.05,regency,Kabupaten Langkat,12
+12.06,regency,Kabupaten Karo,12
+12.07,regency,Kabupaten Deli Serdang,12
+12.08,regency,Kabupaten Simalungun,12
+12.09,regency,Kabupaten Asahan,12
+12.10,regency,Kabupaten Labuhanbatu,12
+12.11,regency,Kabupaten Dairi,12
+12.12,regency,Kabupaten Toba,12
+12.13,regency,Kabupaten Mandailing Natal,12
+12.14,regency,Kabupaten Nias Selatan,12
+12.15,regency,Kabupaten Pakpak Bharat,12
+12.16,regency,Kabupaten Humbang Hasundutan,12
+12.17,regency,Kabupaten Samosir,12
+12.18,regency,Kabupaten Serdang Bedagai,12
+12.19,regency,Kabupaten Batu Bara,12
+12.20,regency,Kabupaten Padang Lawas Utara,12
+12.21,regency,Kabupaten Padang Lawas,12
+12.22,regency,Kabupaten Labuhanbatu Selatan,12
+12.23,regency,Kabupaten Labuhanbatu Utara,12
+12.24,regency,Kabupaten Nias Utara,12
+12.25,regency,Kabupaten Nias Barat,12
+12.71,regency,Kota Medan,12
+12.72,regency,Kota Pematangsiantar,12
+12.73,regency,Kota Sibolga,12
+12.74,regency,Kota Tanjungbalai,12
+12.75,regency,Kota Binjai,12
+12.76,regency,Kota Tebing Tinggi,12
+12.77,regency,Kota Padangsidimpuan,12
+12.78,regency,Kota Gunungsitoli,12
+13.01,regency,Kabupaten Pesisir Selatan,13
+13.02,regency,Kabupaten Solok,13
+13.03,regency,Kabupaten Sijunjung,13
+13.04,regency,Kabupaten Tanah Datar,13
+13.05,regency,Kabupaten Padang Pariaman,13
+13.06,regency,Kabupaten Agam,13
+13.07,regency,Kabupaten Lima Puluh Kota,13
+13.08,regency,Kabupaten Pasaman,13
+13.09,regency,Kabupaten Kepulauan Mentawai,13
+13.10,regency,Kabupaten Dharmasraya,13
+13.11,regency,Kabupaten Solok Selatan,13
+13.12,regency,Kabupaten Pasaman Barat,13
+13.71,regency,Kota Padang,13
+13.72,regency,Kota Solok,13
+13.73,regency,Kota Sawahlunto,13
+13.74,regency,Kota Padang Panjang,13
+13.75,regency,Kota Bukittinggi,13
+13.76,regency,Kota Payakumbuh,13
+13.77,regency,Kota Pariaman,13
+14.01,regency,Kabupaten Kampar,14
+14.02,regency,Kabupaten Indragiri Hulu,14
+14.03,regency,Kabupaten Bengkalis,14
+14.04,regency,Kabupaten Indragiri Hilir,14
+14.05,regency,Kabupaten Pelalawan,14
+14.06,regency,Kabupaten Rokan Hulu,14
+14.07,regency,Kabupaten Rokan Hilir,14
+14.08,regency,Kabupaten Siak,14
+14.09,regency,Kabupaten Kuantan Singingi,14
+14.10,regency,Kabupaten Kepulauan Meranti,14
+14.71,regency,Kota Pekanbaru,14
+14.72,regency,Kota Dumai,14
+15.01,regency,Kabupaten Kerinci,15
+15.02,regency,Kabupaten Merangin,15
+15.03,regency,Kabupaten Sarolangun,15
+15.04,regency,Kabupaten Batanghari,15
+15.05,regency,Kabupaten Muaro Jambi,15
+15.06,regency,Kabupaten Tanjung Jabung Barat,15
+15.07,regency,Kabupaten Tanjung Jabung Timur,15
+15.08,regency,Kabupaten Bungo,15
+15.09,regency,Kabupaten Tebo,15
+15.71,regency,Kota Jambi,15
+15.72,regency,Kota Sungai Penuh,15
+16.01,regency,Kabupaten Ogan Komering Ulu,16
+16.02,regency,Kabupaten Ogan Komering Ilir,16
+16.03,regency,Kabupaten Muara Enim,16
+16.04,regency,Kabupaten Lahat,16
+16.05,regency,Kabupaten Musi Rawas,16
+16.06,regency,Kabupaten Musi Banyuasin,16
+16.07,regency,Kabupaten Banyuasin,16
+16.08,regency,Kabupaten Ogan Komering Ulu Timur,16
+16.09,regency,Kabupaten Ogan Komering Ulu Selatan,16
+16.10,regency,Kabupaten Ogan Ilir,16
+16.11,regency,Kabupaten Empat Lawang,16
+16.12,regency,Kabupaten Penukal Abab Lematang Ilir,16
+16.13,regency,Kabupaten Musi Rawas Utara,16
+16.71,regency,Kota Palembang,16
+16.72,regency,Kota Pagar Alam,16
+16.73,regency,Kota Lubuk Linggau,16
+16.74,regency,Kota Prabumulih,16
+17.01,regency,Kabupaten Bengkulu Selatan,17
+17.02,regency,Kabupaten Rejang Lebong,17
+17.03,regency,Kabupaten Bengkulu Utara,17
+17.04,regency,Kabupaten Kaur,17
+17.05,regency,Kabupaten Seluma,17
+17.06,regency,Kabupaten Mukomuko,17
+17.07,regency,Kabupaten Lebong,17
+17.08,regency,Kabupaten Kepahiang,17
+17.09,regency,Kabupaten Bengkulu Tengah,17
+17.71,regency,Kota Bengkulu,17
+18.01,regency,Kabupaten Lampung Selatan,18
+18.02,regency,Kabupaten Lampung Tengah,18
+18.03,regency,Kabupaten Lampung Utara,18
+18.04,regency,Kabupaten Lampung Barat,18
+18.05,regency,Kabupaten Tulang Bawang,18
+18.06,regency,Kabupaten Tanggamus,18
+18.07,regency,Kabupaten Lampung Timur,18
+18.08,regency,Kabupaten Way Kanan,18
+18.09,regency,Kabupaten Pesawaran,18
+18.10,regency,Kabupaten Pringsewu,18
+18.11,regency,Kabupaten Mesuji,18
+18.12,regency,Kabupaten Tulang Bawang Barat,18
+18.13,regency,Kabupaten Pesisir Barat,18
+18.71,regency,Kota Bandar Lampung,18
+18.72,regency,Kota Metro,18
+19.01,regency,Kabupaten Bangka,19
+19.02,regency,Kabupaten Belitung,19
+19.03,regency,Kabupaten Bangka Selatan,19
+19.04,regency,Kabupaten Bangka Tengah,19
+19.05,regency,Kabupaten Bangka Barat,19
+19.06,regency,Kabupaten Belitung Timur,19
+19.71,regency,Kota Pangkal Pinang,19
+21.01,regency,Kabupaten Bintan,21
+21.02,regency,Kabupaten Karimun,21
+21.03,regency,Kabupaten Natuna,21
+21.04,regency,Kabupaten Lingga,21
+21.05,regency,Kabupaten Kepulauan Anambas,21
+21.71,regency,Kota Batam,21
+21.72,regency,Kota Tanjung Pinang,21
+31.01,regency,Kabupaten Administrasi Kepulauan Seribu,31
+31.71,regency,Kota Administrasi Jakarta Pusat,31
+31.72,regency,Kota Administrasi Jakarta Utara ,31
+31.73,regency,Kota Administrasi Jakarta Barat,31
+31.74,regency,Kota Administrasi Jakarta Selatan,31
+31.75,regency,Kota Administrasi Jakarta Timur,31
+32.01,regency,Kabupaten Bogor,32
+32.02,regency,Kabupaten Sukabumi,32
+32.03,regency,Kabupaten Cianjur,32
+32.04,regency,Kabupaten Bandung,32
+32.05,regency,Kabupaten Garut,32
+32.06,regency,Kabupaten Tasikmalaya,32
+32.07,regency,Kabupaten Ciamis,32
+32.08,regency,Kabupaten Kuningan,32
+32.09,regency,Kabupaten Cirebon,32
+32.10,regency,Kabupaten Majalengka,32
+32.11,regency,Kabupaten Sumedang,32
+32.12,regency,Kabupaten Indramayu,32
+32.13,regency,Kabupaten Subang,32
+32.14,regency,Kabupaten Purwakarta,32
+32.15,regency,Kabupaten Karawang,32
+32.16,regency,Kabupaten Bekasi,32
+32.17,regency,Kabupaten Bandung Barat,32
+32.18,regency,Kabupaten Pangandaran,32
+32.71,regency,Kota Bogor,32
+32.72,regency,Kota Sukabumi,32
+32.73,regency,Kota Bandung,32
+32.74,regency,Kota Cirebon,32
+32.75,regency,Kota Bekasi,32
+32.76,regency,Kota Depok,32
+32.77,regency,Kota Cimahi,32
+32.78,regency,Kota Tasikmalaya,32
+32.79,regency,Kota Banjar,32
+33.01,regency,Kabupaten Cilacap,33
+33.02,regency,Kabupaten Banyumas,33
+33.03,regency,Kabupaten Purbalingga,33
+33.04,regency,Kabupaten Banjarnegara,33
+33.05,regency,Kabupaten Kebumen,33
+33.06,regency,Kabupaten Purworejo,33
+33.07,regency,Kabupaten Wonosobo,33
+33.08,regency,Kabupaten Magelang,33
+33.09,regency,Kabupaten Boyolali,33
+33.10,regency,Kabupaten Klaten,33
+33.11,regency,Kabupaten Sukoharjo,33
+33.12,regency,Kabupaten Wonogiri,33
+33.13,regency,Kabupaten Karanganyar,33
+33.14,regency,Kabupaten Sragen,33
+33.15,regency,Kabupaten Grobogan,33
+33.16,regency,Kabupaten Blora,33
+33.17,regency,Kabupaten Rembang,33
+33.18,regency,Kabupaten Pati,33
+33.19,regency,Kabupaten Kudus,33
+33.20,regency,Kabupaten Jepara,33
+33.21,regency,Kabupaten Demak,33
+33.22,regency,Kabupaten Semarang,33
+33.23,regency,Kabupaten Temanggung,33
+33.24,regency,Kabupaten Kendal,33
+33.25,regency,Kabupaten Batang,33
+33.26,regency,Kabupaten Pekalongan,33
+33.27,regency,Kabupaten Pemalang,33
+33.28,regency,Kabupaten Tegal,33
+33.29,regency,Kabupaten Brebes,33
+33.71,regency,Kota Magelang,33
+33.72,regency,Kota Surakarta,33
+33.73,regency,Kota Salatiga,33
+33.74,regency,Kota Semarang,33
+33.75,regency,Kota Pekalongan,33
+33.76,regency,Kota Tegal,33
+34.01,regency,Kabupaten Kulon Progo,34
+34.02,regency,Kabupaten Bantul,34
+34.03,regency,Kabupaten Gunungkidul,34
+34.04,regency,Kabupaten Sleman,34
+34.71,regency,Kota Yogyakarta,34
+35.01,regency,Kabupaten Pacitan,35
+35.02,regency,Kabupaten Ponorogo,35
+35.03,regency,Kabupaten Trenggalek,35
+35.04,regency,Kabupaten Tulungagung,35
+35.05,regency,Kabupaten Blitar,35
+35.06,regency,Kabupaten Kediri,35
+35.07,regency,Kabupaten Malang,35
+35.08,regency,Kabupaten Lumajang,35
+35.09,regency,Kabupaten Jember,35
+35.10,regency,Kabupaten Banyuwangi,35
+35.11,regency,Kabupaten Bondowoso,35
+35.12,regency,Kabupaten Situbondo,35
+35.13,regency,Kabupaten Probolinggo,35
+35.14,regency,Kabupaten Pasuruan,35
+35.15,regency,Kabupaten Sidoarjo,35
+35.16,regency,Kabupaten Mojokerto,35
+35.17,regency,Kabupaten Jombang,35
+35.18,regency,Kabupaten Nganjuk,35
+35.19,regency,Kabupaten Madiun,35
+35.20,regency,Kabupaten Magetan,35
+35.21,regency,Kabupaten Ngawi,35
+35.22,regency,Kabupaten Bojonegoro,35
+35.23,regency,Kabupaten Tuban,35
+35.24,regency,Kabupaten Lamongan,35
+35.25,regency,Kabupaten Gresik,35
+35.26,regency,Kabupaten Bangkalan,35
+35.27,regency,Kabupaten Sampang,35
+35.28,regency,Kabupaten Pamekasan,35
+35.29,regency,Kabupaten Sumenep,35
+35.71,regency,Kota Kediri,35
+35.72,regency,Kota Blitar,35
+35.73,regency,Kota Malang,35
+35.74,regency,Kota Probolinggo,35
+35.75,regency,Kota Pasuruan,35
+35.76,regency,Kota Mojokerto,35
+35.77,regency,Kota Madiun,35
+35.78,regency,Kota Surabaya,35
+35.79,regency,Kota Batu,35
+36.01,regency,Kabupaten Pandeglang,36
+36.02,regency,Kabupaten Lebak,36
+36.03,regency,Kabupaten Tangerang,36
+36.04,regency,Kabupaten Serang,36
+36.71,regency,Kota Tangerang,36
+36.72,regency,Kota Cilegon,36
+36.73,regency,Kota Serang,36
+36.74,regency,Kota Tangerang Selatan,36
+51.01,regency,Kabupaten Jembrana,51
+51.02,regency,Kabupaten Tabanan,51
+51.03,regency,Kabupaten Badung,51
+51.04,regency,Kabupaten Gianyar,51
+51.05,regency,Kabupaten Klungkung,51
+51.06,regency,Kabupaten Bangli,51
+51.07,regency,Kabupaten Karangasem,51
+51.08,regency,Kabupaten Buleleng,51
+51.71,regency,Kota Denpasar,51
+52.01,regency,Kabupaten Lombok Barat,52
+52.02,regency,Kabupaten Lombok Tengah,52
+52.03,regency,Kabupaten Lombok Timur,52
+52.04,regency,Kabupaten Sumbawa,52
+52.05,regency,Kabupaten Dompu,52
+52.06,regency,Kabupaten Bima,52
+52.07,regency,Kabupaten Sumbawa Barat,52
+52.08,regency,Kabupaten Lombok Utara,52
+52.71,regency,Kota Mataram,52
+52.72,regency,Kota Bima,52
+53.01,regency,Kabupaten Kupang,53
+53.02,regency,Kabupaten Timor Tengah Selatan,53
+53.03,regency,Kabupaten Timor Tengah Utara,53
+53.04,regency,Kabupaten Belu,53
+53.05,regency,Kabupaten Alor,53
+53.06,regency,Kabupaten Flores Timur,53
+53.07,regency,Kabupaten Sikka,53
+53.08,regency,Kabupaten Ende,53
+53.09,regency,Kabupaten Ngada,53
+53.10,regency,Kabupaten Manggarai,53
+53.11,regency,Kabupaten Sumba Timur,53
+53.12,regency,Kabupaten Sumba Barat,53
+53.13,regency,Kabupaten Lembata,53
+53.14,regency,Kabupaten Rote Ndao,53
+53.15,regency,Kabupaten Manggarai Barat,53
+53.16,regency,Kabupaten Nagekeo,53
+53.17,regency,Kabupaten Sumba Tengah,53
+53.18,regency,Kabupaten Sumba Barat Daya,53
+53.19,regency,Kabupaten Manggarai Timur,53
+53.20,regency,Kabupaten Sabu Raijua,53
+53.21,regency,Kabupaten Malaka,53
+53.71,regency,Kota Kupang,53
+61.01,regency,Kabupaten Sambas,61
+61.02,regency,Kabupaten Mempawah,61
+61.03,regency,Kabupaten Sanggau,61
+61.04,regency,Kabupaten Ketapang,61
+61.05,regency,Kabupaten Sintang,61
+61.06,regency,Kabupaten Kapuas Hulu,61
+61.07,regency,Kabupaten Bengkayang,61
+61.08,regency,Kabupaten Landak,61
+61.09,regency,Kabupaten Sekadau,61
+61.10,regency,Kabupaten Melawi,61
+61.11,regency,Kabupaten Kayong Utara,61
+61.12,regency,Kabupaten Kubu Raya,61
+61.71,regency,Kota Pontianak,61
+61.72,regency,Kota Singkawang,61
+62.01,regency,Kabupaten Kotawaringin Barat,62
+62.02,regency,Kabupaten Kotawaringin Timur,62
+62.03,regency,Kabupaten Kapuas,62
+62.04,regency,Kabupaten Barito Selatan,62
+62.05,regency,Kabupaten Barito Utara,62
+62.06,regency,Kabupaten Katingan,62
+62.07,regency,Kabupaten Seruyan,62
+62.08,regency,Kabupaten Sukamara,62
+62.09,regency,Kabupaten Lamandau,62
+62.10,regency,Kabupaten Gunung Mas,62
+62.11,regency,Kabupaten Pulang Pisau,62
+62.12,regency,Kabupaten Murung Raya,62
+62.13,regency,Kabupaten Barito Timur,62
+62.71,regency,Kota Palangkaraya,62
+63.01,regency,Kabupaten Tanah Laut,63
+63.02,regency,Kabupaten Kotabaru,63
+63.03,regency,Kabupaten Banjar,63
+63.04,regency,Kabupaten Barito Kuala,63
+63.05,regency,Kabupaten Tapin,63
+63.06,regency,Kabupaten Hulu Sungai Selatan,63
+63.07,regency,Kabupaten Hulu Sungai Tengah,63
+63.08,regency,Kabupaten Hulu Sungai Utara,63
+63.09,regency,Kabupaten Tabalong,63
+63.10,regency,Kabupaten Tanah Bumbu,63
+63.11,regency,Kabupaten Balangan,63
+63.71,regency,Kota Banjarmasin,63
+63.72,regency,Kota Banjarbaru,63
+64.01,regency,Kabupaten Paser,64
+64.02,regency,Kabupaten Kutai Kartanegara,64
+64.03,regency,Kabupaten Berau,64
+64.07,regency,Kabupaten Kutai Barat,64
+64.08,regency,Kabupaten Kutai Timur,64
+64.09,regency,Kabupaten Penajam Paser Utara,64
+64.11,regency,Kabupaten Mahakam Ulu,64
+64.71,regency,Kota Balikpapan,64
+64.72,regency,Kota Samarinda,64
+64.74,regency,Kota Bontang,64
+65.01,regency,Kabupaten Bulungan,65
+65.02,regency,Kabupaten Malinau,65
+65.03,regency,Kabupaten Nunukan,65
+65.04,regency,Kabupaten Tana Tidung,65
+65.71,regency,Kota Tarakan,65
+71.01,regency,Kabupaten Bolaang Mongondow,71
+71.02,regency,Kabupaten Minahasa,71
+71.03,regency,Kabupaten Kepulauan Sangihe,71
+71.04,regency,Kabupaten Kepulauan Talaud,71
+71.05,regency,Kabupaten Minahasa Selatan,71
+71.06,regency,Kabupaten Minahasa Utara,71
+71.07,regency,Kabupaten Minahasa Tenggara,71
+71.08,regency,Kabupaten Bolaang Mongondow Utara,71
+71.09,regency,Kabupaten Kep. Siau Tagulandang Biaro,71
+71.10,regency,Kabupaten Bolaang Mongondow Timur,71
+71.11,regency,Kabupaten Bolaang Mongondow Selatan,71
+71.71,regency,Kota Manado,71
+71.72,regency,Kota Bitung,71
+71.73,regency,Kota Tomohon,71
+71.74,regency,Kota Kotamobagu,71
+72.01,regency,Kabupaten Banggai,72
+72.02,regency,Kabupaten Poso,72
+72.03,regency,Kabupaten Donggala,72
+72.04,regency,Kabupaten Toli-Toli,72
+72.05,regency,Kabupaten Buol,72
+72.06,regency,Kabupaten Morowali,72
+72.07,regency,Kabupaten Banggai Kepulauan,72
+72.08,regency,Kabupaten Parigi Moutong,72
+72.09,regency,Kabupaten Tojo Una Una,72
+72.10,regency,Kabupaten Sigi,72
+72.11,regency,Kabupaten Banggai Laut,72
+72.12,regency,Kabupaten Morowali Utara,72
+72.71,regency,Kota Palu,72
+73.01,regency,Kabupaten Kepulauan Selayar,73
+73.02,regency,Kabupaten Bulukumba,73
+73.03,regency,Kabupaten Bantaeng,73
+73.04,regency,Kabupaten Jeneponto,73
+73.05,regency,Kabupaten Takalar,73
+73.06,regency,Kabupaten Gowa,73
+73.07,regency,Kabupaten Sinjai,73
+73.08,regency,Kabupaten Bone,73
+73.09,regency,Kabupaten Maros,73
+73.10,regency,Kabupaten Pangkajene dan Kepulauan,73
+73.11,regency,Kabupaten Barru,73
+73.12,regency,Kabupaten Soppeng,73
+73.13,regency,Kabupaten Wajo,73
+73.14,regency,Kabupaten Sidenreng Rappang,73
+73.15,regency,Kabupaten Pinrang,73
+73.16,regency,Kabupaten Enrekang,73
+73.17,regency,Kabupaten Luwu,73
+73.18,regency,Kabupaten Tana Toraja,73
+73.22,regency,Kabupaten Luwu Utara,73
+73.24,regency,Kabupaten Luwu Timur,73
+73.26,regency,Kabupaten Toraja Utara,73
+73.71,regency,Kota Makassar,73
+73.72,regency,Kota Parepare,73
+73.73,regency,Kota Palopo,73
+74.01,regency,Kabupaten Kolaka,74
+74.02,regency,Kabupaten Konawe,74
+74.03,regency,Kabupaten Muna,74
+74.04,regency,Kabupaten Buton,74
+74.05,regency,Kabupaten Konawe Selatan,74
+74.06,regency,Kabupaten Bombana,74
+74.07,regency,Kabupaten Wakatobi,74
+74.08,regency,Kabupaten Kolaka Utara,74
+74.09,regency,Kabupaten Konawe Utara,74
+74.10,regency,Kabupaten Buton Utara,74
+74.11,regency,Kabupaten Kolaka Timur,74
+74.12,regency,Kabupaten Konawe Kepulauan,74
+74.13,regency,Kabupaten Muna Barat,74
+74.14,regency,Kabupaten Buton Tengah,74
+74.15,regency,Kabupaten Buton Selatan,74
+74.71,regency,Kota Kendari,74
+74.72,regency,Kota Bau Bau,74
+75.01,regency,Kabupaten Gorontalo,75
+75.02,regency,Kabupaten Boalemo,75
+75.03,regency,Kabupaten Bone Bolango,75
+75.04,regency,Kabupaten Pohuwato,75
+75.05,regency,Kabupaten Gorontalo Utara,75
+75.71,regency,Kota Gorontalo,75
+76.01,regency,Kabupaten Pasangkayu,76
+76.02,regency,Kabupaten Mamuju,76
+76.03,regency,Kabupaten Mamasa,76
+76.04,regency,Kabupaten Polewali Mandar,76
+76.05,regency,Kabupaten Majene,76
+76.06,regency,Kabupaten Mamuju Tengah,76
+81.01,regency,Kabupaten Maluku Tengah,81
+81.02,regency,Kabupaten Maluku Tenggara,81
+81.03,regency,Kabupaten Kepulauan Tanimbar,81
+81.04,regency,Kabupaten Buru,81
+81.05,regency,Kabupaten Seram Bagian Timur,81
+81.06,regency,Kabupaten Seram Bagian Barat,81
+81.07,regency,Kabupaten Kepulauan Aru,81
+81.08,regency,Kabupaten Maluku Barat Daya,81
+81.09,regency,Kabupaten Buru Selatan,81
+81.71,regency,Kota Ambon,81
+81.72,regency,Kota Tual,81
+82.01,regency,Kabupaten Halmahera Barat,82
+82.02,regency,Kabupaten Halmahera Tengah,82
+82.03,regency,Kabupaten Halmahera Utara,82
+82.04,regency,Kabupaten Halmahera Selatan,82
+82.05,regency,Kabupaten Kepulauan Sula,82
+82.06,regency,Kabupaten Halmahera Timur,82
+82.07,regency,Kabupaten Pulau Morotai,82
+82.08,regency,Kabupaten Pulau Taliabu,82
+82.71,regency,Kota Ternate,82
+82.72,regency,Kota Tidore Kepulauan,82
+91.03,regency,Kabupaten Jayapura,91
+91.05,regency,Kabupaten Kepulauan Yapen,91
+91.06,regency,Kabupaten Biak Numfor,91
+91.10,regency,Kabupaten Sarmi,91
+91.11,regency,Kabupaten Keerom,91
+91.15,regency,Kabupaten Waropen,91
+91.19,regency,Kabupaten Supiori,91
+91.20,regency,Kabupaten Mamberamo Raya,91
+91.71,regency,Kota Jayapura,91
+92.02,regency,Kabupaten Manokwari,92
+92.03,regency,Kabupaten Fak Fak,92
+92.06,regency,Kabupaten Teluk Bintuni,92
+92.07,regency,Kabupaten Teluk Wondama,92
+92.08,regency,Kabupaten Kaimana,92
+92.11,regency,Kabupaten Manokwari Selatan,92
+92.12,regency,Kabupaten Pegunungan Arfak,92
+93.01,regency,Kabupaten Merauke,93
+93.02,regency,Kabupaten Boven Digoel,93
+93.03,regency,Kabupaten Mappi,93
+93.04,regency,Kabupaten Asmat,93
+94.01,regency,Kabupaten Nabire,94
+94.02,regency,Kabupaten Puncak Jaya,94
+94.03,regency,Kabupaten Paniai,94
+94.04,regency,Kabupaten Mimika,94
+94.05,regency,Kabupaten Puncak,94
+94.06,regency,Kabupaten Dogiyai,94
+94.07,regency,Kabupaten Intan Jaya,94
+94.08,regency,Kabupaten Deiyai,94
+95.01,regency,Kabupaten Jayawijaya,95
+95.02,regency,Kabupaten Pegunungan Bintang,95
+95.03,regency,Kabupaten Yahukimo,95
+95.04,regency,Kabupaten Tolikara,95
+95.05,regency,Kabupaten Mamberamo Tengah,95
+95.06,regency,Kabupaten Yalimo,95
+95.07,regency,Kabupaten Lanny Jaya,95
+95.08,regency,Kabupaten Nduga,95
+96.01,regency,Kabupaten Sorong,96
+96.02,regency,Kabupaten Sorong Selatan,96
+96.03,regency,Kabupaten Raja Ampat,96
+96.04,regency,Kabupaten Tambrauw,96
+96.05,regency,Kabupaten Maybrat,96
+96.71,regency,Kota Sorong,96

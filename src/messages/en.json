@@ -1,0 +1,214 @@
+{
+  "meta": {
+    "title": "Indonesian Social Forestry Data Center (PDPSI)",
+    "description": "Social Forestry approval and designation records from the GoKUPS register, presented as recorded in the source."
+  },
+  "nav": {
+    "label": "Main navigation",
+    "home": "Home",
+    "map": "Map",
+    "statistics": "Statistics",
+    "data": "Data",
+    "download": "Download",
+    "about": "About"
+  },
+  "common": {
+    "skipToContent": "Skip to content",
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "language": "Language",
+    "notAvailable": "Not available",
+    "emptyInSource": "Empty in source",
+    "notSet": "Not yet specified",
+    "processed": "Processed by PDPSI from the source data; not an official national figure.",
+    "sourceLine": "Source: GoKUPS, retrieved {date}. Release {version}.",
+    "hectare": "ha",
+    "records": "records",
+    "reason": {
+      "nilai_negatif": "negative value",
+      "komponen_kosong": "empty component",
+      "kosong": "empty in source"
+    }
+  },
+  "draft": {
+    "banner": "Development version. Data comes from draft release {version} and has not been published as a public release."
+  },
+  "footer": {
+    "about": "PDPSI presents Social Forestry approval and designation records from the GoKUPS register as recorded in the source. Data inconsistencies are flagged with a note, never silently corrected.",
+    "source": "Data source",
+    "extracted": "Retrieved from source",
+    "release": "Release",
+    "institution": "Managing institution",
+    "methodology": "How the data is processed"
+  },
+  "home": {
+    "title": "Indonesian Social Forestry Data Center",
+    "lead": "Social Forestry approval and designation records from GoKUPS, presented as recorded in the source. See how they are distributed by region, browse each record, and download the data.",
+    "recordsLabel": "Approval/designation records",
+    "recordsNote": "One record is one row in the GoKUPS register. This is not a count of groups or institutions.",
+    "provincesLabel": "Provinces with records",
+    "provincesValue": "{count} of {total}",
+    "provincesNote": "No records in the source: {names}.",
+    "areaLabel": "Recorded area",
+    "areaNote": "Sum of the Luas Area Keseluruhan (total area) column across {used} records. {flagged} records carry a note because their total area differs by more than 5 ha from the sum of its components.",
+    "membersLabel": "Recorded members, men + women",
+    "membersNote": "Calculated from {used} records, including those with 0. {notUsedCount, plural, one {# record} other {# records}} could not be calculated ({reasons}).",
+    "membersCompare": "For comparison: the source column Anggota Keseluruhan (total members) sums to {sourceTotal}. In {mismatch} records that column equals the number of women.",
+    "next": "Continue to",
+    "toMap": "Distribution by province",
+    "toData": "Browse {count} records",
+    "toDownload": "Download the release data"
+  },
+  "map": {
+    "title": "Distribution map",
+    "unavailableTitle": "The map cannot be shown yet",
+    "unavailableBody": "The administrative boundary data for the map is awaiting licence confirmation, so no geometry is loaded. Figures per province are available in the table below.",
+    "tableCaption": "Records, area, and members per province",
+    "province": "Province",
+    "code": "Code",
+    "noRecords": "No records"
+  },
+  "statistics": {
+    "title": "Statistics",
+    "lead": "Summary of Social Forestry approval/designation records by PS type and by province. Kemitraan Kehutanan (forestry partnership) is shown with its three source subtypes.",
+    "tableCaption": "Summary by PS type",
+    "kind": "Type",
+    "unitNote": "Figures on this page count decree records for approval/designation holders, not groups. Some Hutan Tanaman Rakyat records are individual permits, and some institutions appear under more than one decree number. Hutan Adat (customary forest) is a designation.",
+    "jenis": "PS type",
+    "detailOf": "Forestry partnership subtype:",
+    "total": "Total",
+    "provinceCaption": "Records per province and PS type",
+    "regencyHint": "A summary per regency/city (records and area) is available in the summary Excel file.",
+    "toDownload": "Go to Download"
+  },
+  "columns": {
+    "records": "Records",
+    "area": "Area (ha)",
+    "members": "Members (M+W)",
+    "membersUsed": "Records counted (members)"
+  },
+  "kind": {
+    "persetujuan": "Approval",
+    "penetapan": "Designation"
+  },
+  "data": {
+    "title": "Records",
+    "lead": "All {count} records from the source, including records that share a decree number. Values are shown as recorded.",
+    "noFilters": "Search and filters are not available in this version yet.",
+    "tableCaption": "List of records, page {page} of {pages}",
+    "sk": "Decree number",
+    "name": "Institution name",
+    "scheme": "Scheme",
+    "province": "Province",
+    "regency": "Regency/City",
+    "date": "Decree date",
+    "area": "Area (ha)",
+    "page": "Page {page} of {pages}",
+    "prev": "Previous page",
+    "next": "Next page",
+    "pagination": "Pagination",
+    "duplicate": "Duplicate",
+    "open": "Open record {id}",
+    "emptyPage": "This page contains no records.",
+    "backToFirst": "Back to page 1"
+  },
+  "detail": {
+    "title": "Record {id}",
+    "back": "Back to the list of records",
+    "sourceTitle": "Source data",
+    "sourceLead": "Values from the GoKUPS workbook as recorded, with the original column names.",
+    "column": "Column",
+    "value": "Value",
+    "excluded": "The Ketua Lembaga, Pra-Pendamping, and Pendamping columns (chair and facilitators) are not shown because they contain personal names and their publication is awaiting review.",
+    "derivedTitle": "Processed by PDPSI",
+    "derivedLead": "These fields are derived by PDPSI from the source data and are not part of the source.",
+    "checksTitle": "Review notes",
+    "checksLead": "Notes do not change source values and do not remove the record from any calculation.",
+    "noChecks": "No review notes for this record.",
+    "duplicateTitle": "Duplicate",
+    "duplicateCount": "Decree number {sk} appears in {count} records.",
+    "duplicateIdentical": "Every source column of this record, except the row number, matches another record with the same decree number.",
+    "duplicateDiffers": "Same decree number, but other columns differ.",
+    "duplicateList": "Other records with this decree number",
+    "spacingTitle": "Decree numbers written differently",
+    "spacingBody": "These records have a decree number that differs only in spacing or letter case. PDPSI does not treat them as the same.",
+    "notFound": "Record {id} was not found in release {version}.",
+    "release": "Release",
+    "d": {
+      "scheme_code": "Scheme code",
+      "record_kind": "Record type",
+      "approval_year": "Decree year",
+      "province_code": "Province code",
+      "province_name_official": "Province (official name)",
+      "regency_code": "Regency/city code",
+      "regency_name_official": "Regency/city (official name)",
+      "members_male_plus_female": "Members, men + women",
+      "members_calc_status": "Member calculation status",
+      "area_calc_status": "Area calculation status"
+    },
+    "status": {
+      "dihitung": "Calculated",
+      "nilai_negatif": "Not calculated: negative value",
+      "komponen_kosong": "Not available: empty component",
+      "kosong": "Not available: empty in source"
+    }
+  },
+  "download": {
+    "title": "Download data",
+    "lead": "Files for release {version}. Source columns keep their original names and values. Columns prefixed [Olahan PDPSI] and [Pemeriksaan PDPSI] are processed by PDPSI.",
+    "draftNote": "This is a draft release and has not been published as a public release. The data licence has not been specified yet.",
+    "notRaw": "These files are not a complete raw copy: the Ketua Lembaga, Pra-Pendamping, and Pendamping columns are not included.",
+    "csvNote": "CSV files use UTF-8, comma separators, and a dot as decimal mark.",
+    "file": "File",
+    "format": "Format",
+    "size": "Size",
+    "f": {
+      "rekaman_lengkap": "All records",
+      "ringkasan_provinsi": "Summary by province (processed)",
+      "ringkasan_kabkota": "Summary by regency/city (processed)",
+      "rekap_jenis_ps": "Summary by province, regency/city, and PS type (processed)"
+    },
+    "zip": "CSV in ZIP, with BACA_SAYA.txt (readme, Indonesian)",
+    "xlsx": "Excel, with a Metadata sheet",
+    "rekapNote": "The summary Excel file contains national, province, and regency/city sheets (with province subtotals), a long-format sheet for pivoting, and notes."
+  },
+  "about": {
+    "title": "About the data",
+    "fidelityTitle": "Presented as recorded",
+    "fidelityBody": "PDPSI does not correct, reconstruct, or estimate source values. Names, numbers, dates, and areas appear as recorded. Empty values are labelled not available, never zero. Records sharing a decree number are not removed, and the seven scheme categories are not merged.",
+    "sourceTitle": "Source",
+    "sourceBody": "The Social Forestry register and decree detail pages in GoKUPS, retrieved {date}. GoKUPS reported {reported} decrees at retrieval time; {rows} rows were retrieved.",
+    "numbersTitle": "How the figures are calculated",
+    "excludedTitle": "Columns not published",
+    "excludedBody": "Ketua Lembaga (chair), Pra-Pendamping, and Pendamping (facilitators) contain personal names. They are not shown until their legal basis, purpose, and privacy risk have been reviewed. The public PDPSI data is therefore not a complete raw copy.",
+    "managerTitle": "Manager and licence",
+    "institution": "Managing institution",
+    "license": "Data licence",
+    "contact": "Contact"
+  },
+  "flags": {
+    "duplicate_sk": "Duplicate: the decree number is also used by other records.",
+    "duplicate_identical": "Record content is identical to another record with the same decree number.",
+    "duplicate_attributes_differ": "Same decree number as another record, other columns differ.",
+    "sk_spacing_variant": "Decree number differs from another record only in spacing or letter case.",
+    "sk_year_truncated": "The year in the decree number has 3 digits.",
+    "date_after_extraction": "Decree date is later than the data retrieval date.",
+    "date_year_mismatch": "The year in the decree number differs from the year of the decree date.",
+    "area_zero": "Total area in the source is 0.",
+    "area_component_mismatch": "Total area differs by more than 5 ha from the sum of area components. The area is still counted.",
+    "area_component_rounding": "Total area differs by 1 to 5 ha from the sum of area components. The area is still counted.",
+    "area_missing": "Total area is empty in the source.",
+    "area_negative": "Total area is negative in the source.",
+    "members_total_column_mismatch": "Anggota Keseluruhan (total members) does not equal men + women.",
+    "members_total_equals_female": "Anggota Keseluruhan (total members) equals the number of women.",
+    "members_negative": "A member value is negative.",
+    "members_component_missing": "Men or women count is empty in the source.",
+    "institution_type_lphd_on_htr": "Institution type recorded as Lembaga Pengelola Hutan Desa (village forest institution) under the Hutan Tanaman Rakyat scheme.",
+    "kph_bengkulu_utara_outside_bengkulu": "Forest management unit recorded as KPHP Bengkulu Utara for a record outside Bengkulu Province; needs confirmation from the GoKUPS operator."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "This address does not exist in PDPSI.",
+    "home": "Go to home"
+  }
+}
