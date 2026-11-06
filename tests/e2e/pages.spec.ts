@@ -46,12 +46,14 @@ test.describe("menu ponsel", () => {
   test("buka, tutup dengan Escape, fokus kembali ke tombol", async ({ page }) => {
     await page.goto("/");
     const button = page.getByRole("button", { name: "Menu" });
+    await expect(button).toHaveAttribute("aria-expanded", "false");
     await button.click();
-    await expect(page.getByRole("button", { name: "Tutup menu" })).toHaveAttribute("aria-expanded", "true");
-    await expect(page.getByRole("link", { name: "Statistik", exact: true })).toBeVisible();
+    const sheet = page.getByRole("dialog", { name: "Navigasi utama" });
+    await expect(sheet.getByRole("link", { name: "Statistik", exact: true })).toBeVisible();
     await page.keyboard.press("Escape");
-    await expect(page.getByRole("button", { name: "Menu" })).toHaveAttribute("aria-expanded", "false");
-    await expect(page.getByRole("button", { name: "Menu" })).toBeFocused();
+    await expect(sheet).toBeHidden();
+    await expect(button).toHaveAttribute("aria-expanded", "false");
+    await expect(button).toBeFocused();
   });
   test("tautan menu berpindah halaman", async ({ page }) => {
     await page.goto("/");
@@ -111,7 +113,7 @@ test("rekaman tidak dikenal menghasilkan 404", async ({ page }) => {
 
 test("statistik menampilkan 5 jenis PS dengan rincian Kemitraan Kehutanan", async ({ page }) => {
   await page.goto("/statistics");
-  const table = page.locator("#rekap-nasional + p + div table");
+  const table = page.getByRole("region", { name: /Rekap per jenis PS/ }).locator("table");
   for (const name of ["Hutan Desa", "Hutan Kemasyarakatan", "Hutan Tanaman Rakyat", "Hutan Adat", "Kemitraan Kehutanan"]) {
     await expect(table.getByRole("rowheader", { name, exact: true })).toBeVisible();
   }
@@ -225,8 +227,8 @@ test.describe("Tahap 5: grafik", () => {
     await page.goto("/statistics");
     const fig = page.locator('figure[aria-labelledby="grafik-jenis-title"]');
     await fig.scrollIntoViewIfNeeded();
-    await fig.getByRole("button", { name: "Luas" }).click();
-    await expect(fig.getByRole("button", { name: "Luas" })).toHaveAttribute("aria-pressed", "true");
+    await fig.getByRole("radio", { name: "Luas" }).click();
+    await expect(fig.getByRole("radio", { name: "Luas" })).toHaveAttribute("aria-checked", "true");
     await expect(fig.locator("[role=img]")).toHaveAttribute("aria-label", /Ukuran: Luas\. Tertinggi: Hutan Desa/);
   });
 
@@ -328,7 +330,7 @@ test.describe("Tahap 3: peta", () => {
 
   test("ukuran dan jenis PS tersimpan di URL; tautan panel cocok dengan halaman Data", async ({ page }) => {
     await page.goto("/map?province=72");
-    await page.getByRole("button", { name: "Luas" }).click();
+    await page.getByRole("radio", { name: "Luas" }).click();
     await page.getByLabel("Jenis PS", { exact: true }).selectOption("HTR");
     await expect(page).toHaveURL(/indicator=area&type=HTR&province=72/);
     await page.locator("aside").getByRole("link", { name: /Lihat 1\.085 rekaman ini/ }).click();
@@ -337,10 +339,10 @@ test.describe("Tahap 3: peta", () => {
 
   test("Beranda: peta mini memuat 38 provinsi", async ({ page }) => {
     await page.goto("/");
-    const paths = page.locator('section[aria-labelledby="peta-mini"] svg path');
+    const paths = page.locator('[data-slot=card]:has(#peta-mini) svg[role=img] path');
     await expect(paths).toHaveCount(38);
     // Tidak ada satu provinsi pun yang menutupi seluruh kanvas (cek urutan putar poligon).
-    const svgBox = (await page.locator('section[aria-labelledby="peta-mini"] svg').boundingBox())!;
+    const svgBox = (await page.locator('[data-slot=card]:has(#peta-mini) svg[role=img]').boundingBox())!;
     for (const box of await paths.evaluateAll((els) => els.map((e) => { const b = (e as SVGGraphicsElement).getBBox(); return { width: b.width, height: b.height }; }))) {
       expect(box.width * box.height).toBeLessThan(0.25 * 640 * 250);
     }

@@ -10,7 +10,10 @@
     "statistics": "Statistik",
     "data": "Data",
     "download": "Unduh",
-    "about": "Tentang"
+    "about": "Tentang",
+    "groupExplore": "Jelajahi data",
+    "groupInfo": "Informasi",
+    "record": "Rekaman"
   },
   "common": {
     "skipToContent": "Langsung ke konten",
@@ -33,7 +36,9 @@
     "female": "Perempuan",
     "femaleZeroRecords": "Rekaman perempuan = 0",
     "membersSplit": "Laki-laki {male}, perempuan {female}.",
-    "femaleZeroNote": "Pada {zero} dari {used} rekaman, anggota perempuan tercatat 0, hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, jadi jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya."
+    "femaleZeroNote": "Pada {zero} dari {used} rekaman, anggota perempuan tercatat 0, hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, jadi jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya.",
+    "draftBadge": "Draf",
+    "releaseShort": "Rilis {version}"
   },
   "draft": {
     "banner": "Versi pengembangan. Data berasal dari rilis draf {version} dan belum diterbitkan sebagai rilis publik."

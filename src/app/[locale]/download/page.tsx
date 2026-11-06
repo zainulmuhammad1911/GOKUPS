@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { DataNote, PageHeading } from "@/components/data/blocks";
+import { Download, FileArchive, FileSpreadsheet } from "lucide-react";
+import { DataNote, PageHeading, SectionCard } from "@/components/data/blocks";
+import { Button } from "@/components/ui/button";
 import { loadRelease } from "@/lib/data/release";
 import { formatBytes } from "@/lib/data/format";
 
@@ -27,33 +29,45 @@ export default async function DownloadPage({ params }: { params: Promise<{ local
         <DataNote>{t("download.notRaw")}</DataNote>
       </div>
 
+      <div className="grid items-start gap-x-6 lg:grid-cols-2">
       {KINDS.map((kind) => {
         const group = files.filter((f) => f.path.includes(`_${kind}`));
         if (group.length === 0) return null;
         return (
-          <section key={kind} aria-labelledby={`unduh-${kind}`} className="rule-top mt-10 pt-3">
-            <h2 id={`unduh-${kind}`} className="text-h3 font-bold">{t(`download.f.${kind}`)}</h2>
-            {kind === "rekap_jenis_ps" && <p className="mt-1 text-small text-ink-muted">{t("download.rekapNote")}</p>}
-            <ul className="mt-2 flex flex-col">
+          <SectionCard
+            key={kind}
+            id={`unduh-${kind}`}
+            title={t(`download.f.${kind}`)}
+            description={kind === "rekap_jenis_ps" ? t("download.rekapNote") : undefined}
+          >
+            <ul className="flex flex-col divide-y rounded-md border">
               {group.map((f) => {
                 const name = f.path.replace("downloads/", "");
                 const isZip = name.endsWith(".zip");
+                const Icon = isZip ? FileArchive : FileSpreadsheet;
                 return (
-                  <li key={name} className="flex flex-col gap-0.5 border-b border-rule py-2 md:flex-row md:items-baseline md:gap-6">
-                    <a href={`/unduh-berkas/${name}`} download className="inline-flex min-h-11 items-center break-all font-bold">
-                      {name}
-                    </a>
-                    <span className="text-small text-ink-muted">
-                      {isZip ? t("download.zip") : t("download.xlsx")} · {formatBytes(f.bytes, locale)}
+                  <li key={name} className="flex items-center gap-3 px-3 py-2.5">
+                    <Icon aria-hidden="true" className="size-5 shrink-0 text-primary" />
+                    <span className="flex min-w-0 flex-1 flex-col">
+                      <span className="text-small font-bold break-all">{name}</span>
+                      <span className="text-caption text-muted-foreground">
+                        {isZip ? t("download.zip") : t("download.xlsx")} · {formatBytes(f.bytes, locale)}
+                      </span>
                     </span>
+                    <Button asChild variant="outline" size="icon-lg" className="size-10 shrink-0">
+                      <a href={`/unduh-berkas/${name}`} download aria-label={`${t("nav.download")} ${name}`}>
+                        <Download aria-hidden="true" />
+                      </a>
+                    </Button>
                   </li>
                 );
               })}
             </ul>
-          </section>
+          </SectionCard>
         );
       })}
-      <p className="mt-6 text-caption text-ink-muted">{t("download.csvNote")}</p>
+      </div>
+      <p className="mt-6 text-caption text-muted-foreground">{t("download.csvNote")}</p>
     </>
   );
 }

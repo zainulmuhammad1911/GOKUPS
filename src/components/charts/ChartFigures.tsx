@@ -3,7 +3,12 @@
 import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 import { BarChart } from "./BarChart";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 
 export interface Metric {
   key: string;
@@ -29,6 +34,7 @@ function Figure({
   title,
   caption,
   controls,
+  legend,
   children,
   table,
 }: {
@@ -36,23 +42,38 @@ function Figure({
   title: string;
   caption: string;
   controls?: React.ReactNode;
+  legend?: React.ReactNode;
   children: React.ReactNode;
   table: React.ReactNode;
 }) {
   const t = useTranslations("charts");
   return (
-    <figure aria-labelledby={`${id}-title`} className="rule-top mt-12 pt-3">
-      <h2 id={`${id}-title`} className="text-h2 font-bold">{title}</h2>
-      <figcaption className="mt-1 text-caption text-ink-muted">{caption}</figcaption>
-      {controls}
-      <div className="mt-4">{children}</div>
-      <details className="mt-3 text-small">
-        <summary className="inline-flex min-h-11 cursor-pointer items-center font-bold text-forest">{t("showTable")}</summary>
-        <div className="relative mt-2 max-h-[480px] overflow-auto" role="region" aria-label={title} tabIndex={0}>
-          {table}
-        </div>
-      </details>
-    </figure>
+    <Card className="mt-6 gap-4">
+      <figure aria-labelledby={`${id}-title`} aria-describedby={`${id}-caption`} className="contents">
+        <CardHeader className="gap-1">
+          <h2 id={`${id}-title`} className="text-h3 font-bold tracking-tight">{title}</h2>
+          <CardDescription id={`${id}-caption`} className="text-caption">{caption}</CardDescription>
+          {controls && <div className="mt-2">{controls}</div>}
+        </CardHeader>
+        <CardContent>
+          {legend}
+          {children}
+        </CardContent>
+        <CardFooter className="mt-auto block bg-transparent py-1">
+          <Collapsible>
+            <CollapsibleTrigger className="group/trigger inline-flex min-h-11 cursor-pointer items-center gap-1.5 text-small font-bold text-primary">
+              <ChevronDown aria-hidden="true" className="size-4 transition-transform group-data-[state=open]/trigger:rotate-180" />
+              {t("showTable")}
+            </CollapsibleTrigger>
+            <CollapsibleContent>
+              <div className="relative mb-3 max-h-[480px] overflow-auto rounded-md border bg-card" role="region" aria-label={title} tabIndex={0}>
+                {table}
+              </div>
+            </CollapsibleContent>
+          </Collapsible>
+        </CardFooter>
+      </figure>
+    </Card>
   );
 }
 
@@ -99,46 +120,50 @@ export function MetricChart({
 
   const controls =
     metrics.length > 1 ? (
-      <div role="group" aria-label={t("measure")} className="mt-3 inline-flex flex-wrap gap-1 rounded-[var(--radius-panel)] border border-rule bg-surface-raised p-1">
+      <ToggleGroup
+        type="single"
+        variant="outline"
+        size="lg"
+        value={metric.key}
+        onValueChange={(v) => v && setMetricKey(v)}
+        aria-label={t("measure")}
+        className="flex-wrap"
+      >
         {metrics.map((m) => (
-          <button
+          <ToggleGroupItem
             key={m.key}
-            type="button"
-            aria-pressed={m.key === metric.key}
-            onClick={() => setMetricKey(m.key)}
-            className={`min-h-11 rounded-[var(--radius-control)] px-3 text-small ${
-              m.key === metric.key ? "bg-forest font-bold text-white" : "text-forest hover:bg-surface-sunken"
-            }`}
+            value={m.key}
+            className="px-3 text-small data-[state=on]:bg-primary data-[state=on]:font-bold data-[state=on]:text-primary-foreground"
           >
             {m.label}
-          </button>
+          </ToggleGroupItem>
         ))}
-      </div>
+      </ToggleGroup>
     ) : null;
 
   const table = (
-    <table className="w-full border-collapse text-small">
-      <thead className="sticky top-0 bg-surface-sunken text-left">
-        <tr>
-          <th scope="col" className="px-3 py-2">{categoryHeader}</th>
+    <Table className="text-small">
+      <TableHeader className="sticky top-0 bg-muted">
+        <TableRow>
+          <TableHead scope="col">{categoryHeader}</TableHead>
           {metrics.map((m) => (
-            <th key={m.key} scope="col" className="px-3 py-2 text-right">{m.label} ({m.unit})</th>
+            <TableHead key={m.key} scope="col" className="text-right">{m.label} ({m.unit})</TableHead>
           ))}
-        </tr>
-      </thead>
-      <tbody>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {shown.map((r) => (
-          <tr key={r.label} className="border-b border-rule">
-            <th scope="row" className="px-3 py-2 text-left font-normal">
+          <TableRow key={r.label}>
+            <TableHead scope="row" className="font-normal text-foreground">
               {r.href ? <Link href={r.href}>{r.label}</Link> : r.label}
-            </th>
+            </TableHead>
             {metrics.map((m) => (
-              <td key={m.key} className="px-3 py-2 text-right tabular">{format(r.values[m.key] ?? 0, m.digits)}</td>
+              <TableCell key={m.key} className="text-right tabular">{format(r.values[m.key] ?? 0, m.digits)}</TableCell>
             ))}
-          </tr>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   );
 
   return (
@@ -190,7 +215,7 @@ export function StackedChart({
   );
 
   const legend = (
-    <ul className="mt-3 flex flex-wrap gap-x-5 gap-y-1 text-small" aria-label={t("legend")}>
+    <ul className="mb-3 flex flex-wrap gap-x-5 gap-y-1 text-small" aria-label={t("legend")}>
       {visibleParts.map((p) => (
         <li key={p.code} className="flex items-center gap-2">
           <span aria-hidden="true" className="inline-block size-3 rounded-[1px]" style={{ background: p.color }} />
@@ -201,34 +226,34 @@ export function StackedChart({
   );
 
   const table = (
-    <table className="w-full border-collapse text-small">
-      <thead className="sticky top-0 bg-surface-sunken text-left">
-        <tr>
-          <th scope="col" className="px-3 py-2">{categoryHeader}</th>
+    <Table className="text-small">
+      <TableHeader className="sticky top-0 bg-muted">
+        <TableRow>
+          <TableHead scope="col">{categoryHeader}</TableHead>
           {visibleParts.map((p) => (
-            <th key={p.code} scope="col" className="px-3 py-2 text-right">{p.label}</th>
+            <TableHead key={p.code} scope="col" className="text-right">{p.label}</TableHead>
           ))}
-          <th scope="col" className="px-3 py-2 text-right">{t("total")}</th>
-        </tr>
-      </thead>
-      <tbody>
+          <TableHead scope="col" className="text-right">{t("total")}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {sorted.map((r) => (
-          <tr key={r.label} className="border-b border-rule">
-            <th scope="row" className="px-3 py-2 text-left font-normal">
+          <TableRow key={r.label}>
+            <TableHead scope="row" className="font-normal text-foreground">
               {r.href ? <Link href={r.href}>{r.label}</Link> : r.label}
-            </th>
+            </TableHead>
             {visibleParts.map((p) => (
-              <td key={p.code} className="px-3 py-2 text-right tabular">{format(r.values[p.code] ?? 0)}</td>
+              <TableCell key={p.code} className="text-right tabular">{format(r.values[p.code] ?? 0)}</TableCell>
             ))}
-            <td className="px-3 py-2 text-right font-bold tabular">{format(sum(r))}</td>
-          </tr>
+            <TableCell className="text-right font-bold tabular">{format(sum(r))}</TableCell>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   );
 
   return (
-    <Figure id={id} title={title} caption={caption} controls={legend} table={table}>
+    <Figure id={id} title={title} caption={caption} legend={legend} table={table}>
       {sorted.length === 0 ? (
         <p className="py-4 text-small text-ink-muted">{t("empty")}</p>
       ) : (

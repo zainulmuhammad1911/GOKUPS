@@ -10,7 +10,7 @@
 |---------|------|-------|
 | Pipeline data dan batas wilayah | pytest | 41 lulus |
 | Logika web (agregasi, filter, data grafik) | Vitest | 26 lulus |
-| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 112 lulus; 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
+| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 112 lulus (diulang setelah desain ulang shadcn/ui); 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
 | Tipe | `tsc --noEmit` | lulus |
 
 Cakupan e2e meliputi: tautan lewati-ke-konten, menu ponsel (buka, tutup dengan Escape, fokus kembali), ganti bahasa, filter dan pencarian, urutan kolom, paginasi, unduhan sesuai filter (isi = tabel, kolom = rilis), referensi duplikat, nilai sumber apa adanya (spasi ganda, kosong), grafik (render, pilihan ukuran, tabel data, label di ponsel), peta (render, drill-down, URL, panel, tautan ke data), peta mini, halaman Tentang (daftar isi, angka dari rilis), keamanan rute unduhan, 404, dan regresi pengalihan berulang perutean bahasa.
@@ -24,6 +24,18 @@ Cakupan e2e meliputi: tautan lewati-ke-konten, menu ponsel (buka, tutup dengan E
 | Statistik | 100 | 100 | 100 | 1,1 s | 0 | 50 ms | 337 KB |
 | Peta | 100 | 100 | 100 | 1,1 s | 0 | 60 ms | 453 KB |
 | Tentang | 100 | 100 | 100 | 0,8 s | 0 | 10 ms | 157 KB |
+
+**Pengukuran ulang 2026-11-06 setelah desain ulang dengan shadcn/ui (DESIGN.md v0.4):**
+
+| Halaman | Performa | Aksesibilitas | Best practices | LCP | CLS | TBT | JS (transfer) |
+|---------|---------:|--------------:|---------------:|----:|----:|----:|--------------:|
+| Beranda | 100 | 100 | 100 | 1,1 s | 0 | 10 ms | 213 KB |
+| Data | 100 | 100 | 100 | 0,9 s | 0 | 10 ms | 204 KB |
+| Statistik | 100 | 100 | 100 | 1,1 s | 0 | 80 ms | 390 KB |
+| Peta | 99 sampai 100 | 100 | 100 | 1,1 s | 0 | 70 sampai 120 ms | 506 KB |
+| Tentang | 100 | 100 | 100 | 0,9 s | 0 | 10 ms | 201 KB |
+
+JS naik sekitar 45 sampai 55 KB per halaman karena Radix (sidebar, laci, toggle, collapsible) dan ikon lucide. Pengukuran pertama Peta setelah server baru dinyalakan memberi skor 75 (TBT 1,4 s); dua pengukuran ulang memberi 99 dan 100, jadi itu efek server dingin.
 
 SEO bernilai 60 karena semua halaman sengaja memakai `noindex` selama rilis masih draf. Nilai ini akan naik setelah `robots` dibuka saat publikasi.
 

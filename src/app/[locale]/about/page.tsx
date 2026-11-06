@@ -58,19 +58,20 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const title = (s: (typeof SECTIONS)[number]) => t(`about.${s}Title`);
 
   return (
-    <article className="max-w-[72ch]">
-      <PageHeading title={t("about.title")} lead={t("about.lead")} />
-
-      <nav aria-labelledby="isi" className="rounded-[var(--radius-panel)] border border-rule bg-surface-raised px-4 py-3">
+    <div className="grid gap-x-12 xl:grid-cols-[minmax(0,72ch)_16rem]">
+      <nav aria-labelledby="isi" className="mb-6 rounded-xl bg-card px-5 py-4 ring-1 ring-border xl:sticky xl:top-20 xl:col-start-2 xl:row-start-1 xl:mb-0 xl:self-start">
         <h2 id="isi" className="text-small font-bold">{t("about.toc")}</h2>
-        <ol className="mt-1 grid list-decimal gap-x-8 pl-5 text-small sm:grid-cols-2">
+        <ol className="mt-1 grid list-decimal gap-x-8 pl-5 text-small sm:grid-cols-2 xl:grid-cols-1">
           {SECTIONS.map((s) => (
             <li key={s}>
-              <a href={`#${s}`} className="inline-flex min-h-11 items-center">{title(s)}</a>
+              <a href={`#${s}`} className="inline-flex min-h-10 items-center">{title(s)}</a>
             </li>
           ))}
         </ol>
       </nav>
+    <article className="min-w-0 xl:col-start-1 xl:row-start-1">
+      <PageHeading title={t("about.title")} lead={t("about.lead")} />
+
 
       <SectionHeading id="purpose">{title("purpose")}</SectionHeading>
       <p className="mt-3">{t("about.purposeBody")}</p>
@@ -238,11 +239,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
       <SectionHeading id="manager">{title("manager")}</SectionHeading>
       <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-6 gap-y-2">
-        <dt className="text-ink-muted">{t("about.institution")}</dt>
+        <dt className="text-muted-foreground">{t("about.institution")}</dt>
         <dd>{institution ?? notSet}</dd>
-        <dt className="text-ink-muted">{t("about.license")}</dt>
+        <dt className="text-muted-foreground">{t("about.license")}</dt>
         <dd>{site.data_license.name ?? notSet}</dd>
-        <dt className="text-ink-muted">{t("about.contact")}</dt>
+        <dt className="text-muted-foreground">{t("about.contact")}</dt>
         <dd>{site.institution.contact_email ?? notSet}</dd>
       </dl>
       {meta.status === "draft" && (
@@ -251,5 +252,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         </div>
       )}
     </article>
+    </div>
   );
 }

@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import { DataFilters } from "@/components/data/DataFilters";
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Download } from "lucide-react";
 import { BreakableText, DataNote, DuplicateBadge, EmptyValue, PageHeading } from "@/components/data/blocks";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { loadExportSchema, loadRelease } from "@/lib/data/release";
 import { aggregate, AREA_COLUMN } from "@/lib/data/aggregate";
 import { displaySourceValue, formatNumber } from "@/lib/data/format";
@@ -33,7 +37,7 @@ const COLUMNS: { key: SortKey; source: string; className?: string }[] = [
   { key: "province", source: "Provinsi" },
   { key: "regency", source: "Kabupaten Kota" },
   { key: "date", source: "Tanggal Surat Keputusan", className: "whitespace-nowrap tabular" },
-  { key: "area", source: AREA_COLUMN, className: "text-right tabular" },
+  { key: "area", source: AREA_COLUMN, className: "text-right tabular whitespace-pre-wrap" },
 ];
 
 export default async function DataPage({
@@ -122,134 +126,153 @@ export default async function DataPage({
         </div>
       )}
 
-      <section aria-labelledby="hasil" className="mt-8">
-        <h2 id="hasil" className="text-h3 font-bold" aria-live="polite">
-          {active > 0 ? t("data.results", { count: n(filtered.length), total: n(approvals.length) }) : t("data.resultsAll", { count: n(filtered.length) })}
-        </h2>
-        {activeLabels.length > 0 && (
-          <p className="mt-1 text-small">
-            <span className="text-ink-muted">{t("data.activeFilters")} </span>
-            {activeLabels.join(" · ")}{" "}
-            <Link href="/data">{t("data.reset")}</Link>
-          </p>
-        )}
-        {filtered.length > 0 && (
-          <p className="mt-2 text-small text-ink">
-            {t("data.summary", {
-              area: n(summary.area_ha),
-              members: n(summary.members_male_plus_female),
-              male: n(summary.members_male),
-              female: n(summary.members_female),
-              membersUsed: n(summary.members_records_used),
-            })}{" "}
-            <span className="text-ink-muted">{t("common.processed")}</span>
-          </p>
-        )}
-        {filtered.length > 0 && (
-          <p className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-1 text-small">
-            <a href={exportHref("xlsx")} download className="inline-flex min-h-11 items-center font-bold">
-              {t("data.exportXlsx", { count: n(filtered.length) })}
-            </a>
-            <a href={exportHref("csv")} download className="inline-flex min-h-11 items-center font-bold">
-              {t("data.exportCsv", { count: n(filtered.length) })}
-            </a>
-          </p>
-        )}
-      </section>
-
-      {filtered.length === 0 ? (
-        <div className="mt-6">
-          <DataNote title={t("data.noResultsTitle")}>
-            <p>
-              {t("data.noResults")} <Link href="/data">{t("data.reset")}</Link>
-            </p>
-          </DataNote>
-        </div>
-      ) : rows.length === 0 ? (
-        <p className="mt-6">
-          {t("data.emptyPage")} <Link href={{ pathname: "/data", query: qs({ page: 1 }) }}>{t("data.backToFirst")}</Link>
-        </p>
-      ) : (
-        <>
-          {/* Tabel untuk layar ≥ 1024 px; di bawahnya 7 kolom tidak muat tanpa geser horizontal */}
-          <div className="mt-4 hidden lg:block">
-            <table className="w-full border-collapse text-small">
-              <caption className="sr-only">{t("data.tableCaption", { page: n(page), pages: n(pages) })}</caption>
-              <thead className="bg-surface-sunken text-left">
-                <tr>
-                  {COLUMNS.map((c) => {
-                    const isCurrent = query.sort === c.key;
-                    return (
-                      <th
-                        key={c.key}
-                        scope="col"
-                        aria-sort={isCurrent ? (query.dir === "asc" ? "ascending" : "descending") : undefined}
-                        className={`px-3 py-1 ${c.key === "area" ? "text-right" : ""}`}
-                      >
-                        <Link href={sortLink(c.key)} className="inline-flex min-h-11 items-center gap-1 text-ink no-underline hover:underline">
-                          {t(`data.sortLabel.${c.key}`)}
-                          <span aria-hidden="true" className="text-ink-muted">
-                            {isCurrent ? (query.dir === "asc" ? "↑" : "↓") : "↕"}
-                          </span>
-                          <span className="sr-only">
-                            {isCurrent && query.dir === "asc" ? t("data.sortDescAction") : t("data.sortAscAction")}
-                          </span>
-                        </Link>
-                      </th>
-                    );
-                  })}
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((r) => (
-                  <tr key={r.id} className="border-b border-rule align-top">
-                    <td className="px-3 py-2">
-                      <Link href={`/data/${r.id}`} className="whitespace-pre-wrap [overflow-wrap:anywhere]">{cell(r, "Nomor Surat Keputusan")}</Link>
-                      {r.quality.duplicate && <span className="ml-2"><DuplicateBadge label={t("data.duplicate")} /></span>}
-                    </td>
-                    {COLUMNS.slice(1).map((c) => (
-                      <td key={c.key} className={`px-3 py-2 whitespace-pre-wrap ${c.className ?? ""}`}>{cell(r, c.source)}</td>
-                    ))}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+      <Card className="mt-6 gap-0 pb-0">
+        <CardHeader className="flex flex-col gap-3 border-b pb-4 xl:flex-row xl:items-start xl:justify-between">
+          <div className="flex min-w-0 flex-col gap-2">
+          <h2 id="hasil" className="text-h3 font-bold" aria-live="polite">
+            {active > 0 ? t("data.results", { count: n(filtered.length), total: n(approvals.length) }) : t("data.resultsAll", { count: n(filtered.length) })}
+          </h2>
+          {activeLabels.length > 0 && (
+            <div className="flex flex-wrap items-center gap-1.5 text-small">
+              <span className="text-muted-foreground">{t("data.activeFilters")}</span>
+              {activeLabels.map((l) => (
+                <Badge key={l} variant="secondary" className="h-auto py-0.5 text-caption whitespace-normal">{l}</Badge>
+              ))}
+              <Link href="/data" className="ml-1">{t("data.reset")}</Link>
+            </div>
+          )}
+          {filtered.length > 0 && (
+            <CardDescription className="text-small text-foreground">
+              {t("data.summary", {
+                area: n(summary.area_ha),
+                members: n(summary.members_male_plus_female),
+                male: n(summary.members_male),
+                female: n(summary.members_female),
+                membersUsed: n(summary.members_records_used),
+              })}{" "}
+              <span className="text-muted-foreground">{t("common.processed")}</span>
+            </CardDescription>
+          )}
           </div>
+          {filtered.length > 0 && (
+            <div className="flex shrink-0 flex-wrap gap-2">
+              <Button asChild variant="outline" size="lg" className="h-10 px-3 text-small">
+                <a href={exportHref("xlsx")} download>
+                  <Download aria-hidden="true" />
+                  {t("data.exportXlsx", { count: n(filtered.length) })}
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" className="h-10 px-3 text-small">
+                <a href={exportHref("csv")} download>
+                  <Download aria-hidden="true" />
+                  {t("data.exportCsv", { count: n(filtered.length) })}
+                </a>
+              </Button>
+            </div>
+          )}
+        </CardHeader>
 
-          {/* Daftar ringkas untuk ponsel dan tablet (PRD §6.4) */}
-          <ul className="mt-4 flex flex-col lg:hidden" aria-label={t("data.tableCaption", { page: n(page), pages: n(pages) })}>
-            {rows.map((r) => (
-              <li key={r.id} className="rule-top flex flex-col gap-1 py-3 text-small">
-                <span className="flex flex-wrap items-center gap-2">
-                  <Link href={`/data/${r.id}`} className="font-bold whitespace-pre-wrap [overflow-wrap:anywhere]">{cell(r, "Nomor Surat Keputusan")}</Link>
-                  {r.quality.duplicate && <DuplicateBadge label={t("data.duplicate")} />}
-                </span>
-                <span className="whitespace-pre-wrap">{cell(r, "Nama Lembaga")}</span>
-                <span className="text-ink-muted">
-                  {cell(r, "Skema")} · {cell(r, "Kabupaten Kota")}, {cell(r, "Provinsi")}
-                </span>
-                <span className="tabular text-ink-muted">
-                  {cell(r, "Tanggal Surat Keputusan")} · {cell(r, AREA_COLUMN)} {t("common.hectare")}
-                </span>
-              </li>
-            ))}
-          </ul>
+        <CardContent className="px-0">
+          {filtered.length === 0 ? (
+            <div className="p-5">
+              <DataNote title={t("data.noResultsTitle")}>
+                <p>
+                  {t("data.noResults")} <Link href="/data">{t("data.reset")}</Link>
+                </p>
+              </DataNote>
+            </div>
+          ) : rows.length === 0 ? (
+            <p className="p-5">
+              {t("data.emptyPage")} <Link href={{ pathname: "/data", query: qs({ page: 1 }) }}>{t("data.backToFirst")}</Link>
+            </p>
+          ) : (
+            <>
+              {/* Tabel untuk layar ≥ 1280 px; di bawahnya (dengan sidebar) 7 kolom tidak muat tanpa geser horizontal */}
+              <div className="hidden xl:block">
+                <table className="w-full border-collapse text-small">
+                  <caption className="sr-only">{t("data.tableCaption", { page: n(page), pages: n(pages) })}</caption>
+                  <thead className="bg-muted/60 text-left">
+                    <tr className="border-b">
+                      {COLUMNS.map((c) => {
+                        const isCurrent = query.sort === c.key;
+                        const Icon = isCurrent ? (query.dir === "asc" ? ArrowUp : ArrowDown) : ArrowUpDown;
+                        return (
+                          <th
+                            key={c.key}
+                            scope="col"
+                            aria-sort={isCurrent ? (query.dir === "asc" ? "ascending" : "descending") : undefined}
+                            className={`px-3 py-1 font-medium first:pl-5 last:pr-5 ${c.key === "area" ? "text-right" : ""}`}
+                          >
+                            <Link href={sortLink(c.key)} className={`inline-flex min-h-10 items-center gap-1 no-underline hover:underline ${isCurrent ? "font-bold text-foreground" : "text-muted-foreground"}`}>
+                              {t(`data.sortLabel.${c.key}`)}
+                              <Icon aria-hidden="true" className="size-3.5" />
+                              <span className="sr-only">
+                                {isCurrent && query.dir === "asc" ? t("data.sortDescAction") : t("data.sortAscAction")}
+                              </span>
+                            </Link>
+                          </th>
+                        );
+                      })}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {rows.map((r) => (
+                      <tr key={r.id} className="border-b align-top transition-colors last:border-0 hover:bg-muted/40">
+                        <td className="px-3 py-2.5 pl-5">
+                          <Link href={`/data/${r.id}`} className="whitespace-pre-wrap [overflow-wrap:anywhere]">{cell(r, "Nomor Surat Keputusan")}</Link>
+                          {r.quality.duplicate && <span className="ml-2"><DuplicateBadge label={t("data.duplicate")} /></span>}
+                        </td>
+                        {COLUMNS.slice(1).map((c) => (
+                          <td key={c.key} className={`px-3 py-2.5 last:pr-5 ${c.className ?? "whitespace-pre-wrap"}`}>{cell(r, c.source)}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
-          <nav aria-label={t("data.pagination")} className="rule-top mt-6 flex flex-wrap items-center justify-between gap-4 pt-4 text-small">
-            {page > 1 ? (
-              <Link href={{ pathname: "/data", query: qs({ page: page - 1 }) }} className="inline-flex min-h-11 items-center">
-                {t("data.prev")}
-              </Link>
-            ) : <span />}
-            <span className="tabular">{t("data.page", { page: n(page), pages: n(pages) })}</span>
-            {page < pages ? (
-              <Link href={{ pathname: "/data", query: qs({ page: page + 1 }) }} className="inline-flex min-h-11 items-center">
-                {t("data.next")}
-              </Link>
-            ) : <span />}
-          </nav>
-        </>
-      )}
+              {/* Daftar ringkas untuk ponsel dan tablet (PRD §6.4) */}
+              <ul className="flex flex-col divide-y xl:hidden" aria-label={t("data.tableCaption", { page: n(page), pages: n(pages) })}>
+                {rows.map((r) => (
+                  <li key={r.id} className="flex flex-col gap-1 px-5 py-3 text-small">
+                    <span className="flex flex-wrap items-center gap-2">
+                      <Link href={`/data/${r.id}`} className="font-bold whitespace-pre-wrap [overflow-wrap:anywhere]">{cell(r, "Nomor Surat Keputusan")}</Link>
+                      {r.quality.duplicate && <DuplicateBadge label={t("data.duplicate")} />}
+                    </span>
+                    <span className="whitespace-pre-wrap">{cell(r, "Nama Lembaga")}</span>
+                    <span className="text-muted-foreground">
+                      {cell(r, "Skema")} · {cell(r, "Kabupaten Kota")}, {cell(r, "Provinsi")}
+                    </span>
+                    <span className="tabular text-muted-foreground">
+                      {cell(r, "Tanggal Surat Keputusan")} · {cell(r, AREA_COLUMN)} {t("common.hectare")}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              <nav aria-label={t("data.pagination")} className="flex flex-wrap items-center justify-between gap-4 border-t px-5 py-3 text-small">
+                {page > 1 ? (
+                  <Button asChild variant="outline" size="lg" className="h-10 px-3 text-small">
+                    <Link href={{ pathname: "/data", query: qs({ page: page - 1 }) }}>
+                      <ChevronLeft aria-hidden="true" />
+                      {t("data.prev")}
+                    </Link>
+                  </Button>
+                ) : <span />}
+                <span className="tabular text-muted-foreground">{t("data.page", { page: n(page), pages: n(pages) })}</span>
+                {page < pages ? (
+                  <Button asChild variant="outline" size="lg" className="h-10 px-3 text-small">
+                    <Link href={{ pathname: "/data", query: qs({ page: page + 1 }) }}>
+                      {t("data.next")}
+                      <ChevronRight aria-hidden="true" />
+                    </Link>
+                  </Button>
+                ) : <span />}
+              </nav>
+            </>
+          )}
+        </CardContent>
+      </Card>
     </>
   );
 }

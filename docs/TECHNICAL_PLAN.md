@@ -48,7 +48,7 @@ Tidak ada basis data server, layanan terpisah, antrean, atau tile server di MVP.
 |----------|-----------|--------|
 | Framework | **Next.js App Router** | Sesuai PRD; server components cukup untuk filter server-side tanpa backend terpisah |
 | Bahasa | **TypeScript** (strict) | Tipe rekaman dan filter dibagi antara server dan klien |
-| UI | **React + Tailwind CSS** | Sesuai PRD; token desain sebagai CSS variables |
+| UI | **React + Tailwind CSS + shadcn/ui** (Radix, gaya `radix-nova`, ikon lucide) | Sesuai PRD; token desain sebagai CSS variables. shadcn/ui dipilih pemilik produk 2026-11-06; komponen disalin ke `src/components/ui/` dan diberi tema PDPSI (DESIGN.md v0.4) |
 | Peta | **MapLibre GL JS**, dimuat lazy hanya di `/map` | Zoom/pan sentuh yang baik di ponsel; tanpa API key; tanpa basemap |
 | Peta mini beranda | **SVG statis** dirender di server dari GeoJSON provinsi (d3-geo) | Beranda tidak perlu memuat WebGL dan library peta |
 | Grafik | **Apache ECharts**, impor modular (`echarts/core`), renderer SVG | Sesuai PRD; impor modular menekan ukuran bundle |
@@ -222,14 +222,14 @@ Rincian ada di `docs/MAP_DATA_AUDIT.md`. Ringkasnya:
 
 ## 8. Kinerja (target dan hasil terukur)
 
-| Halaman | Target awal JS (gzip) | Terukur 2026-11-05 | Catatan |
+| Halaman | Target awal JS (gzip) | Terukur 2026-11-06 | Catatan |
 |---------|----------------------:|-------------------:|---------|
-| Beranda | < 120 KB | 157 KB | Peta mini SVG; ECharts dimuat saat grafik mendekati layar |
-| `/data` | < 100 KB | 160 KB | Tabel dirender di server |
-| `/statistics` | < 250 KB | 337 KB | ECharts modular, renderer SVG |
-| `/map` | < 350 KB + GeoJSON provinsi < 150 KB | 453 KB + 153 KB | MapLibre hanya di halaman ini |
+| Beranda | < 120 KB | 213 KB (157 KB sebelum shadcn/ui) | Peta mini SVG; ECharts dimuat saat grafik mendekati layar |
+| `/data` | < 100 KB | 204 KB (160 KB) | Tabel dirender di server |
+| `/statistics` | < 250 KB | 390 KB (337 KB) | ECharts modular, renderer SVG |
+| `/map` | < 350 KB + GeoJSON provinsi < 150 KB | 506 KB (453 KB) + 153 KB | MapLibre hanya di halaman ini |
 
-Target awal JS tidak realistis: React 19, Next.js 16, dan next-intl sendiri sekitar 155 KB gzip. Anggaran baru = angka terukur di atas; kenaikan lebih dari 10% perlu alasan. Target pengalaman pengguna tercapai: LCP 0,8 sampai 1,1 detik, CLS 0, dan skor performa Lighthouse ponsel 100 di semua halaman utama (QA_REPORT §2).
+Target awal JS tidak realistis: React 19, Next.js 16, dan next-intl sendiri sekitar 155 KB gzip. Anggaran baru = angka terukur di atas; kenaikan lebih dari 10% perlu alasan. Kenaikan 2026-11-06 (sekitar 50 KB per halaman) disengaja: desain ulang dengan shadcn/ui atas permintaan pemilik produk; skor performa tetap 99 sampai 100. Target pengalaman pengguna tercapai: LCP 0,8 sampai 1,1 detik, CLS 0, dan skor performa Lighthouse ponsel 100 di semua halaman utama (QA_REPORT §2).
 
 ## 9. Keamanan dan privasi
 

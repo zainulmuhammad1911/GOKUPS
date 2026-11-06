@@ -2,6 +2,12 @@
 
 import { useId, useState } from "react";
 import { useTranslations } from "next-intl";
+import { ChevronDown, Search, SlidersHorizontal } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { NativeSelect } from "@/components/ui/native-select";
 
 interface Option {
   code: string;
@@ -64,22 +70,32 @@ export function DataFilters({
     .map((p) => ({ p, items: visibleRegencies.filter((r) => r.parent === p.code) }))
     .filter((g) => g.items.length > 0);
 
-  const field = "flex flex-col gap-1 text-small";
-  const control =
-    "min-h-11 w-full rounded-[var(--radius-control)] border border-rule-strong bg-surface-raised px-3 text-body text-ink";
+  const field = "flex min-w-0 flex-col gap-1.5 text-small";
 
   return (
-    <div className="rounded-[var(--radius-panel)] border border-rule bg-surface-raised">
+    <div data-slot="card" className="rounded-xl bg-card ring-1 ring-border">
       <button
         type="button"
-        className="flex min-h-11 w-full items-center justify-between px-4 text-left font-bold text-forest lg:hidden"
+        className="flex min-h-12 w-full items-center gap-2 px-4 text-left font-bold text-primary lg:hidden"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
       >
-        <span>{activeCount > 0 ? t("filtersActive", { count: activeCount }) : t("filters")}</span>
-        <span aria-hidden="true">{open ? "−" : "+"}</span>
+        <SlidersHorizontal aria-hidden="true" className="size-4" />
+        <span className="flex-1">{t("filters")}</span>
+        {activeCount > 0 && (
+          <Badge>
+            <span className="sr-only">{t("filtersActive", { count: activeCount })}</span>
+            <span aria-hidden="true">{activeCount}</span>
+          </Badge>
+        )}
+        <ChevronDown aria-hidden="true" className={`size-4 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
+      <p className="hidden items-center gap-2 px-5 pt-4 text-small font-bold lg:flex" aria-hidden="true">
+        <SlidersHorizontal className="size-4 text-primary" />
+        {t("filters")}
+        {activeCount > 0 && <Badge>{activeCount}</Badge>}
+      </p>
       <form
         id={panelId}
         action={action}
@@ -101,27 +117,30 @@ export function DataFilters({
             }
           }, 0);
         }}
-        className={`${open ? "grid" : "hidden"} gap-4 border-t border-rule p-4 lg:grid lg:border-t-0 lg:grid-cols-4`}
+        className={`${open ? "grid" : "hidden"} gap-4 border-t p-4 lg:grid lg:grid-cols-4 lg:border-t-0 lg:px-5 lg:pb-5`}
       >
         {!minimal && (
         <div className={`${field} lg:col-span-2`}>
-          <label htmlFor={`${panelId}-q`} className="font-bold">{t("search")}</label>
-          <input
-            id={`${panelId}-q`}
-            type="search"
-            name="q"
-            defaultValue={values.q}
-            maxLength={100}
-            aria-describedby={`${panelId}-hint`}
-            className={control}
-          />
-          <span id={`${panelId}-hint`} className="text-caption text-ink-muted">{t("searchHint")}</span>
+          <Label htmlFor={`${panelId}-q`} className="font-bold">{t("search")}</Label>
+          <div className="relative">
+            <Search aria-hidden="true" className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+            <Input
+              id={`${panelId}-q`}
+              type="search"
+              name="q"
+              defaultValue={values.q}
+              maxLength={100}
+              aria-describedby={`${panelId}-hint`}
+              className="h-10 bg-card pl-9 text-[0.9375rem] md:text-[0.9375rem]"
+            />
+          </div>
+          <span id={`${panelId}-hint`} className="text-caption text-muted-foreground">{t("searchHint")}</span>
         </div>
         )}
 
         <div className={field}>
-          <label htmlFor={`${panelId}-province`} className="font-bold">{t("province")}</label>
-          <select
+          <Label htmlFor={`${panelId}-province`} className="font-bold">{t("province")}</Label>
+          <NativeSelect size="lg" className="w-full"
             id={`${panelId}-province`}
             name="province"
             value={province}
@@ -129,20 +148,20 @@ export function DataFilters({
               setProvince(e.target.value);
               if (e.target.value && regency && !regency.startsWith(`${e.target.value}.`)) setRegency("");
             }}
-            className={control}
+           
           >
             <option value="">{t("allProvinces")}</option>
             {provinces.map((p) => (
               <option key={p.code} value={p.code}>{p.name}</option>
             ))}
-          </select>
+          </NativeSelect>
         </div>
 
         <div className={field}>
-          <label htmlFor={`${panelId}-regency`} className="font-bold">{t("regency")}</label>
-          <select
+          <Label htmlFor={`${panelId}-regency`} className="font-bold">{t("regency")}</Label>
+          <NativeSelect size="lg" className="w-full"
             id={`${panelId}-regency`}
-            name="regency" value={regency} onChange={(e) => setRegency(e.target.value)} className={control}>
+            name="regency" value={regency} onChange={(e) => setRegency(e.target.value)}>
             <option value="">{t("allRegencies")}</option>
             {grouped.map((g) => (
               <optgroup key={g.p.code} label={g.p.name}>
@@ -151,14 +170,14 @@ export function DataFilters({
                 ))}
               </optgroup>
             ))}
-          </select>
+          </NativeSelect>
         </div>
 
         <div className={field}>
-          <label htmlFor={`${panelId}-type`} className="font-bold">{t("type")}</label>
-          <select
+          <Label htmlFor={`${panelId}-type`} className="font-bold">{t("type")}</Label>
+          <NativeSelect size="lg" className="w-full"
             id={`${panelId}-type`}
-            name="type" defaultValue={values.type ?? ""} className={control}>
+            name="type" defaultValue={values.type ?? ""}>
             <option value="">{t("allTypes")}</option>
             {types.map((o) => (
               <option key={o.code} value={o.code}>{o.name}</option>
@@ -168,72 +187,69 @@ export function DataFilters({
                 <option key={o.code} value={o.code}>{o.name}</option>
               ))}
             </optgroup>
-          </select>
+          </NativeSelect>
         </div>
 
         <fieldset className="grid grid-cols-2 gap-2">
-          <legend className="mb-1 text-small font-bold">{t("year")}</legend>
+          <legend className="mb-1.5 text-small font-bold">{t("year")}</legend>
           <div className={field}>
-            <label htmlFor={`${panelId}-year_from`}>{t("yearFrom")}</label>
-            <select id={`${panelId}-year_from`} name="year_from" defaultValue={values.yearFrom ?? ""} className={control}>
+            <Label htmlFor={`${panelId}-year_from`} className="font-normal text-muted-foreground">{t("yearFrom")}</Label>
+            <NativeSelect size="lg" className="w-full" id={`${panelId}-year_from`} name="year_from" defaultValue={values.yearFrom ?? ""}>
               <option value="">{t("anyYear")}</option>
               {years.map((y) => <option key={y} value={y}>{y}</option>)}
-            </select>
+            </NativeSelect>
           </div>
           <div className={field}>
-            <label htmlFor={`${panelId}-year_to`}>{t("yearTo")}</label>
-            <select id={`${panelId}-year_to`} name="year_to" defaultValue={values.yearTo ?? ""} className={control}>
+            <Label htmlFor={`${panelId}-year_to`} className="font-normal text-muted-foreground">{t("yearTo")}</Label>
+            <NativeSelect size="lg" className="w-full" id={`${panelId}-year_to`} name="year_to" defaultValue={values.yearTo ?? ""}>
               <option value="">{t("anyYear")}</option>
               {years.map((y) => <option key={y} value={y}>{y}</option>)}
-            </select>
+            </NativeSelect>
           </div>
         </fieldset>
 
         {!minimal && (
         <div className={field}>
-          <label htmlFor={`${panelId}-flag`} className="font-bold">{t("flag")}</label>
-          <select
+          <Label htmlFor={`${panelId}-flag`} className="font-bold">{t("flag")}</Label>
+          <NativeSelect size="lg" className="w-full"
             id={`${panelId}-flag`}
-            name="flag" defaultValue={values.flag ?? ""} className={control}>
+            name="flag" defaultValue={values.flag ?? ""}>
             <option value="">{t("allFlags")}</option>
             {flags.map((o) => (
               <option key={o.code} value={o.code}>{o.name}</option>
             ))}
-          </select>
+          </NativeSelect>
         </div>
         )}
 
         {!minimal && (
         <fieldset className="grid grid-cols-2 gap-2">
-          <legend className="mb-1 text-small font-bold">{t("sortBy")}</legend>
+          <legend className="mb-1.5 text-small font-bold">{t("sortBy")}</legend>
           <div className={field}>
-            <label htmlFor={`${panelId}-sort`} className="sr-only">{t("sortBy")}</label>
-            <select id={`${panelId}-sort`} name="sort" defaultValue={values.sort} className={control}>
+            <Label htmlFor={`${panelId}-sort`} className="sr-only">{t("sortBy")}</Label>
+            <NativeSelect size="lg" className="w-full" id={`${panelId}-sort`} name="sort" defaultValue={values.sort}>
               {(["no", "sk", "name", "type", "province", "regency", "date", "area"] as const).map((k) => (
                 <option key={k} value={k}>{t(`sortLabel.${k}`)}</option>
               ))}
-            </select>
+            </NativeSelect>
           </div>
           <div className={field}>
-            <label htmlFor={`${panelId}-dir`} className="sr-only">{t("sortDir")}</label>
-            <select id={`${panelId}-dir`} name="dir" defaultValue={values.dir} className={control}>
+            <Label htmlFor={`${panelId}-dir`} className="sr-only">{t("sortDir")}</Label>
+            <NativeSelect size="lg" className="w-full" id={`${panelId}-dir`} name="dir" defaultValue={values.dir}>
               <option value="asc">{t("asc")}</option>
               <option value="desc">{t("desc")}</option>
-            </select>
+            </NativeSelect>
           </div>
         </fieldset>
         )}
 
         <div className="flex flex-wrap items-end gap-3 lg:col-span-4">
-          <button
-            type="submit"
-            className="min-h-11 rounded-[var(--radius-control)] bg-forest px-5 font-bold text-white hover:bg-forest-hover"
-          >
+          <Button type="submit" size="lg" className="h-10 px-5 text-small font-bold">
             {t("apply")}
-          </button>
-          <a href={resetHref} className="inline-flex min-h-11 items-center px-2">
-            {t("reset")}
-          </a>
+          </Button>
+          <Button asChild variant="ghost" size="lg" className="h-10 px-3 text-small text-primary">
+            <a href={resetHref}>{t("reset")}</a>
+          </Button>
         </div>
       </form>
     </div>

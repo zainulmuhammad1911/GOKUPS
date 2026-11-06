@@ -3,6 +3,11 @@
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { ArrowRight, ChevronLeft } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { NativeSelect } from "@/components/ui/native-select";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import type { FeatureCollection, Geometry } from "geojson";
 
@@ -315,41 +320,53 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
 
   return (
     <div className="flex flex-col gap-4">
+      <div data-slot="card" className="flex flex-col gap-3 rounded-xl bg-card p-4 ring-1 ring-border">
       <div className="flex flex-wrap items-end gap-4">
-        <div role="group" aria-label={tc("measure")} className="inline-flex flex-wrap gap-1 rounded-[var(--radius-panel)] border border-rule bg-surface-raised p-1">
-          {(["records", "area", "members"] as const).map((k) => (
-            <button
-              key={k}
-              type="button"
-              aria-pressed={state.indicator === k}
-              onClick={() => setState((s) => ({ ...s, indicator: k }))}
-              className={`min-h-11 rounded-[var(--radius-control)] px-3 text-small ${state.indicator === k ? "bg-forest font-bold text-white" : "text-forest hover:bg-surface-sunken"}`}
-            >
-              {{ records: tc("records"), area: tc("area"), members: tc("members") }[k]}
-            </button>
-          ))}
+        <div className="flex flex-col gap-1.5 text-small">
+          <span id="peta-ukuran" className="font-bold">{tc("measure")}</span>
+          <ToggleGroup
+            type="single"
+            variant="outline"
+            size="lg"
+            value={state.indicator}
+            onValueChange={(v) => v && setState((s) => ({ ...s, indicator: v as Indicator }))}
+            aria-labelledby="peta-ukuran"
+            className="flex-wrap"
+          >
+            {(["records", "area", "members"] as const).map((k) => (
+              <ToggleGroupItem
+                key={k}
+                value={k}
+                className="h-10 px-3 text-small data-[state=on]:bg-primary data-[state=on]:font-bold data-[state=on]:text-primary-foreground"
+              >
+                {{ records: tc("records"), area: tc("area"), members: tc("members") }[k]}
+              </ToggleGroupItem>
+            ))}
+          </ToggleGroup>
         </div>
-        <div className="flex w-full min-w-0 flex-col gap-1 text-small sm:w-auto">
-          <label htmlFor="peta-jenis" className="font-bold">{t("typeFilter")}</label>
-          <select
+        <div className="flex w-full min-w-0 flex-col gap-1.5 text-small sm:w-auto">
+          <Label htmlFor="peta-jenis" className="font-bold">{t("typeFilter")}</Label>
+          <NativeSelect
+            size="lg"
             id="peta-jenis"
             value={state.type}
             onChange={(e) => setState((s) => ({ ...s, type: e.target.value }))}
-            className="min-h-11 w-full min-w-0 rounded-[var(--radius-control)] border border-rule-strong bg-surface-raised px-3 text-body sm:w-auto sm:max-w-80"
+            className="w-full min-w-0 sm:w-72"
           >
             <option value="all">{t("allTypes")}</option>
             {types.map((x) => (
               <option key={x.code} value={x.code}>{x.label}</option>
             ))}
-          </select>
+          </NativeSelect>
         </div>
-        <div className="flex w-full min-w-0 flex-col gap-1 text-small sm:w-auto">
-          <label htmlFor="peta-wilayah" className="font-bold">{t("provinceSelect")}</label>
-          <select
+        <div className="flex w-full min-w-0 flex-col gap-1.5 text-small sm:w-auto">
+          <Label htmlFor="peta-wilayah" className="font-bold">{t("provinceSelect")}</Label>
+          <NativeSelect
+            size="lg"
             id="peta-wilayah"
             value={state.province ?? ""}
             onChange={(e) => setState((s) => ({ ...s, province: e.target.value || null, regency: null }))}
-            className="min-h-11 w-full min-w-0 rounded-[var(--radius-control)] border border-rule-strong bg-surface-raised px-3 text-body sm:w-auto sm:max-w-80"
+            className="w-full min-w-0 sm:w-64"
           >
             <option value="">{t("indonesia")}</option>
             {Object.keys(regions)
@@ -358,30 +375,38 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
               .map((c) => (
                 <option key={c} value={c}>{regions[c]!.name}</option>
               ))}
-          </select>
+          </NativeSelect>
         </div>
       </div>
 
-      <nav aria-label={t("breadcrumb")} className="flex flex-wrap items-center gap-2 text-small">
+      <nav aria-label={t("breadcrumb")} className="flex min-h-10 flex-wrap items-center gap-2 border-t pt-3 text-small">
         {state.province ? (
-          <button type="button" className="min-h-11 font-bold text-forest underline" onClick={() => setState((s) => ({ ...s, province: null, regency: null }))}>
+          <Button
+            type="button"
+            variant="ghost"
+            size="lg"
+            className="-ml-2 h-10 px-2 text-small font-bold text-primary"
+            onClick={() => setState((s) => ({ ...s, province: null, regency: null }))}
+          >
+            <ChevronLeft aria-hidden="true" />
             {t("backToIndonesia")}
-          </button>
+          </Button>
         ) : (
           <span className="font-bold">{t("indonesia")}</span>
         )}
         {state.province && (
           <>
-            <span aria-hidden="true" className="text-ink-muted">›</span>
+            <span aria-hidden="true" className="text-muted-foreground">›</span>
             <span className="font-bold">{regions[state.province]?.name}</span>
           </>
         )}
       </nav>
+      </div>
 
       <div className="grid gap-4 lg:grid-cols-[1fr_340px]">
-        <div className="relative">
+        <div data-slot="card" className="relative flex min-w-0 flex-col gap-3 rounded-xl bg-card p-2 ring-1 ring-border">
           {failed ? (
-            <div className="flex h-[60vh] min-h-[320px] items-center justify-center rounded-[var(--radius-panel)] border border-rule bg-surface-sunken p-6 text-center text-small">
+            <div className="flex h-[60vh] min-h-[320px] items-center justify-center rounded-lg bg-muted p-6 text-center text-small">
               {t("failed")}
             </div>
           ) : (
@@ -389,13 +414,13 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
               ref={container}
               role="region"
               aria-label={t("mapLabel", { indicator: indicatorLabel, type: typeLabel })}
-              className="h-[60vh] min-h-[320px] w-full overflow-hidden rounded-[var(--radius-panel)] border border-rule"
+              className="h-[60vh] min-h-[320px] w-full overflow-hidden rounded-lg"
             />
           )}
           {hover && regions[hover.code] && (
             <div
               role="status"
-              className="pointer-events-none absolute z-10 rounded-[var(--radius-control)] border border-rule bg-surface-raised px-2 py-1 text-small shadow-sm"
+              className="pointer-events-none absolute z-10 rounded-md border bg-popover px-2 py-1 text-small text-popover-foreground shadow-md"
               style={{ left: Math.min(hover.x + 12, 9999), top: hover.y + 12 }}
             >
               <strong className="block">
@@ -407,11 +432,36 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
               {regions[hover.code]!.name}
             </div>
           )}
+          <div className="flex flex-col gap-2 px-2 pb-2 text-small" aria-label={t("legend")} role="group">
+            <p className="font-bold">
+              {indicatorLabel} ({unit}), {typeLabel}
+            </p>
+            <ul className="flex flex-wrap gap-x-5 gap-y-1">
+              {legend.map((l) => (
+                <li key={l.label} className="flex items-center gap-2">
+                  <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: l.color }} />
+                  <span className="tabular">{l.label}</span>
+                </li>
+              ))}
+              <li className="flex items-center gap-2">
+                <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px] border border-rule" style={{ background: NO_RECORDS }} />
+                {t("noRecords")}
+              </li>
+              {hasInvalid && (
+                <li className="flex items-center gap-2">
+                  <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: "repeating-linear-gradient(135deg,#f1eee6 0 3px,#8c8f87 3px 4px)" }} />
+                  {t("notAvailable")}
+                </li>
+              )}
+            </ul>
+            <p className="text-caption text-muted-foreground">{t("aggregateNote")} {attribution}</p>
+            <p className="text-caption text-muted-foreground">{sourceLine}</p>
+          </div>
         </div>
 
-        <aside aria-live="polite" className="rounded-[var(--radius-panel)] border border-rule bg-surface-raised p-4 text-small">
+        <aside aria-live="polite" className="self-start rounded-xl bg-card p-5 text-small ring-1 ring-border">
           <h2 className="text-h3 font-bold">{focus?.name ?? t("indonesia")}</h2>
-          <p className="text-ink-muted">{typeLabel}</p>
+          <p className="text-muted-foreground">{typeLabel}</p>
           {!shown || shown[0] === 0 ? (
             <p className="mt-3">{t("panelEmpty")}</p>
           ) : (
@@ -423,12 +473,12 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
                 <dd className="text-right font-bold tabular">{fmt.format(shown[1])} ha</dd>
                 <dt>{tc("members")}</dt>
                 <dd className="text-right font-bold tabular">{fmt.format(shown[2])}</dd>
-                <dt className="pl-3 text-ink-muted">{tcom("male")}</dt>
+                <dt className="pl-3 text-muted-foreground">{tcom("male")}</dt>
                 <dd className="text-right tabular">{fmt.format(shown[4])}</dd>
-                <dt className="pl-3 text-ink-muted">{tcom("female")}</dt>
+                <dt className="pl-3 text-muted-foreground">{tcom("female")}</dt>
                 <dd className="text-right tabular">{fmt.format(shown[5])}</dd>
               </dl>
-              <p className="mt-1 text-caption text-ink-muted">
+              <p className="mt-1 text-caption text-muted-foreground">
                 {t("membersCoverage", { used: fmt.format(shown[3]), total: fmt.format(shown[0]) })}{" "}
                 {t("femaleZero", { zero: shown[6], zeroText: fmt.format(shown[6]) })}
               </p>
@@ -449,51 +499,26 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
                   })}
                 </ul>
               )}
-              <p className="mt-3">
-                <Link href={dataQuery(focusCode)} className="font-bold">
+              <Button asChild size="lg" className="mt-4 h-10 w-full px-3 text-small">
+                <Link href={dataQuery(focusCode)}>
                   {t("seeRecords", { count: fmt.format(shown[0]) })}
+                  <ArrowRight aria-hidden="true" />
                 </Link>
-              </p>
+              </Button>
             </>
           )}
-          <p className="mt-3 text-caption text-ink-muted">{t("processedNote")}</p>
+          <p className="mt-3 text-caption text-muted-foreground">{t("processedNote")}</p>
         </aside>
       </div>
 
-      <div className="flex flex-col gap-2 text-small" aria-label={t("legend")} role="group">
-        <p className="font-bold">
-          {indicatorLabel} ({unit}), {typeLabel}
-        </p>
-        <ul className="flex flex-wrap gap-x-5 gap-y-1">
-          {legend.map((l) => (
-            <li key={l.label} className="flex items-center gap-2">
-              <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: l.color }} />
-              <span className="tabular">{l.label}</span>
-            </li>
-          ))}
-          <li className="flex items-center gap-2">
-            <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px] border border-rule" style={{ background: NO_RECORDS }} />
-            {t("noRecords")}
-          </li>
-          {hasInvalid && (
-            <li className="flex items-center gap-2">
-              <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: "repeating-linear-gradient(135deg,#f1eee6 0 3px,#8c8f87 3px 4px)" }} />
-              {t("notAvailable")}
-            </li>
-          )}
-        </ul>
-        <p className="text-caption text-ink-muted">{t("aggregateNote")} {attribution}</p>
-        <p className="text-caption text-ink-muted">{sourceLine}</p>
-      </div>
-
-      <section aria-labelledby="tabel-peta" className="rule-top mt-6 pt-3">
-        <h2 id="tabel-peta" className="text-h2 font-bold">
+      <section aria-labelledby="tabel-peta" className="mt-2 rounded-xl bg-card p-5 ring-1 ring-border">
+        <h2 id="tabel-peta" className="text-h3 font-bold">
           {t("tableTitle", { level: level === "province" ? t("provinces") : t("regenciesOf", { name: regions[state.province!]?.name ?? "" }) })}
         </h2>
-        <p className="mt-1 text-caption text-ink-muted">{t("tableNote")}</p>
-        <div className="relative mt-3 max-h-[520px] overflow-auto" role="region" aria-labelledby="tabel-peta" tabIndex={0}>
+        <p className="mt-1 text-caption text-muted-foreground">{t("tableNote")}</p>
+        <div className="relative mt-3 max-h-[520px] overflow-auto rounded-md border" role="region" aria-labelledby="tabel-peta" tabIndex={0}>
           <table className="w-full border-collapse text-small">
-            <thead className="sticky top-0 bg-surface-sunken text-left">
+            <thead className="sticky top-0 bg-muted text-left">
               <tr>
                 <th scope="col" className="px-3 py-2">{level === "province" ? t("province") : t("regency")}</th>
                 <th scope="col" className="px-3 py-2 text-right">{tc("records")}</th>
@@ -503,11 +528,11 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
             </thead>
             <tbody>
               {tableRows.map((row) => (
-                <tr key={row.code} className={`border-b border-rule ${row.code === focusCode ? "bg-surface-sunken" : ""}`}>
+                <tr key={row.code} className={`border-b hover:bg-muted/40 ${row.code === focusCode ? "bg-accent" : ""}`}>
                   <th scope="row" className="px-3 py-1 text-left font-normal">
                     <button
                       type="button"
-                      className="min-h-11 text-left text-forest underline"
+                      className="min-h-10 text-left text-primary underline underline-offset-[0.18em]"
                       onClick={() =>
                         setState((s) => (level === "province" ? { ...s, province: row.code, regency: null } : { ...s, regency: row.code }))
                       }
@@ -527,7 +552,7 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
                       <td className="px-3 py-1 text-right tabular">{row.r[3] > 0 ? fmt.format(row.r[2]) : t("notAvailable")}</td>
                     </>
                   ) : (
-                    <td colSpan={3} className="px-3 py-1 text-right text-ink-muted">{t("noRecords")}</td>
+                    <td colSpan={3} className="px-3 py-1 text-right text-muted-foreground">{t("noRecords")}</td>
                   )}
                 </tr>
               ))}

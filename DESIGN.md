@@ -1,6 +1,7 @@
 # DESIGN.md: Pusat Data Perhutanan Sosial Indonesia (PDPSI)
 
-**Status:** v0.3, 2026-11-05. v0.3: palet diganti menjadi 5 warna jenis PS yang divalidasi untuk urutan rekap.
+**Status:** v0.4, 2026-11-06. v0.4: atas permintaan pemilik produk, tampilan memakai komponen **shadcn/ui** (Radix, gaya `radix-nova`) dengan tata letak dasbor bersidebar. Identitas PDPSI tetap: palet hijau hutan, putih hangat, abu-abu netral, aksen cokelat tanah, palet 5 jenis PS, skala peta, dan Atkinson Hyperlegible Next.
+v0.3, 2026-11-05. v0.3: palet diganti menjadi 5 warna jenis PS yang divalidasi untuk urutan rekap.
 v0.2, 2026-11-04. Arah ditetapkan pemilik produk (DECISIONS.md bagian 3, keputusan F): Swiss minimal dan editorial, Atkinson Hyperlegible Next, mode terang saja untuk MVP. Nilai token sudah diuji kontras dan keamanan buta warna. v0.2: palet skema diperluas ke 7 kategori.
 **Dipakai bersama:** `/antislop` mode *during* (filter), `/ui-ux-pro-max` (pedoman UX), `docs/MAP_DATA_AUDIT.md` (aturan peta).
 
@@ -14,13 +15,14 @@ Dari pemilik produk:
 - Hijau kehutanan, putih hangat, abu-abu netral.
 - Bukan dashboard korporat generik.
 - Peta interaktif adalah fitur utama.
+- **Diubah 2026-11-06:** tata letak dasbor dengan sidebar dan komponen shadcn/ui (kartu, tabel, toggle, select, sheet, breadcrumb, badge). Agar tetap tidak generik: warna dan tipografi PDPSI, setiap angka tetap membawa satuan dan baris sumber, tidak ada ikon dekoratif di kartu angka, dan tidak ada grafik hiasan.
 
 **Design Read:** portal data publik untuk masyarakat umum, peneliti, jurnalis, dan pemerintah, dengan bahasa visual Swiss editorial. **Dial: ENERGY 1 / RHYTHM 2 / MOTION 1.**
 - ENERGY 1: tenang dan institusional. Yang menonjol adalah angka dan peta, bukan dekorasi.
 - RHYTHM 2: tiap halaman punya komposisi sendiri (beranda editorial, peta layar penuh, tabel padat, metodologi berupa teks panjang), tetapi grid dan aturan tipografinya sama.
 - MOTION 1: hanya perubahan state hover/fokus dan transisi kamera peta. Tidak ada animasi masuk atau scroll reveal.
 
-**Motif identitas: "lembar data".** Setiap angka utama tampil sebagai blok berisi angka besar, satuan yang tertulis, satu kalimat keterangan, dan baris sumber kecil di bawahnya (sumber, tanggal ekstraksi, cakupan). Blok dipisahkan garis rambut 1 px, bukan kartu berbayang. Motif ini diulang di beranda, panel peta, statistik, dan detail rekaman, sehingga portal terasa seperti publikasi statistik yang bisa dicek, bukan aplikasi SaaS.
+**Motif identitas: "lembar data".** Setiap angka utama tampil sebagai blok berisi angka besar, satuan yang tertulis, satu kalimat keterangan, dan baris sumber kecil di bawahnya (sumber, tanggal ekstraksi, cakupan). Sejak v0.4 blok ini berupa kartu shadcn (`Card`) berbingkai garis 1 px `--border`, tanpa bayangan. Motif ini diulang di beranda, panel peta, statistik, dan detail rekaman, sehingga portal terasa seperti publikasi statistik yang bisa dicek, bukan aplikasi SaaS.
 
 ## 2. Prinsip
 
@@ -35,6 +37,8 @@ Dari pemilik produk:
 Semua nilai di bawah sudah diuji: rasio teks dengan `antislop-human/contrast-check.py` (WCAG 2), palet grafik dengan `dataviz/validate_palette.js`.
 
 ### 3.1 Token antarmuka
+
+Pemetaan ke variabel shadcn (v0.4, `src/app/globals.css`): `--background` = surface, `--card`/`--popover` = surface-raised, `--muted`/`--secondary`/`--sidebar` = surface-sunken, `--foreground` = ink, `--muted-foreground` = ink-muted, `--border` = rule, `--input` = rule-strong (batas kontrol ≥ 3:1), `--primary` = forest, `--ring` = accent-earth, `--accent` = tint hijau `#E7EEE8` (latar hover), `--sidebar-accent` = `#E3DDD0` (menu aktif), `--chart-1..5` = 5 warna jenis PS.
 
 | Token | Hex | Pemakaian | Kontras | Alasan |
 |-------|-----|-----------|---------|--------|
@@ -112,27 +116,37 @@ Larangan: label huruf kapital dengan tracking lebar, monospace dekoratif, judul 
 ## 5. Spacing, grid, bentuk
 
 - Satuan dasar 4 px. Skala: 4, 8, 12, 16, 24, 32, 48, 64, 96.
-- Grid 12 kolom, lebar konten maks. 1200 px, gutter 24 px (desktop) dan 16 px (ponsel). Teks panjang dibatasi 68 karakter.
-- Breakpoint: 375 (dasar), 768, 1024, 1280.
-- Radius: 2 px untuk input dan tombol, 4 px untuk panel. Tidak ada bentuk pill kecuali kontrol segmen indikator peta. Radius kecil sesuai karakter Swiss.
+- Kerangka: sidebar 256 px (≥ 1024 px; di bawahnya menjadi laci `Sheet` dari tombol menu di bilah atas), area isi maks. 1400 px, gutter 32 px (desktop), 24 px (tablet), 16 px (ponsel). Teks panjang dibatasi 72 karakter.
+- Breakpoint: 375 (dasar), 768, 1024 (sidebar tetap), 1280 (tabel Data 7 kolom; di bawahnya daftar ringkas).
+- Radius (v0.4): `--radius` 0,5 rem; kartu 0,7 rem, kontrol 0,4 sampai 0,5 rem, mengikuti skala shadcn.
 - Bayangan: hanya panel peta yang mengambang di atas peta (`0 1px 2px rgb(31 36 32 / 0.12)`), karena harus terbaca di atas isian berwarna. Elemen lain memakai garis rambut.
-- Target sentuh minimal 44 × 44 px.
+- Target sentuh: minimal 40 px untuk tombol, select, dan menu (WCAG 2.2 AA mensyaratkan 24 px); tautan dalam teks mengikuti tinggi baris.
 
 ## 6. Komponen
 
+Komponen dasar dari shadcn/ui di `src/components/ui/` (kode milik proyek, boleh diubah). Perubahan PDPSI pada komponen bawaan:
+- `sidebar.tsx`: status buka/tutup tidak disimpan di cookie (situs tanpa cookie); label tombol dan laci memakai teks bahasa aktif; sidebar tetap mulai 1024 px; fokus kembali ke tombol menu saat laci ditutup; `SidebarInset` berupa `div` karena `<main id="konten">` ada di dalamnya.
+- `native-select.tsx`: ukuran `lg` (40 px) dan latar kartu.
+- `card.tsx`: teks mewarisi ukuran body (bukan 14 px), bingkai `--border`, jarak 20 px.
+- `src/lib/utils.ts`: `cn()` memakai tailwind-merge yang mengenali ukuran teks PDPSI (`text-caption`, `text-small`, `text-h3`, ...), agar tidak dianggap warna teks.
+
 | Komponen | Pedoman |
 |----------|---------|
-| Header | Nama "PDPSI" sebagai teks (logo institusi dari `config/site.json`; kosong = tidak ditampilkan), 6 menu, pemilih `ID | EN`. Di ponsel menu menjadi tombol "Menu" yang membuka daftar penuh. |
-| Footer | Deskripsi singkat, sumber data, tanggal ekstraksi dan versi rilis, institusi pengelola (atau "Belum ditetapkan"), tautan Metodologi. Satu atau dua kolom sesuai isi, bukan pola 4 kolom. |
-| Blok angka (lembar data) | Angka display + satuan tertulis + satu kalimat keterangan + baris sumber 13 px + cakupan bila ada pengecualian. Dipisah garis rambut, tanpa kartu berbayang. |
-| Bilah filter | Satu baris di atas konten (desktop); di ponsel tombol "Filter (n aktif)" yang membuka panel penuh dengan tombol "Terapkan" dan "Atur ulang". Setiap filter punya label terlihat. |
-| Tabel data | Header lengket `--surface-sunken`, angka rata kanan dengan `tabular-nums`, kolom yang bisa diurutkan ditandai tombol dengan `aria-sort`. Di < 768 px berubah menjadi daftar kartu ringkas. |
-| Tombol | Utama: isi `--forest`, teks putih. Sekunder: garis `--rule-strong`, teks `--forest`. Label spesifik ("Unduh CSV hasil filter"), tidak generik. |
-| Tautan | `--forest` bergaris bawah; hover `--forest-hover`. |
-| Cincin fokus | 2 px `--accent-earth`, offset 2 px, di semua elemen interaktif termasuk wilayah peta. `outline: none` dilarang. |
-| Catatan kualitas data | Blok `--surface-sunken` dengan ikon info dan label "Catatan data". Tidak memakai merah/hijau status. |
-| Keadaan kosong / memuat / galat | Kosong: kalimat yang menyebut filter aktif + tombol atur ulang. Memuat: kerangka dengan ukuran tetap (CLS < 0,1). Galat: penjelasan singkat + alternatif (misalnya "Lihat dalam tabel"). |
-| Placeholder institusi | Teks "Belum ditetapkan" berwarna `--ink-muted`; tidak ada logo atau nama karangan. |
+| Kerangka | `SidebarProvider` + `AppSidebar` (nama PDPSI sebagai teks, dua kelompok menu: Jelajahi data dan Informasi, versi rilis + badge Draf, tanggal pengambilan data) + `SidebarInset` berisi banner draf, bilah atas, isi, footer. |
+| Bilah atas | Tombol menu (`SidebarTrigger`), breadcrumb posisi halaman, pemilih bahasa `ID | EN` berupa dua tautan dengan `aria-current`. Lengket di atas. |
+| Footer | Deskripsi singkat, sumber data, tanggal ekstraksi dan versi rilis, institusi pengelola (atau "Belum ditetapkan"), tautan Metodologi. |
+| Kartu angka (lembar data) | `Card`: label, angka besar + satuan tertulis, keterangan, baris sumber 13 px di kaki kartu. Tanpa ikon dekoratif. |
+| Kartu bagian | `SectionCard`: judul h2, keterangan sumber, isi (tabel/grafik), kaki opsional. Dipakai untuk rekap, grafik, panel detail, dan unduhan. |
+| Grafik | `Card` + `ToggleGroup` untuk ukuran (rekaman/luas/anggota) + `Collapsible` berisi `Table` data grafik. |
+| Bilah filter | Kartu dengan `Label`, `Input` (ikon cari), `NativeSelect`, `Button`. Form GET biasa (tetap bekerja tanpa JavaScript). Di < 1024 px tersembunyi di balik tombol "Filter dan pencarian" dengan `Badge` jumlah filter aktif. |
+| Tabel data | Gaya `Table` shadcn: kepala `--muted`, baris dengan garis `--border` dan hover tipis, angka rata kanan `tabular-nums`, tajuk yang bisa diurutkan dengan ikon panah dan `aria-sort`. |
+| Tombol | `Button` default: isi `--primary` (hijau hutan), teks putih. `outline`: garis `--border`, untuk unduhan dan navigasi halaman. Label spesifik, tidak generik. |
+| Tautan dalam teks | `--forest` bergaris bawah; komponen shadcn (`data-slot`) memakai gayanya sendiri. |
+| Cincin fokus | 2 px `--accent-earth`, offset 2 px, di semua elemen interaktif termasuk komponen shadcn (aturan global di luar `@layer`). |
+| Catatan kualitas data | `Alert` dengan ikon info, latar `--muted`. Tidak memakai merah/hijau status. |
+| Penanda Duplikat | `Badge` garis cokelat tanah dengan teks "Duplikat". |
+| Keadaan kosong / memuat / galat | Kosong: kalimat yang menyebut filter aktif + tautan atur ulang. Memuat: ruang tetap (CLS < 0,1). Galat: penjelasan singkat + tabel alternatif. |
+| Placeholder institusi | Teks "Belum ditetapkan" berwarna `--muted-foreground`; tidak ada logo atau nama karangan. |
 
 ## 7. Pola grafik (ECharts)
 
@@ -172,4 +186,4 @@ Hanya mode terang untuk MVP (ditetapkan pemilik produk, keputusan F). Alasannya:
 
 ## 11. Yang dihindari
 
-Tampilan dashboard SaaS: kartu berbayang seragam, ikon di setiap kartu, gradien, glassmorphism, badge "Baru", angka besar tanpa satuan, bento grid, animasi masuk, ilustrasi generik, CTA generik ("Mulai", "Pelajari lebih lanjut"), FAQ templat.
+Meski memakai pola dasbor (v0.4): kartu berbayang, ikon dekoratif di kartu angka, gradien, glassmorphism, badge "Baru", angka besar tanpa satuan atau sumber, grafik hiasan tanpa tabel data, animasi masuk, ilustrasi generik, CTA generik ("Mulai", "Pelajari lebih lanjut"), FAQ templat.

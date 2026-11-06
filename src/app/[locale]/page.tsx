@@ -1,6 +1,8 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { DataSheetStat, PageHeading } from "@/components/data/blocks";
+import { ArrowRight, Download, Map as MapIcon } from "lucide-react";
+import { DataSheetStat, PageHeading, SectionCard } from "@/components/data/blocks";
+import { Button } from "@/components/ui/button";
 import { MetricChart } from "@/components/charts/ChartFigures";
 import { MiniMap } from "@/components/map/MiniMap";
 import { getPathname } from "@/i18n/navigation";
@@ -39,9 +41,28 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <PageHeading title={t("home.title")} lead={t("home.lead")} />
+      <PageHeading
+        title={t("home.title")}
+        lead={t("home.lead")}
+        actions={
+          <>
+            <Button asChild size="lg" className="h-11 px-4 text-small">
+              <Link href="/map">
+                <MapIcon aria-hidden="true" />
+                {t("home.openMap")}
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="h-11 px-4 text-small">
+              <Link href="/download">
+                <Download aria-hidden="true" />
+                {t("home.toDownload")}
+              </Link>
+            </Button>
+          </>
+        }
+      />
 
-      <dl className="grid gap-x-10 gap-y-10 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
         <DataSheetStat label={t("home.recordsLabel")} value={n(nat.records)} unit={t("common.records")} source={source}>
           {t("home.recordsNote")}
         </DataSheetStat>
@@ -71,24 +92,27 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               })}
           </span>
         </DataSheetStat>
-      </dl>
+      </div>
 
-      <section aria-labelledby="peta-mini" className="rule-top mt-12 pt-3">
-        <h2 id="peta-mini" className="text-h2 font-bold">{t("home.miniMapTitle")}</h2>
-        <p className="mt-1 text-caption text-ink-muted">{`${processed} ${source}`}</p>
-        <div className="mt-4">
+      <div className="grid gap-x-6 xl:grid-cols-2">
+        <SectionCard
+          id="peta-mini"
+          title={t("home.miniMapTitle")}
+          description={`${processed} ${source}`}
+          footer={
+            <Link href="/map" className="inline-flex min-h-11 items-center gap-1.5 font-bold">
+              {t("home.openMap")}
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </Link>
+          }
+        >
           <MiniMap
             values={Object.fromEntries(totals.by_province.map((p) => [p.province_code, p.records]))}
             label={t("home.miniMapLabel", { count: totals.provinces_with_records })}
             legendLabels={(from, to) => t("map.range", { from: n(from), to: n(to) })}
             noRecordsLabel={t("map.noRecords")}
           />
-        </div>
-        <p className="mt-2 text-small">
-          <Link href="/map" className="inline-flex min-h-11 items-center font-bold">{t("home.openMap")}</Link>
-        </p>
-      </section>
-
+        </SectionCard>
       <MetricChart
         id="beranda-jenis"
         title={t("home.chartJenis")}
@@ -102,6 +126,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           values: { records: j.records, area: j.area, members: j.members },
         }))}
       />
+      </div>
       <MetricChart
         id="beranda-provinsi"
         title={t("home.chartTopProvinces")}
@@ -117,15 +142,26 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         }))}
       />
 
-      <nav aria-labelledby="lanjut" className="rule-top mt-14 pt-4">
-        <h2 id="lanjut" className="text-small font-bold text-ink-muted">
+      <nav aria-labelledby="lanjut" className="mt-10">
+        <h2 id="lanjut" className="text-small font-bold text-muted-foreground">
           {t("home.next")}
         </h2>
-        <ul className="mt-2 flex flex-col gap-1 text-h3 md:flex-row md:gap-8">
-          <li><Link href="/statistics" className="inline-flex min-h-11 items-center">{t("home.toStatistics")}</Link></li>
-          <li><Link href="/map" className="inline-flex min-h-11 items-center">{t("home.toMap")}</Link></li>
-          <li><Link href="/data" className="inline-flex min-h-11 items-center">{t("home.toData", { count: n(nat.records) })}</Link></li>
-          <li><Link href="/download" className="inline-flex min-h-11 items-center">{t("home.toDownload")}</Link></li>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {[
+            { href: "/statistics", label: t("home.toStatistics") },
+            { href: "/map", label: t("home.toMap") },
+            { href: "/data", label: t("home.toData", { count: n(nat.records) }) },
+            { href: "/download", label: t("home.toDownload") },
+          ].map((l) => (
+            <li key={l.href}>
+              <Button asChild variant="outline" size="lg" className="h-11 px-4 text-small">
+                <Link href={l.href}>
+                  {l.label}
+                  <ArrowRight aria-hidden="true" />
+                </Link>
+              </Button>
+            </li>
+          ))}
         </ul>
       </nav>
     </>

@@ -6,6 +6,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start", "--", "-p", "3100"],
       "port": 3100
+    },
+    {
+      "name": "pdpsi-dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "-p", "3101"],
+      "port": 3101
     }
   ]
 }

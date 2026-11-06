@@ -10,7 +10,10 @@
     "statistics": "Statistics",
     "data": "Data",
     "download": "Download",
-    "about": "About"
+    "about": "About",
+    "groupExplore": "Explore the data",
+    "groupInfo": "Information",
+    "record": "Record"
   },
   "common": {
     "skipToContent": "Skip to content",
@@ -33,7 +36,9 @@
     "female": "Women",
     "femaleZeroRecords": "Records with 0 women",
     "membersSplit": "Men {male}, women {female}.",
-    "femaleZeroNote": "In {zero} of {used} records the number of women is 0, almost all of them decrees issued before 2017. The source does not distinguish 0 from not recorded, so the number of women is probably lower than the real figure."
+    "femaleZeroNote": "In {zero} of {used} records the number of women is 0, almost all of them decrees issued before 2017. The source does not distinguish 0 from not recorded, so the number of women is probably lower than the real figure.",
+    "draftBadge": "Draft",
+    "releaseShort": "Release {version}"
   },
   "draft": {
     "banner": "Development version. Data comes from draft release {version} and has not been published as a public release."

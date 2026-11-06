@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Fragment } from "react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
-import { DataNote, JENIS_COLOR_HEX, PageHeading, SchemeSwatch, SectionHeading } from "@/components/data/blocks";
+import { DataNote, JENIS_COLOR_HEX, PageHeading, SchemeSwatch, SectionCard } from "@/components/data/blocks";
 import { DataFilters } from "@/components/data/DataFilters";
 import { MetricChart, StackedChart } from "@/components/charts/ChartFigures";
 import { loadExportSchema, loadRelease } from "@/lib/data/release";
@@ -163,15 +163,6 @@ export default async function StatisticsPage({
               .filter((j) => j.records > 0)
               .map((j) => toRow({ ...j, name: jenisLabel(j.code) }, dataHref({ type: j.code })))}
           />
-          <MetricChart
-            id="grafik-wilayah"
-            title={t("statistics.chartRegion", { level: regionWord, scope })}
-            caption={caption}
-            metrics={metrics}
-            categoryHeader={level === "province" ? t("map.province") : t("data.regency")}
-            color="#1e5a3a"
-            rows={regions.map((r) => toRow(r, dataHref(regionQuery(r.code))))}
-          />
           {!query.regency && (
             <MetricChart
               id="grafik-top10"
@@ -189,6 +180,15 @@ export default async function StatisticsPage({
               )}
             />
           )}
+          <MetricChart
+            id="grafik-wilayah"
+            title={t("statistics.chartRegion", { level: regionWord, scope })}
+            caption={caption}
+            metrics={metrics}
+            categoryHeader={level === "province" ? t("map.province") : t("data.regency")}
+            color="#1e5a3a"
+            rows={regions.map((r) => toRow(r, dataHref(regionQuery(r.code))))}
+          />
           <StackedChart
             id="grafik-komposisi"
             title={t("statistics.chartComposition", { level: regionWord, scope })}
@@ -201,11 +201,10 @@ export default async function StatisticsPage({
         </>
       )}
 
-      <SectionHeading id="rekap-nasional">{t("statistics.tableCaption", { scope })}</SectionHeading>
-      <p className="mt-2 text-caption text-ink-muted">{caption}</p>
-      <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-nasional" tabIndex={0}>
+      <SectionCard id="rekap-nasional" title={t("statistics.tableCaption", { scope })} description={caption}>
+        <div className="relative overflow-x-auto rounded-md border" role="region" aria-labelledby="rekap-nasional" tabIndex={0}>
         <table className="w-full min-w-[820px] border-collapse text-small">
-          <thead className="bg-surface-sunken text-left">
+          <thead className="bg-muted text-left">
             <tr>
               <th scope="col" className="px-3 py-2">{t("statistics.jenis")}</th>
               <th scope="col" className="px-3 py-2">{t("statistics.kind")}</th>
@@ -219,7 +218,7 @@ export default async function StatisticsPage({
           <tbody>
             {JENIS_ORDER.map((code) => (
               <Fragment key={code}>
-                <tr className="border-b border-rule">
+                <tr className="border-b border-rule hover:bg-muted/40">
                   <th scope="row" className="px-3 py-2 text-left font-bold">
                     <span className="flex items-center gap-2">
                       <SchemeSwatch code={code} />
@@ -255,18 +254,18 @@ export default async function StatisticsPage({
             </tr>
           </tfoot>
         </table>
-      </div>
+        </div>
+      </SectionCard>
       <p className="mt-3 max-w-[72ch] text-small">
         {t("common.femaleZeroNote", { zero: n(total.members_female_zero_records), used: n(total.members_records_used) })}
       </p>
 
       {records.length > 0 && (
         <>
-          <SectionHeading id="rekap-wilayah">{t("statistics.regionTableCaption", { level: regionWord, scope })}</SectionHeading>
-          <p className="mt-2 text-caption text-ink-muted">{caption}</p>
-          <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-wilayah" tabIndex={0}>
+          <SectionCard id="rekap-wilayah" title={t("statistics.regionTableCaption", { level: regionWord, scope })} description={caption}>
+            <div className="relative overflow-x-auto rounded-md border" role="region" aria-labelledby="rekap-wilayah" tabIndex={0}>
             <table className="w-full min-w-[900px] border-collapse text-small">
-              <thead className="bg-surface-sunken text-left">
+              <thead className="bg-muted text-left">
                 <tr>
                   <th scope="col" className="px-3 py-2">{level === "province" ? t("map.province") : t("data.regency")}</th>
                   {JENIS_ORDER.map((c) => (
@@ -286,7 +285,7 @@ export default async function StatisticsPage({
                   .map((r) => {
                     const inRegion = records.filter(regionKey(r.code));
                     return (
-                      <tr key={r.code} className="border-b border-rule">
+                      <tr key={r.code} className="border-b border-rule hover:bg-muted/40">
                         <th scope="row" className="px-3 py-2 text-left font-normal">{r.name}</th>
                         {JENIS_ORDER.map((c) => (
                           <td key={c} className="px-3 py-2 text-right">
@@ -308,14 +307,14 @@ export default async function StatisticsPage({
                   })}
               </tbody>
             </table>
-          </div>
+            </div>
+          </SectionCard>
 
-          <SectionHeading id="rekap-anggota">{t("statistics.sexTableCaption", { level: regionWord, scope })}</SectionHeading>
-          <p className="mt-2 text-caption text-ink-muted">{caption}</p>
-          <p className="mt-2 max-w-[72ch] text-small">{t("statistics.sexTableNote")}</p>
-          <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-anggota" tabIndex={0}>
+          <SectionCard id="rekap-anggota" title={t("statistics.sexTableCaption", { level: regionWord, scope })} description={caption}>
+          <p className="mb-4 max-w-[72ch] text-small text-muted-foreground">{t("statistics.sexTableNote")}</p>
+            <div className="relative overflow-x-auto rounded-md border" role="region" aria-labelledby="rekap-anggota" tabIndex={0}>
             <table className="w-full min-w-[820px] border-collapse text-small">
-              <thead className="bg-surface-sunken text-left">
+              <thead className="bg-muted text-left">
                 <tr>
                   <th scope="col" className="px-3 py-2">{level === "province" ? t("map.province") : t("data.regency")}</th>
                   <th scope="col" className="px-3 py-2 text-right">{t("columns.membersUsed")}</th>
@@ -331,7 +330,7 @@ export default async function StatisticsPage({
                   .map((r) => {
                     const b = aggregate(records.filter(regionKey(r.code)));
                     return (
-                      <tr key={r.code} className="border-b border-rule">
+                      <tr key={r.code} className="border-b border-rule hover:bg-muted/40">
                         <th scope="row" className="px-3 py-2 text-left font-normal">{r.name}</th>
                         <td className="px-3 py-2 text-right tabular">{n(b.members_records_used)}</td>
                         <td className="px-3 py-2 text-right tabular">{n(b.members_male_plus_female)}</td>
@@ -353,7 +352,8 @@ export default async function StatisticsPage({
                 </tr>
               </tfoot>
             </table>
-          </div>
+            </div>
+          </SectionCard>
         </>
       )}
       <p className="mt-3 text-small">{t("statistics.linkHint")}</p>
