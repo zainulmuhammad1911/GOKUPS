@@ -13,10 +13,13 @@ interface Option {
   code: string;
   name: string;
   parent?: string | null;
+  /** Untuk provinsi: nilai Region-nya. */
+  region?: string;
 }
 
 export interface FilterValues {
   q: string;
+  region: string | null;
   province: string | null;
   regency: string | null;
   type: string | null;
@@ -39,6 +42,7 @@ export function DataFilters({
   action,
   resetHref,
   values,
+  regions,
   provinces,
   regencies,
   types,
@@ -53,6 +57,8 @@ export function DataFilters({
   action: string;
   resetHref: string;
   values: FilterValues;
+  /** Nilai kolom sumber Region. */
+  regions: string[];
   provinces: Option[];
   regencies: Option[];
   types: Option[];
@@ -69,12 +75,17 @@ export function DataFilters({
 }) {
   const t = useTranslations("data");
   const [open, setOpen] = useState(false);
+  const [region, setRegion] = useState(values.region ?? "");
   const [province, setProvince] = useState(values.province ?? "");
   const [regency, setRegency] = useState(values.regency ?? "");
   const panelId = useId();
 
-  const visibleRegencies = province ? regencies.filter((r) => r.parent === province) : regencies;
-  const grouped = provinces
+  const visibleProvinces = region ? provinces.filter((p) => p.region === region) : provinces;
+  const visibleProvinceCodes = new Set(visibleProvinces.map((p) => p.code));
+  const visibleRegencies = province
+    ? regencies.filter((r) => r.parent === province)
+    : regencies.filter((r) => visibleProvinceCodes.has(r.parent ?? ""));
+  const grouped = visibleProvinces
     .map((p) => ({ p, items: visibleRegencies.filter((r) => r.parent === p.code) }))
     .filter((g) => g.items.length > 0);
 
@@ -147,6 +158,30 @@ export function DataFilters({
         )}
 
         <div className={field}>
+          <Label htmlFor={`${panelId}-region`} className="font-bold">{t("region")}</Label>
+          <NativeSelect size="lg" className="w-full"
+            id={`${panelId}-region`}
+            name="region"
+            value={region}
+            aria-describedby={`${panelId}-region-hint`}
+            onChange={(e) => {
+              const next = e.target.value;
+              setRegion(next);
+              // Provinsi dan kabupaten/kota yang berada di luar region terpilih dikosongkan.
+              const inRegion = (code: string) => !next || provinces.find((p) => p.code === code)?.region === next;
+              if (province && !inRegion(province)) setProvince("");
+              if (regency && !inRegion(regency.slice(0, 2))) setRegency("");
+            }}
+          >
+            <option value="">{t("allRegions")}</option>
+            {regions.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
+          </NativeSelect>
+          <span id={`${panelId}-region-hint`} className="text-caption text-muted-foreground">{t("regionHint")}</span>
+        </div>
+
+        <div className={field}>
           <Label htmlFor={`${panelId}-province`} className="font-bold">{t("province")}</Label>
           <NativeSelect size="lg" className="w-full"
             id={`${panelId}-province`}
@@ -159,7 +194,7 @@ export function DataFilters({
            
           >
             <option value="">{t("allProvinces")}</option>
-            {provinces.map((p) => (
+            {visibleProvinces.map((p) => (
               <option key={p.code} value={p.code}>{p.name}</option>
             ))}
           </NativeSelect>

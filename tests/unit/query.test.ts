@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { aggregate } from "@/lib/data/aggregate";
 import { loadExportSchema, loadRelease } from "@/lib/data/release";
-import { applyQuery, EMPTY_QUERY, memberFilterCounts, paginate, parseQuery, queryContext, toSearchParams } from "@/lib/data/query";
+import { applyQuery, EMPTY_QUERY, memberFilterCounts, paginate, parseQuery, queryContext, regionList, toSearchParams } from "@/lib/data/query";
 
 const { approvals, adminAreas, totals } = loadRelease();
 const ctx = queryContext(adminAreas, approvals, Object.keys(loadExportSchema().flag_docs));
@@ -78,6 +78,24 @@ describe("filter pendamping (K11)", () => {
     const both = run({ members: "1", pendamping: "ada" });
     expect(both.every((r) => r.derived.members_male_plus_female === 1 && r.derived.pendamping_status === "tercatat")).toBe(true);
     expect(parseQuery({ pendamping: "ya" }, ctx).ignored).toEqual(["pendamping"]);
+  });
+});
+
+describe("filter Region (kolom sumber)", () => {
+  it("7 region membagi seluruh rekaman; nilai = kolom sumber apa adanya", () => {
+    const regions = regionList(ctx);
+    expect(regions).toHaveLength(7);
+    expect(regions[0]).toBe("Sumatera");
+    expect(regions.reduce((a, r) => a + run({ region: r }).length, 0)).toBe(approvals.length);
+    expect(run({ region: "Sulawesi" }).every((r) => r.source["Region"] === "Sulawesi")).toBe(true);
+  });
+  it("region = jumlah provinsi di dalamnya; provinsi di luar region diabaikan", () => {
+    const sulawesi = totals.by_province.filter((p) => ctx.provinceRegion.get(p.province_code) === "Sulawesi");
+    expect(run({ region: "Sulawesi" }).length).toBe(sulawesi.reduce((a, p) => a + p.records, 0));
+    const parsed = parseQuery({ region: "Jawa", province: "72" }, ctx);
+    expect(parsed.query.province).toBeNull();
+    expect(parsed.ignored).toContain("province");
+    expect(parseQuery({ region: "Atlantis" }, ctx).ignored).toEqual(["region"]);
   });
 });
 

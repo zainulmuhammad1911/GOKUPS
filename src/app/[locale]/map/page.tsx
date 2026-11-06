@@ -7,7 +7,7 @@ import { DataNote, PageHeading } from "@/components/data/blocks";
 import { JENIS_COLOR_HEX } from "@/components/data/blocks";
 import { MapExplorer, type Indicator, type RegionData, type Values } from "@/components/map/MapExplorer";
 import { loadExportSchema, loadRelease } from "@/lib/data/release";
-import { applyQuery, EMPTY_QUERY, MEMBER_FILTERS, memberFilterCounts, PENDAMPING_FILTERS, parseQuery, queryContext } from "@/lib/data/query";
+import { applyQuery, EMPTY_QUERY, MEMBER_FILTERS, memberFilterCounts, PENDAMPING_FILTERS, parseQuery, queryContext, regionList } from "@/lib/data/query";
 import { aggregate } from "@/lib/data/aggregate";
 import { formatDateTime } from "@/lib/data/format";
 import { JENIS_ORDER } from "@/lib/data/stats";
@@ -60,9 +60,10 @@ export default async function MapPage({
   }
   // Filter server (anggota tercatat, pendamping): sama dengan halaman Data dan Statistik.
   const sp = await searchParams;
-  const { query: q } = parseQuery(sp, queryContext(adminAreas, approvals, Object.keys(loadExportSchema().flag_docs)));
-  const serverFilters = { members: q.members, pendamping: q.pendamping };
-  const filtered = q.members || q.pendamping ? applyQuery(approvals, { ...EMPTY_QUERY, ...serverFilters }) : approvals;
+  const ctx = queryContext(adminAreas, approvals, Object.keys(loadExportSchema().flag_docs));
+  const { query: q } = parseQuery(sp, ctx);
+  const serverFilters = { region: q.region, members: q.members, pendamping: q.pendamping };
+  const filtered = q.region || q.members || q.pendamping ? applyQuery(approvals, { ...EMPTY_QUERY, ...serverFilters }) : approvals;
   const groups = new Map<string, ApprovalRecord[]>();
   for (const r of filtered) {
     for (const key of [r.derived.province_code, r.derived.regency_code]) {
@@ -83,7 +84,10 @@ export default async function MapPage({
   const indicator = (["records", "area", "members"] as const).includes(one("indicator") as Indicator) ? (one("indicator") as Indicator) : "records";
   const type = (JENIS_ORDER as readonly string[]).includes(one("type") ?? "") ? one("type")! : "all";
   const provinceParam = one("province");
-  const province = provinceParam && regions[provinceParam]?.parent === null ? provinceParam : null;
+  const province =
+    provinceParam && regions[provinceParam]?.parent === null && (!q.region || ctx.provinceRegion.get(provinceParam) === q.region)
+      ? provinceParam
+      : null;
   const regencyParam = one("regency");
   const regency = province && regencyParam && regions[regencyParam]?.parent === province ? regencyParam : null;
 
@@ -115,7 +119,7 @@ export default async function MapPage({
         </div>
       )}
       <MapExplorer
-        key={`${q.members ?? ""}|${q.pendamping ?? ""}`}
+        key={`${q.region ?? ""}|${q.members ?? ""}|${q.pendamping ?? ""}`}
         geoBase={`/geo/${boundary.version}`}
         attribution={locale === "en" ? boundary.attribution_en : boundary.attribution_id}
         regions={regions}
@@ -124,6 +128,7 @@ export default async function MapPage({
         dataPath={getPathname({ href: "/data", locale })}
         sourceLine={`${t("common.processed")} ${t("common.sourceLine", { date: formatDateTime(meta.source.extracted_at, locale), version: meta.version })}`}
         serverFilters={serverFilters}
+        regionOptions={regionList(ctx)}
         memberOptions={(() => {
           const c = memberFilterCounts(approvals);
           const nf = new Intl.NumberFormat(locale === "en" ? "en-GB" : "id-ID");

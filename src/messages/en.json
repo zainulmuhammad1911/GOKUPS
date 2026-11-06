@@ -220,7 +220,10 @@
       "ada": "Facilitator recorded",
       "tidak": "No facilitator recorded"
     },
-    "pendampingNote": "The facilitator filter uses whether the Pendamping (facilitator) column in the GoKUPS source is filled in. Facilitator names are not published. An empty column may mean the group has no facilitator or that the facilitator was not recorded."
+    "pendampingNote": "The facilitator filter uses whether the Pendamping (facilitator) column in the GoKUPS source is filled in. Facilitator names are not published. An empty column may mean the group has no facilitator or that the facilitator was not recorded.",
+    "region": "Region",
+    "regionHint": "Island group from the workbook's Region column (not a GoKUPS field).",
+    "allRegions": "All regions"
   },
   "detail": {
     "title": "Record {id}",

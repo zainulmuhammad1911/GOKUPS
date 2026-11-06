@@ -197,6 +197,33 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await expect(page.locator("aside").getByRole("link", { name: /Lihat .* rekaman ini/ })).toHaveAttribute("href", /members=1&pendamping=ada/);
   });
 
+  test("filter Region: daftar provinsi menyempit, jumlah, Statistik, unduhan, Peta", async ({ page, request }) => {
+    const approvals = JSON.parse(readFileSync(`data/releases/${VERSION}/approvals.json`, "utf-8")) as { source: Record<string, unknown> }[];
+    const sulawesi = approvals.filter((r) => r.source["Region"] === "Sulawesi").length;
+    const id = (v: number) => new Intl.NumberFormat("id-ID").format(v);
+
+    await page.goto("/data");
+    const form = page.getByRole("search");
+    await form.getByLabel("Region", { exact: true }).selectOption("Sulawesi");
+    // 6 provinsi Sulawesi + opsi "Semua provinsi".
+    await expect(form.getByLabel("Provinsi", { exact: true }).locator("option")).toHaveCount(7);
+    await form.getByRole("button", { name: "Terapkan" }).click();
+    await expect(page).toHaveURL(/\/data\?region=Sulawesi$/);
+    await expect(page.getByRole("heading", { name: `${id(sulawesi)} dari 10.061 rekaman cocok dengan filter` })).toBeVisible();
+
+    const res = await request.get("/unduh-hasil?region=Bali%20dan%20Nusa%20Tenggara&format=csv");
+    const files = unzipSync(new Uint8Array(await res.body()));
+    expect(strFromU8(files["BACA_SAYA.txt"]!)).toContain("Region (kolom sumber, kelompok pulau): Bali dan Nusa Tenggara");
+
+    await page.goto("/statistics?region=Sulawesi");
+    await expect(page.getByText(`${id(sulawesi)} rekaman · Region Sulawesi`, { exact: true })).toBeVisible();
+
+    await page.goto("/map");
+    await page.getByLabel("Region", { exact: true }).selectOption("Sulawesi");
+    await expect(page).toHaveURL(/region=Sulawesi/);
+    await expect(page.locator("aside dd").first()).toHaveText(id(sulawesi));
+  });
+
   test("pencarian tidak peka huruf dan menampilkan nilai sumber apa adanya", async ({ page }) => {
     await page.goto("/data?q=muara%20kilis");
     await expect(page.getByRole("cell", { name: "KTH  MUARA KILIS" }).first()).toBeVisible();

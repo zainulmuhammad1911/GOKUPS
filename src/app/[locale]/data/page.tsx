@@ -18,6 +18,7 @@ import {
   MEMBER_FILTERS,
   memberFilterCounts,
   PENDAMPING_FILTERS,
+  regionList,
   paginate,
   parseQuery,
   queryContext,
@@ -64,7 +65,9 @@ export default async function DataPage({
   const empty = t("common.emptyInSource");
   const active = activeFilterCount(query);
 
-  const provinces = adminAreas.filter((a) => a.level === "province").map((a) => ({ code: a.code, name: a.name }));
+  const provinces = adminAreas
+    .filter((a) => a.level === "province")
+    .map((a) => ({ code: a.code, name: a.name, region: ctx.provinceRegion.get(a.code) }));
   const regencies = adminAreas.filter((a) => a.level === "regency").map((a) => ({ code: a.code, name: a.name, parent: a.parent_code }));
   const nameOf = new Map(adminAreas.map((a) => [a.code, a.name]));
   const jenisLabel = (code: string) => schemes.find((s) => s.jenis_ps_code === code)?.jenis_ps_label_id ?? code;
@@ -94,6 +97,7 @@ export default async function DataPage({
 
   const activeLabels = [
     query.q && `${t("data.search")}: “${query.q}”`,
+    query.region && `${t("data.region")}: ${query.region}`,
     query.province && `${t("data.province")}: ${nameOf.get(query.province)}`,
     query.regency && `${t("data.regency")}: ${nameOf.get(query.regency)}`,
     query.type && `${t("data.type")}: ${typeLabel(query.type)}`,
@@ -124,6 +128,7 @@ export default async function DataPage({
         action={dataPath}
         resetHref={dataPath}
         values={{ ...query }}
+        regions={regionList(ctx)}
         provinces={provinces}
         regencies={regencies}
         types={types}

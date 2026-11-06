@@ -43,7 +43,8 @@ interface Props {
    * Filter yang diterapkan di server (angka wilayah sudah dihitung dari rekaman yang lolos filter):
    * anggota tercatat dan pendamping. Mengubahnya memuat ulang data peta.
    */
-  serverFilters: { members: string | null; pendamping: string | null };
+  serverFilters: { region: string | null; members: string | null; pendamping: string | null };
+  regionOptions: string[];
   memberOptions: { code: string; label: string }[];
   pendampingOptions: { code: string; label: string }[];
 }
@@ -106,6 +107,7 @@ export function MapExplorer({
   dataPath,
   sourceLine,
   serverFilters,
+  regionOptions,
   memberOptions,
   pendampingOptions,
 }: Props) {
@@ -153,6 +155,7 @@ export function MapExplorer({
     if (state.type !== "all") p.set("type", state.type);
     if (state.province) p.set("province", state.province);
     if (state.regency) p.set("regency", state.regency);
+    if (serverFilters.region) p.set("region", serverFilters.region);
     if (serverFilters.members) p.set("members", serverFilters.members);
     if (serverFilters.pendamping) p.set("pendamping", serverFilters.pendamping);
     const qs = p.toString();
@@ -160,10 +163,11 @@ export function MapExplorer({
   }, [state, serverFilters]);
 
   // Filter server: muat ulang halaman dengan state peta yang sama.
-  const setServerFilter = (key: "members" | "pendamping", value: string) => {
+  const setServerFilter = (key: "region" | "members" | "pendamping", value: string) => {
     const p = new URLSearchParams(window.location.search);
     if (value) p.set(key, value);
     else p.delete(key);
+    // Provinsi di luar region baru diabaikan oleh server; tampilan kembali ke tingkat nasional.
     const qs = p.toString();
     router.push(`${window.location.pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
   };
@@ -337,6 +341,7 @@ export function MapExplorer({
     const q = new URLSearchParams();
     if (code) q.set(code.includes(".") ? "regency" : "province", code);
     if (state.type !== "all") q.set("type", state.type);
+    if (serverFilters.region) q.set("region", serverFilters.region);
     if (serverFilters.members) q.set("members", serverFilters.members);
     if (serverFilters.pendamping) q.set("pendamping", serverFilters.pendamping);
     const s = q.toString();
@@ -409,6 +414,21 @@ export function MapExplorer({
               .map((c) => (
                 <option key={c} value={c}>{regions[c]!.name}</option>
               ))}
+          </NativeSelect>
+        </div>
+        <div className="flex w-full min-w-0 flex-col gap-1.5 text-small sm:w-auto">
+          <Label htmlFor="peta-region" className="font-bold">{td("region")}</Label>
+          <NativeSelect
+            size="lg"
+            id="peta-region"
+            value={serverFilters.region ?? ""}
+            onChange={(e) => setServerFilter("region", e.target.value)}
+            className="w-full min-w-0 sm:w-56"
+          >
+            <option value="">{td("allRegions")}</option>
+            {regionOptions.map((r) => (
+              <option key={r} value={r}>{r}</option>
+            ))}
           </NativeSelect>
         </div>
         <div className="flex w-full min-w-0 flex-col gap-1.5 text-small sm:w-auto">

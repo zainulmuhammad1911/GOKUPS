@@ -30,6 +30,8 @@ const MAX_Q = 100;
 
 export interface DataQuery {
   q: string;
+  /** Nilai kolom sumber "Region" apa adanya (kelompok pulau; diturunkan penyusun workbook dari provinsi). */
+  region: string | null;
   province: string | null;
   regency: string | null;
   type: string | null;
@@ -44,7 +46,7 @@ export interface DataQuery {
 }
 
 export const EMPTY_QUERY: DataQuery = {
-  q: "", province: null, regency: null, type: null, yearFrom: null, yearTo: null, flag: null, members: null, pendamping: null,
+  q: "", region: null, province: null, regency: null, type: null, yearFrom: null, yearTo: null, flag: null, members: null, pendamping: null,
   sort: "no", dir: "asc", page: 1,
 };
 
@@ -57,6 +59,9 @@ function first(params: Params, key: string): string | undefined {
 }
 
 export interface QueryContext {
+  regions: Set<string>;
+  /** Region tiap provinsi menurut rekaman sumber (setiap provinsi tepat satu region). */
+  provinceRegion: Map<string, string>;
   provinceCodes: Set<string>;
   regencyCodes: Set<string>;
   flags: Set<string>;
@@ -66,7 +71,10 @@ export interface QueryContext {
 export function queryContext(adminAreas: AdminArea[], records: ApprovalRecord[], flagCodes: string[]): QueryContext {
   let min = Infinity;
   let max = -Infinity;
+  const provinceRegion = new Map<string, string>();
   for (const r of records) {
+    const region = r.source["Region"];
+    if (typeof region === "string") provinceRegion.set(r.derived.province_code, region);
     const y = r.derived.approval_year;
     if (y !== null) {
       min = Math.min(min, y);
@@ -74,11 +82,20 @@ export function queryContext(adminAreas: AdminArea[], records: ApprovalRecord[],
     }
   }
   return {
+    regions: new Set(provinceRegion.values()),
+    provinceRegion,
     provinceCodes: new Set(adminAreas.filter((a) => a.level === "province").map((a) => a.code)),
     regencyCodes: new Set(adminAreas.filter((a) => a.level === "regency").map((a) => a.code)),
     flags: new Set(flagCodes),
     years: { min, max },
   };
+}
+
+/** Daftar Region, diurutkan menurut kode provinsi terkecil di dalamnya (barat ke timur). */
+export function regionList(ctx: QueryContext): string[] {
+  const first = new Map<string, string>();
+  for (const [code, region] of ctx.provinceRegion) if (!first.has(region) || code < first.get(region)!) first.set(region, code);
+  return [...first].sort((a, b) => a[1].localeCompare(b[1])).map(([region]) => region);
 }
 
 /** Parameter yang tidak valid diabaikan (dan dicatat), bukan menyebabkan galat. */
@@ -98,9 +115,18 @@ export function parseQuery(params: Params, ctx: QueryContext): { query: DataQuer
     return v === null ? null : Number(v);
   };
 
-  const province = pick("province", (v) => ctx.provinceCodes.has(v));
+  const region = pick("region", (v) => ctx.regions.has(v));
+  let province = pick("province", (v) => ctx.provinceCodes.has(v));
+  if (province && region && ctx.provinceRegion.get(province) !== region) {
+    ignored.push("province");
+    province = null;
+  }
   let regency = pick("regency", (v) => ctx.regencyCodes.has(v));
   if (regency && province && !regency.startsWith(`${province}.`)) {
+    ignored.push("regency");
+    regency = null;
+  }
+  if (regency && region && ctx.provinceRegion.get(regency.slice(0, 2)) !== region) {
     ignored.push("regency");
     regency = null;
   }
@@ -116,7 +142,7 @@ export function parseQuery(params: Params, ctx: QueryContext): { query: DataQuer
   const pageRaw = first(params, "page");
   const page = pageRaw && /^\d{1,6}$/.test(pageRaw) ? Math.max(1, Number(pageRaw)) : 1;
 
-  return { query: { q, province, regency, type, yearFrom, yearTo, flag, members, pendamping, sort, dir, page }, ignored };
+  return { query: { q, region, province, regency, type, yearFrom, yearTo, flag, members, pendamping, sort, dir, page }, ignored };
 }
 
 const normalize = (s: string) =>
@@ -152,6 +178,7 @@ export function memberFilterCounts(records: ApprovalRecord[]): Record<MemberFilt
 
 export function matches(r: ApprovalRecord, q: DataQuery): boolean {
   const d = r.derived;
+  if (q.region && r.source["Region"] !== q.region) return false;
   if (q.province && d.province_code !== q.province) return false;
   if (q.regency && d.regency_code !== q.regency) return false;
   if (q.type) {
@@ -214,6 +241,7 @@ export function toSearchParams(q: DataQuery, overrides: Partial<DataQuery> = {})
   const m = { ...q, ...overrides };
   const out: Record<string, string> = {};
   if (m.q) out.q = m.q;
+  if (m.region) out.region = m.region;
   if (m.province) out.province = m.province;
   if (m.regency) out.regency = m.regency;
   if (m.type) out.type = m.type;
@@ -229,5 +257,5 @@ export function toSearchParams(q: DataQuery, overrides: Partial<DataQuery> = {})
 }
 
 export function activeFilterCount(q: DataQuery): number {
-  return [q.q, q.province, q.regency, q.type, q.yearFrom, q.yearTo, q.flag, q.members, q.pendamping].filter((v) => v !== null && v !== "").length;
+  return [q.q, q.region, q.province, q.regency, q.type, q.yearFrom, q.yearTo, q.flag, q.members, q.pendamping].filter((v) => v !== null && v !== "").length;
 }

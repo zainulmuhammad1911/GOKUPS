@@ -56,6 +56,7 @@ export function describeQuery(q: DataQuery, admin: AdminArea[], schemes: SchemeI
       : schemes.find((s) => s.jenis_ps_code === c)?.jenis_ps_label_id;
   const parts = [
     q.q && `Pencarian: "${q.q}"`,
+    q.region && `Region (kolom sumber, kelompok pulau): ${q.region}`,
     q.province && `Provinsi: ${name.get(q.province)} (${q.province})`,
     q.regency && `Kabupaten/Kota: ${name.get(q.regency)} (${q.regency})`,
     q.type && `Jenis PS: ${typeName(q.type)} (${q.type})`,

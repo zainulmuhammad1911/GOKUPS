@@ -1,6 +1,6 @@
 # Rencana Implementasi PDPSI
 
-**Status:** Tahap 0 sampai 6 selesai; Tahap 7 selesai untuk QA, publikasi menunggu K9 dan hosting (2026-11-05). Rilis aktif: draf `2026-11-02.r5`; batas wilayah `bps-2020-gb9469f09-kemendagri2025`. Pengujian terakhir (2026-11-06): pytest 42, Vitest 31, Playwright + axe 114. Bukti QA: `docs/QA_REPORT.md`.
+**Status:** Tahap 0 sampai 6 selesai; Tahap 7 selesai untuk QA, publikasi menunggu K9 dan hosting (2026-11-05). Rilis aktif: draf `2026-11-02.r5`; batas wilayah `bps-2020-gb9469f09-kemendagri2025`. Pengujian terakhir (2026-11-06): pytest 42, Vitest 33, Playwright + axe 115. Bukti QA: `docs/QA_REPORT.md`.
 **Urutan:** data dan peta lebih dulu, karena keduanya membawa risiko terbesar (PRD §14). Setiap tahap punya kriteria selesai yang bisa diperiksa. Tahap berikutnya dimulai setelah tahap sebelumnya disetujui.
 
 **Aturan permanen untuk semua tahap:** prinsip Source Fidelity & Data Transparency (PRD §1.1, DECISIONS.md bagian 1). Setiap fitur yang menampilkan data harus memakai nilai `source` apa adanya, memberi label pada hasil pengolahan, dan menampilkan penanda ketidaksesuaian.

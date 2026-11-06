@@ -16,6 +16,7 @@ import {
   MEMBER_FILTERS,
   memberFilterCounts,
   PENDAMPING_FILTERS,
+  regionList,
   parseQuery,
   queryContext,
   toSearchParams,
@@ -46,6 +47,7 @@ export default async function StatisticsPage({
   // Statistik memakai filter wilayah, jenis PS, tahun, dan jumlah anggota tercatat (DataFilters mode minimal).
   const query: DataQuery = {
     ...EMPTY_QUERY,
+    region: parsed.query.region,
     province: parsed.query.province,
     regency: parsed.query.regency,
     type: parsed.query.type,
@@ -70,7 +72,13 @@ export default async function StatisticsPage({
   const regions = regionStats(records, level, adminAreas);
   const regencies = regionStats(records, "regency", adminAreas);
   const scope =
-    (query.regency ? nameOf.get(query.regency) : query.province ? nameOf.get(query.province) : t("statistics.indonesia")) ?? "";
+    (query.regency
+      ? nameOf.get(query.regency)
+      : query.province
+        ? nameOf.get(query.province)
+        : query.region
+          ? `${t("data.region")} ${query.region}`
+          : t("statistics.indonesia")) ?? "";
 
   const metrics = [
     { key: "records", label: t("charts.records"), unit: t("common.records") },
@@ -124,7 +132,10 @@ export default async function StatisticsPage({
           action={statsPath}
           resetHref={statsPath}
           values={{ ...query }}
-          provinces={adminAreas.filter((a) => a.level === "province").map((a) => ({ code: a.code, name: a.name }))}
+          regions={regionList(ctx)}
+          provinces={adminAreas
+            .filter((a) => a.level === "province")
+            .map((a) => ({ code: a.code, name: a.name, region: ctx.provinceRegion.get(a.code) }))}
           regencies={adminAreas.filter((a) => a.level === "regency").map((a) => ({ code: a.code, name: a.name, parent: a.parent_code }))}
           types={JENIS_ORDER.map((c) => ({ code: c, name: jenisLabel(c) }))}
           kkSubtypes={kkSub}

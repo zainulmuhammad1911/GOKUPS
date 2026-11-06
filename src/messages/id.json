@@ -220,7 +220,10 @@
       "ada": "Ada pendamping tercatat",
       "tidak": "Tidak ada pendamping tercatat"
     },
-    "pendampingNote": "Filter pendamping memakai ada atau tidaknya isi kolom Pendamping di data sumber GoKUPS. Nama pendamping tidak dipublikasikan. Kolom kosong bisa berarti kelompok tidak didampingi atau pendampingnya tidak dicatat."
+    "pendampingNote": "Filter pendamping memakai ada atau tidaknya isi kolom Pendamping di data sumber GoKUPS. Nama pendamping tidak dipublikasikan. Kolom kosong bisa berarti kelompok tidak didampingi atau pendampingnya tidak dicatat.",
+    "region": "Region",
+    "regionHint": "Kelompok pulau dari kolom Region di workbook (bukan field GoKUPS).",
+    "allRegions": "Semua region"
   },
   "detail": {
     "title": "Rekaman {id}",
