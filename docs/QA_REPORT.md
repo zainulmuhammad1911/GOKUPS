@@ -125,4 +125,4 @@ Semua butir "tidak": tidak ada keputusan yang alasannya hanya "bawaan AI", tidak
 | K7 | Pemeriksaan manual crosswalk kode wilayah (`data/reference/region_crosswalk.csv`, kolom `verified_by_human`) | Pengelola data |
 | Tinjauan istilah | Definisi jenis PS dan terjemahan di `docs/TERMINOLOGY.md` | Pakar kebijakan PS |
 | Hosting | Server atau layanan hosting dan domain institusi; lalu `robots` dibuka (hapus `noindex` di `src/app/[locale]/layout.tsx`) | Institusi |
-| Remote git | Visibilitas repositori (K10). Workbook sumber dan `internal/` sudah dikecualikan dari git | Institusi |
+| Lisensi repositori | Remote sudah ada (`github.com/zainulmuhammad1911/GOKUPS`, publik; K10), tetapi belum ada berkas LICENSE karena lisensi kode dan data belum ditetapkan (K9) | Institusi |

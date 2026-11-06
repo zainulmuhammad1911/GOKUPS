@@ -117,7 +117,7 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 - Semua nilai dibaca dari `config/site.json`. Nilai `null` tampil sebagai "Belum ditetapkan". Rilis berstatus `draft` dan tidak boleh diterbitkan sebagai rilis publik final sampai K9 terisi.
 
 ### K10. Git dan repositori
-- **Status:** Sebagian. Repositori lokal + `.gitignore` sudah ada. Commit dan remote belum dibuat.
+- **Status:** Ditetapkan 2026-11-06. Remote GitHub `zainulmuhammad1911/GOKUPS` (publik), cabang `main`, dibuat dan di-push atas permintaan pemilik produk. Workbook sumber, `data/source/`, dan `internal/` tidak pernah masuk riwayat git (diperiksa sebelum push). Repositori belum punya berkas lisensi karena lisensi kode dan data belum ditetapkan (K9).
 
 ## 3. Keputusan desain (keputusan F)
 
@@ -138,7 +138,7 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 | K7 | Sebagian |
 | K8 | Ditetapkan (diubah 2026-11-05) |
 | K9 | Menunggu |
-| K10 | Sebagian |
+| K10 | Ditetapkan (remote GitHub publik) |
 | K11 | Ditetapkan (semua kolom nama dipublikasikan sejak r7) |
 
 ## 5. Log perubahan
@@ -156,3 +156,4 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 | 2026-11-06 | **Filter Region** ditambahkan atas permintaan pemilik produk (Data, Statistik, Peta, unduhan; parameter `region`). Memakai nilai kolom sumber `Region` apa adanya (7 kelompok pulau, terisi di semua rekaman, satu region per provinsi). Kolom ini bukan field GoKUPS, melainkan turunan penyusun workbook dari provinsi; keterangan ini tampil di bawah pilihan filter. Provinsi atau kabupaten/kota di luar region terpilih diabaikan dan dicatat. |
 | 2026-11-06 | **K11 diubah:** pemilik produk memutuskan kolom `Pendamping` dipublikasikan dengan nama apa adanya, karena nama pendamping juga disajikan di situs GoKUPS. Rilis `2026-11-02.r6` (sumber sama) memuat kolom ini; Ketua Lembaga dan Pra-Pendamping tetap dikecualikan. Rilis r5 dihapus dari working tree (masih ada di riwayat git). Aplikasi kini memuat ulang rilis otomatis bila `current.json` berubah, karena server yang sudah berjalan sebelumnya masih menyajikan rilis lama dari memori (filter pendamping tampak 0). |
 | 2026-11-06 | **K11 diubah lagi:** pemilik produk memutuskan kolom `Ketua Lembaga` dan `Pra-Pendamping` juga dipublikasikan. Rilis `2026-11-02.r7` (sumber sama) memuat semua kolom tabular GoKUPS; `PRIVATE_COLUMNS` dikosongkan. CSV rilis kini menetralkan teks berawalan = + - @ seperti unduhan web (10 nilai Ketua Lembaga). Rilis r6 dihapus dari working tree (masih ada di riwayat git). |
+| 2026-11-06 | **K10 ditetapkan:** riwayat git di-push ke `https://github.com/zainulmuhammad1911/GOKUPS` (repositori publik). Sebelum push diperiksa: tidak ada workbook sumber, `data/source/`, `internal/`, atau berkas rahasia di riwayat; berkas terbesar 14,6 MB. |

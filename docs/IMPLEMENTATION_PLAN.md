@@ -22,7 +22,7 @@ Rincian lengkap, konsekuensi, dan nilai bawaan ada di `docs/DECISIONS.md`. Ringk
 | K7 | Verifikasi kode wilayah | Sebagian | Kode resmi; cek silang otomatis lolos; verifikasi manusia belum |
 | K8 | Kategori skema dan jenis PS | Ditetapkan (diubah 2026-11-05) | Rekap 5 jenis PS; Kemitraan Kehutanan dengan rincian 3 subskema; 7 kategori sumber tetap disimpan |
 | K9 | Institusi dan lisensi data | Menunggu | `config/site.json` berisi `null`; tampil "Belum ditetapkan"; rilis tetap draf |
-| K10 | Git | Sebagian | Repositori lokal dengan riwayat commit per tahap; belum ada remote |
+| K10 | Git | Ditetapkan 2026-11-06 | Remote publik `github.com/zainulmuhammad1911/GOKUPS`, cabang `main` |
 
 **K9 (dan verifikasi K7) harus selesai sebelum rilis publik final.** K6 selesai. Pembangunan aplikasi boleh berjalan, tetapi tidak menerbitkan rilis publik final atau mendistribusikan geometri yang belum jelas lisensinya.
 
