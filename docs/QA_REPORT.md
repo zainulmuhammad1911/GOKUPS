@@ -45,9 +45,9 @@ Catatan anggaran: target awal TECHNICAL_PLAN §8 (Beranda < 120 KB, Data < 100 K
 
 - Header: `Content-Security-Policy` (produksi; semua sumber dari domain sendiri, tanpa skrip, font, atau tile pihak ketiga), `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`. Diperiksa: tidak ada pelanggaran CSP di konsol pada Beranda, Statistik, Peta, Data, dan Tentang.
 - Tidak ada cookie. Perutean bahasa tidak lagi memakai middleware, jadi cookie `NEXT_LOCALE` juga tidak dipasang.
-- Kolom Ketua Lembaga dan Pra-Pendamping tidak ikut ke `approvals.json` maupun unduhan (diuji pipeline). Kolom Pendamping dipublikasikan sejak rilis r6 atas keputusan pemilik produk (K11). Pemindaian ulang 2026-11-06 (rilis r6): 1.174 nilai dari Ketua Lembaga dan Pra-Pendamping (minimal dua kata, tidak sama persis dengan nilai kolom publik) dicari di `.next/` (termasuk `standalone/`), `public/`, dan berkas rilis publik. Ada 32 kecocokan, semuanya bagian dari nilai kolom publik: 13 di Nama Lembaga (misalnya pemegang izin HTR yang namanya sama dengan ketua) dan 19 di Pendamping. Tidak ada kecocokan yang hanya berasal dari kolom yang dikecualikan.
+- Sejak rilis r7 semua kolom tabular GoKUPS dipublikasikan apa adanya, termasuk nama ketua lembaga, pra-pendamping, dan pendamping, atas keputusan pemilik produk (K11). Pemindaian kebocoran nama tidak lagi relevan; yang diuji pipeline sekarang adalah nilai ketiga kolom di rilis sama persis dengan sumber. Pemindaian 2026-11-06 sebelum perubahan ini (rilis r6) tidak menemukan kebocoran.
 - Rute unduhan hanya melayani file di manifes rilis; `internal/` tidak bisa diakses (diuji).
-- Ekspor CSV menetralkan teks berawalan `=`, `+`, `-`, `@`; rilis saat ini tidak memuat nilai seperti itu (diuji pipeline).
+- CSV (unduhan web dan file rilis) menetralkan teks berawalan `=`, `+`, `-`, `@` dengan awalan `'` dan menyebut jumlahnya di metadata. Rilis r7 punya 10 nilai seperti itu (Ketua Lembaga berawalan "-"); nilai asli tetap di XLSX dan `approvals.json` (diuji pipeline).
 - Parameter filter divalidasi; parameter tidak dikenal diabaikan dan disebutkan di halaman.
 
 ## 4. Kesiapan deploy

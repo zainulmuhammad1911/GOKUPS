@@ -9,7 +9,7 @@ from pathlib import Path
 import pandas as pd
 
 from .config import PROJECT_ROOT
-from .ingest import EXCLUSION_REASON, EXPECTED_COLUMNS, PRIVATE_COLUMNS, PUBLISHED_COLUMNS
+from .ingest import ALL_PUBLISHED_NOTE, EXCLUSION_REASON, EXPECTED_COLUMNS, PRIVATE_COLUMNS, PUBLISHED_COLUMNS
 from .quality import FLAG_DOCS
 
 NOT_SET_ID = "Belum ditetapkan"
@@ -69,7 +69,9 @@ def metadata_lines(release: dict, site: dict, title: str) -> list[tuple[str, str
         ("Waktu pembuatan rilis (UTC)", release["built_at"]),
         ("Unit analisis", SCHEMA["texts"]["unit"]),
         ("Kesetiaan pada sumber", SCHEMA["texts"]["fidelity"]),
-        ("Kolom yang tidak dipublikasikan", f"{', '.join(PRIVATE_COLUMNS)}. {EXCLUSION_REASON} Karena itu file ini bukan salinan mentah sepenuhnya."),
+        ("Kolom yang tidak dipublikasikan",
+         f"{', '.join(PRIVATE_COLUMNS)}. {EXCLUSION_REASON} Karena itu file ini bukan salinan mentah sepenuhnya."
+         if PRIVATE_COLUMNS else ALL_PUBLISHED_NOTE),
         ("Angka agregat", SCHEMA["texts"]["aggregates"]),
         ("Institusi pengelola", _site_value(inst.get("name_id"))),
         ("Kontak", _site_value(inst.get("contact_email"))),
@@ -80,9 +82,32 @@ def metadata_lines(release: dict, site: dict, title: str) -> list[tuple[str, str
     return lines
 
 
+FORMULA_START = ("=", "+", "-", "@", "\t", "\r")
+
+
+def neutralize_formulas(table: pd.DataFrame) -> tuple[pd.DataFrame, int]:
+    """Sel teks berawalan = + - @ diberi awalan ' di CSV agar tidak dijalankan sebagai rumus oleh
+    aplikasi spreadsheet (sama dengan unduhan web). Nilai asli tetap utuh di XLSX dan approvals.json."""
+    count = 0
+
+    def fix(v):
+        nonlocal count
+        if isinstance(v, str) and v.startswith(FORMULA_START):
+            count += 1
+            return "'" + v
+        return v
+
+    return table.apply(lambda col: col.map(fix) if col.dtype == object else col), count
+
+
 def write_csv_zip(table: pd.DataFrame, meta: list[tuple[str, str]], path: Path, csv_name: str,
                   dictionary: pd.DataFrame | None) -> None:
+    table, neutralized = neutralize_formulas(table)
     csv_bytes = table.to_csv(index=False).encode("utf-8-sig")
+    if neutralized:
+        meta = [*meta, ("Penetralan rumus (CSV)",
+                        f"{neutralized} sel teks diawali = + - @ diberi awalan ' agar tidak dijalankan sebagai rumus "
+                        "oleh aplikasi spreadsheet. Nilai aslinya ada di file XLSX.")]
     readme = "\n".join(f"{k}: {v}" if v else k for k, v in meta)
     if dictionary is not None:
         readme += "\n\nKamus kolom:\n" + "\n".join(f"- {c} [{j}]: {d}" for c, j, d in dictionary.itertuples(index=False))

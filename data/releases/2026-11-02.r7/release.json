@@ -1,7 +1,7 @@
 {
-  "version": "2026-11-02.r6",
+  "version": "2026-11-02.r7",
   "status": "draft",
-  "built_at": "2026-11-06T03:19:41+00:00",
+  "built_at": "2026-11-06T03:29:34+00:00",
   "pipeline_version": "0.1.0",
   "source": {
     "name": "GoKUPS",
@@ -37,14 +37,13 @@
       "Anggota Laki-Laki",
       "Anggota Perempuan",
       "Anggota Keseluruhan",
+      "Ketua Lembaga",
+      "Pra-Pendamping",
       "Pendamping",
       "Kesatuan Pengelola Hutan"
     ],
-    "excluded_columns": [
-      "Ketua Lembaga",
-      "Pra-Pendamping"
-    ],
-    "exclusion_reason": "Berisi nama orang. PRD §6.5: tidak ditampilkan secara default sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi.",
+    "excluded_columns": [],
+    "exclusion_reason": "Tidak ada. Semua kolom tabular GoKUPS dipublikasikan apa adanya, termasuk nama ketua lembaga, pra-pendamping, dan pendamping, atas keputusan pemilik produk karena nama-nama ini juga disajikan publik di situs GoKUPS (DECISIONS.md K11).",
     "is_full_raw_copy": false
   },
   "rules": {
@@ -93,8 +92,8 @@
     },
     {
       "path": "approvals.json",
-      "bytes": 14815902,
-      "sha256": "c0688bb499f0cc55bc2feac91e010c43a02c762d5155544a3fc0ba113c65a316"
+      "bytes": 15267722,
+      "sha256": "ac2ddc416f6ae7903911e2bba7f53789d58598be44f148c3db213327bb714a9a"
     },
     {
       "path": "control_totals.json",
@@ -102,54 +101,54 @@
       "sha256": "c7b9ff2dae1f37002755308de4d0a69e0e14d2912a9e8d28caf0b100d2754482"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_rekaman_lengkap.xlsx",
-      "bytes": 2114620,
-      "sha256": "55b6ef5cda50fdb82b66453a05202beb341115bd102f1148b05d38d1b886a8f6"
+      "path": "downloads/pdpsi_2026-11-02.r7_rekaman_lengkap.xlsx",
+      "bytes": 2184593,
+      "sha256": "a438bdade55826a68c25f7803e4228abb7fea6db365ec665b8f8d111c8993bc7"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_rekaman_lengkap_csv.zip",
-      "bytes": 576869,
-      "sha256": "b976e78b75dc322ec87c69d2df46d2d19e3d67a8768a7a170cdcaa3584db7043"
+      "path": "downloads/pdpsi_2026-11-02.r7_rekaman_lengkap_csv.zip",
+      "bytes": 596083,
+      "sha256": "7cea36e1cf5c79d5fd6680f1450c3a4150243bd6a71f53e93686cbc273845df9"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_rekap_jenis_ps.xlsx",
-      "bytes": 266178,
-      "sha256": "ea426d412e4e1ea7059886d3959b9d6b4547ccb53b28f0da228219f87230ebf3"
+      "path": "downloads/pdpsi_2026-11-02.r7_rekap_jenis_ps.xlsx",
+      "bytes": 266179,
+      "sha256": "535f7c11d5e328c295a22fca6a7c9deb9a8973b9a7047e3798db4d220fa56a57"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_rekap_jenis_ps_csv.zip",
-      "bytes": 44279,
-      "sha256": "692dc622107224e5b7a05e9caa91be07ecfeb3f728091cd3ddb960694829d48f"
+      "path": "downloads/pdpsi_2026-11-02.r7_rekap_jenis_ps_csv.zip",
+      "bytes": 44266,
+      "sha256": "19f11ca5cd2753eec68b270721c31b56063d48154bb5aa394dbaa6700061b570"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_ringkasan_kabkota.xlsx",
-      "bytes": 36252,
-      "sha256": "0fb0b94d46b0ec75b73e6d98e86e9e15c83389cf97fa134c8710010859977b0e"
+      "path": "downloads/pdpsi_2026-11-02.r7_ringkasan_kabkota.xlsx",
+      "bytes": 36231,
+      "sha256": "15bdbdabb48e478245979f46db0f61a41fb84dfb921b2a1903df3fb801168ad6"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_ringkasan_kabkota_csv.zip",
-      "bytes": 13051,
-      "sha256": "5d30938827b4bbda8f13a48bb9a2a7d578584c747cc5f42d74cdd6d74a34f50b"
+      "path": "downloads/pdpsi_2026-11-02.r7_ringkasan_kabkota_csv.zip",
+      "bytes": 13210,
+      "sha256": "259dff79c7e7adbf3fa15bcd2955704766d5d9da787cda5c582578cc0162a852"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_ringkasan_provinsi.xlsx",
-      "bytes": 10707,
-      "sha256": "c4f6335a586e86512f7aa4d86fcabed1cb58daa3f49b20ac254a5f3cbb0674ec"
+      "path": "downloads/pdpsi_2026-11-02.r7_ringkasan_provinsi.xlsx",
+      "bytes": 10686,
+      "sha256": "440b1501eb0a2cf58c51db2372d1dd474211ccc3695d1ba254ea27a710dadd5d"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r6_ringkasan_provinsi_csv.zip",
-      "bytes": 3245,
-      "sha256": "6684e574b918369cf3a0b7e30ea8dc79d7d25b7e6a5d13ea55fc007eb8cdfc0c"
+      "path": "downloads/pdpsi_2026-11-02.r7_ringkasan_provinsi_csv.zip",
+      "bytes": 3326,
+      "sha256": "d4e7abb8da6e3dc8b4d7795bb0813b524a67bd9eaada15d18f6356c0ce5826ec"
     },
     {
       "path": "quality_report.json",
-      "bytes": 1298,
-      "sha256": "28046dfa42d11951ed2b016dab23f931fb3c1a79713a815d57f833a469c58dd0"
+      "bytes": 1253,
+      "sha256": "4420d822226d11ea694e8e24222bd4cd2cbfc46d1a62004a920303fb80890bae"
     },
     {
       "path": "quality_report.md",
-      "bytes": 4147,
-      "sha256": "312ebea643c5cd0f20a9e30955216a72b711ead641fb35fded638aca6a99c2f4"
+      "bytes": 4205,
+      "sha256": "8d1e6060074f35f93dbc0bee3ac9250ac6319d58cd373fa60d5350a5321daadc"
     },
     {
       "path": "schemes.json",

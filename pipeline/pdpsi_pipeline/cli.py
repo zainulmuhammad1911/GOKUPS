@@ -81,7 +81,7 @@ def cmd_build(args, paths: Paths) -> int:
         "source_fidelity": {
             "published_source_columns": ingest.PUBLISHED_COLUMNS,
             "excluded_columns": ingest.PRIVATE_COLUMNS,
-            "exclusion_reason": ingest.EXCLUSION_REASON,
+            "exclusion_reason": ingest.EXCLUSION_REASON if ingest.PRIVATE_COLUMNS else ingest.ALL_PUBLISHED_NOTE,
             "is_full_raw_copy": False,
         },
         "rules": result.rules,

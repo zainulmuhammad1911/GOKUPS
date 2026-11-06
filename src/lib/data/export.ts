@@ -96,7 +96,9 @@ export function metadataLines(
     ["Kesetiaan pada sumber", schema.texts.fidelity],
     [
       "Kolom yang tidak dipublikasikan",
-      `${meta.source_fidelity.excluded_columns.join(", ")}. ${meta.source_fidelity.exclusion_reason} Karena itu file ini bukan salinan mentah sepenuhnya.`,
+      meta.source_fidelity.excluded_columns.length > 0
+        ? `${meta.source_fidelity.excluded_columns.join(", ")}. ${meta.source_fidelity.exclusion_reason} Karena itu file ini bukan salinan mentah sepenuhnya.`
+        : meta.source_fidelity.exclusion_reason,
     ],
     ["Angka agregat", schema.texts.aggregates],
     ["Institusi pengelola", site.institution.name_id ?? notSet],

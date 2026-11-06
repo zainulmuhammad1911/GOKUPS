@@ -41,10 +41,7 @@
   "area_calc_status": {
     "dihitung": 10061
   },
-  "excluded_columns": [
-    "Ketua Lembaga",
-    "Pra-Pendamping"
-  ],
+  "excluded_columns": [],
   "crosswalk": {
     "pairs": 407,
     "by_method": {

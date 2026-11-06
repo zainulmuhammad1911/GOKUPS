@@ -33,17 +33,11 @@ Jika data tidak tersedia, katakan tidak tersedia. Jika data tidak konsisten, tam
 - Semua hasil pengolahan (kode wilayah resmi, kode skema, L+P, tahun, bendera kualitas) disimpan terpisah di `derived` dan `quality`, dan diberi label "olahan PDPSI".
 - Agregat dihitung dari rekaman dengan aturan tertulis (`control_totals.json` → `definitions`). Setiap angka agregat bisa diulang dengan memfilter `approvals.json` atau halaman Data dengan kunci yang sama.
 
-**Kolom yang tidak dipublikasikan.** Data publik **bukan** salinan mentah sepenuhnya. Kolom berikut dikecualikan:
+**Kolom yang dipublikasikan.** Sejak rilis `2026-11-02.r7` **semua kolom tabular GoKUPS dipublikasikan apa adanya**, termasuk nama orang di kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping (K11). Pemilik produk menilai nama-nama ini layak ditampilkan karena juga disajikan publik di situs GoKUPS. Ini menggantikan pengecualian awal berdasarkan PRD §6.5. Riwayat: r1–r5 mengecualikan ketiga kolom; r6 menerbitkan Pendamping; r7 menerbitkan Ketua Lembaga dan Pra-Pendamping.
 
-| Kolom | Alasan | Cakupan |
-|-------|--------|---------|
-| Ketua Lembaga | Nama orang; PRD §6.5 meminta tidak ditampilkan secara default sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi | Semua rekaman |
-| Pra-Pendamping | Sama | Semua rekaman |
-| Sheet `Pendamping` | Daftar nama orang dan SK pendamping | Seluruh sheet |
+Yang tetap tidak dipakai: sheet `Pendamping` di workbook (daftar nama dan SK pendamping), karena pipeline hanya membaca sheet tabular. Mekanisme pengecualian kolom (`PRIVATE_COLUMNS` di `pipeline/pdpsi_pipeline/ingest.py`) dipertahankan dalam keadaan kosong, sehingga kolom bisa dikecualikan lagi bila institusi pengelola memutuskan lain. Salinan baris mentah tetap ada di `internal/source_records.jsonl` (tidak masuk git).
 
-Kolom `Pendamping` **dipublikasikan sejak rilis `2026-11-02.r6`** (K11, diubah 2026-11-06): pemilik produk menilai nama pendamping layak ditampilkan karena juga disajikan publik di situs GoKUPS.
-
-Kolom yang dikecualikan tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasikan, tidak masuk git) dan bisa dipublikasikan bila penilaian kelayakan publikasi menyetujuinya.
+Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar tidak dijalankan sebagai rumus oleh aplikasi spreadsheet (10 nilai Ketua Lembaga berawalan "-"); jumlahnya disebut di `BACA_SAYA.txt`. Nilai asli tetap utuh di `approvals.json` dan XLSX.
 
 ## 2. Daftar K1 sampai K10
 
@@ -69,12 +63,13 @@ Kolom yang dikecualikan tetap tersimpan di `internal/source_records.jsonl` (tida
 - **Transparansi:** anggota perempuan bernilai 0 pada 5.371 dari 10.060 rekaman yang dihitung (53%), hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat. Setiap rincian disertai catatan ini dan jumlah rekaman yang mencatat perempuan 0 (`members_female_zero_records`), sehingga pembaca bisa menilai sendiri. Rasio atau persentase perempuan tidak dihitung oleh PDPSI.
 - **Keputusan sebelumnya (2026-11-05):** tidak ada statistik gender agregat di MVP. Diganti oleh keputusan di atas.
 
-### K11. Kolom Pendamping dan filter pendamping
-- **Status:** Ditetapkan 2026-11-06, diubah pada hari yang sama atas keputusan pemilik produk.
-- **Keputusan (berlaku):** kolom sumber `Pendamping` dipublikasikan apa adanya (halaman detail rekaman, pencarian, unduhan), karena nama pendamping juga disajikan publik di situs GoKUPS. Penilaian kelayakan ini dibuat pemilik produk; konfirmasi institusi pengelola terhadap UU No. 27/2022 tentang Pelindungan Data Pribadi tetap disarankan sebelum rilis publik final (K9). Turunan `derived.pendamping_status` (`tercatat`/`kosong`) dipakai filter Pendamping di Data, Statistik, Peta, dan unduhan, serta `pendamping_recorded_records` di total kontrol dan ringkasan.
-- **Keputusan sebelumnya (r5):** hanya status tercatat/kosong yang terbit, tanpa nama.
-- **Cakupan:** 2.233 rekaman tercatat, 7.828 kosong (rilis `2026-11-02.r6`). Kolom `Ketua Lembaga` dan `Pra-Pendamping` tetap tidak dipublikasikan. Kolom `Pra-Pendamping` tidak dipakai: hanya 150 rekaman terisi dan 84 di antaranya bernilai "0".
-- **Batasan yang ditampilkan:** kolom kosong bisa berarti tidak ada pendamping atau tidak dicatat. Pemindaian nama dari kolom yang masih dikecualikan (Ketua Lembaga, Pra-Pendamping) pada rilis dan build tetap tanpa kebocoran.
+### K11. Kolom nama orang (Ketua Lembaga, Pra-Pendamping, Pendamping) dan filter pendamping
+- **Status:** Ditetapkan 2026-11-06, diubah dua kali pada hari yang sama atas keputusan pemilik produk.
+- **Keputusan (berlaku, rilis r7):** kolom `Ketua Lembaga`, `Pra-Pendamping`, dan `Pendamping` dipublikasikan apa adanya (halaman detail rekaman, pencarian untuk Ketua Lembaga dan Pendamping, unduhan), karena nama-nama ini juga disajikan publik di situs GoKUPS. Penilaian kelayakan ini dibuat pemilik produk; konfirmasi institusi pengelola terhadap UU No. 27/2022 tentang Pelindungan Data Pribadi tetap disarankan sebelum rilis publik final (K9).
+- **Filter pendamping:** turunan `derived.pendamping_status` (`tercatat`/`kosong`) dipakai filter Pendamping di Data, Statistik, Peta, dan unduhan, serta `pendamping_recorded_records` di total kontrol dan ringkasan. Pra-Pendamping tidak dipakai untuk filter (150 terisi, 84 bernilai "0").
+- **Riwayat:** r5 menerbitkan status tercatat/kosong saja; r6 menerbitkan nama pendamping; r7 menerbitkan nama ketua lembaga dan pra-pendamping.
+- **Cakupan (r7):** Ketua Lembaga terisi 1.995 rekaman, Pra-Pendamping 150, Pendamping 2.233.
+- **Batasan yang ditampilkan:** kolom kosong bisa berarti tidak ada atau tidak dicatat.
 
 ### K3. Nama lembaga dan pemegang izin HTR
 - **Status:** Ditetapkan (dikoreksi 2026-11-04, keputusan E). Menggantikan aturan penyamaran sebelumnya.
@@ -144,7 +139,7 @@ Kolom yang dikecualikan tetap tersimpan di `internal/source_records.jsonl` (tida
 | K8 | Ditetapkan (diubah 2026-11-05) |
 | K9 | Menunggu |
 | K10 | Sebagian |
-| K11 | Ditetapkan (kolom Pendamping dipublikasikan sejak r6) |
+| K11 | Ditetapkan (semua kolom nama dipublikasikan sejak r7) |
 
 ## 5. Log perubahan
 
@@ -160,3 +155,4 @@ Kolom yang dikecualikan tetap tersimpan di `internal/source_records.jsonl` (tida
 | 2026-11-06 | **K11 ditetapkan:** filter Pendamping (ada/tidak ada pendamping tercatat) atas permintaan pemilik produk; hanya status isi kolom yang dipublikasikan. Filter Anggota tercatat dan Pendamping juga ditambahkan ke halaman Peta (diterapkan di server). Rilis `2026-11-02.r5` (sumber sama) menambahkan `derived.pendamping_status`; rilis r4 dihapus dari working tree (masih ada di riwayat git). |
 | 2026-11-06 | **Filter Region** ditambahkan atas permintaan pemilik produk (Data, Statistik, Peta, unduhan; parameter `region`). Memakai nilai kolom sumber `Region` apa adanya (7 kelompok pulau, terisi di semua rekaman, satu region per provinsi). Kolom ini bukan field GoKUPS, melainkan turunan penyusun workbook dari provinsi; keterangan ini tampil di bawah pilihan filter. Provinsi atau kabupaten/kota di luar region terpilih diabaikan dan dicatat. |
 | 2026-11-06 | **K11 diubah:** pemilik produk memutuskan kolom `Pendamping` dipublikasikan dengan nama apa adanya, karena nama pendamping juga disajikan di situs GoKUPS. Rilis `2026-11-02.r6` (sumber sama) memuat kolom ini; Ketua Lembaga dan Pra-Pendamping tetap dikecualikan. Rilis r5 dihapus dari working tree (masih ada di riwayat git). Aplikasi kini memuat ulang rilis otomatis bila `current.json` berubah, karena server yang sudah berjalan sebelumnya masih menyajikan rilis lama dari memori (filter pendamping tampak 0). |
+| 2026-11-06 | **K11 diubah lagi:** pemilik produk memutuskan kolom `Ketua Lembaga` dan `Pra-Pendamping` juga dipublikasikan. Rilis `2026-11-02.r7` (sumber sama) memuat semua kolom tabular GoKUPS; `PRIVATE_COLUMNS` dikosongkan. CSV rilis kini menetralkan teks berawalan = + - @ seperti unduhan web (10 nilai Ketua Lembaga). Rilis r6 dihapus dari working tree (masih ada di riwayat git). |

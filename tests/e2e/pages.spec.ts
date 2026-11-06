@@ -74,14 +74,14 @@ test("referensi duplikat menaut ke semua rekaman terkait dan saling menaut balik
   await expect(page.locator(`section[aria-labelledby=duplikat] a:has-text("${DUP_ID}")`)).toHaveCount(1);
 });
 
-test("halaman detail menampilkan kolom Pendamping, tanpa Ketua Lembaga dan Pra-Pendamping", async ({ page }) => {
+test("halaman detail menampilkan kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping", async ({ page }) => {
   const approvals = JSON.parse(readFileSync(`data/releases/${VERSION}/approvals.json`, "utf-8")) as { id: string; source: Record<string, unknown> }[];
   const r = approvals.find((x) => typeof x.source["Pendamping"] === "string" && (x.source["Pendamping"] as string).trim().length > 3)!;
   await page.goto(`/data/${r.id}`);
   const table = page.locator("table[aria-labelledby=sumber]");
   await expect(table.getByRole("rowheader", { name: "Pendamping", exact: true })).toBeVisible();
-  await expect(table.getByRole("rowheader", { name: "Ketua Lembaga" })).toHaveCount(0);
-  await expect(table.getByRole("rowheader", { name: "Pra-Pendamping" })).toHaveCount(0);
+  await expect(table.getByRole("rowheader", { name: "Ketua Lembaga", exact: true })).toBeVisible();
+  await expect(table.getByRole("rowheader", { name: "Pra-Pendamping", exact: true })).toBeVisible();
 });
 
 test("nilai sumber tampil apa adanya, termasuk spasi ganda dan kosong", async ({ page }) => {
@@ -191,10 +191,10 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     const lines = csv.trimEnd().split("\r\n");
     expect(lines.length).toBe(10061 - ada + 1);
     expect(lines[0]).toContain("[Olahan PDPSI] Pendamping Tercatat");
-    // K11 (2026-11-06): kolom sumber Pendamping dipublikasikan; Ketua Lembaga dan Pra-Pendamping tidak.
+    // K11 (2026-11-06): semua kolom sumber dipublikasikan, termasuk nama ketua dan pendamping.
     expect(lines[0]).toMatch(/(^|,)"?Pendamping"?(,|$)/);
-    expect(lines[0]).not.toContain("Ketua Lembaga");
-    expect(lines[0]).not.toContain("Pra-Pendamping");
+    expect(lines[0]).toContain("Ketua Lembaga");
+    expect(lines[0]).toContain("Pra-Pendamping");
 
     // Peta: filter diterapkan di server; angka panel = jumlah rekaman berpendamping di provinsi itu.
     await page.goto("/map?province=72");
@@ -272,7 +272,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     const readme = strFromU8(files["BACA_SAYA.txt"]!);
     expect(readme).toContain("Provinsi: Sulawesi Tengah (72)");
     expect(readme).toContain("Jumlah rekaman dalam file: 1085");
-    expect(readme).toContain("bukan salinan mentah sepenuhnya");
+    expect(readme).toContain("Semua kolom tabular GoKUPS dipublikasikan apa adanya");
     // Judul kolom sama persis dengan file rilis lengkap dari pipeline.
     const full = unzipSync(readFileSync(`data/releases/${VERSION}/downloads/pdpsi_${VERSION}_rekaman_lengkap_csv.zip`));
     const fullCsv = strFromU8(full[Object.keys(full).find((n) => n.endsWith(".csv"))!]!).replace(/^\uFEFF/, "");

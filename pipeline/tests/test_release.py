@@ -275,26 +275,15 @@ def _public_strings(release_dir) -> set[str]:
     return values
 
 
-def test_excluded_columns_not_published(release_dir, approvals, source_rows):
-    """Isi kolom Ketua Lembaga/Pra-Pendamping tidak muncul di keluaran publik,
-    kecuali nilai yang sama memang ada di kolom sumber yang dipublikasikan
-    (beberapa sel Ketua berisi nomor SK, nama provinsi, atau nama lembaganya sendiri)."""
-    assert not set(PRIVATE_COLUMNS) & set(approvals[0]["source"])
-    legit = set()
+def test_all_source_columns_published(approvals, source_rows, release_meta):
+    """K11 (2026-11-06): semua kolom tabular GoKUPS dipublikasikan apa adanya, termasuk nama
+    ketua lembaga, pra-pendamping, dan pendamping (keputusan pemilik produk)."""
+    assert PRIVATE_COLUMNS == []
+    assert release_meta["source_fidelity"]["excluded_columns"] == []
+    by_id = {a["id"]: a for a in approvals}
     for row in source_rows:
-        for col in PUBLISHED_COLUMNS:
-            v = row["raw_payload"][col]
-            if isinstance(v, str):
-                legit.add(v.strip().upper())
-    private = set()
-    for row in source_rows:
-        for col in PRIVATE_COLUMNS:
-            v = row["raw_payload"][col]
-            if isinstance(v, str):
-                private.update(p.strip().upper() for p in v.split(";") if len(p.strip()) >= 4)
-    assert len(private) > 1000
-    leaked = (private & _public_strings(release_dir)) - legit
-    assert not leaked, sorted(leaked)[:5]
+        for col in ("Ketua Lembaga", "Pra-Pendamping", "Pendamping"):
+            assert by_id[row["id"]]["source"][col] == row["raw_payload"][col]
 
 
 def test_pendamping_status_only(approvals, source_rows, totals):
@@ -328,7 +317,8 @@ def test_downloads(release_dir, release_meta):
     assert len(df) == AUDIT["rows"]
     assert all(c in df.columns for c in PUBLISHED_COLUMNS)  # nama kolom sumber asli
     assert release_meta["version"] in readme
-    assert "bukan salinan mentah sepenuhnya" in readme
+    # K11: semua kolom sumber dipublikasikan; metadata menyatakannya.
+    assert "Semua kolom tabular GoKUPS dipublikasikan" in readme
     assert "Belum ditetapkan" in readme
     sheets = pd.read_excel(next(dl.glob("*_rekaman_lengkap.xlsx")), sheet_name=None)
     assert {"Data", "Metadata", "Kamus Kolom"} <= set(sheets)
@@ -341,10 +331,20 @@ def test_manifest_hashes(release_dir, release_meta):
         assert hashlib.sha256((release_dir / f["path"]).read_bytes()).hexdigest() == f["sha256"]
 
 
-def test_no_formula_like_source_text(approvals):
-    """Ekspor CSV di aplikasi web menetralkan teks berawalan = + - @ agar tidak dieksekusi spreadsheet.
-    Uji ini memastikan rilis saat ini tidak punya nilai seperti itu, jadi penetralan tidak mengubah data apa pun.
-    Bila uji ini gagal di rilis baru, catatan penetralan wajib disebut di metadata unduhan."""
-    bad = [(a["id"], k) for a in approvals for k, v in a["source"].items()
-           if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r")]
-    assert not bad, bad[:5]
+def test_formula_like_text_neutralized_in_csv_only(approvals, release_dir):
+    """Teks berawalan = + - @ (mis. 10 nilai Ketua Lembaga berawalan "-") tetap apa adanya di
+    approvals.json dan XLSX; di CSV diberi awalan ' dan jumlahnya disebut di BACA_SAYA.txt."""
+    bad = {(a["id"], k): v for a in approvals for k, v in a["source"].items()
+           if isinstance(v, str) and v[:1] in ("=", "+", "-", "@", "\t", "\r")}
+    assert not any(v.startswith("'") for v in bad.values())  # nilai asli tidak diubah
+    with zipfile.ZipFile(next((release_dir / "downloads").glob("*_rekaman_lengkap_csv.zip"))) as zf:
+        csv_text = zf.read(next(n for n in zf.namelist() if n.endswith(".csv"))).decode("utf-8-sig")
+        readme = zf.read("BACA_SAYA.txt").decode()
+    df = pd.read_csv(io.StringIO(csv_text), dtype=str, keep_default_na=False)
+    # Hanya kolom teks yang berisiko; angka negatif (mis. -3 di Anggota Perempuan) tetap angka.
+    for col in {k for _, k in bad}:
+        assert not df[col].str.match(r"^[=+\-@]").any(), col
+    if bad:
+        assert f"{len(bad)} sel teks diawali = + - @" in readme
+        xlsx = pd.read_excel(next((release_dir / "downloads").glob("*_rekaman_lengkap.xlsx")), sheet_name="Data", dtype=str)
+        assert set(bad.values()) <= set(xlsx.stack().astype(str))

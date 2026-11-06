@@ -18,7 +18,7 @@ Setiap rekaman di PDPSI terdiri dari tiga bagian yang dipisahkan dengan jelas:
 - PDPSI tidak terhubung langsung ke GoKUPS. Data diperbarui dengan impor terkontrol oleh pengelola.
 
 ## Data yang tidak dipublikasikan
-Data publik PDPSI **bukan salinan mentah sepenuhnya**. Kolom Ketua Lembaga dan Pra-Pendamping, serta sheet daftar pendamping, berisi nama orang dan tidak ditampilkan sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi (PRD §6.5). Kolom Pendamping ditampilkan apa adanya sejak rilis 2026-11-02.r6 atas keputusan pemilik produk, karena nama pendamping juga disajikan publik di situs GoKUPS (K11). Kolom lain, termasuk Nama Lembaga, ditampilkan apa adanya.
+Data publik PDPSI **bukan salinan mentah sepenuhnya**. Semua kolom tabular GoKUPS ditampilkan apa adanya, termasuk nama di kolom Ketua Lembaga, Pra-Pendamping, Pendamping, dan Nama Lembaga, atas keputusan pemilik produk karena nama-nama ini juga disajikan publik di situs GoKUPS (K11, rilis 2026-11-02.r7). Sheet daftar pendamping di workbook tidak dipakai.
 
 Nama Lembaga pada sekitar 2.000 rekaman Hutan Tanaman Rakyat berisi nama orang pemegang izin, ditampilkan sesuai sumber (keputusan K3). **[Belum ditetapkan: dasar hukum publikasi dan kontak pengelola untuk permintaan koreksi, K9]**
 

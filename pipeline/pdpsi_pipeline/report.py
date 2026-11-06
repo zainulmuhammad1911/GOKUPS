@@ -5,7 +5,7 @@ from collections import Counter
 
 import pandas as pd
 
-from .ingest import PRIVATE_COLUMNS
+from .ingest import ALL_PUBLISHED_NOTE, PRIVATE_COLUMNS
 from .quality import FLAG_DOCS
 
 
@@ -90,8 +90,9 @@ def render_markdown(release: dict, q: dict, totals: dict, pending: list[str]) ->
         "",
         "## Kolom yang tidak dipublikasikan",
         "",
-        f"{', '.join(q['excluded_columns'])}: berisi nama orang (PRD §6.5). Data publik karena itu bukan salinan mentah sepenuhnya. "
-        "Salinan lengkap ada di `internal/` (tidak dipublikasikan).",
+        (f"{', '.join(q['excluded_columns'])}: berisi nama orang (PRD §6.5). Data publik karena itu bukan salinan mentah sepenuhnya. "
+         "Salinan lengkap ada di `internal/` (tidak dipublikasikan).")
+        if q["excluded_columns"] else ALL_PUBLISHED_NOTE,
         "",
         "## Kode wilayah",
         "",
