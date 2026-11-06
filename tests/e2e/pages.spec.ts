@@ -135,6 +135,32 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
   });
 
+  test("filter anggota tercatat 1 orang: form, jumlah, catatan, unduhan, Statistik", async ({ page, request }) => {
+    const approvals = JSON.parse(readFileSync(`data/releases/${VERSION}/approvals.json`, "utf-8")) as {
+      derived: { members_male_plus_female: number | null; members_calc_status: string; jenis_ps_code: string };
+    }[];
+    const one = approvals.filter((r) => r.derived.members_calc_status === "dihitung" && r.derived.members_male_plus_female === 1);
+    const oneHtr = one.filter((r) => r.derived.jenis_ps_code === "HTR").length;
+    const id = (v: number) => new Intl.NumberFormat("id-ID").format(v);
+
+    await page.goto("/data");
+    const form = page.getByRole("search");
+    await form.getByLabel("Anggota tercatat", { exact: true }).selectOption("1");
+    await form.getByRole("button", { name: "Terapkan" }).click();
+    await expect(page).toHaveURL(/\/data\?members=1$/);
+    await expect(page.getByRole("heading", { name: new RegExp(`${id(one.length).replace(".", "\\.")} dari 10\\.061 rekaman`) })).toBeVisible();
+    await expect(page.getByText(/bukan status resmi/)).toBeVisible();
+
+    const res = await request.get("/unduh-hasil?members=1&type=HTR&format=csv");
+    const files = unzipSync(new Uint8Array(await res.body()));
+    const csv = strFromU8(files[Object.keys(files).find((n) => n.endsWith(".csv"))!]!);
+    expect(csv.trimEnd().split("\r\n").length).toBe(oneHtr + 1);
+    expect(strFromU8(files["BACA_SAYA.txt"]!)).toContain("Anggota tercatat (laki-laki + perempuan, hasil pengolahan PDPSI): 1 orang");
+
+    await page.goto("/statistics?members=1&type=HTR");
+    await expect(page.getByText(`${id(oneHtr)} rekaman · Indonesia`, { exact: true })).toBeVisible();
+  });
+
   test("pencarian tidak peka huruf dan menampilkan nilai sumber apa adanya", async ({ page }) => {
     await page.goto("/data?q=muara%20kilis");
     await expect(page.getByRole("cell", { name: "KTH  MUARA KILIS" }).first()).toBeVisible();

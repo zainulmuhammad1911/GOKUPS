@@ -23,6 +23,7 @@ export interface FilterValues {
   yearFrom: number | null;
   yearTo: number | null;
   flag: string | null;
+  members: string | null;
   sort: string;
   dir: "asc" | "desc";
 }
@@ -43,6 +44,7 @@ export function DataFilters({
   kkSubtypes,
   flags,
   years,
+  memberOptions,
   activeCount,
   minimal = false,
 }: {
@@ -55,6 +57,8 @@ export function DataFilters({
   kkSubtypes: Option[];
   flags: Option[];
   years: number[];
+  /** Pilihan filter jumlah anggota tercatat, dengan jumlah rekaman pada label. */
+  memberOptions: Option[];
   activeCount: number;
   /** Tanpa pencarian, catatan pemeriksaan, dan urutan (dipakai halaman Statistik). */
   minimal?: boolean;
@@ -207,6 +211,22 @@ export function DataFilters({
             </NativeSelect>
           </div>
         </fieldset>
+
+        <div className={field}>
+          <Label htmlFor={`${panelId}-members`} className="font-bold">{t("members")}</Label>
+          <NativeSelect size="lg" className="w-full"
+            id={`${panelId}-members`}
+            name="members"
+            defaultValue={values.members ?? ""}
+            aria-describedby={`${panelId}-members-hint`}
+          >
+            <option value="">{t("membersAll")}</option>
+            {memberOptions.map((o) => (
+              <option key={o.code} value={o.code}>{o.name}</option>
+            ))}
+          </NativeSelect>
+          <span id={`${panelId}-members-hint`} className="text-caption text-muted-foreground">{t("membersHint")}</span>
+        </div>
 
         {!minimal && (
         <div className={field}>

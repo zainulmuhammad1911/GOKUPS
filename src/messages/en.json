@@ -202,7 +202,17 @@
       "regency": "Regency/City",
       "date": "Decree date",
       "area": "Area (ha)"
-    }
+    },
+    "members": "Recorded members",
+    "membersHint": "Men + women, processed by PDPSI.",
+    "membersAll": "All",
+    "membersOpt": {
+      "1": "1 person",
+      "2plus": "2 or more people",
+      "0": "0 people",
+      "na": "Cannot be counted"
+    },
+    "membersNote": "The members filter uses the number of men + women recorded in the source, not an official status. The source does not mark individual permits consistently: the Bentuk Lembaga (institution type) column says “PERORANGAN” (individual) in only {perorangan} records. Most records with 1 member are Hutan Tanaman Rakyat (community plantation forest) permits that are probably held by individuals. 0 members may mean the value was not recorded."
   },
   "detail": {
     "title": "Record {id}",

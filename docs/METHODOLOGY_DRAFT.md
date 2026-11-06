@@ -76,6 +76,8 @@ Kolom Anggota Keseluruhan dari sumber tetap ditampilkan tetapi tidak dipakai unt
 
 Laki-laki dan perempuan dijumlahkan dari rekaman yang sama dengan anggota L+P, sehingga keduanya selalu berjumlah sama dengan anggota L+P (K2). Anggota perempuan bernilai 0 pada 53% rekaman, termasuk hampir semua SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, jadi jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya. PDPSI menampilkan nilai apa adanya, menyertakan catatan ini dan jumlah rekaman yang mencatat perempuan 0 di setiap rincian, dan tidak menghitung rasio atau persentase perempuan.
 
+**Filter anggota tercatat.** Halaman Data dan Statistik bisa disaring menurut jumlah anggota laki-laki + perempuan: 1 orang, 2 orang atau lebih, 0 orang, atau tidak dapat dihitung. Pilihan "1 orang" dipakai untuk melihat rekaman yang kemungkinan izin perorangan (2.168 rekaman, 2.167 di antaranya HTR). Ini hasil pengolahan, bukan status resmi; sumber hanya menandai 58 rekaman sebagai "PERORANGAN" di kolom Bentuk Lembaga.
+
 ## Penanda ketidaksesuaian
 Penanda tidak mengubah nilai dan tidak mengeluarkan rekaman dari perhitungan.
 - **Luas:** selisih luas total dengan jumlah komponen luas lebih dari 5 ha (19 rekaman), selisih 1 sampai 5 ha (26), luas total 0 (64).

@@ -13,6 +13,8 @@ import {
   applyQuery,
   EMPTY_QUERY,
   KK_SUB_CODES,
+  MEMBER_FILTERS,
+  memberFilterCounts,
   parseQuery,
   queryContext,
   toSearchParams,
@@ -40,7 +42,7 @@ export default async function StatisticsPage({
   const { meta, approvals, schemes, adminAreas } = loadRelease();
   const ctx = queryContext(adminAreas, approvals, Object.keys(loadExportSchema().flag_docs));
   const parsed = parseQuery(await searchParams, ctx);
-  // Statistik hanya memakai filter wilayah, jenis PS, dan tahun (DataFilters mode minimal).
+  // Statistik memakai filter wilayah, jenis PS, tahun, dan jumlah anggota tercatat (DataFilters mode minimal).
   const query: DataQuery = {
     ...EMPTY_QUERY,
     province: parsed.query.province,
@@ -48,6 +50,7 @@ export default async function StatisticsPage({
     type: parsed.query.type,
     yearFrom: parsed.query.yearFrom,
     yearTo: parsed.query.yearTo,
+    members: parsed.query.members,
   };
   const records = applyQuery(approvals, query);
   const n = (v: number) => formatNumber(v, locale);
@@ -125,6 +128,10 @@ export default async function StatisticsPage({
           kkSubtypes={kkSub}
           flags={[]}
           years={Array.from({ length: ctx.years.max - ctx.years.min + 1 }, (_, i) => ctx.years.min + i)}
+          memberOptions={(() => {
+            const c = memberFilterCounts(approvals);
+            return MEMBER_FILTERS.map((f) => ({ code: f, name: `${t(`data.membersOpt.${f}`)} (${n(c[f])})` }));
+          })()}
           activeCount={activeFilterCount(query)}
           minimal
         />
@@ -132,6 +139,16 @@ export default async function StatisticsPage({
       {parsed.ignored.length > 0 && (
         <div className="mt-4">
           <DataNote>{t("data.ignored", { names: parsed.ignored.join(", ") })}</DataNote>
+        </div>
+      )}
+      {query.members && (
+        <div className="mt-4">
+          <DataNote>
+            <strong>{t("data.members")}: {t(`data.membersOpt.${query.members}`)}.</strong>{" "}
+            {t("data.membersNote", {
+              perorangan: n(approvals.filter((r) => r.source["Bentuk Lembaga"] === "PERORANGAN").length),
+            })}
+          </DataNote>
         </div>
       )}
 

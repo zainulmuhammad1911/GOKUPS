@@ -15,6 +15,8 @@ import {
   applyQuery,
   JENIS_CODES,
   KK_SUB_CODES,
+  MEMBER_FILTERS,
+  memberFilterCounts,
   paginate,
   parseQuery,
   queryContext,
@@ -73,6 +75,9 @@ export default async function DataPage({
   const flags = Object.keys(schema.flag_docs)
     .filter((f) => flagCounts.has(f))
     .map((f) => ({ code: f, name: `${t(`flagLabel.${f}`)} (${n(flagCounts.get(f) ?? 0)})` }));
+  const memberCounts = memberFilterCounts(approvals);
+  const memberOptions = MEMBER_FILTERS.map((f) => ({ code: f, name: `${t(`data.membersOpt.${f}`)} (${n(memberCounts[f])})` }));
+  const perorangan = approvals.filter((r) => r.source["Bentuk Lembaga"] === "PERORANGAN").length;
   const years: number[] = [];
   for (let y = ctx.years.min; y <= ctx.years.max; y++) years.push(y);
 
@@ -89,6 +94,7 @@ export default async function DataPage({
     (query.yearFrom !== null || query.yearTo !== null) &&
       `${t("data.year")}: ${t("data.yearRange", { from: query.yearFrom ?? ctx.years.min, to: query.yearTo ?? ctx.years.max })}`,
     query.flag && `${t("data.flag")}: ${t(`flagLabel.${query.flag}`)}`,
+    query.members && `${t("data.members")}: ${t(`data.membersOpt.${query.members}`)}`,
   ].filter(Boolean) as string[];
 
   const cell = (r: ApprovalRecord, col: string) => {
@@ -117,8 +123,15 @@ export default async function DataPage({
         kkSubtypes={kkSubtypes}
         flags={flags}
         years={years}
+        memberOptions={memberOptions}
         activeCount={active}
       />
+
+      {query.members && (
+        <div className="mt-4">
+          <DataNote>{t("data.membersNote", { perorangan: n(perorangan) })}</DataNote>
+        </div>
+      )}
 
       {ignored.length > 0 && (
         <div className="mt-4">

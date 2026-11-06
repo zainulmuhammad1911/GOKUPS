@@ -202,7 +202,17 @@
       "regency": "Kabupaten/Kota",
       "date": "Tanggal SK",
       "area": "Luas (ha)"
-    }
+    },
+    "members": "Anggota tercatat",
+    "membersHint": "Laki-laki + perempuan, hasil pengolahan PDPSI.",
+    "membersAll": "Semua",
+    "membersOpt": {
+      "1": "1 orang",
+      "2plus": "2 orang atau lebih",
+      "0": "0 orang",
+      "na": "Tidak dapat dihitung"
+    },
+    "membersNote": "Filter anggota memakai jumlah anggota laki-laki + perempuan yang tercatat di sumber, bukan status resmi. Data sumber tidak menandai izin perorangan secara konsisten: kolom Bentuk Lembaga hanya mencatat “PERORANGAN” pada {perorangan} rekaman. Rekaman beranggota 1 orang sebagian besar adalah izin Hutan Tanaman Rakyat yang kemungkinan dimiliki perorangan. Anggota 0 bisa berarti tidak dicatat."
   },
   "detail": {
     "title": "Rekaman {id}",

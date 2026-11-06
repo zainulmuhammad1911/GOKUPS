@@ -14,6 +14,14 @@ export const JENIS_CODES = ["HD", "HKM", "HTR", "HA", "KK"] as const;
 export const KK_SUB_CODES = ["KK_KULIN", "KK_KONSERVASI", "KK_IPHPS"] as const;
 export const SORT_KEYS = ["no", "sk", "name", "type", "province", "regency", "date", "area"] as const;
 export type SortKey = (typeof SORT_KEYS)[number];
+/**
+ * Filter jumlah anggota tercatat (laki-laki + perempuan, hasil pengolahan K1). "1" dipakai untuk
+ * melihat rekaman yang anggotanya tercatat satu orang, misalnya izin HTR yang kemungkinan dimiliki
+ * perorangan. Sumber tidak punya penanda perorangan yang konsisten, jadi ini bukan status resmi.
+ * "na" = anggota tidak dapat dihitung (ada nilai negatif atau kosong).
+ */
+export const MEMBER_FILTERS = ["1", "2plus", "0", "na"] as const;
+export type MemberFilter = (typeof MEMBER_FILTERS)[number];
 export const PAGE_SIZE = 25;
 const MAX_Q = 100;
 
@@ -25,13 +33,14 @@ export interface DataQuery {
   yearFrom: number | null;
   yearTo: number | null;
   flag: string | null;
+  members: MemberFilter | null;
   sort: SortKey;
   dir: "asc" | "desc";
   page: number;
 }
 
 export const EMPTY_QUERY: DataQuery = {
-  q: "", province: null, regency: null, type: null, yearFrom: null, yearTo: null, flag: null,
+  q: "", province: null, regency: null, type: null, yearFrom: null, yearTo: null, flag: null, members: null,
   sort: "no", dir: "asc", page: 1,
 };
 
@@ -96,12 +105,13 @@ export function parseQuery(params: Params, ctx: QueryContext): { query: DataQuer
   let yearTo = year("year_to");
   if (yearFrom !== null && yearTo !== null && yearFrom > yearTo) [yearFrom, yearTo] = [yearTo, yearFrom];
   const flag = pick("flag", (v) => ctx.flags.has(v));
+  const members = pick("members", (v) => (MEMBER_FILTERS as readonly string[]).includes(v)) as MemberFilter | null;
   const sort = (pick("sort", (v) => (SORT_KEYS as readonly string[]).includes(v)) ?? "no") as SortKey;
   const dir = pick("dir", (v) => v === "asc" || v === "desc") === "desc" ? "desc" : "asc";
   const pageRaw = first(params, "page");
   const page = pageRaw && /^\d{1,6}$/.test(pageRaw) ? Math.max(1, Number(pageRaw)) : 1;
 
-  return { query: { q, province, regency, type, yearFrom, yearTo, flag, sort, dir, page }, ignored };
+  return { query: { q, province, regency, type, yearFrom, yearTo, flag, members, sort, dir, page }, ignored };
 }
 
 const normalize = (s: string) =>
@@ -121,6 +131,20 @@ function searchText(r: ApprovalRecord): string {
   return s;
 }
 
+function matchesMembers(r: ApprovalRecord, f: MemberFilter): boolean {
+  const m = r.derived.members_calc_status === "dihitung" ? r.derived.members_male_plus_female : null;
+  if (f === "na") return m === null;
+  if (m === null) return false;
+  return f === "1" ? m === 1 : f === "0" ? m === 0 : m >= 2;
+}
+
+/** Jumlah rekaman per pilihan filter anggota (untuk label pilihan). */
+export function memberFilterCounts(records: ApprovalRecord[]): Record<MemberFilter, number> {
+  const out: Record<MemberFilter, number> = { "1": 0, "2plus": 0, "0": 0, na: 0 };
+  for (const r of records) for (const f of MEMBER_FILTERS) if (matchesMembers(r, f)) out[f] += 1;
+  return out;
+}
+
 export function matches(r: ApprovalRecord, q: DataQuery): boolean {
   const d = r.derived;
   if (q.province && d.province_code !== q.province) return false;
@@ -131,6 +155,7 @@ export function matches(r: ApprovalRecord, q: DataQuery): boolean {
   if (q.yearFrom !== null && (d.approval_year === null || d.approval_year < q.yearFrom)) return false;
   if (q.yearTo !== null && (d.approval_year === null || d.approval_year > q.yearTo)) return false;
   if (q.flag && !r.quality.flags.includes(q.flag)) return false;
+  if (q.members && !matchesMembers(r, q.members)) return false;
   if (q.q) {
     const text = searchText(r);
     // Semua kata pencarian harus muncul (AND), dicocokkan sebagai awal kata.
@@ -189,6 +214,7 @@ export function toSearchParams(q: DataQuery, overrides: Partial<DataQuery> = {})
   if (m.yearFrom !== null) out.year_from = String(m.yearFrom);
   if (m.yearTo !== null) out.year_to = String(m.yearTo);
   if (m.flag) out.flag = m.flag;
+  if (m.members) out.members = m.members;
   if (m.sort !== "no") out.sort = m.sort;
   if (m.dir !== "asc") out.dir = m.dir;
   if (m.page > 1) out.page = String(m.page);
@@ -196,5 +222,5 @@ export function toSearchParams(q: DataQuery, overrides: Partial<DataQuery> = {})
 }
 
 export function activeFilterCount(q: DataQuery): number {
-  return [q.q, q.province, q.regency, q.type, q.yearFrom, q.yearTo, q.flag].filter((v) => v !== null && v !== "").length;
+  return [q.q, q.province, q.regency, q.type, q.yearFrom, q.yearTo, q.flag, q.members].filter((v) => v !== null && v !== "").length;
 }

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { aggregate } from "@/lib/data/aggregate";
 import { loadExportSchema, loadRelease } from "@/lib/data/release";
-import { applyQuery, EMPTY_QUERY, paginate, parseQuery, queryContext, toSearchParams } from "@/lib/data/query";
+import { applyQuery, EMPTY_QUERY, memberFilterCounts, paginate, parseQuery, queryContext, toSearchParams } from "@/lib/data/query";
 
 const { approvals, adminAreas, totals } = loadRelease();
 const ctx = queryContext(adminAreas, approvals, Object.keys(loadExportSchema().flag_docs));
@@ -37,6 +37,29 @@ describe("filter cocok dengan total kontrol pipeline", () => {
   });
   it("penanda: duplikat", () => {
     expect(run({ flag: "duplicate_sk" }).length).toBe(282);
+  });
+});
+
+describe("filter anggota tercatat (laki-laki + perempuan)", () => {
+  const counted = approvals.filter((r) => r.derived.members_calc_status === "dihitung");
+  it("1 orang = rekaman dengan anggota L+P = 1", () => {
+    const rows = run({ members: "1" });
+    expect(rows.length).toBe(counted.filter((r) => r.derived.members_male_plus_female === 1).length);
+    expect(rows.every((r) => (r.source["Anggota Laki-Laki"] as number) + (r.source["Anggota Perempuan"] as number) === 1)).toBe(true);
+    // Agregat hasil filter: anggota = jumlah rekaman.
+    expect(aggregate(rows).members_male_plus_female).toBe(rows.length);
+  });
+  it("keempat pilihan membagi seluruh rekaman tanpa tumpang tindih", () => {
+    const c = memberFilterCounts(approvals);
+    expect(c["1"] + c["2plus"] + c["0"] + c.na).toBe(approvals.length);
+    expect(c.na).toBe(approvals.length - counted.length);
+    expect(run({ members: "2plus" }).length).toBe(c["2plus"]);
+  });
+  it("bisa digabung dengan jenis PS; nilai tidak dikenal diabaikan", () => {
+    const htr = run({ members: "1", type: "HTR" });
+    expect(htr.every((r) => r.derived.jenis_ps_code === "HTR")).toBe(true);
+    expect(parseQuery({ members: "3" }, ctx).ignored).toEqual(["members"]);
+    expect(toSearchParams({ ...EMPTY_QUERY, members: "1" })).toEqual({ members: "1" });
   });
 });
 
