@@ -15,6 +15,7 @@ import {
   KK_SUB_CODES,
   MEMBER_FILTERS,
   memberFilterCounts,
+  PENDAMPING_FILTERS,
   parseQuery,
   queryContext,
   toSearchParams,
@@ -51,6 +52,7 @@ export default async function StatisticsPage({
     yearFrom: parsed.query.yearFrom,
     yearTo: parsed.query.yearTo,
     members: parsed.query.members,
+    pendamping: parsed.query.pendamping,
   };
   const records = applyQuery(approvals, query);
   const n = (v: number) => formatNumber(v, locale);
@@ -132,6 +134,13 @@ export default async function StatisticsPage({
             const c = memberFilterCounts(approvals);
             return MEMBER_FILTERS.map((f) => ({ code: f, name: `${t(`data.membersOpt.${f}`)} (${n(c[f])})` }));
           })()}
+          pendampingOptions={(() => {
+            const ada = approvals.filter((r) => r.derived.pendamping_status === "tercatat").length;
+            return PENDAMPING_FILTERS.map((f) => ({
+              code: f,
+              name: `${t(`data.pendampingOpt.${f}`)} (${n(f === "ada" ? ada : approvals.length - ada)})`,
+            }));
+          })()}
           activeCount={activeFilterCount(query)}
           minimal
         />
@@ -139,6 +148,13 @@ export default async function StatisticsPage({
       {parsed.ignored.length > 0 && (
         <div className="mt-4">
           <DataNote>{t("data.ignored", { names: parsed.ignored.join(", ") })}</DataNote>
+        </div>
+      )}
+      {query.pendamping && (
+        <div className="mt-4">
+          <DataNote>
+            <strong>{t("data.pendamping")}: {t(`data.pendampingOpt.${query.pendamping}`)}.</strong> {t("data.pendampingNote")}
+          </DataNote>
         </div>
       )}
       {query.members && (

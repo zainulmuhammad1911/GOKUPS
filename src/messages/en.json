@@ -212,7 +212,15 @@
       "0": "0 people",
       "na": "Cannot be counted"
     },
-    "membersNote": "The members filter uses the number of men + women recorded in the source, not an official status. The source does not mark individual permits consistently: the Bentuk Lembaga (institution type) column says “PERORANGAN” (individual) in only {perorangan} records. Most records with 1 member are Hutan Tanaman Rakyat (community plantation forest) permits that are probably held by individuals. 0 members may mean the value was not recorded."
+    "membersNote": "The members filter uses the number of men + women recorded in the source, not an official status. The source does not mark individual permits consistently: the Bentuk Lembaga (institution type) column says “PERORANGAN” (individual) in only {perorangan} records. Most records with 1 member are Hutan Tanaman Rakyat (community plantation forest) permits that are probably held by individuals. 0 members may mean the value was not recorded.",
+    "pendamping": "Facilitator",
+    "pendampingHint": "Based on the source Pendamping (facilitator) column. Facilitator names are not shown.",
+    "pendampingAll": "All",
+    "pendampingOpt": {
+      "ada": "Facilitator recorded",
+      "tidak": "No facilitator recorded"
+    },
+    "pendampingNote": "The facilitator filter uses whether the Pendamping (facilitator) column in the GoKUPS source is filled in. Facilitator names are not published. An empty column may mean the group has no facilitator or that the facilitator was not recorded."
   },
   "detail": {
     "title": "Record {id}",
@@ -335,7 +343,7 @@
     "mapTitle": "Map",
     "mapBody": "The dataset has no location coordinates for groups. The PDPSI map therefore shows counts per province and regency/city on administrative boundaries, without location points. Regency/city boundaries come from BPS via OCHA and geoBoundaries (CC BY 3.0 IGO licence, as of 2020). PDPSI assigns each regency/city its 2025 Ministry of Home Affairs code and forms the 38 provinces by merging regencies/cities. Map boundaries are indicative, for statistical visualisation, and are not a legal boundary reference. BIG boundary data is not used because permission to use it has not been confirmed.",
     "excludedTitle": "Columns not published",
-    "excludedBody": "The Ketua Lembaga (chair), Pra-Pendamping, and Pendamping (facilitator) columns contain personal names. They are not shown until their legal basis, purpose, and privacy risk have been reviewed. The public PDPSI data is therefore not a complete raw copy.",
+    "excludedBody": "The Ketua Lembaga (chair), Pra-Pendamping, and Pendamping (facilitator) columns contain personal names. They are not shown until their legal basis, purpose, and privacy risk have been reviewed. The public PDPSI data is therefore not a complete raw copy. For the Pendamping (facilitator) column, only whether it is filled in or empty is published (used by the facilitator filter), never the names.",
     "managerTitle": "Manager and licence",
     "institution": "Managing institution",
     "license": "Data licence",

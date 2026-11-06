@@ -63,6 +63,24 @@ describe("filter anggota tercatat (laki-laki + perempuan)", () => {
   });
 });
 
+describe("filter pendamping (K11)", () => {
+  it("ada + tidak = seluruh rekaman; ada = total kontrol", () => {
+    const ada = run({ pendamping: "ada" });
+    const tidak = run({ pendamping: "tidak" });
+    expect(ada.length + tidak.length).toBe(approvals.length);
+    expect(ada.length).toBe(totals.national.pendamping_recorded_records);
+    expect(ada.every((r) => r.derived.pendamping_status === "tercatat")).toBe(true);
+  });
+  it("per provinsi cocok dengan total kontrol; digabung dengan filter anggota", () => {
+    for (const row of totals.by_province) {
+      expect(run({ province: row.province_code, pendamping: "ada" }).length).toBe(row.pendamping_recorded_records);
+    }
+    const both = run({ members: "1", pendamping: "ada" });
+    expect(both.every((r) => r.derived.members_male_plus_female === 1 && r.derived.pendamping_status === "tercatat")).toBe(true);
+    expect(parseQuery({ pendamping: "ya" }, ctx).ignored).toEqual(["pendamping"]);
+  });
+});
+
 describe("pencarian, urutan, validasi", () => {
   it("pencarian tidak peka huruf dan tanda baca, nilai sumber tidak berubah", () => {
     const rows = run({ q: "kth muara kilis" });

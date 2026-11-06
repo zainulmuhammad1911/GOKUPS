@@ -297,6 +297,19 @@ def test_excluded_columns_not_published(release_dir, approvals, source_rows):
     assert not leaked, sorted(leaked)[:5]
 
 
+def test_pendamping_status_only(approvals, source_rows, totals):
+    """K11: hanya status ada/tidaknya isi kolom Pendamping yang dipublikasikan."""
+    by_id = {a["id"]: a for a in approvals}
+    for row in source_rows:
+        v = row["raw_payload"]["Pendamping"]
+        expected = "tercatat" if isinstance(v, str) and v.strip() else "kosong"
+        assert by_id[row["id"]]["derived"]["pendamping_status"] == expected
+    assert {a["derived"]["pendamping_status"] for a in approvals} == {"tercatat", "kosong"}
+    assert totals["national"]["pendamping_recorded_records"] == sum(
+        a["derived"]["pendamping_status"] == "tercatat" for a in approvals
+    )
+
+
 def test_internal_folder_not_in_manifest(release_meta):
     assert all(not f["path"].startswith("internal") for f in release_meta["files"])
 

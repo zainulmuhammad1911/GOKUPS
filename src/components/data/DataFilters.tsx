@@ -24,6 +24,7 @@ export interface FilterValues {
   yearTo: number | null;
   flag: string | null;
   members: string | null;
+  pendamping: string | null;
   sort: string;
   dir: "asc" | "desc";
 }
@@ -45,6 +46,7 @@ export function DataFilters({
   flags,
   years,
   memberOptions,
+  pendampingOptions,
   activeCount,
   minimal = false,
 }: {
@@ -59,6 +61,8 @@ export function DataFilters({
   years: number[];
   /** Pilihan filter jumlah anggota tercatat, dengan jumlah rekaman pada label. */
   memberOptions: Option[];
+  /** Pilihan filter pendamping (K11), dengan jumlah rekaman pada label. */
+  pendampingOptions: Option[];
   activeCount: number;
   /** Tanpa pencarian, catatan pemeriksaan, dan urutan (dipakai halaman Statistik). */
   minimal?: boolean;
@@ -226,6 +230,22 @@ export function DataFilters({
             ))}
           </NativeSelect>
           <span id={`${panelId}-members-hint`} className="text-caption text-muted-foreground">{t("membersHint")}</span>
+        </div>
+
+        <div className={field}>
+          <Label htmlFor={`${panelId}-pendamping`} className="font-bold">{t("pendamping")}</Label>
+          <NativeSelect size="lg" className="w-full"
+            id={`${panelId}-pendamping`}
+            name="pendamping"
+            defaultValue={values.pendamping ?? ""}
+            aria-describedby={`${panelId}-pendamping-hint`}
+          >
+            <option value="">{t("pendampingAll")}</option>
+            {pendampingOptions.map((o) => (
+              <option key={o.code} value={o.code}>{o.name}</option>
+            ))}
+          </NativeSelect>
+          <span id={`${panelId}-pendamping-hint`} className="text-caption text-muted-foreground">{t("pendampingHint")}</span>
         </div>
 
         {!minimal && (

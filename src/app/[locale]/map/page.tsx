@@ -3,10 +3,11 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname } from "@/i18n/navigation";
-import { PageHeading } from "@/components/data/blocks";
+import { DataNote, PageHeading } from "@/components/data/blocks";
 import { JENIS_COLOR_HEX } from "@/components/data/blocks";
 import { MapExplorer, type Indicator, type RegionData, type Values } from "@/components/map/MapExplorer";
-import { loadRelease } from "@/lib/data/release";
+import { loadExportSchema, loadRelease } from "@/lib/data/release";
+import { applyQuery, EMPTY_QUERY, MEMBER_FILTERS, memberFilterCounts, PENDAMPING_FILTERS, parseQuery, queryContext } from "@/lib/data/query";
 import { aggregate } from "@/lib/data/aggregate";
 import { formatDateTime } from "@/lib/data/format";
 import { JENIS_ORDER } from "@/lib/data/stats";
@@ -57,8 +58,13 @@ export default async function MapPage({
   for (const a of adminAreas) {
     regions[a.code] = { name: a.name, parent: a.level === "province" ? null : a.parent_code, byType: {} };
   }
+  // Filter server (anggota tercatat, pendamping): sama dengan halaman Data dan Statistik.
+  const sp = await searchParams;
+  const { query: q } = parseQuery(sp, queryContext(adminAreas, approvals, Object.keys(loadExportSchema().flag_docs)));
+  const serverFilters = { members: q.members, pendamping: q.pendamping };
+  const filtered = q.members || q.pendamping ? applyQuery(approvals, { ...EMPTY_QUERY, ...serverFilters }) : approvals;
   const groups = new Map<string, ApprovalRecord[]>();
-  for (const r of approvals) {
+  for (const r of filtered) {
     for (const key of [r.derived.province_code, r.derived.regency_code]) {
       for (const type of ["all", r.derived.jenis_ps_code]) {
         const k = `${key}|${type}`;
@@ -73,7 +79,6 @@ export default async function MapPage({
     regions[code]!.byType[type] = values(list);
   }
 
-  const sp = await searchParams;
   const one = (k: string) => (Array.isArray(sp[k]) ? sp[k]![0] : (sp[k] as string | undefined));
   const indicator = (["records", "area", "members"] as const).includes(one("indicator") as Indicator) ? (one("indicator") as Indicator) : "records";
   const type = (JENIS_ORDER as readonly string[]).includes(one("type") ?? "") ? one("type")! : "all";
@@ -90,7 +95,27 @@ export default async function MapPage({
   return (
     <>
       <PageHeading title={t("map.title")} lead={t("map.lead")} />
+      {(q.members || q.pendamping) && (
+        <div className="mb-4 flex flex-col gap-3">
+          {q.members && (
+            <DataNote>
+              <strong>{t("data.members")}: {t(`data.membersOpt.${q.members}`)}.</strong>{" "}
+              {t("data.membersNote", {
+                perorangan: new Intl.NumberFormat(locale === "en" ? "en-GB" : "id-ID").format(
+                  approvals.filter((r) => r.source["Bentuk Lembaga"] === "PERORANGAN").length,
+                ),
+              })}
+            </DataNote>
+          )}
+          {q.pendamping && (
+            <DataNote>
+              <strong>{t("data.pendamping")}: {t(`data.pendampingOpt.${q.pendamping}`)}.</strong> {t("data.pendampingNote")}
+            </DataNote>
+          )}
+        </div>
+      )}
       <MapExplorer
+        key={`${q.members ?? ""}|${q.pendamping ?? ""}`}
         geoBase={`/geo/${boundary.version}`}
         attribution={locale === "en" ? boundary.attribution_en : boundary.attribution_id}
         regions={regions}
@@ -98,6 +123,20 @@ export default async function MapPage({
         initial={{ indicator, type, province, regency }}
         dataPath={getPathname({ href: "/data", locale })}
         sourceLine={`${t("common.processed")} ${t("common.sourceLine", { date: formatDateTime(meta.source.extracted_at, locale), version: meta.version })}`}
+        serverFilters={serverFilters}
+        memberOptions={(() => {
+          const c = memberFilterCounts(approvals);
+          const nf = new Intl.NumberFormat(locale === "en" ? "en-GB" : "id-ID");
+          return MEMBER_FILTERS.map((f) => ({ code: f, label: `${t(`data.membersOpt.${f}`)} (${nf.format(c[f])})` }));
+        })()}
+        pendampingOptions={(() => {
+          const ada = approvals.filter((r) => r.derived.pendamping_status === "tercatat").length;
+          const nf = new Intl.NumberFormat(locale === "en" ? "en-GB" : "id-ID");
+          return PENDAMPING_FILTERS.map((f) => ({
+            code: f,
+            label: `${t(`data.pendampingOpt.${f}`)} (${nf.format(f === "ada" ? ada : approvals.length - ada)})`,
+          }));
+        })()}
       />
     </>
   );

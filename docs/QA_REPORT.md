@@ -8,9 +8,9 @@
 
 | Lapisan | Alat | Hasil |
 |---------|------|-------|
-| Pipeline data dan batas wilayah | pytest | 41 lulus |
-| Logika web (agregasi, filter, data grafik) | Vitest | 26 lulus |
-| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 112 lulus (diulang setelah desain ulang shadcn/ui); 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
+| Pipeline data dan batas wilayah | pytest | 42 lulus |
+| Logika web (agregasi, filter, data grafik) | Vitest | 31 lulus |
+| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 114 lulus (diulang setelah desain ulang shadcn/ui dan filter anggota/pendamping); 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
 | Tipe | `tsc --noEmit` | lulus |
 
 Cakupan e2e meliputi: tautan lewati-ke-konten, menu ponsel (buka, tutup dengan Escape, fokus kembali), ganti bahasa, filter dan pencarian, urutan kolom, paginasi, unduhan sesuai filter (isi = tabel, kolom = rilis), referensi duplikat, nilai sumber apa adanya (spasi ganda, kosong), grafik (render, pilihan ukuran, tabel data, label di ponsel), peta (render, drill-down, URL, panel, tautan ke data), peta mini, halaman Tentang (daftar isi, angka dari rilis), keamanan rute unduhan, 404, dan regresi pengalihan berulang perutean bahasa.

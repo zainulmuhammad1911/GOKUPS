@@ -9,6 +9,7 @@ import { NativeSelect } from "@/components/ui/native-select";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import type { FeatureCollection, Geometry } from "geojson";
 
 /**
@@ -38,6 +39,13 @@ interface Props {
   initial: MapState;
   dataPath: string;
   sourceLine: string;
+  /**
+   * Filter yang diterapkan di server (angka wilayah sudah dihitung dari rekaman yang lolos filter):
+   * anggota tercatat dan pendamping. Mengubahnya memuat ulang data peta.
+   */
+  serverFilters: { members: string | null; pendamping: string | null };
+  memberOptions: { code: string; label: string }[];
+  pendampingOptions: { code: string; label: string }[];
 }
 
 // DESIGN.md §3.3–3.4: skala hijau 5 kelas, netral untuk "tidak ada rekaman", arsir untuk "tidak tersedia".
@@ -89,7 +97,20 @@ function bbox(fc: FC, filter?: (f: Feature) => boolean): [[number, number], [num
   return minX <= maxX ? [[minX, minY], [maxX, maxY]] : null;
 }
 
-export function MapExplorer({ geoBase, attribution, regions, types, initial, dataPath, sourceLine }: Props) {
+export function MapExplorer({
+  geoBase,
+  attribution,
+  regions,
+  types,
+  initial,
+  dataPath,
+  sourceLine,
+  serverFilters,
+  memberOptions,
+  pendampingOptions,
+}: Props) {
+  const router = useRouter();
+  const td = useTranslations("data");
   const t = useTranslations("map");
   const tc = useTranslations("charts");
   const tcom = useTranslations("common");
@@ -132,9 +153,20 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
     if (state.type !== "all") p.set("type", state.type);
     if (state.province) p.set("province", state.province);
     if (state.regency) p.set("regency", state.regency);
+    if (serverFilters.members) p.set("members", serverFilters.members);
+    if (serverFilters.pendamping) p.set("pendamping", serverFilters.pendamping);
     const qs = p.toString();
     window.history.replaceState(null, "", `${window.location.pathname}${qs ? `?${qs}` : ""}`);
-  }, [state]);
+  }, [state, serverFilters]);
+
+  // Filter server: muat ulang halaman dengan state peta yang sama.
+  const setServerFilter = (key: "members" | "pendamping", value: string) => {
+    const p = new URLSearchParams(window.location.search);
+    if (value) p.set(key, value);
+    else p.delete(key);
+    const qs = p.toString();
+    router.push(`${window.location.pathname}${qs ? `?${qs}` : ""}`, { scroll: false });
+  };
 
   const paint = useCallback(() => {
     const map = mapRef.current;
@@ -305,6 +337,8 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
     const q = new URLSearchParams();
     if (code) q.set(code.includes(".") ? "regency" : "province", code);
     if (state.type !== "all") q.set("type", state.type);
+    if (serverFilters.members) q.set("members", serverFilters.members);
+    if (serverFilters.pendamping) q.set("pendamping", serverFilters.pendamping);
     const s = q.toString();
     return `${dataPath}${s ? `?${s}` : ""}`;
   };
@@ -375,6 +409,36 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
               .map((c) => (
                 <option key={c} value={c}>{regions[c]!.name}</option>
               ))}
+          </NativeSelect>
+        </div>
+        <div className="flex w-full min-w-0 flex-col gap-1.5 text-small sm:w-auto">
+          <Label htmlFor="peta-anggota" className="font-bold">{td("members")}</Label>
+          <NativeSelect
+            size="lg"
+            id="peta-anggota"
+            value={serverFilters.members ?? ""}
+            onChange={(e) => setServerFilter("members", e.target.value)}
+            className="w-full min-w-0 sm:w-56"
+          >
+            <option value="">{td("membersAll")}</option>
+            {memberOptions.map((o) => (
+              <option key={o.code} value={o.code}>{o.label}</option>
+            ))}
+          </NativeSelect>
+        </div>
+        <div className="flex w-full min-w-0 flex-col gap-1.5 text-small sm:w-auto">
+          <Label htmlFor="peta-pendamping" className="font-bold">{td("pendamping")}</Label>
+          <NativeSelect
+            size="lg"
+            id="peta-pendamping"
+            value={serverFilters.pendamping ?? ""}
+            onChange={(e) => setServerFilter("pendamping", e.target.value)}
+            className="w-full min-w-0 sm:w-80"
+          >
+            <option value="">{td("pendampingAll")}</option>
+            {pendampingOptions.map((o) => (
+              <option key={o.code} value={o.code}>{o.label}</option>
+            ))}
           </NativeSelect>
         </div>
       </div>

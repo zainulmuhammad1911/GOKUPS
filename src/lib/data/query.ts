@@ -22,6 +22,9 @@ export type SortKey = (typeof SORT_KEYS)[number];
  */
 export const MEMBER_FILTERS = ["1", "2plus", "0", "na"] as const;
 export type MemberFilter = (typeof MEMBER_FILTERS)[number];
+/** Filter pendamping (K11): "ada" = kolom sumber Pendamping terisi, "tidak" = kosong di sumber. */
+export const PENDAMPING_FILTERS = ["ada", "tidak"] as const;
+export type PendampingFilter = (typeof PENDAMPING_FILTERS)[number];
 export const PAGE_SIZE = 25;
 const MAX_Q = 100;
 
@@ -34,13 +37,14 @@ export interface DataQuery {
   yearTo: number | null;
   flag: string | null;
   members: MemberFilter | null;
+  pendamping: PendampingFilter | null;
   sort: SortKey;
   dir: "asc" | "desc";
   page: number;
 }
 
 export const EMPTY_QUERY: DataQuery = {
-  q: "", province: null, regency: null, type: null, yearFrom: null, yearTo: null, flag: null, members: null,
+  q: "", province: null, regency: null, type: null, yearFrom: null, yearTo: null, flag: null, members: null, pendamping: null,
   sort: "no", dir: "asc", page: 1,
 };
 
@@ -106,12 +110,13 @@ export function parseQuery(params: Params, ctx: QueryContext): { query: DataQuer
   if (yearFrom !== null && yearTo !== null && yearFrom > yearTo) [yearFrom, yearTo] = [yearTo, yearFrom];
   const flag = pick("flag", (v) => ctx.flags.has(v));
   const members = pick("members", (v) => (MEMBER_FILTERS as readonly string[]).includes(v)) as MemberFilter | null;
+  const pendamping = pick("pendamping", (v) => (PENDAMPING_FILTERS as readonly string[]).includes(v)) as PendampingFilter | null;
   const sort = (pick("sort", (v) => (SORT_KEYS as readonly string[]).includes(v)) ?? "no") as SortKey;
   const dir = pick("dir", (v) => v === "asc" || v === "desc") === "desc" ? "desc" : "asc";
   const pageRaw = first(params, "page");
   const page = pageRaw && /^\d{1,6}$/.test(pageRaw) ? Math.max(1, Number(pageRaw)) : 1;
 
-  return { query: { q, province, regency, type, yearFrom, yearTo, flag, members, sort, dir, page }, ignored };
+  return { query: { q, province, regency, type, yearFrom, yearTo, flag, members, pendamping, sort, dir, page }, ignored };
 }
 
 const normalize = (s: string) =>
@@ -156,6 +161,7 @@ export function matches(r: ApprovalRecord, q: DataQuery): boolean {
   if (q.yearTo !== null && (d.approval_year === null || d.approval_year > q.yearTo)) return false;
   if (q.flag && !r.quality.flags.includes(q.flag)) return false;
   if (q.members && !matchesMembers(r, q.members)) return false;
+  if (q.pendamping && (d.pendamping_status === "tercatat") !== (q.pendamping === "ada")) return false;
   if (q.q) {
     const text = searchText(r);
     // Semua kata pencarian harus muncul (AND), dicocokkan sebagai awal kata.
@@ -215,6 +221,7 @@ export function toSearchParams(q: DataQuery, overrides: Partial<DataQuery> = {})
   if (m.yearTo !== null) out.year_to = String(m.yearTo);
   if (m.flag) out.flag = m.flag;
   if (m.members) out.members = m.members;
+  if (m.pendamping) out.pendamping = m.pendamping;
   if (m.sort !== "no") out.sort = m.sort;
   if (m.dir !== "asc") out.dir = m.dir;
   if (m.page > 1) out.page = String(m.page);
@@ -222,5 +229,5 @@ export function toSearchParams(q: DataQuery, overrides: Partial<DataQuery> = {})
 }
 
 export function activeFilterCount(q: DataQuery): number {
-  return [q.q, q.province, q.regency, q.type, q.yearFrom, q.yearTo, q.flag, q.members].filter((v) => v !== null && v !== "").length;
+  return [q.q, q.province, q.regency, q.type, q.yearFrom, q.yearTo, q.flag, q.members, q.pendamping].filter((v) => v !== null && v !== "").length;
 }

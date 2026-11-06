@@ -1,9 +1,9 @@
-# Laporan Pemeriksaan Rilis 2026-11-02.r4
+# Laporan Pemeriksaan Rilis 2026-11-02.r5
 
 - Status: **draft** (bukan rilis publik final)
 - Sumber: `Data_SK_Perhutanan_Sosial_GoKUPS.xlsx` (SHA-256 `99c05e22db11c316…`)
 - Pengambilan data sumber: 2026-11-02T04:52:09.490000+00:00
-- Dibuat: 2026-11-06T01:38:07+00:00 dengan pipeline 0.1.0
+- Dibuat: 2026-11-06T02:49:58+00:00 dengan pipeline 0.1.0
 
 ## Angka nasional (hasil pengolahan PDPSI dari data sumber)
 

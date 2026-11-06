@@ -68,6 +68,12 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 - **Transparansi:** anggota perempuan bernilai 0 pada 5.371 dari 10.060 rekaman yang dihitung (53%), hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat. Setiap rincian disertai catatan ini dan jumlah rekaman yang mencatat perempuan 0 (`members_female_zero_records`), sehingga pembaca bisa menilai sendiri. Rasio atau persentase perempuan tidak dihitung oleh PDPSI.
 - **Keputusan sebelumnya (2026-11-05):** tidak ada statistik gender agregat di MVP. Diganti oleh keputusan di atas.
 
+### K11. Status pendamping (tanpa nama)
+- **Status:** Ditetapkan 2026-11-06 atas permintaan pemilik produk.
+- **Keputusan:** kolom sumber `Pendamping` tetap tidak dipublikasikan (berisi nama orang, PRD §6.5). Yang dipublikasikan hanya turunan `derived.pendamping_status`: `tercatat` bila kolom terisi, `kosong` bila tidak. Dipakai untuk filter Pendamping di halaman Data, Statistik, Peta, dan unduhan, serta `pendamping_recorded_records` di total kontrol dan ringkasan.
+- **Cakupan:** 2.233 rekaman tercatat, 7.828 kosong (rilis `2026-11-02.r5`). Kolom `Pra-Pendamping` tidak dipakai: hanya 150 rekaman terisi dan 84 di antaranya bernilai "0".
+- **Batasan yang ditampilkan:** kolom kosong bisa berarti tidak ada pendamping atau tidak dicatat. Pemindaian nama dari kolom yang dikecualikan pada rilis dan build tetap tanpa kebocoran.
+
 ### K3. Nama lembaga dan pemegang izin HTR
 - **Status:** Ditetapkan (dikoreksi 2026-11-04, keputusan E). Menggantikan aturan penyamaran sebelumnya.
 - **Aturan:** Semua nama dipertahankan sebagaimana tercatat di sumber, termasuk nama pemegang izin HTR perorangan. Nama tidak disamarkan, tidak diganti inisial atau label lain, dan tidak diubah. Tidak ada pengecualian berdasarkan asumsi sistem.
@@ -136,6 +142,7 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | K8 | Ditetapkan (diubah 2026-11-05) |
 | K9 | Menunggu |
 | K10 | Sebagian |
+| K11 | Ditetapkan (status saja, tanpa nama) |
 
 ## 5. Log perubahan
 
@@ -148,3 +155,4 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | 2026-11-05 | Pemilik produk memberi persetujuan umum atas semua rekomendasi. **K2** ditetapkan (tanpa statistik gender di MVP). **K6** ditetapkan lewat sumber alternatif berlisensi jelas (BPS/OCHA, geoBoundaries, CC BY 3.0 IGO); BIG tidak dipakai. K7, K9, K10 tetap menunggu karena butuh tindakan atau informasi dari pihak lain. Rilis draf `2026-11-02` dan `2026-11-02.r2` dihapus dari working tree (masih ada di riwayat git). |
 | 2026-11-06 | **K2 diubah** atas permintaan pemilik produk: anggota L+P selalu disertai jumlah laki-laki dan perempuan, dihitung dari rekaman yang sama, dengan catatan dan jumlah rekaman yang mencatat perempuan 0. Rilis `2026-11-02.r4` (sumber sama) menambahkan `members_male`, `members_female`, dan `members_female_zero_records` ke total kontrol, ringkasan, dan file rekap. Rilis `2026-11-02.r3` dihapus dari working tree (masih ada di riwayat git). |
 | 2026-11-06 | **Filter "Anggota tercatat"** ditambahkan atas permintaan pemilik produk (halaman Data, Statistik, dan unduhan sesuai filter; parameter `members` = `1`, `2plus`, `0`, `na`). Tujuannya melihat rekaman yang kemungkinan izin perorangan. Filter memakai anggota laki-laki + perempuan hasil pengolahan K1, bukan status resmi: kolom sumber Bentuk Lembaga hanya mencatat "PERORANGAN" pada 58 rekaman, sedangkan rekaman beranggota 1 orang berjumlah 2.168 (2.167 HTR). Setiap tampilan hasil filter memuat catatan ini. |
+| 2026-11-06 | **K11 ditetapkan:** filter Pendamping (ada/tidak ada pendamping tercatat) atas permintaan pemilik produk; hanya status isi kolom yang dipublikasikan. Filter Anggota tercatat dan Pendamping juga ditambahkan ke halaman Peta (diterapkan di server). Rilis `2026-11-02.r5` (sumber sama) menambahkan `derived.pendamping_status`; rilis r4 dihapus dari working tree (masih ada di riwayat git). |

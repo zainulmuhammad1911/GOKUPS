@@ -30,6 +30,8 @@ export interface ApprovalRecord {
     members_male_plus_female: number | null;
     members_calc_status: CalcStatus;
     area_calc_status: CalcStatus;
+    /** K11: hanya status isi kolom sumber Pendamping; isinya (nama orang) tidak dipublikasikan. */
+    pendamping_status: "tercatat" | "kosong";
   };
   quality: {
     flags: string[];
@@ -53,6 +55,7 @@ export interface AggregateBlock {
   members_male: number;
   members_female: number;
   members_female_zero_records: number;
+  pendamping_recorded_records: number;
   members_records_used: number;
   members_records_not_used: Record<string, number>;
   members_source_total_column: number | null;

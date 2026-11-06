@@ -1,7 +1,7 @@
 {
-  "version": "2026-11-02.r4",
+  "version": "2026-11-02.r5",
   "status": "draft",
-  "built_at": "2026-11-06T01:38:07+00:00",
+  "built_at": "2026-11-06T02:49:58+00:00",
   "pipeline_version": "0.1.0",
   "source": {
     "name": "GoKUPS",
@@ -81,6 +81,7 @@
     "members_records_not_used": {
       "nilai_negatif": 1
     },
+    "pendamping_recorded_records": 2233,
     "members_source_total_column": 1227046,
     "members_source_total_column_records": 10061
   },
@@ -92,53 +93,53 @@
     },
     {
       "path": "approvals.json",
-      "bytes": 14300911,
-      "sha256": "ec6b9ccccb2ded2c84ac590e584742b2ae2c29036850e4e264abe20b6e3bf083"
+      "bytes": 14597146,
+      "sha256": "ad8ddbf781908bac3045cc8feb36e2cfd990e09aa4dbb4eda36bbdc64d084b07"
     },
     {
       "path": "control_totals.json",
-      "bytes": 1279664,
-      "sha256": "68bda058f3b22ea4d431939f6ff03808c57ae610bcdfd7ce5d1b8060bec5fb2f"
+      "bytes": 1382579,
+      "sha256": "48dee12a44cb211a0b0cab5ccdbb6237e5bad5fd942cdb00269851e7f4604b5f"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_rekaman_lengkap.xlsx",
-      "bytes": 1999796,
-      "sha256": "31eed992dbb7b746d3afbd37773fbf450d41d55e3bdc8da65ed29917652b39af"
+      "path": "downloads/pdpsi_2026-11-02.r5_rekaman_lengkap.xlsx",
+      "bytes": 2041569,
+      "sha256": "e88981c03efc8a0855d1a6d4644c48d8081d5888d1979d2df6b17bb5c6dfd1fb"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_rekaman_lengkap_csv.zip",
-      "bytes": 547549,
-      "sha256": "a7ab6003cc08cffbb29b5b71bd833fef6baa82eafb1dd965533dd0e18ed9aa1c"
+      "path": "downloads/pdpsi_2026-11-02.r5_rekaman_lengkap_csv.zip",
+      "bytes": 551251,
+      "sha256": "de1f590c27af505be5ef6393171726da741a9b75a39d5199b71736367185b19e"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_rekap_jenis_ps.xlsx",
+      "path": "downloads/pdpsi_2026-11-02.r5_rekap_jenis_ps.xlsx",
       "bytes": 266178,
-      "sha256": "e814e41a7cf16eea4407e4a3949e64f8400a3336645348d8397df3f2dad079d0"
+      "sha256": "445b68809defa6476b1001aa09a7730b6d869b9a5a934862c524dd0dfa7bbab4"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_rekap_jenis_ps_csv.zip",
+      "path": "downloads/pdpsi_2026-11-02.r5_rekap_jenis_ps_csv.zip",
       "bytes": 44282,
-      "sha256": "90827b2e617f0ecabeaff2b9d362a18ed3cf64f1a8a3d6d49dfc98602031b2e3"
+      "sha256": "d4621a4373f87865b70338165d9e015e9693f2b9b7c945bbb49ea3358092ef56"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_kabkota.xlsx",
-      "bytes": 34800,
-      "sha256": "0e64cef790f345a09be418754d9b2314b00134ef7505718a39837b760a0af11c"
+      "path": "downloads/pdpsi_2026-11-02.r5_ringkasan_kabkota.xlsx",
+      "bytes": 36255,
+      "sha256": "f07354ae73f32ff1f4fecabe09fcb92ab90f9dc6ea04ac06d8174ca5ce039b52"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_kabkota_csv.zip",
-      "bytes": 12689,
-      "sha256": "297d1ca37ca4339d4360b5e3e44df0e3e7933146210a3b077958776c7eb1bc9f"
+      "path": "downloads/pdpsi_2026-11-02.r5_ringkasan_kabkota_csv.zip",
+      "bytes": 13054,
+      "sha256": "32f231931a85966b16907053a1d2c852f31923a3f2de9e5dd037732c59118a8b"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_provinsi.xlsx",
-      "bytes": 10492,
-      "sha256": "7c04a287f644493d11d9695a1da7985966eac54103c2e47a1d6e5229e382c283"
+      "path": "downloads/pdpsi_2026-11-02.r5_ringkasan_provinsi.xlsx",
+      "bytes": 10710,
+      "sha256": "c5a66d32fdffd7b1fb1eec2b33bd4b0d14fd0638c3a54074d428dc5bfe14efbc"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_provinsi_csv.zip",
-      "bytes": 3170,
-      "sha256": "d87b5a98dc307ede94e1e080a012335c6439cf6bf6b3d4cad0efa89a70aca6de"
+      "path": "downloads/pdpsi_2026-11-02.r5_ringkasan_provinsi_csv.zip",
+      "bytes": 3248,
+      "sha256": "7cef12a85a44710c420c31af28faa178f5e004226402ed0259d6d77f95139fe8"
     },
     {
       "path": "quality_report.json",
@@ -148,7 +149,7 @@
     {
       "path": "quality_report.md",
       "bytes": 4159,
-      "sha256": "9510dc921c4d6bf26d2b44a8dadfbf8ee9a42ff083507539e706c4aa63b98fe0"
+      "sha256": "49aa9e4af93df2e798e4b7f3e09a2695ca99a2747d962b955ff56f641e4fe432"
     },
     {
       "path": "schemes.json",

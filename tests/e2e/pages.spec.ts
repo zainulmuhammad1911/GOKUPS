@@ -161,6 +161,42 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await expect(page.getByText(`${id(oneHtr)} rekaman · Indonesia`, { exact: true })).toBeVisible();
   });
 
+  test("filter pendamping: form, jumlah, catatan, unduhan, Peta", async ({ page, request }) => {
+    const totals = JSON.parse(readFileSync(`data/releases/${VERSION}/control_totals.json`, "utf-8"));
+    const ada = totals.national.pendamping_recorded_records as number;
+    const p72 = totals.by_province.find((x: { province_code: string }) => x.province_code === "72");
+    const id = (v: number) => new Intl.NumberFormat("id-ID").format(v);
+
+    await page.goto("/data");
+    const form = page.getByRole("search");
+    await form.getByLabel("Pendamping", { exact: true }).selectOption("ada");
+    await form.getByRole("button", { name: "Terapkan" }).click();
+    await expect(page).toHaveURL(/\/data\?pendamping=ada$/);
+    await expect(page.getByRole("heading", { name: `${id(ada)} dari 10.061 rekaman cocok dengan filter` })).toBeVisible();
+    await expect(page.getByText(/Nama pendamping tidak dipublikasikan/)).toBeVisible();
+
+    const res = await request.get("/unduh-hasil?pendamping=tidak&format=csv");
+    const files = unzipSync(new Uint8Array(await res.body()));
+    const csv = strFromU8(files[Object.keys(files).find((n) => n.endsWith(".csv"))!]!).replace(/^\uFEFF/, "");
+    const lines = csv.trimEnd().split("\r\n");
+    expect(lines.length).toBe(10061 - ada + 1);
+    expect(lines[0]).toContain("[Olahan PDPSI] Pendamping Tercatat");
+    expect(lines[0]).not.toMatch(/(^|,)"?Pendamping"?(,|$)/);
+
+    // Peta: filter diterapkan di server; angka panel = jumlah rekaman berpendamping di provinsi itu.
+    await page.goto("/map?province=72");
+    await page.getByLabel("Pendamping", { exact: true }).selectOption("ada");
+    await expect(page).toHaveURL(/province=72.*pendamping=ada|pendamping=ada.*province=72/);
+    await expect(page.locator("aside dd").first()).toHaveText(id(p72.pendamping_recorded_records));
+    await page.getByLabel("Anggota tercatat", { exact: true }).selectOption("1");
+    await expect(page).toHaveURL(/members=1/);
+    await expect(page).toHaveURL(/pendamping=ada/);
+    // Tidak ada rekaman beranggota 1 orang dengan pendamping di Sulawesi Tengah: panel kosong.
+    await expect(page.locator("aside")).toContainText("Tidak ada rekaman untuk pilihan ini.");
+    await page.getByRole("button", { name: "Kembali ke Indonesia" }).click();
+    await expect(page.locator("aside").getByRole("link", { name: /Lihat .* rekaman ini/ })).toHaveAttribute("href", /members=1&pendamping=ada/);
+  });
+
   test("pencarian tidak peka huruf dan menampilkan nilai sumber apa adanya", async ({ page }) => {
     await page.goto("/data?q=muara%20kilis");
     await expect(page.getByRole("cell", { name: "KTH  MUARA KILIS" }).first()).toBeVisible();

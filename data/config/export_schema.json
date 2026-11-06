@@ -88,6 +88,13 @@
       "description": "dihitung, nilai_negatif, atau kosong."
     },
     {
+      "title": "[Olahan PDPSI] Pendamping Tercatat",
+      "path": "derived.pendamping_status",
+      "transform": null,
+      "kind": "Olahan PDPSI",
+      "description": "tercatat bila kolom sumber Pendamping terisi, kosong bila tidak. Isi kolom (nama orang) tidak dipublikasikan. Kosong bisa berarti tidak ada pendamping atau tidak dicatat."
+    },
+    {
       "title": "[Pemeriksaan PDPSI] Jumlah Rekaman dengan Nomor SK Sama",
       "path": "quality.duplicate.record_count",
       "transform": "default_1",

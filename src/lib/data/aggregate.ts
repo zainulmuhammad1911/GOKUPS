@@ -31,6 +31,7 @@ export function aggregate(records: Iterable<ApprovalRecord>): AggregateBlock {
     members_male: 0,
     members_female: 0,
     members_female_zero_records: 0,
+    pendamping_recorded_records: 0,
     members_records_used: 0,
     members_records_not_used: {},
     members_source_total_column: null,
@@ -57,6 +58,7 @@ export function aggregate(records: Iterable<ApprovalRecord>): AggregateBlock {
     } else {
       bump(block.members_records_not_used, r.derived.members_calc_status);
     }
+    if (r.derived.pendamping_status === "tercatat") block.pendamping_recorded_records += 1;
     const src = r.source[MEMBERS_SOURCE_COLUMN];
     if (typeof src === "number") {
       sourceTotal += src;

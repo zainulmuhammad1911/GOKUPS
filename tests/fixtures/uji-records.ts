@@ -30,6 +30,7 @@ function uji(
       members_male_plus_female: null,
       members_calc_status: "dihitung",
       area_calc_status: "dihitung",
+      pendamping_status: "kosong",
       ...derived,
     },
     quality: {

@@ -18,6 +18,7 @@ DEFINITIONS = {
     "members_male": "Jumlah kolom sumber 'Anggota Laki-Laki' pada rekaman yang sama dengan members_male_plus_female, sehingga laki-laki + perempuan = members_male_plus_female.",
     "members_female": "Jumlah kolom sumber 'Anggota Perempuan' pada rekaman yang sama dengan members_male_plus_female.",
     "members_female_zero_records": "Banyaknya rekaman yang dihitung untuk anggota dengan 'Anggota Perempuan' bernilai 0 di sumber. Sumber tidak membedakan 0 dari tidak dicatat; nilai 0 hampir selalu muncul pada SK sebelum 2017, sehingga jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya.",
+    "pendamping_recorded_records": "Banyaknya rekaman yang kolom sumber 'Pendamping'-nya terisi (K11). Isi kolom (nama orang) tidak dipublikasikan; kolom kosong bisa berarti tidak ada pendamping atau tidak dicatat.",
     "members_source_total_column": "Jumlah kolom sumber 'Anggota Keseluruhan' apa adanya, untuk pembanding. Tidak dipakai sebagai indikator karena pada sebagian rekaman nilainya sama dengan anggota perempuan.",
     "jenis_ps": "Rekap memakai 5 jenis PS: Hutan Desa, Hutan Kemasyarakatan, Hutan Tanaman Rakyat, Hutan Adat, Kemitraan Kehutanan. Kemitraan Kehutanan = jumlah tiga subskema sumber berlabel 'KEMITRAAN KEHUTANAN ~' (Kulin KK, Konservasi, IPHPS); rinciannya ditampilkan di setiap rekap.",
     "unit": "Unit rekap adalah rekaman SK penerima persetujuan/penetapan, bukan jumlah kelompok. Sebagian rekaman HTR adalah izin perorangan, dan sebagian lembaga tercatat pada lebih dari satu nomor SK.",
@@ -39,6 +40,7 @@ def _block(g: pd.DataFrame) -> dict:
         "members_female_zero_records": int((pd.to_numeric(g.loc[mem_ok, F]) == 0).sum()),
         "members_records_used": int(mem_ok.sum()),
         "members_records_not_used": {k: int(v) for k, v in g.loc[~mem_ok, "members_calc_status"].value_counts().items()},
+        "pendamping_recorded_records": int((g["pendamping_status"] == "tercatat").sum()),
         "members_source_total_column": int(g[T].sum(min_count=1)) if g[T].notna().any() else None,
         "members_source_total_column_records": int(g[T].notna().sum()),
     }

@@ -212,7 +212,15 @@
       "0": "0 orang",
       "na": "Tidak dapat dihitung"
     },
-    "membersNote": "Filter anggota memakai jumlah anggota laki-laki + perempuan yang tercatat di sumber, bukan status resmi. Data sumber tidak menandai izin perorangan secara konsisten: kolom Bentuk Lembaga hanya mencatat “PERORANGAN” pada {perorangan} rekaman. Rekaman beranggota 1 orang sebagian besar adalah izin Hutan Tanaman Rakyat yang kemungkinan dimiliki perorangan. Anggota 0 bisa berarti tidak dicatat."
+    "membersNote": "Filter anggota memakai jumlah anggota laki-laki + perempuan yang tercatat di sumber, bukan status resmi. Data sumber tidak menandai izin perorangan secara konsisten: kolom Bentuk Lembaga hanya mencatat “PERORANGAN” pada {perorangan} rekaman. Rekaman beranggota 1 orang sebagian besar adalah izin Hutan Tanaman Rakyat yang kemungkinan dimiliki perorangan. Anggota 0 bisa berarti tidak dicatat.",
+    "pendamping": "Pendamping",
+    "pendampingHint": "Menurut kolom Pendamping di sumber. Nama pendamping tidak ditampilkan.",
+    "pendampingAll": "Semua",
+    "pendampingOpt": {
+      "ada": "Ada pendamping tercatat",
+      "tidak": "Tidak ada pendamping tercatat"
+    },
+    "pendampingNote": "Filter pendamping memakai ada atau tidaknya isi kolom Pendamping di data sumber GoKUPS. Nama pendamping tidak dipublikasikan. Kolom kosong bisa berarti kelompok tidak didampingi atau pendampingnya tidak dicatat."
   },
   "detail": {
     "title": "Rekaman {id}",
@@ -335,7 +343,7 @@
     "mapTitle": "Peta",
     "mapBody": "Dataset tidak memuat koordinat lokasi kelompok. Karena itu peta PDPSI menampilkan jumlah per provinsi dan kabupaten/kota di atas batas wilayah administratif, tanpa titik lokasi. Batas kabupaten/kota berasal dari BPS melalui OCHA dan geoBoundaries (lisensi CC BY 3.0 IGO, keadaan tahun 2020). PDPSI memberi setiap kabupaten/kota kode Kepmendagri 2025 dan membentuk 38 provinsi dari gabungan kabupaten/kota tersebut. Batas di peta bersifat indikatif untuk visualisasi statistik dan bukan rujukan batas hukum. Data batas BIG tidak dipakai karena izin pemakaiannya belum terkonfirmasi.",
     "excludedTitle": "Kolom yang tidak dipublikasikan",
-    "excludedBody": "Kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping berisi nama orang. Kolom ini tidak ditampilkan sampai dasar hukum, tujuan, dan risiko privasinya diperiksa. Karena itu data publik PDPSI bukan salinan mentah sepenuhnya.",
+    "excludedBody": "Kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping berisi nama orang. Kolom ini tidak ditampilkan sampai dasar hukum, tujuan, dan risiko privasinya diperiksa. Karena itu data publik PDPSI bukan salinan mentah sepenuhnya. Untuk kolom Pendamping, yang dipublikasikan hanya keterangan apakah kolom itu terisi atau kosong (dipakai filter Pendamping), tanpa namanya.",
     "managerTitle": "Pengelola dan lisensi",
     "institution": "Institusi pengelola",
     "license": "Lisensi data",

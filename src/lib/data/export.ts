@@ -65,6 +65,8 @@ export function describeQuery(q: DataQuery, admin: AdminArea[], schemes: SchemeI
       `Anggota tercatat (laki-laki + perempuan, hasil pengolahan PDPSI): ${
         { "1": "1 orang", "2plus": "2 orang atau lebih", "0": "0 orang", na: "tidak dapat dihitung" }[q.members]
       } (members=${q.members})`,
+    q.pendamping &&
+      `Pendamping: ${q.pendamping === "ada" ? "kolom sumber Pendamping terisi" : "kolom sumber Pendamping kosong"} (pendamping=${q.pendamping})`,
   ].filter(Boolean) as string[];
   const order = q.sort === "no" && q.dir === "asc" ? "urutan sumber" : `${q.sort}, ${q.dir === "asc" ? "naik" : "turun"}`;
   return `${parts.length ? parts.join("; ") : "Tanpa filter (seluruh rekaman)"}. Urutan: ${order}.`;

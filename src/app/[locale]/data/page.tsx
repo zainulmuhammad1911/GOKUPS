@@ -17,6 +17,7 @@ import {
   KK_SUB_CODES,
   MEMBER_FILTERS,
   memberFilterCounts,
+  PENDAMPING_FILTERS,
   paginate,
   parseQuery,
   queryContext,
@@ -78,6 +79,11 @@ export default async function DataPage({
   const memberCounts = memberFilterCounts(approvals);
   const memberOptions = MEMBER_FILTERS.map((f) => ({ code: f, name: `${t(`data.membersOpt.${f}`)} (${n(memberCounts[f])})` }));
   const perorangan = approvals.filter((r) => r.source["Bentuk Lembaga"] === "PERORANGAN").length;
+  const withPendamping = approvals.filter((r) => r.derived.pendamping_status === "tercatat").length;
+  const pendampingOptions = PENDAMPING_FILTERS.map((f) => ({
+    code: f,
+    name: `${t(`data.pendampingOpt.${f}`)} (${n(f === "ada" ? withPendamping : approvals.length - withPendamping)})`,
+  }));
   const years: number[] = [];
   for (let y = ctx.years.min; y <= ctx.years.max; y++) years.push(y);
 
@@ -95,6 +101,7 @@ export default async function DataPage({
       `${t("data.year")}: ${t("data.yearRange", { from: query.yearFrom ?? ctx.years.min, to: query.yearTo ?? ctx.years.max })}`,
     query.flag && `${t("data.flag")}: ${t(`flagLabel.${query.flag}`)}`,
     query.members && `${t("data.members")}: ${t(`data.membersOpt.${query.members}`)}`,
+    query.pendamping && `${t("data.pendamping")}: ${t(`data.pendampingOpt.${query.pendamping}`)}`,
   ].filter(Boolean) as string[];
 
   const cell = (r: ApprovalRecord, col: string) => {
@@ -124,12 +131,18 @@ export default async function DataPage({
         flags={flags}
         years={years}
         memberOptions={memberOptions}
+        pendampingOptions={pendampingOptions}
         activeCount={active}
       />
 
       {query.members && (
         <div className="mt-4">
           <DataNote>{t("data.membersNote", { perorangan: n(perorangan) })}</DataNote>
+        </div>
+      )}
+      {query.pendamping && (
+        <div className="mt-4">
+          <DataNote>{t("data.pendampingNote")}</DataNote>
         </div>
       )}
 
