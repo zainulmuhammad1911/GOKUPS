@@ -18,7 +18,6 @@
   "common": {
     "skipToContent": "Langsung ke konten",
     "menu": "Menu",
-    "closeMenu": "Tutup menu",
     "language": "Bahasa",
     "notAvailable": "Tidak tersedia",
     "emptyInSource": "Kosong di sumber",
@@ -34,7 +33,6 @@
     },
     "male": "Laki-laki",
     "female": "Perempuan",
-    "femaleZeroRecords": "Rekaman perempuan = 0",
     "membersSplit": "Laki-laki {male}, perempuan {female}.",
     "femaleZeroNote": "Pada {zero} dari {used} rekaman, anggota perempuan tercatat 0, hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, jadi jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya.",
     "draftBadge": "Draf",
@@ -151,7 +149,6 @@
     "tableCaption": "Daftar rekaman, halaman {page} dari {pages}",
     "sk": "Nomor SK",
     "name": "Nama Lembaga",
-    "scheme": "Skema",
     "province": "Provinsi",
     "regency": "Kabupaten/Kota",
     "date": "Tanggal SK",
@@ -254,7 +251,6 @@
     "draftNote": "Rilis ini masih draf dan belum diterbitkan sebagai rilis publik. Lisensi data belum ditetapkan.",
     "notRaw": "File ini bukan salinan mentah sepenuhnya: kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping tidak disertakan.",
     "csvNote": "CSV memakai UTF-8, pemisah koma, dan desimal titik. Untuk Excel berlokal Indonesia, gunakan file XLSX.",
-    "file": "File",
     "format": "Format",
     "size": "Ukuran",
     "f": {

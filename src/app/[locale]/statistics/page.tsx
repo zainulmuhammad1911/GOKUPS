@@ -218,7 +218,7 @@ export default async function StatisticsPage({
           <tbody>
             {JENIS_ORDER.map((code) => (
               <Fragment key={code}>
-                <tr className="border-b border-rule hover:bg-muted/40">
+                <tr className="border-b border-border hover:bg-muted/40">
                   <th scope="row" className="px-3 py-2 text-left font-bold">
                     <span className="flex items-center gap-2">
                       <SchemeSwatch code={code} />
@@ -230,7 +230,7 @@ export default async function StatisticsPage({
                 </tr>
                 {code === "KK" &&
                   kkSub.map((sub) => (
-                    <tr key={sub.code} className="border-b border-rule bg-surface-sunken/50">
+                    <tr key={sub.code} className="border-b border-border bg-muted/50">
                       <th scope="row" className="py-2 pr-3 pl-8 text-left font-normal">
                         <span className="flex items-center gap-2">
                           <SchemeSwatch code={sub.code} />
@@ -272,7 +272,7 @@ export default async function StatisticsPage({
                     <th key={c} scope="col" className="px-3 py-2 text-right">{jenisLabel(c)}</th>
                   ))}
                   {kkSub.map((s) => (
-                    <th key={s.code} scope="col" className="px-3 py-2 text-right font-normal text-ink-muted">
+                    <th key={s.code} scope="col" className="px-3 py-2 text-right font-normal text-muted-foreground">
                       {s.name.replace("KEMITRAAN KEHUTANAN", "KK")}
                     </th>
                   ))}
@@ -285,7 +285,7 @@ export default async function StatisticsPage({
                   .map((r) => {
                     const inRegion = records.filter(regionKey(r.code));
                     return (
-                      <tr key={r.code} className="border-b border-rule hover:bg-muted/40">
+                      <tr key={r.code} className="border-b border-border hover:bg-muted/40">
                         <th scope="row" className="px-3 py-2 text-left font-normal">{r.name}</th>
                         {JENIS_ORDER.map((c) => (
                           <td key={c} className="px-3 py-2 text-right">
@@ -293,7 +293,7 @@ export default async function StatisticsPage({
                           </td>
                         ))}
                         {kkSub.map((s) => (
-                          <td key={s.code} className="px-3 py-2 text-right text-ink-muted">
+                          <td key={s.code} className="px-3 py-2 text-right text-muted-foreground">
                             {countLink(
                               inRegion.filter((x) => x.derived.scheme_code === s.code).length,
                               { ...regionQuery(r.code), type: s.code },
@@ -330,7 +330,7 @@ export default async function StatisticsPage({
                   .map((r) => {
                     const b = aggregate(records.filter(regionKey(r.code)));
                     return (
-                      <tr key={r.code} className="border-b border-rule hover:bg-muted/40">
+                      <tr key={r.code} className="border-b border-border hover:bg-muted/40">
                         <th scope="row" className="px-3 py-2 text-left font-normal">{r.name}</th>
                         <td className="px-3 py-2 text-right tabular">{n(b.members_records_used)}</td>
                         <td className="px-3 py-2 text-right tabular">{n(b.members_male_plus_female)}</td>

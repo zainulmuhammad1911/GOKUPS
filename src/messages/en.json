@@ -18,7 +18,6 @@
   "common": {
     "skipToContent": "Skip to content",
     "menu": "Menu",
-    "closeMenu": "Close menu",
     "language": "Language",
     "notAvailable": "Not available",
     "emptyInSource": "Empty in source",
@@ -34,7 +33,6 @@
     },
     "male": "Men",
     "female": "Women",
-    "femaleZeroRecords": "Records with 0 women",
     "membersSplit": "Men {male}, women {female}.",
     "femaleZeroNote": "In {zero} of {used} records the number of women is 0, almost all of them decrees issued before 2017. The source does not distinguish 0 from not recorded, so the number of women is probably lower than the real figure.",
     "draftBadge": "Draft",
@@ -151,7 +149,6 @@
     "tableCaption": "List of records, page {page} of {pages}",
     "sk": "Decree number",
     "name": "Institution name",
-    "scheme": "Scheme",
     "province": "Province",
     "regency": "Regency/City",
     "date": "Decree date",
@@ -254,7 +251,6 @@
     "draftNote": "This is a draft release and has not been published as a public release. The data licence has not been specified yet.",
     "notRaw": "These files are not a complete raw copy: the Ketua Lembaga, Pra-Pendamping, and Pendamping columns are not included.",
     "csvNote": "CSV files use UTF-8, comma separators, and a dot as the decimal mark.",
-    "file": "File",
     "format": "Format",
     "size": "Size",
     "f": {

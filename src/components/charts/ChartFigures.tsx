@@ -169,7 +169,7 @@ export function MetricChart({
   return (
     <Figure id={id} title={title} caption={caption} controls={controls} table={table}>
       {shown.length === 0 ? (
-        <p className="py-4 text-small text-ink-muted">{t("empty")}</p>
+        <p className="py-4 text-small text-muted-foreground">{t("empty")}</p>
       ) : (
         <BarChart categories={categories} series={series} unit={metric.unit} ariaLabel={ariaLabel} maxFractionDigits={metric.digits} />
       )}
@@ -255,7 +255,7 @@ export function StackedChart({
   return (
     <Figure id={id} title={title} caption={caption} legend={legend} table={table}>
       {sorted.length === 0 ? (
-        <p className="py-4 text-small text-ink-muted">{t("empty")}</p>
+        <p className="py-4 text-small text-muted-foreground">{t("empty")}</p>
       ) : (
         <BarChart
           categories={categories}

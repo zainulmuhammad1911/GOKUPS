@@ -56,7 +56,7 @@ export function MiniMap({
           </path>
         ))}
       </svg>
-      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-caption text-ink-muted" aria-hidden="true">
+      <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-caption text-muted-foreground" aria-hidden="true">
         {breaks.map((b, i) => (
           <li key={b} className="flex items-center gap-1.5">
             <span className="inline-block h-2.5 w-4 rounded-[1px]" style={{ background: RAMP[i] }} />
@@ -64,7 +64,7 @@ export function MiniMap({
           </li>
         ))}
         <li className="flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-4 rounded-[1px] border border-rule" style={{ background: NO_RECORDS }} />
+          <span className="inline-block h-2.5 w-4 rounded-[1px] border border-border" style={{ background: NO_RECORDS }} />
           {noRecordsLabel}
         </li>
       </ul>

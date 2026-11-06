@@ -134,7 +134,7 @@ export function DuplicateBadge({ label }: { label: string }) {
 }
 
 export function EmptyValue({ children }: { children: ReactNode }) {
-  return <span className="text-ink-muted italic">{children}</span>;
+  return <span className="text-muted-foreground italic">{children}</span>;
 }
 
 /**

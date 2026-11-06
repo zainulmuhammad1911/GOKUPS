@@ -145,7 +145,7 @@ export function BarChart({ categories, series, unit, stacked = false, ariaLabel,
   }, [categories, series, unit, stacked, ariaLabel, locale, maxFractionDigits, router]);
 
   if (failed) {
-    return <p className="py-4 text-small text-ink-muted">{t("failed")}</p>;
+    return <p className="py-4 text-small text-muted-foreground">{t("failed")}</p>;
   }
   return <div ref={ref} role="img" aria-label={ariaLabel} style={{ height }} className="w-full" />;
 }

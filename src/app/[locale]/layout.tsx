@@ -9,7 +9,6 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { AppSidebar } from "@/components/layout/AppSidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { loadRelease, loadSiteConfig } from "@/lib/data/release";
 import { formatDateTime } from "@/lib/data/format";
 import "../globals.css";
@@ -61,7 +60,6 @@ export default async function LocaleLayout({
           {t("common.skipToContent")}
         </a>
         <NextIntlClientProvider messages={clientMessages}>
-          <TooltipProvider>
             <SidebarProvider>
               <AppSidebar
                 productName={locale === "en" ? site.product.name_en : site.product.name_id}
@@ -84,7 +82,6 @@ export default async function LocaleLayout({
                 <SiteFooter />
               </SidebarInset>
             </SidebarProvider>
-          </TooltipProvider>
         </NextIntlClientProvider>
       </body>
     </html>

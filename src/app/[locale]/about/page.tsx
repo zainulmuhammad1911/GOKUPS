@@ -33,7 +33,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
   const flagDocs = loadExportSchema().flag_docs;
   const n = (v: number, d = 0) => formatNumber(v, locale, d);
   const nat = totals.national;
-  const notSet = <span className="text-ink-muted">{t("common.notSet")}</span>;
+  const notSet = <span className="text-muted-foreground">{t("common.notSet")}</span>;
   const institution = locale === "en" ? site.institution.name_en : site.institution.name_id;
   const dateFmt = new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "id-ID", { dateStyle: "long", timeZone: "UTC" });
   const longDate = (iso: string) => dateFmt.format(new Date(iso));
@@ -183,7 +183,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <p className="mt-3">{t("about.checksLead")}</p>
       <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="checks" tabIndex={0}>
         <table className="w-full border-collapse text-small">
-          <thead className="bg-surface-sunken text-left">
+          <thead className="bg-muted text-left">
             <tr>
               <th scope="col" className="px-3 py-2">{t("about.checksNote")}</th>
               <th scope="col" className="px-3 py-2 text-right">{t("about.checksCount")}</th>
@@ -191,10 +191,10 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </thead>
           <tbody>
             {flagCounts.map(({ flag, count }) => (
-              <tr key={flag} className="border-b border-rule align-top">
+              <tr key={flag} className="border-b border-border align-top">
                 <th scope="row" className="px-3 py-2 text-left font-normal">
                   <span className="font-bold">{t(`flagLabel.${flag}`)}</span>
-                  <span className="block text-ink-muted">{t(`flags.${flag}`)}</span>
+                  <span className="block text-muted-foreground">{t(`flags.${flag}`)}</span>
                 </th>
                 <td className="px-3 py-2 text-right">
                   <Link href={{ pathname: "/data", query: { flag } }} className="tabular">

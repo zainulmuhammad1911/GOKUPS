@@ -444,7 +444,7 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
                 </li>
               ))}
               <li className="flex items-center gap-2">
-                <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px] border border-rule" style={{ background: NO_RECORDS }} />
+                <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px] border border-border" style={{ background: NO_RECORDS }} />
                 {t("noRecords")}
               </li>
               {hasInvalid && (
