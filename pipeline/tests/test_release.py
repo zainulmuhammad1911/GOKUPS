@@ -121,6 +121,22 @@ def test_members_rule(approvals, totals):
     assert count_flag(approvals, "members_total_equals_female") == AUDIT["members_total_mismatch"]
 
 
+def test_members_by_sex_same_records_as_total(approvals, totals):
+    """Laki-laki dan perempuan dijumlahkan dari rekaman yang sama dengan anggota L+P (K2, 2026-11-06)."""
+    used = [a for a in approvals if a["derived"]["members_calc_status"] == "dihitung"]
+    nat = totals["national"]
+    assert nat["members_male"] == sum(a["source"]["Anggota Laki-Laki"] for a in used)
+    assert nat["members_female"] == sum(a["source"]["Anggota Perempuan"] for a in used)
+    assert nat["members_female_zero_records"] == sum(a["source"]["Anggota Perempuan"] == 0 for a in used)
+    for key, rows in totals.items():
+        if key == "definitions":
+            continue
+        for row in rows if isinstance(rows, list) else [rows] if isinstance(rows, dict) else []:
+            assert row["members_male"] + row["members_female"] == row["members_male_plus_female"], key
+            assert row["members_female_zero_records"] <= row["members_records_used"], key
+    assert "members_female_zero_records" in totals["definitions"]
+
+
 # --- K5 luas -------------------------------------------------------------------------
 
 def test_area_flags_do_not_exclude(approvals, totals):

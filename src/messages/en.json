@@ -28,7 +28,12 @@
       "nilai_negatif": "negative value",
       "komponen_kosong": "empty component",
       "kosong": "empty in source"
-    }
+    },
+    "male": "Men",
+    "female": "Women",
+    "femaleZeroRecords": "Records with 0 women",
+    "membersSplit": "Men {male}, women {female}.",
+    "femaleZeroNote": "In {zero} of {used} records the number of women is 0, almost all of them decrees issued before 2017. The source does not distinguish 0 from not recorded, so the number of women is probably lower than the real figure."
   },
   "draft": {
     "banner": "Development version. Data comes from draft release {version} and has not been published as a public release."
@@ -93,7 +98,8 @@
     "province": "Province",
     "regency": "Regency/City",
     "recordsIn": "records in {name}",
-    "range": "{from} to {to}"
+    "range": "{from} to {to}",
+    "femaleZero": "{zero, plural, one {{zeroText} record lists} other {{zeroText} records list}} 0 women."
   },
   "statistics": {
     "title": "Statistics",
@@ -117,13 +123,18 @@
     "chartRegion": "Distribution {level}, {scope}",
     "chartTop10": "Top 10 regencies/cities, {scope}",
     "chartComposition": "PS type composition {level}, {scope}",
-    "regionTableCaption": "Records {level} and PS type, {scope}"
+    "regionTableCaption": "Records {level} and PS type, {scope}",
+    "sexTableCaption": "Members by sex {level}, {scope}",
+    "sexTableNote": "Men and women are summed over the same records as Members (M+W), so the two always add up to Members (M+W). The last column shows how many records list 0 women."
   },
   "columns": {
     "records": "Records",
     "area": "Area (ha)",
     "members": "Members (M+W)",
-    "membersUsed": "Records counted (members)"
+    "membersUsed": "Records counted (members)",
+    "male": "Men",
+    "female": "Women",
+    "femaleZero": "Records with 0 women"
   },
   "kind": {
     "persetujuan": "Approval",
@@ -172,7 +183,7 @@
     "results": "{count} of {total} records match the filters",
     "resultsAll": "{count} records",
     "activeFilters": "Active filters:",
-    "summary": "Area {area} ha. Members, men + women: {members} (from {membersUsed} records).",
+    "summary": "Area {area} ha. Members, men + women: {members}; men {male}, women {female} (from {membersUsed} records).",
     "ignored": "Some parameters in this address were not recognised and were ignored: {names}.",
     "noResultsTitle": "No matching records",
     "noResults": "Try fewer filters or a different search term.",
@@ -286,7 +297,7 @@
     "processingRegion": "official region codes from Minister of Home Affairs Decree No. 300.2.2-2138 of 2025 for every province and regency/city. All {pairs} name pairs in the source matched, and the codes are identical to the 2023 BIG (Geospatial Information Agency) boundary data. The matching has not yet been checked manually.",
     "processingJenis": "PS type and record type (approval or designation);",
     "processingYear": "decree year, from the decree date column;",
-    "processingMembers": "members, men + women;",
+    "processingMembers": "members, men + women, with separate totals for men and women;",
     "processingFlags": "review notes and links between records that share a decree number.",
     "numbersTitle": "How the figures are calculated",
     "numbersLabel": "All aggregate figures are processed by PDPSI from the source records and are not official national figures. Every figure can be reproduced by filtering records on the Data page.",
@@ -306,7 +317,7 @@
     "limitsTitle": "Limitations",
     "limitsHomepage": "PDPSI figures differ from the achievement figures on the GoKUPS home page. According to the source workbook notes, on {homeDate} the GoKUPS home page showed {homeInstitutions} institutions and {homeArea} ha, while the retrieved register contained {records} decrees and {area} ha. GoKUPS does not explain the difference.",
     "limitsRounding": "Areas in the source are rounded to whole hectares.",
-    "limitsFemale": "The number of women is 0 in {pct}% of records, including almost all decrees before 2017. These zeros probably mean the value was not recorded. PDPSI does not yet publish statistics comparing men and women.",
+    "limitsFemale": "The number of women is 0 in {pct}% of records, including almost all decrees before 2017. The source does not distinguish 0 from not recorded, so read the number of women, and any comparison of men and women, with care: the number of women is probably lower than the real figure. Every breakdown table shows how many records list 0 women.",
     "limitsRecent": "There are far fewer records dated {lastYears} than in earlier years ({recent}). Data for the most recent years is probably incomplete in the source.",
     "limitsDistrict": "Districts (kecamatan) are shown as source text and are not yet matched to official codes.",
     "limitsRegion": "The Region column in the workbook is not a GoKUPS field. The workbook compiler derived it from the province name.",
@@ -318,7 +329,8 @@
     "institution": "Managing institution",
     "license": "Data licence",
     "contact": "Contact",
-    "yearPair": "{a} and {b}"
+    "yearPair": "{a} and {b}",
+    "numbersSex": "Broken down: {male} men and {female} women. Both are summed over the same records, so they add up to {members}. The number of women is 0 in {zero} records."
   },
   "flags": {
     "duplicate_sk": "The decree number is also used by other records.",

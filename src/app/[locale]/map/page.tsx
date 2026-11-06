@@ -28,7 +28,15 @@ function boundaryMeta(): { version: string; attribution_id: string; attribution_
 
 function values(records: ApprovalRecord[]): Values {
   const b = aggregate(records);
-  return [b.records, b.area_ha, b.members_male_plus_female, b.members_records_used];
+  return [
+    b.records,
+    b.area_ha,
+    b.members_male_plus_female,
+    b.members_records_used,
+    b.members_male,
+    b.members_female,
+    b.members_female_zero_records,
+  ];
 }
 
 export default async function MapPage({

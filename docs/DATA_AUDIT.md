@@ -117,7 +117,7 @@ Pola lain banyak berasal dari izin yang diterbitkan pemerintah daerah sebelum 20
 
 **Usulan:**
 - Indikator "jumlah anggota" hanya dihitung dari baris yang lolos aturan `L + P = total` dan tidak negatif, **atau** memakai `L + P` sebagai total untuk 1.127 baris tersebut. Keduanya keputusan metodologi yang perlu disetujui (lihat Pertanyaan Terbuka).
-- Rincian laki-laki/perempuan tidak ditampilkan sebagai statistik nasional di MVP. Di halaman detail, rincian hanya ditampilkan bila konsisten, dengan catatan bahwa nol dapat berarti tidak tercatat.
+- Rincian laki-laki/perempuan tidak ditampilkan sebagai statistik nasional di MVP. Di halaman detail, rincian hanya ditampilkan bila konsisten, dengan catatan bahwa nol dapat berarti tidak tercatat. *(Usulan audit ini digantikan K2 versi 2026-11-06: rincian laki-laki dan perempuan ditampilkan bersama catatan dan jumlah rekaman perempuan 0.)*
 - Label angka harus berbunyi "anggota tercatat", bukan "penerima manfaat".
 
 ## 5. Skema Perhutanan Sosial

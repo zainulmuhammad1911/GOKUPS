@@ -6,8 +6,11 @@ import { useLocale, useTranslations } from "next-intl";
 import Link from "next/link";
 import type { FeatureCollection, Geometry } from "geojson";
 
-/** Nilai per wilayah per jenis PS: [rekaman, luas ha, anggota L+P, rekaman yang dihitung untuk anggota]. */
-export type Values = [number, number, number, number];
+/**
+ * Nilai per wilayah per jenis PS: [rekaman, luas ha, anggota L+P, rekaman yang dihitung untuk anggota,
+ * laki-laki, perempuan, rekaman dengan perempuan 0]. Laki-laki + perempuan = anggota L+P.
+ */
+export type Values = [number, number, number, number, number, number, number];
 export interface RegionData {
   name: string;
   parent: string | null;
@@ -84,6 +87,7 @@ function bbox(fc: FC, filter?: (f: Feature) => boolean): [[number, number], [num
 export function MapExplorer({ geoBase, attribution, regions, types, initial, dataPath, sourceLine }: Props) {
   const t = useTranslations("map");
   const tc = useTranslations("charts");
+  const tcom = useTranslations("common");
   const locale = useLocale();
   const fmt = useMemo(() => new Intl.NumberFormat(locale === "en" ? "en-GB" : "id-ID", { maximumFractionDigits: 0 }), [locale]);
   const [state, setState] = useState<MapState>(initial);
@@ -283,11 +287,11 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
   const focus = focusCode ? regions[focusCode] : undefined;
   const panelValues = focus?.byType[state.type];
   const national = useMemo(() => {
-    const sum: Values = [0, 0, 0, 0];
+    const sum: Values = [0, 0, 0, 0, 0, 0, 0];
     for (const c of Object.keys(regions)) {
       if (regions[c]!.parent !== null) continue;
       const v = regions[c]!.byType[state.type];
-      if (v) for (let i = 0; i < 4; i++) sum[i]! += v[i]!;
+      if (v) for (let i = 0; i < sum.length; i++) sum[i]! += v[i]!;
     }
     return sum;
   }, [regions, state.type]);
@@ -419,8 +423,15 @@ export function MapExplorer({ geoBase, attribution, regions, types, initial, dat
                 <dd className="text-right font-bold tabular">{fmt.format(shown[1])} ha</dd>
                 <dt>{tc("members")}</dt>
                 <dd className="text-right font-bold tabular">{fmt.format(shown[2])}</dd>
+                <dt className="pl-3 text-ink-muted">{tcom("male")}</dt>
+                <dd className="text-right tabular">{fmt.format(shown[4])}</dd>
+                <dt className="pl-3 text-ink-muted">{tcom("female")}</dt>
+                <dd className="text-right tabular">{fmt.format(shown[5])}</dd>
               </dl>
-              <p className="mt-1 text-caption text-ink-muted">{t("membersCoverage", { used: fmt.format(shown[3]), total: fmt.format(shown[0]) })}</p>
+              <p className="mt-1 text-caption text-ink-muted">
+                {t("membersCoverage", { used: fmt.format(shown[3]), total: fmt.format(shown[0]) })}{" "}
+                {t("femaleZero", { zero: shown[6], zeroText: fmt.format(shown[6]) })}
+              </p>
               {state.type === "all" && focus && (
                 <ul className="mt-3 flex flex-col gap-1" aria-label={t("composition")}>
                   {types.map((x) => {

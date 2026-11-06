@@ -28,7 +28,12 @@
       "nilai_negatif": "ada nilai negatif",
       "komponen_kosong": "komponen kosong",
       "kosong": "kosong di sumber"
-    }
+    },
+    "male": "Laki-laki",
+    "female": "Perempuan",
+    "femaleZeroRecords": "Rekaman perempuan = 0",
+    "membersSplit": "Laki-laki {male}, perempuan {female}.",
+    "femaleZeroNote": "Pada {zero} dari {used} rekaman, anggota perempuan tercatat 0, hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, jadi jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya."
   },
   "draft": {
     "banner": "Versi pengembangan. Data berasal dari rilis draf {version} dan belum diterbitkan sebagai rilis publik."
@@ -93,7 +98,8 @@
     "province": "Provinsi",
     "regency": "Kabupaten/Kota",
     "recordsIn": "rekaman di {name}",
-    "range": "{from} sampai {to}"
+    "range": "{from} sampai {to}",
+    "femaleZero": "Perempuan tercatat 0 pada {zeroText} rekaman."
   },
   "statistics": {
     "title": "Statistik",
@@ -117,13 +123,18 @@
     "chartRegion": "Sebaran {level}, {scope}",
     "chartTop10": "10 kabupaten/kota teratas, {scope}",
     "chartComposition": "Komposisi jenis PS {level}, {scope}",
-    "regionTableCaption": "Jumlah rekaman {level} dan jenis PS, {scope}"
+    "regionTableCaption": "Jumlah rekaman {level} dan jenis PS, {scope}",
+    "sexTableCaption": "Anggota laki-laki dan perempuan {level}, {scope}",
+    "sexTableNote": "Laki-laki dan perempuan dijumlahkan dari rekaman yang sama dengan Anggota L+P, jadi keduanya selalu berjumlah sama dengan Anggota L+P. Kolom terakhir menunjukkan banyaknya rekaman yang mencatat perempuan 0."
   },
   "columns": {
     "records": "Rekaman",
     "area": "Luas (ha)",
     "members": "Anggota L+P",
-    "membersUsed": "Rekaman dihitung (anggota)"
+    "membersUsed": "Rekaman dihitung (anggota)",
+    "male": "Laki-laki",
+    "female": "Perempuan",
+    "femaleZero": "Rekaman perempuan = 0"
   },
   "kind": {
     "persetujuan": "Persetujuan",
@@ -172,7 +183,7 @@
     "results": "{count} dari {total} rekaman cocok dengan filter",
     "resultsAll": "{count} rekaman",
     "activeFilters": "Filter aktif:",
-    "summary": "Luas {area} ha. Anggota laki-laki + perempuan {members} (dari {membersUsed} rekaman).",
+    "summary": "Luas {area} ha. Anggota laki-laki + perempuan {members}: laki-laki {male}, perempuan {female} (dari {membersUsed} rekaman).",
     "ignored": "Sebagian parameter di alamat ini tidak dikenali dan diabaikan: {names}.",
     "noResultsTitle": "Tidak ada rekaman yang cocok",
     "noResults": "Coba longgarkan filter atau ubah kata pencarian.",
@@ -286,7 +297,7 @@
     "processingRegion": "kode wilayah resmi Kepmendagri Nomor 300.2.2-2138 Tahun 2025 untuk setiap provinsi dan kabupaten/kota. Semua {pairs} pasangan nama di sumber cocok, dan kodenya sama dengan data wilayah BIG edisi 2023. Pencocokan ini belum diperiksa manual.",
     "processingJenis": "jenis PS dan jenis rekaman (persetujuan atau penetapan);",
     "processingYear": "tahun SK, dari kolom tanggal SK;",
-    "processingMembers": "jumlah anggota laki-laki + perempuan;",
+    "processingMembers": "jumlah anggota laki-laki + perempuan, beserta rincian laki-laki dan perempuan;",
     "processingFlags": "catatan pemeriksaan dan referensi rekaman bernomor SK sama.",
     "numbersTitle": "Cara angka dihitung",
     "numbersLabel": "Semua angka agregat adalah hasil pengolahan PDPSI dari rekaman sumber, bukan angka resmi nasional. Setiap angka bisa diulang dengan menyaring rekaman di halaman Data.",
@@ -306,7 +317,7 @@
     "limitsTitle": "Keterbatasan",
     "limitsHomepage": "Angka PDPSI berbeda dari angka capaian di beranda GoKUPS. Menurut catatan workbook sumber, per {homeDate} beranda GoKUPS menampilkan {homeInstitutions} lembaga dan {homeArea} ha, sedangkan tabular yang diambil berisi {records} SK dan {area} ha. GoKUPS tidak menjelaskan penyebab selisih ini.",
     "limitsRounding": "Luas di sumber dibulatkan ke hektare penuh.",
-    "limitsFemale": "Anggota perempuan bernilai 0 pada {pct}% rekaman, termasuk hampir semua SK sebelum 2017. Kemungkinan nilai 0 ini berarti tidak dicatat. PDPSI belum menyajikan statistik perbandingan laki-laki dan perempuan.",
+    "limitsFemale": "Anggota perempuan bernilai 0 pada {pct}% rekaman, termasuk hampir semua SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, jadi jumlah perempuan dan perbandingan laki-laki dengan perempuan perlu dibaca dengan hati-hati: jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya. Setiap tabel rincian menyertakan banyaknya rekaman yang mencatat perempuan 0.",
     "limitsRecent": "Rekaman bertanggal {lastYears} jauh lebih sedikit dibanding tahun-tahun sebelumnya ({recent}). Data tahun terakhir kemungkinan belum lengkap di sumber.",
     "limitsDistrict": "Kecamatan ditampilkan sebagai teks sumber dan belum dicocokkan ke kode resmi.",
     "limitsRegion": "Kolom Region di workbook bukan field GoKUPS. Penyusun workbook menurunkannya dari nama provinsi.",
@@ -318,7 +329,8 @@
     "institution": "Institusi pengelola",
     "license": "Lisensi data",
     "contact": "Kontak",
-    "yearPair": "{a} dan {b}"
+    "yearPair": "{a} dan {b}",
+    "numbersSex": "Rinciannya: laki-laki {male} dan perempuan {female}. Keduanya dijumlahkan dari rekaman yang sama, sehingga berjumlah {members}. Anggota perempuan tercatat 0 pada {zero} rekaman."
   },
   "flags": {
     "duplicate_sk": "Nomor SK juga dipakai rekaman lain.",

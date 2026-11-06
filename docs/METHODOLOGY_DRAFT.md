@@ -2,7 +2,7 @@
 
 **Catatan 2026-11-05:** teks final untuk publik kini ada di halaman Tentang (`src/app/[locale]/about/page.tsx`, teks di `src/messages/*.json`), dengan angka yang dihitung langsung dari rilis aktif. Dokumen ini tetap menjadi catatan teknis.
 
-**Status:** draf isi teknis untuk rilis `2026-11-02.r3` (draf, bukan rilis publik final). Ini bahan, bukan teks final. Teks antarmuka disusun di Tahap 6 dengan `/antislop` dan disunting dengan `/humanizer` tanpa mengubah angka atau definisi. Bagian bertanda **[Belum ditetapkan]** menunggu keputusan di `docs/DECISIONS.md`.
+**Status:** draf isi teknis untuk rilis `2026-11-02.r4` (draf, bukan rilis publik final). Ini bahan, bukan teks final. Teks antarmuka disusun di Tahap 6 dengan `/antislop` dan disunting dengan `/humanizer` tanpa mengubah angka atau definisi. Bagian bertanda **[Belum ditetapkan]** menunggu keputusan di `docs/DECISIONS.md`.
 
 ## Prinsip: kesetiaan pada sumber
 PDPSI menyajikan data sebagaimana tercatat di sumber. Nilai sumber tidak diperbaiki, direkonstruksi, diestimasi, atau diubah. Nama, angka, tanggal, dan luas ditampilkan apa adanya, termasuk ejaan dan spasi. Kosong ditampilkan sebagai "tidak tersedia", tidak diganti 0. Ketidaksesuaian data ditandai dan diberi catatan, tidak dihapus atau disembunyikan.
@@ -63,16 +63,18 @@ Nama provinsi dan kabupaten/kota sumber ditampilkan apa adanya. Sebagai hasil pe
 ## Angka agregat
 Semua angka agregat adalah **hasil pengolahan PDPSI dari data sumber, bukan angka resmi nasional**. Setiap angka bisa diulang dengan memfilter rekaman di halaman Data atau di file unduhan.
 
-| Angka | Cara hitung | Rilis 2026-11-02.r3 |
+| Angka | Cara hitung | Rilis 2026-11-02.r4 |
 |-------|-------------|---------------------|
 | Jumlah rekaman | Semua rekaman, termasuk rekaman bernomor SK sama | 10.061 |
 | Luas (ha) | Jumlah kolom sumber Luas Area Keseluruhan (Ha) pada rekaman yang nilainya tersedia dan tidak negatif | 6.892.023 ha dari 10.061 rekaman |
 | Anggota laki-laki + perempuan | Jumlah (laki-laki + perempuan) pada rekaman yang kedua nilainya tersedia dan tidak negatif, termasuk yang hasilnya 0 | 1.288.574 dari 10.060 rekaman; 1 rekaman tidak dapat dihitung karena ada nilai negatif |
+| … laki-laki | Jumlah kolom sumber Anggota Laki-Laki pada rekaman yang sama dengan baris di atas | 1.211.597 |
+| … perempuan | Jumlah kolom sumber Anggota Perempuan pada rekaman yang sama | 76.977; 5.371 rekaman bernilai 0 |
 | Pembanding: kolom sumber Anggota Keseluruhan | Jumlah kolom apa adanya | 1.227.046 |
 
 Kolom Anggota Keseluruhan dari sumber tetap ditampilkan tetapi tidak dipakai untuk menghitung anggota. Pada 1.127 rekaman, nilainya sama dengan jumlah anggota perempuan, bukan jumlah laki-laki + perempuan. Kedua angka ditampilkan berdampingan agar perbedaannya terlihat.
 
-Angka anggota perempuan bernilai 0 pada 53% rekaman, termasuk hampir semua SK sebelum 2017. Nilai 0 ini kemungkinan berarti tidak dicatat, tetapi PDPSI menampilkannya apa adanya. PDPSI belum menyajikan statistik perbandingan laki-laki dan perempuan. **[Belum ditetapkan: K2]**
+Laki-laki dan perempuan dijumlahkan dari rekaman yang sama dengan anggota L+P, sehingga keduanya selalu berjumlah sama dengan anggota L+P (K2). Anggota perempuan bernilai 0 pada 53% rekaman, termasuk hampir semua SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, jadi jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya. PDPSI menampilkan nilai apa adanya, menyertakan catatan ini dan jumlah rekaman yang mencatat perempuan 0 di setiap rincian, dan tidak menghitung rasio atau persentase perempuan.
 
 ## Penanda ketidaksesuaian
 Penanda tidak mengubah nilai dan tidak mengeluarkan rekaman dari perhitungan.

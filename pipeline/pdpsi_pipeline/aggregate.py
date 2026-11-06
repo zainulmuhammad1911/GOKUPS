@@ -8,13 +8,16 @@ from __future__ import annotations
 
 import pandas as pd
 
-from .quality import AREA_TOTAL, T
+from .quality import AREA_TOTAL, F, M, T
 
 DEFINITIONS = {
     "label": "Hasil pengolahan PDPSI dari data sumber GoKUPS. Bukan angka resmi nasional.",
     "records": "Jumlah rekaman (baris sumber). Semua rekaman dihitung, termasuk rekaman bernomor SK sama.",
     "area_ha": "Jumlah kolom sumber 'Luas Area Keseluruhan (Ha)' pada rekaman yang nilainya tersedia dan tidak negatif. Penanda selisih luas tidak mengeluarkan rekaman.",
     "members_male_plus_female": "Jumlah (Anggota Laki-Laki + Anggota Perempuan) pada rekaman yang kedua nilainya tersedia dan tidak negatif, termasuk yang hasilnya 0.",
+    "members_male": "Jumlah kolom sumber 'Anggota Laki-Laki' pada rekaman yang sama dengan members_male_plus_female, sehingga laki-laki + perempuan = members_male_plus_female.",
+    "members_female": "Jumlah kolom sumber 'Anggota Perempuan' pada rekaman yang sama dengan members_male_plus_female.",
+    "members_female_zero_records": "Banyaknya rekaman yang dihitung untuk anggota dengan 'Anggota Perempuan' bernilai 0 di sumber. Sumber tidak membedakan 0 dari tidak dicatat; nilai 0 hampir selalu muncul pada SK sebelum 2017, sehingga jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya.",
     "members_source_total_column": "Jumlah kolom sumber 'Anggota Keseluruhan' apa adanya, untuk pembanding. Tidak dipakai sebagai indikator karena pada sebagian rekaman nilainya sama dengan anggota perempuan.",
     "jenis_ps": "Rekap memakai 5 jenis PS: Hutan Desa, Hutan Kemasyarakatan, Hutan Tanaman Rakyat, Hutan Adat, Kemitraan Kehutanan. Kemitraan Kehutanan = jumlah tiga subskema sumber berlabel 'KEMITRAAN KEHUTANAN ~' (Kulin KK, Konservasi, IPHPS); rinciannya ditampilkan di setiap rekap.",
     "unit": "Unit rekap adalah rekaman SK penerima persetujuan/penetapan, bukan jumlah kelompok. Sebagian rekaman HTR adalah izin perorangan, dan sebagian lembaga tercatat pada lebih dari satu nomor SK.",
@@ -31,6 +34,9 @@ def _block(g: pd.DataFrame) -> dict:
         "area_records_used": int(area_ok.sum()),
         "area_records_not_used": {k: int(v) for k, v in g.loc[~area_ok, "area_calc_status"].value_counts().items()},
         "members_male_plus_female": int(g.loc[mem_ok, "members_male_plus_female"].sum()),
+        "members_male": int(pd.to_numeric(g.loc[mem_ok, M]).sum()),
+        "members_female": int(pd.to_numeric(g.loc[mem_ok, F]).sum()),
+        "members_female_zero_records": int((pd.to_numeric(g.loc[mem_ok, F]) == 0).sum()),
         "members_records_used": int(mem_ok.sum()),
         "members_records_not_used": {k: int(v) for k, v in g.loc[~mem_ok, "members_calc_status"].value_counts().items()},
         "members_source_total_column": int(g[T].sum(min_count=1)) if g[T].notna().any() else None,

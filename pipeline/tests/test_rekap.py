@@ -81,15 +81,19 @@ def test_coverage(long):
     assert long.loc[long["tingkat"] == "kabupaten_kota", "kode_kabupaten_kota"].nunique() == 407
 
 
+# Kolom: Kode, nama, 8 kelompok × (rekaman, luas), Total (rekaman, luas), lalu 4 kolom anggota.
+TOTAL_RECORDS = 2 + 8 * 2
+
+
 def test_workbook_sheets_and_totals(workbook, totals):
     assert workbook.sheetnames == ["Rekap Nasional", "Rekap Provinsi", "Rekap Kabupaten-Kota", "Data Panjang", "Catatan"]
     ws = workbook["Rekap Provinsi"]
     rows = [r for r in ws.iter_rows(values_only=True) if r[0] and str(r[0]).isdigit() and len(str(r[0])) == 2]
     assert len(rows) == 38  # semua provinsi, termasuk yang tanpa rekaman (nilai 0)
     total_row = next(r for r in ws.iter_rows(values_only=True) if r[1] == "Total")
-    # Kolom: Kode, Provinsi, 8 kelompok × (rekaman, luas), lalu Total (rekaman, luas).
-    assert total_row[-2] == totals["national"]["records"]
-    assert sum(r[-2] for r in rows) == totals["national"]["records"]
+    assert total_row[TOTAL_RECORDS] == totals["national"]["records"]
+    assert sum(r[TOTAL_RECORDS] for r in rows) == totals["national"]["records"]
+    assert total_row[TOTAL_RECORDS + 2] == totals["national"]["members_male_plus_female"]
     kk = total_row[2 + 4 * 2]
     assert kk == sum(total_row[2 + i * 2] for i in (5, 6, 7))
     notes = " ".join(str(c.value) for row in workbook["Catatan"].iter_rows() for c in row if c.value)
@@ -105,8 +109,28 @@ def test_regency_sheet_subtotals(workbook):
             if current is not None:
                 assert acc == current
                 checked += 1
-            current, acc = r[-2], 0
+            current, acc = r[TOTAL_RECORDS], 0
         elif len(code) == 5 and "." in code:
-            acc += r[-2]
+            acc += r[TOTAL_RECORDS]
     assert acc == current
     assert checked == 36  # 37 provinsi, subtotal terakhir diperiksa setelah loop
+
+
+def test_rekap_members_by_sex(long, workbook):
+    """Rekap anggota: laki-laki + perempuan = anggota L+P di setiap baris."""
+    assert (long["anggota_laki_laki"] + long["anggota_perempuan"] == long["anggota_laki_plus_perempuan"]).all()
+    assert (long["rekaman_perempuan_0"] <= long["rekaman_dihitung_anggota"]).all()
+    ws = workbook["Rekap Nasional"]
+    rows = [[c.value for c in r] for r in ws.iter_rows()]
+    head = next(r for r in rows if r[0] == "Jenis PS")
+    i_lp, i_l, i_p = head.index("Anggota L+P"), head.index("Laki-laki"), head.index("Perempuan")
+    total = next(r for r in rows if r[0] == "Total")
+    nat = long[(long["tingkat"] == "nasional") & (long["jenis_ps"] == "Total")].iloc[0]
+    assert total[i_lp] == nat["anggota_laki_plus_perempuan"] == total[i_l] + total[i_p]
+    for name in ("Rekap Provinsi", "Rekap Kabupaten-Kota"):
+        sheet = [[c.value for c in r] for r in workbook[name].iter_rows()]
+        sub = next(r for r in sheet if "Laki-laki" in r)
+        last = next(r for r in sheet if len(r) > 1 and r[1] == "Total")
+        j = sub.index("Laki-laki")
+        assert last[j - 1] == nat["anggota_laki_plus_perempuan"] == last[j] + last[j + 1], name
+

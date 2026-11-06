@@ -102,6 +102,8 @@ export default async function StatisticsPage({
       <td className="px-3 py-2 text-right">{countLink(row.records, extra, context)}</td>
       <td className="px-3 py-2 text-right tabular">{n(row.area_ha)}</td>
       <td className="px-3 py-2 text-right tabular">{n(row.members_male_plus_female)}</td>
+      <td className="px-3 py-2 text-right tabular">{n(row.members_male)}</td>
+      <td className="px-3 py-2 text-right tabular">{n(row.members_female)}</td>
     </>
   );
   const regionKey = (code: string) => (r: (typeof records)[number]) =>
@@ -202,7 +204,7 @@ export default async function StatisticsPage({
       <SectionHeading id="rekap-nasional">{t("statistics.tableCaption", { scope })}</SectionHeading>
       <p className="mt-2 text-caption text-ink-muted">{caption}</p>
       <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-nasional" tabIndex={0}>
-        <table className="w-full min-w-[640px] border-collapse text-small">
+        <table className="w-full min-w-[820px] border-collapse text-small">
           <thead className="bg-surface-sunken text-left">
             <tr>
               <th scope="col" className="px-3 py-2">{t("statistics.jenis")}</th>
@@ -210,6 +212,8 @@ export default async function StatisticsPage({
               <th scope="col" className="px-3 py-2 text-right">{t("columns.records")}</th>
               <th scope="col" className="px-3 py-2 text-right">{t("columns.area")}</th>
               <th scope="col" className="px-3 py-2 text-right">{t("columns.members")}</th>
+              <th scope="col" className="px-3 py-2 text-right">{t("columns.male")}</th>
+              <th scope="col" className="px-3 py-2 text-right">{t("columns.female")}</th>
             </tr>
           </thead>
           <tbody>
@@ -252,6 +256,9 @@ export default async function StatisticsPage({
           </tfoot>
         </table>
       </div>
+      <p className="mt-3 max-w-[72ch] text-small">
+        {t("common.femaleZeroNote", { zero: n(total.members_female_zero_records), used: n(total.members_records_used) })}
+      </p>
 
       {records.length > 0 && (
         <>
@@ -300,6 +307,51 @@ export default async function StatisticsPage({
                     );
                   })}
               </tbody>
+            </table>
+          </div>
+
+          <SectionHeading id="rekap-anggota">{t("statistics.sexTableCaption", { level: regionWord, scope })}</SectionHeading>
+          <p className="mt-2 text-caption text-ink-muted">{caption}</p>
+          <p className="mt-2 max-w-[72ch] text-small">{t("statistics.sexTableNote")}</p>
+          <div className="relative mt-4 overflow-x-auto" role="region" aria-labelledby="rekap-anggota" tabIndex={0}>
+            <table className="w-full min-w-[820px] border-collapse text-small">
+              <thead className="bg-surface-sunken text-left">
+                <tr>
+                  <th scope="col" className="px-3 py-2">{level === "province" ? t("map.province") : t("data.regency")}</th>
+                  <th scope="col" className="px-3 py-2 text-right">{t("columns.membersUsed")}</th>
+                  <th scope="col" className="px-3 py-2 text-right">{t("columns.members")}</th>
+                  <th scope="col" className="px-3 py-2 text-right">{t("columns.male")}</th>
+                  <th scope="col" className="px-3 py-2 text-right">{t("columns.female")}</th>
+                  <th scope="col" className="px-3 py-2 text-right">{t("columns.femaleZero")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[...regions]
+                  .sort((a, b) => a.code.localeCompare(b.code))
+                  .map((r) => {
+                    const b = aggregate(records.filter(regionKey(r.code)));
+                    return (
+                      <tr key={r.code} className="border-b border-rule">
+                        <th scope="row" className="px-3 py-2 text-left font-normal">{r.name}</th>
+                        <td className="px-3 py-2 text-right tabular">{n(b.members_records_used)}</td>
+                        <td className="px-3 py-2 text-right tabular">{n(b.members_male_plus_female)}</td>
+                        <td className="px-3 py-2 text-right tabular">{n(b.members_male)}</td>
+                        <td className="px-3 py-2 text-right tabular">{n(b.members_female)}</td>
+                        <td className="px-3 py-2 text-right tabular">{n(b.members_female_zero_records)}</td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+              <tfoot>
+                <tr className="font-bold">
+                  <th scope="row" className="px-3 py-2 text-left">{t("statistics.total")}</th>
+                  <td className="px-3 py-2 text-right tabular">{n(total.members_records_used)}</td>
+                  <td className="px-3 py-2 text-right tabular">{n(total.members_male_plus_female)}</td>
+                  <td className="px-3 py-2 text-right tabular">{n(total.members_male)}</td>
+                  <td className="px-3 py-2 text-right tabular">{n(total.members_female)}</td>
+                  <td className="px-3 py-2 text-right tabular">{n(total.members_female_zero_records)}</td>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </>

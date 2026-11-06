@@ -55,6 +55,13 @@ describe("aturan agregasi pada data uji (bukan data resmi)", () => {
     expect(block.members_records_not_used).toEqual({ nilai_negatif: 1, komponen_kosong: 1 });
   });
 
+  it("laki-laki dan perempuan dari rekaman yang sama dengan total; perempuan 0 dihitung terpisah", () => {
+    expect(block.members_male).toBe(10);
+    expect(block.members_female).toBe(5);
+    expect(block.members_male + block.members_female).toBe(block.members_male_plus_female);
+    expect(block.members_female_zero_records).toBe(1);
+  });
+
   it("luas dengan penanda selisih tetap dihitung; kosong tidak", () => {
     expect(block.area_ha).toBe(150);
     expect(block.area_records_used).toBe(3);

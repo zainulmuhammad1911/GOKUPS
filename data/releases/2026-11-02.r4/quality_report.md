@@ -1,9 +1,9 @@
-# Laporan Pemeriksaan Rilis 2026-11-02.r3
+# Laporan Pemeriksaan Rilis 2026-11-02.r4
 
 - Status: **draft** (bukan rilis publik final)
 - Sumber: `Data_SK_Perhutanan_Sosial_GoKUPS.xlsx` (SHA-256 `99c05e22db11c316…`)
 - Pengambilan data sumber: 2026-11-02T04:52:09.490000+00:00
-- Dibuat: 2026-11-05T01:05:21+00:00 dengan pipeline 0.1.0
+- Dibuat: 2026-11-06T01:38:07+00:00 dengan pipeline 0.1.0
 
 ## Angka nasional (hasil pengolahan PDPSI dari data sumber)
 
@@ -12,6 +12,8 @@
 | Rekaman persetujuan/penetapan | 10.061 | 10.061 | tidak ada |
 | Luas (ha), dari kolom Luas Area Keseluruhan | 6.892.023 | 10.061 | tidak ada |
 | Anggota laki-laki + perempuan | 1.288.574 | 10.060 | nilai_negatif 1 |
+| … laki-laki | 1.211.597 | 10.060 | sama dengan baris di atas |
+| … perempuan | 76.977 | 10.060 | sama; 5.371 rekaman bernilai 0 di sumber |
 | Pembanding: jumlah kolom sumber Anggota Keseluruhan | 1.227.046 | 10.061 | – |
 
 Provinsi dengan rekaman: 37 dari 38. Kabupaten/kota dengan rekaman: 407 dari 514.
@@ -56,6 +58,5 @@ Pasangan provinsi + kabupaten/kota: 407. Metode: nama_ternormalisasi 406, alias_
 ## Keputusan yang masih menunggu
 
 - K2: statistik gender belum disepakati; rilis tidak memuat statistik gender agregat.
-- K6: lisensi dan izin redistribusi geometri BIG (rilis ini tidak memuat geometri).
 - K7: verifikasi manusia atas crosswalk kode wilayah.
 - K9: institusi pengelola, kontak, dan lisensi publikasi data. Rilis tetap draf sampai terisi.

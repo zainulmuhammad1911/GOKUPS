@@ -43,11 +43,11 @@ function uji(
 
 export const UJI_RECORDS: ApprovalRecord[] = [
   // Anggota 0 + 0 tetap dihitung (K1).
-  uji("uji-1", { "Luas Area Keseluruhan (Ha)": 100, "Anggota Keseluruhan": 0 }, { members_male_plus_female: 0 }),
+  uji("uji-1", { "Luas Area Keseluruhan (Ha)": 100, "Anggota Laki-Laki": 0, "Anggota Perempuan": 0, "Anggota Keseluruhan": 0 }, { members_male_plus_female: 0 }),
   // Duplikat tetap dihitung (K4). Luas dengan penanda selisih tetap dihitung (K5).
-  uji("uji-2", { "Luas Area Keseluruhan (Ha)": 50, "Anggota Keseluruhan": 5 }, { members_male_plus_female: 15 }, true),
+  uji("uji-2", { "Luas Area Keseluruhan (Ha)": 50, "Anggota Laki-Laki": 10, "Anggota Perempuan": 5, "Anggota Keseluruhan": 5 }, { members_male_plus_female: 15 }, true),
   // Nilai negatif: tidak dihitung untuk anggota.
-  uji("uji-3", { "Luas Area Keseluruhan (Ha)": 0, "Anggota Keseluruhan": 35 }, { members_calc_status: "nilai_negatif" }),
+  uji("uji-3", { "Luas Area Keseluruhan (Ha)": 0, "Anggota Laki-Laki": 38, "Anggota Perempuan": -3, "Anggota Keseluruhan": 35 }, { members_calc_status: "nilai_negatif" }),
   // Komponen kosong: anggota tidak tersedia; luas kosong tidak dihitung.
   uji(
     "uji-4",

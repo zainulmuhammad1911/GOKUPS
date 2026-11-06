@@ -362,3 +362,46 @@ test.describe("perutean bahasa (regresi pengalihan berulang)", () => {
     expect(res.headers()["location"]).toBe("/data?province=72");
   });
 });
+
+test.describe("rincian anggota laki-laki dan perempuan (K2, 2026-11-06)", () => {
+  const totals = JSON.parse(readFileSync(`data/releases/${VERSION}/control_totals.json`, "utf-8"));
+  const nat = totals.national;
+  const id = (v: number) => new Intl.NumberFormat("id-ID").format(v);
+  const en = (v: number) => new Intl.NumberFormat("en").format(v);
+
+  test("laki-laki + perempuan = anggota L+P pada total kontrol", () => {
+    expect(nat.members_male + nat.members_female).toBe(nat.members_male_plus_female);
+  });
+
+  test("Beranda menampilkan rincian dan catatan perempuan 0, dalam dua bahasa", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText(`Laki-laki ${id(nat.members_male)}, perempuan ${id(nat.members_female)}.`)).toBeVisible();
+    await expect(page.getByText(new RegExp(`Pada ${id(nat.members_female_zero_records)} dari ${id(nat.members_records_used)} rekaman, anggota perempuan tercatat 0`))).toBeVisible();
+    await page.goto("/en");
+    await expect(page.getByText(`Men ${en(nat.members_male)}, women ${en(nat.members_female)}.`)).toBeVisible();
+  });
+
+  test("Statistik: kolom laki-laki dan perempuan di rekap jenis PS dan tabel per wilayah", async ({ page }) => {
+    await page.goto("/statistics");
+    const foot = page.getByRole("region", { name: /Rekap per jenis PS/ }).locator("tfoot tr");
+    await expect(foot).toContainText(id(nat.members_male));
+    await expect(foot).toContainText(id(nat.members_female));
+    const sex = page.getByRole("region", { name: /Anggota laki-laki dan perempuan per provinsi/ });
+    await expect(sex.locator("tbody tr")).toHaveCount(totals.provinces_with_records);
+    const total = sex.locator("tfoot td");
+    await expect(total).toHaveText([
+      id(nat.members_records_used), id(nat.members_male_plus_female), id(nat.members_male), id(nat.members_female), id(nat.members_female_zero_records),
+    ]);
+  });
+
+  test("Data dan Peta: rincian mengikuti filter provinsi", async ({ page }) => {
+    const p = totals.by_province.find((x: { province_code: string }) => x.province_code === "72");
+    await page.goto("/data?province=72");
+    await expect(page.getByText(new RegExp(`laki-laki ${id(p.members_male)}, perempuan ${id(p.members_female)}`))).toBeVisible();
+    await page.goto("/map?province=72");
+    const panel = page.locator("aside");
+    await expect(panel.getByText("Laki-laki", { exact: true })).toBeVisible();
+    await expect(panel).toContainText(id(p.members_male));
+    await expect(panel).toContainText(id(p.members_female));
+  });
+});

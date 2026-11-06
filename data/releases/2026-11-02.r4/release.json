@@ -1,7 +1,7 @@
 {
-  "version": "2026-11-02.r3",
+  "version": "2026-11-02.r4",
   "status": "draft",
-  "built_at": "2026-11-05T01:05:21+00:00",
+  "built_at": "2026-11-06T01:38:07+00:00",
   "pipeline_version": "0.1.0",
   "source": {
     "name": "GoKUPS",
@@ -74,6 +74,9 @@
     "area_records_used": 10061,
     "area_records_not_used": {},
     "members_male_plus_female": 1288574,
+    "members_male": 1211597,
+    "members_female": 76977,
+    "members_female_zero_records": 5371,
     "members_records_used": 10060,
     "members_records_not_used": {
       "nilai_negatif": 1
@@ -90,52 +93,52 @@
     {
       "path": "approvals.json",
       "bytes": 14300911,
-      "sha256": "589749ca1d1d3d6e9bc7e9ac865dcbc144c4e250f1203ea212f95a5456c5e760"
+      "sha256": "ec6b9ccccb2ded2c84ac590e584742b2ae2c29036850e4e264abe20b6e3bf083"
     },
     {
       "path": "control_totals.json",
-      "bytes": 1034605,
-      "sha256": "bcc087009c8aa9f2195b0b6a5e55ec3223c4defda2263392fbb133736d729734"
+      "bytes": 1279664,
+      "sha256": "68bda058f3b22ea4d431939f6ff03808c57ae610bcdfd7ce5d1b8060bec5fb2f"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_rekaman_lengkap.xlsx",
-      "bytes": 1999819,
-      "sha256": "05b50bf80364b670649d3c3036bf2e19c579d72a0621772a270b1e8e39f83ff8"
+      "path": "downloads/pdpsi_2026-11-02.r4_rekaman_lengkap.xlsx",
+      "bytes": 1999796,
+      "sha256": "31eed992dbb7b746d3afbd37773fbf450d41d55e3bdc8da65ed29917652b39af"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_rekaman_lengkap_csv.zip",
-      "bytes": 547548,
-      "sha256": "3086fe3709f4e45bf409261a247a5cb5bd8e7a6b35ca404eea1f6487487a8b82"
+      "path": "downloads/pdpsi_2026-11-02.r4_rekaman_lengkap_csv.zip",
+      "bytes": 547549,
+      "sha256": "a7ab6003cc08cffbb29b5b71bd833fef6baa82eafb1dd965533dd0e18ed9aa1c"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_rekap_jenis_ps.xlsx",
-      "bytes": 219133,
-      "sha256": "db8ef2b40efd029b81a0ed2230c1beba7b71967c3b134949d09594d3cb35a3b5"
+      "path": "downloads/pdpsi_2026-11-02.r4_rekap_jenis_ps.xlsx",
+      "bytes": 266178,
+      "sha256": "e814e41a7cf16eea4407e4a3949e64f8400a3336645348d8397df3f2dad079d0"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_rekap_jenis_ps_csv.zip",
-      "bytes": 36876,
-      "sha256": "11cf1530cc503a2b9145fbb102b4566370489831f2f8b3da9d125fc05f6ae6d7"
+      "path": "downloads/pdpsi_2026-11-02.r4_rekap_jenis_ps_csv.zip",
+      "bytes": 44282,
+      "sha256": "90827b2e617f0ecabeaff2b9d362a18ed3cf64f1a8a3d6d49dfc98602031b2e3"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_ringkasan_kabkota.xlsx",
-      "bytes": 28911,
-      "sha256": "a83f4c43e2261e30ec82b0bfbcbbe31b3e3a4aa424e5b54ab4fdb3473d3da6ce"
+      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_kabkota.xlsx",
+      "bytes": 34800,
+      "sha256": "0e64cef790f345a09be418754d9b2314b00134ef7505718a39837b760a0af11c"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_ringkasan_kabkota_csv.zip",
-      "bytes": 10197,
-      "sha256": "9a34c317bc04bf75b37733e492aeaee2f21d0af568e866758641452c49a88e2d"
+      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_kabkota_csv.zip",
+      "bytes": 12689,
+      "sha256": "297d1ca37ca4339d4360b5e3e44df0e3e7933146210a3b077958776c7eb1bc9f"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_ringkasan_provinsi.xlsx",
-      "bytes": 9813,
-      "sha256": "2347bd900da7ce2fe02046cbc622eee7c910f517cefbb00e1e8f4594d5cccb4f"
+      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_provinsi.xlsx",
+      "bytes": 10492,
+      "sha256": "7c04a287f644493d11d9695a1da7985966eac54103c2e47a1d6e5229e382c283"
     },
     {
-      "path": "downloads/pdpsi_2026-11-02.r3_ringkasan_provinsi_csv.zip",
-      "bytes": 2850,
-      "sha256": "04c11615124a9126b9f29387c95f5566c9078d29b5a563fb52fecc33b6fb5278"
+      "path": "downloads/pdpsi_2026-11-02.r4_ringkasan_provinsi_csv.zip",
+      "bytes": 3170,
+      "sha256": "d87b5a98dc307ede94e1e080a012335c6439cf6bf6b3d4cad0efa89a70aca6de"
     },
     {
       "path": "quality_report.json",
@@ -144,8 +147,8 @@
     },
     {
       "path": "quality_report.md",
-      "bytes": 4097,
-      "sha256": "c3ea56ed4e1061dbb1a3172791d910ac21c6d74f8d4f3ac40c8a1a14363f05e9"
+      "bytes": 4159,
+      "sha256": "9510dc921c4d6bf26d2b44a8dadfbf8ee9a42ff083507539e706c4aa63b98fe0"
     },
     {
       "path": "schemes.json",

@@ -119,7 +119,10 @@ def summary_table(rows: list[dict], names: dict[str, str], level: str) -> pd.Dat
         "Rekaman yang Dipakai untuk Luas": r["area_records_used"],
         "Rekaman Tidak Dipakai untuk Luas (alasan: jumlah)": _reasons(r["area_records_not_used"]),
         f"{DERIVED} Anggota Laki-Laki + Perempuan": r["members_male_plus_female"],
+        f"{DERIVED} Anggota Laki-Laki": r["members_male"],
+        f"{DERIVED} Anggota Perempuan": r["members_female"],
         "Rekaman yang Dipakai untuk Anggota": r["members_records_used"],
+        "Rekaman dengan Anggota Perempuan = 0": r["members_female_zero_records"],
         "Rekaman Tidak Dipakai untuk Anggota (alasan: jumlah)": _reasons(r["members_records_not_used"]),
         "Jumlah Kolom Sumber 'Anggota Keseluruhan' (pembanding)": r["members_source_total_column"],
     } for r in rows])

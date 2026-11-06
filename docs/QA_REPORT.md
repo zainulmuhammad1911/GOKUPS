@@ -1,16 +1,16 @@
 # Laporan QA PDPSI (Tahap 7)
 
 **Tanggal:** 2026-11-05
-**Build yang diuji:** commit kerja setelah Tahap 3 dan 7, rilis data draf `2026-11-02.r3`, batas wilayah `bps-2020-gb9469f09-kemendagri2025`.
+**Build yang diuji:** commit kerja setelah Tahap 3 dan 7, rilis data draf `2026-11-02.r3`. Pembaruan 2026-11-06: rincian anggota laki-laki/perempuan (K2) dan rilis `2026-11-02.r4`; uji diulang (bagian 1), Lighthouse tidak diulang, batas wilayah `bps-2020-gb9469f09-kemendagri2025`.
 **Status publikasi:** belum diterbitkan. Rilis tetap draf sampai K7 dan K9 selesai (lihat bagian 6).
 
 ## 1. Pengujian otomatis
 
 | Lapisan | Alat | Hasil |
 |---------|------|-------|
-| Pipeline data dan batas wilayah | pytest | 39 lulus |
-| Logika web (agregasi, filter, data grafik) | Vitest | 25 lulus |
-| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 108 lulus; 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
+| Pipeline data dan batas wilayah | pytest | 41 lulus |
+| Logika web (agregasi, filter, data grafik) | Vitest | 26 lulus |
+| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 112 lulus; 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
 | Tipe | `tsc --noEmit` | lulus |
 
 Cakupan e2e meliputi: tautan lewati-ke-konten, menu ponsel (buka, tutup dengan Escape, fokus kembali), ganti bahasa, filter dan pencarian, urutan kolom, paginasi, unduhan sesuai filter (isi = tabel, kolom = rilis), referensi duplikat, nilai sumber apa adanya (spasi ganda, kosong), grafik (render, pilihan ukuran, tabel data, label di ponsel), peta (render, drill-down, URL, panel, tautan ke data), peta mini, halaman Tentang (daftar isi, angka dari rilis), keamanan rute unduhan, 404, dan regresi pengalihan berulang perutean bahasa.

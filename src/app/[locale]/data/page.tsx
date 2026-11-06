@@ -138,6 +138,8 @@ export default async function DataPage({
             {t("data.summary", {
               area: n(summary.area_ha),
               members: n(summary.members_male_plus_female),
+              male: n(summary.members_male),
+              female: n(summary.members_female),
               membersUsed: n(summary.members_records_used),
             })}{" "}
             <span className="text-ink-muted">{t("common.processed")}</span>

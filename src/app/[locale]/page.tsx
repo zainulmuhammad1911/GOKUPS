@@ -56,12 +56,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           {t("home.areaNote", { used: n(nat.area_records_used), flagged: n(countFlag(approvals, "area_component_mismatch")) })}
         </DataSheetStat>
         <DataSheetStat label={t("home.membersLabel")} value={n(nat.members_male_plus_female)} source={`${processed} ${source}`}>
-          {t("home.membersNote", { used: n(nat.members_records_used), notUsed: n(notUsedMembers), notUsedCount: notUsedMembers, reasons })}{" "}
-          {nat.members_source_total_column !== null &&
-            t("home.membersCompare", {
-              sourceTotal: n(nat.members_source_total_column),
-              mismatch: n(countFlag(approvals, "members_total_equals_female")),
-            })}
+          <span className="block font-bold">
+            {t("common.membersSplit", { male: n(nat.members_male), female: n(nat.members_female) })}
+          </span>
+          <span className="mt-1 block">
+            {t("common.femaleZeroNote", { zero: n(nat.members_female_zero_records), used: n(nat.members_records_used) })}
+          </span>
+          <span className="mt-1 block">
+            {t("home.membersNote", { used: n(nat.members_records_used), notUsed: n(notUsedMembers), notUsedCount: notUsedMembers, reasons })}{" "}
+            {nat.members_source_total_column !== null &&
+              t("home.membersCompare", {
+                sourceTotal: n(nat.members_source_total_column),
+                mismatch: n(countFlag(approvals, "members_total_equals_female")),
+              })}
+          </span>
         </DataSheetStat>
       </dl>
 

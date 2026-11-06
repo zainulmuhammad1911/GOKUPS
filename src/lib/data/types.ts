@@ -50,6 +50,9 @@ export interface AggregateBlock {
   area_records_used: number;
   area_records_not_used: Record<string, number>;
   members_male_plus_female: number;
+  members_male: number;
+  members_female: number;
+  members_female_zero_records: number;
   members_records_used: number;
   members_records_not_used: Record<string, number>;
   members_source_total_column: number | null;

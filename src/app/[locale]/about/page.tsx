@@ -153,6 +153,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           })}
         </li>
         <li>
+          {t("about.numbersSex", {
+            male: n(nat.members_male),
+            female: n(nat.members_female),
+            members: n(nat.members_male_plus_female),
+            zero: n(nat.members_female_zero_records),
+          })}
+        </li>
+        <li>
           {t("about.numbersSourceTotal", {
             sourceTotal: n(nat.members_source_total_column ?? 0),
             mismatch: n(countFlag(approvals, "members_total_equals_female")),

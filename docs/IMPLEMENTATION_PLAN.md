@@ -1,6 +1,6 @@
 # Rencana Implementasi PDPSI
 
-**Status:** Tahap 0 sampai 6 selesai; Tahap 7 selesai untuk QA, publikasi menunggu K9 dan hosting (2026-11-05). Rilis aktif: draf `2026-11-02.r3`; batas wilayah `bps-2020-gb9469f09-kemendagri2025`. Pengujian terakhir: pytest 39, Vitest 25, Playwright + axe 108. Bukti QA: `docs/QA_REPORT.md`.
+**Status:** Tahap 0 sampai 6 selesai; Tahap 7 selesai untuk QA, publikasi menunggu K9 dan hosting (2026-11-05). Rilis aktif: draf `2026-11-02.r4`; batas wilayah `bps-2020-gb9469f09-kemendagri2025`. Pengujian terakhir (2026-11-06): pytest 41, Vitest 26, Playwright + axe 112. Bukti QA: `docs/QA_REPORT.md`.
 **Urutan:** data dan peta lebih dulu, karena keduanya membawa risiko terbesar (PRD §14). Setiap tahap punya kriteria selesai yang bisa diperiksa. Tahap berikutnya dimulai setelah tahap sebelumnya disetujui.
 
 **Aturan permanen untuk semua tahap:** prinsip Source Fidelity & Data Transparency (PRD §1.1, DECISIONS.md bagian 1). Setiap fitur yang menampilkan data harus memakai nilai `source` apa adanya, memberi label pada hasil pengolahan, dan menampilkan penanda ketidaksesuaian.
@@ -14,7 +14,7 @@ Rincian lengkap, konsekuensi, dan nilai bawaan ada di `docs/DECISIONS.md`. Ringk
 | # | Keputusan | Status | Penerapan |
 |---|-----------|--------|-----------|
 | K1 | Perhitungan anggota | Ditetapkan | L+P bila keduanya tersedia dan ≥ 0, termasuk 0; negatif = anomali; kolom sumber tetap tampil |
-| K2 | Statistik gender | Menunggu | Tidak ada statistik gender agregat |
+| K2 | Rincian anggota L/P | Ditetapkan (diubah 2026-11-06) | Anggota L+P selalu disertai laki-laki dan perempuan dari rekaman yang sama, dengan catatan perempuan 0 |
 | K3 | Nama lembaga/pemegang izin HTR | Ditetapkan | Ditampilkan sesuai sumber, tanpa penyamaran |
 | K4 | Nomor SK sama | Ditetapkan | Semua dihitung; penanda Duplikat + referensi ke semua rekaman terkait |
 | K5 | Anomali luas | Ditetapkan | Ambang 5 ha hanya penanda; tidak ada rekaman yang dikeluarkan |

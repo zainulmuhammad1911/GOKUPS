@@ -16,7 +16,7 @@ from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
-from .quality import AREA_TOTAL
+from .quality import AREA_TOTAL, F, M
 
 JENIS = [("HD", "Hutan Desa"), ("HKM", "Hutan Kemasyarakatan"), ("HTR", "Hutan Tanaman Rakyat"),
          ("HA", "Hutan Adat"), ("KK", "Kemitraan Kehutanan")]
@@ -32,7 +32,10 @@ NOTES = [
     "Rinciannya ditampilkan di kolom tersendiri.",
     "Hutan Adat adalah penetapan, bukan persetujuan.",
     "Luas = jumlah kolom sumber 'Luas Area Keseluruhan (Ha)', tanpa koreksi. Rekaman dengan catatan selisih luas tetap dihitung.",
-    "Anggota (lembar Data Panjang) = laki-laki + perempuan pada rekaman yang kedua nilainya tersedia dan tidak negatif, termasuk 0.",
+    "Anggota = laki-laki + perempuan pada rekaman yang kedua nilainya tersedia dan tidak negatif, termasuk 0. "
+    "Kolom Laki-laki dan Perempuan dijumlahkan dari rekaman yang sama, sehingga Laki-laki + Perempuan = Anggota L+P.",
+    "Perempuan bernilai 0 pada sebagian besar rekaman SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat, "
+    "sehingga jumlah perempuan kemungkinan lebih rendah dari keadaan sebenarnya. Kolom 'Rekaman perempuan = 0' menunjukkan banyaknya rekaman seperti itu.",
     "Rekaman bernomor SK sama tidak dihapus dan tetap dihitung.",
 ]
 
@@ -51,8 +54,18 @@ def _stats(g: pd.DataFrame) -> dict:
         "rekaman": int(len(g)),
         "luas_ha": round(float(g.loc[area_ok, AREA_TOTAL].sum()), 2),
         "anggota_laki_plus_perempuan": int(g.loc[mem_ok, "members_male_plus_female"].sum()),
+        "anggota_laki_laki": int(pd.to_numeric(g.loc[mem_ok, M]).sum()),
+        "anggota_perempuan": int(pd.to_numeric(g.loc[mem_ok, F]).sum()),
         "rekaman_dihitung_anggota": int(mem_ok.sum()),
+        "rekaman_perempuan_0": int((pd.to_numeric(g.loc[mem_ok, F]) == 0).sum()),
     }
+
+
+MEMBER_HEADS = ["Anggota L+P", "Laki-laki", "Perempuan", "Rekaman perempuan = 0"]
+
+
+def _members(s: dict) -> list:
+    return [s["anggota_laki_plus_perempuan"], s["anggota_laki_laki"], s["anggota_perempuan"], s["rekaman_perempuan_0"]]
 
 
 def long_table(df: pd.DataFrame, admin: pd.DataFrame) -> pd.DataFrame:
@@ -90,6 +103,11 @@ def _header(ws, row: int, first_cols: list[str]) -> int:
         ws.cell(row + 1, col, "Rekaman")
         ws.cell(row + 1, col + 1, "Luas (ha)")
         col += 2
+    ws.cell(row, col, "Anggota (semua jenis PS)")
+    ws.merge_cells(start_row=row, start_column=col, end_row=row, end_column=col + len(MEMBER_HEADS) - 1)
+    for i, h in enumerate(MEMBER_HEADS):
+        ws.cell(row + 1, col + i, h)
+    col += len(MEMBER_HEADS)
     for r in (row, row + 1):
         for c in range(1, col):
             cell = ws.cell(r, c)
@@ -106,14 +124,14 @@ def _values(part: pd.DataFrame) -> list:
         s = _stats(part[part[field] == code])
         out += [s["rekaman"], s["luas_ha"]]
     s = _stats(part)
-    return out + [s["rekaman"], s["luas_ha"]]
+    return out + [s["rekaman"], s["luas_ha"]] + _members(s)
 
 
 def _write_row(ws, row: int, lead: list, values: list, bold=False, fill=None, indent=0):
     for i, v in enumerate(lead + values, start=1):
         cell = ws.cell(row, i, v)
         if i > len(lead):
-            cell.number_format = INT if (i - len(lead)) % 2 == 1 else AREA
+            cell.number_format = AREA if isinstance(v, float) else INT
         if bold:
             cell.font = BOLD
         if fill:
@@ -142,7 +160,7 @@ def write_rekap_xlsx(df: pd.DataFrame, admin: pd.DataFrame, path: Path, meta: li
     ws = wb.active
     ws.title = "Rekap Nasional"
     r = _title(ws, "Rekapitulasi penerima persetujuan/penetapan Perhutanan Sosial per jenis PS", meta)
-    for c, h in enumerate(["Jenis PS", "Jenis rekaman", "Rekaman", "Luas (ha)", "Anggota laki-laki + perempuan"], 1):
+    for c, h in enumerate(["Jenis PS", "Jenis rekaman", "Rekaman", "Luas (ha)", *MEMBER_HEADS], 1):
         cell = ws.cell(r, c, h)
         cell.font, cell.fill = BOLD, HEAD_FILL
     r += 1
@@ -150,23 +168,17 @@ def write_rekap_xlsx(df: pd.DataFrame, admin: pd.DataFrame, path: Path, meta: li
         g = df[df["jenis_ps_code"] == code]
         s = _stats(g)
         kind = "penetapan" if code == "HA" else "persetujuan"
-        _write_row(ws, r, [label, kind], [s["rekaman"], s["luas_ha"], s["anggota_laki_plus_perempuan"]])
-        for i, fmt in ((3, INT), (4, AREA), (5, INT)):
-            ws.cell(r, i).number_format = fmt
+        _write_row(ws, r, [label, kind], [s["rekaman"], s["luas_ha"], *_members(s)])
         r += 1
         if code == "KK":
             for scode, slabel in KK_SUB:
                 s = _stats(df[df["scheme_code"] == scode])
-                _write_row(ws, r, [f"   rincian: {slabel}", kind], [s["rekaman"], s["luas_ha"], s["anggota_laki_plus_perempuan"]],
+                _write_row(ws, r, [f"   rincian: {slabel}", kind], [s["rekaman"], s["luas_ha"], *_members(s)],
                            fill=SUB_FILL)
-                for i, fmt in ((3, INT), (4, AREA), (5, INT)):
-                    ws.cell(r, i).number_format = fmt
                 r += 1
     s = _stats(df)
-    _write_row(ws, r, ["Total", ""], [s["rekaman"], s["luas_ha"], s["anggota_laki_plus_perempuan"]], bold=True)
-    for i, fmt in ((3, INT), (4, AREA), (5, INT)):
-        ws.cell(r, i).number_format = fmt
-    for col, w in zip("ABCDE", (40, 16, 12, 16, 30)):
+    _write_row(ws, r, ["Total", ""], [s["rekaman"], s["luas_ha"], *_members(s)], bold=True)
+    for col, w in zip("ABCDEFGH", (40, 16, 12, 16, 14, 14, 14, 16)):
         ws.column_dimensions[col].width = w
 
     # 2. Rekap per provinsi × jenis PS (semua 38 provinsi, termasuk yang tanpa rekaman)
@@ -182,6 +194,8 @@ def write_rekap_xlsx(df: pd.DataFrame, admin: pd.DataFrame, path: Path, meta: li
     ws.column_dimensions["A"].width, ws.column_dimensions["B"].width = 8, 34
     for c in range(3, last + 1):
         ws.column_dimensions[get_column_letter(c)].width = 11 if (c - 3) % 2 == 0 else 15
+    for c in range(last - len(MEMBER_HEADS) + 1, last + 1):
+        ws.column_dimensions[get_column_letter(c)].width = 14
 
     # 3. Rekap per kabupaten/kota × jenis PS, subtotal per provinsi
     ws = wb.create_sheet("Rekap Kabupaten-Kota")
@@ -199,6 +213,8 @@ def write_rekap_xlsx(df: pd.DataFrame, admin: pd.DataFrame, path: Path, meta: li
     ws.column_dimensions["A"].width, ws.column_dimensions["B"].width = 9, 40
     for c in range(3, last + 1):
         ws.column_dimensions[get_column_letter(c)].width = 11 if (c - 3) % 2 == 0 else 15
+    for c in range(last - len(MEMBER_HEADS) + 1, last + 1):
+        ws.column_dimensions[get_column_letter(c)].width = 14
 
     # 4. Data panjang untuk penelitian (pivot/filter)
     ws = wb.create_sheet("Data Panjang")

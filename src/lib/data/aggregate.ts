@@ -7,11 +7,15 @@ import type { AggregateBlock, ApprovalRecord } from "./types";
  *
  * - Rekaman: semua rekaman, termasuk yang bernomor SK sama.
  * - Luas: kolom sumber "Luas Area Keseluruhan (Ha)" bila area_calc_status = dihitung.
- * - Anggota: laki-laki + perempuan bila members_calc_status = dihitung (termasuk 0).
+ * - Anggota: laki-laki + perempuan bila members_calc_status = dihitung (termasuk 0). Laki-laki dan
+ *   perempuan dijumlahkan dari rekaman yang sama, jadi members_male + members_female = total L+P.
+ *   members_female_zero_records menghitung rekaman yang perempuannya 0 di sumber (K2).
  * - Pembanding: jumlah kolom sumber "Anggota Keseluruhan" apa adanya.
  */
 export const AREA_COLUMN = "Luas Area Keseluruhan (Ha)";
 export const MEMBERS_SOURCE_COLUMN = "Anggota Keseluruhan";
+export const MALE_COLUMN = "Anggota Laki-Laki";
+export const FEMALE_COLUMN = "Anggota Perempuan";
 
 function bump(map: Record<string, number>, key: string) {
   map[key] = (map[key] ?? 0) + 1;
@@ -24,6 +28,9 @@ export function aggregate(records: Iterable<ApprovalRecord>): AggregateBlock {
     area_records_used: 0,
     area_records_not_used: {},
     members_male_plus_female: 0,
+    members_male: 0,
+    members_female: 0,
+    members_female_zero_records: 0,
     members_records_used: 0,
     members_records_not_used: {},
     members_source_total_column: null,
@@ -42,6 +49,10 @@ export function aggregate(records: Iterable<ApprovalRecord>): AggregateBlock {
     const members = r.derived.members_male_plus_female;
     if (r.derived.members_calc_status === "dihitung" && typeof members === "number") {
       block.members_male_plus_female += members;
+      block.members_male += r.source[MALE_COLUMN] as number;
+      const female = r.source[FEMALE_COLUMN] as number;
+      block.members_female += female;
+      if (female === 0) block.members_female_zero_records += 1;
       block.members_records_used += 1;
     } else {
       bump(block.members_records_not_used, r.derived.members_calc_status);

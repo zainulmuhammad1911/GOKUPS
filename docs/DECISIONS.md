@@ -61,9 +61,12 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 - **Label:** hasil perhitungan tidak disebut "total resmi nasional". Labelnya "jumlah anggota laki-laki + perempuan tercatat (hasil pengolahan PDPSI)".
 - **Catatan:** Pada 1.127 rekaman, nilai `Anggota Keseluruhan` sama dengan nilai anggota perempuan. Ini ditampilkan sebagai catatan (`members_total_column_mismatch`), bukan diperbaiki.
 
-### K2. Statistik gender
+### K2. Rincian anggota laki-laki dan perempuan
 - **Status:** Ditetapkan (2026-11-05, persetujuan umum pemilik produk atas rekomendasi)
-- **Keputusan:** MVP tidak menampilkan statistik atau rasio gender agregat. Nilai laki-laki dan perempuan tetap ditampilkan per rekaman sebagai nilai sumber, dan ikut dalam unduhan. Alasan: anggota perempuan bernilai 0 pada 53% rekaman (hampir semua SK sebelum 2017), yang kemungkinan berarti tidak dicatat.
+- **Keputusan (diubah 2026-11-06 atas permintaan pemilik produk):** setiap angka anggota L+P disertai rinciannya, yaitu jumlah laki-laki dan jumlah perempuan, di Beranda, Statistik (rekap per jenis PS dan tabel per wilayah), Data, Peta, Tentang, unduhan ringkasan, dan file rekap.
+- **Aturan hitung:** laki-laki dan perempuan dijumlahkan dari kolom sumber `Anggota Laki-Laki` dan `Anggota Perempuan` pada rekaman yang sama dengan anggota L+P (K1: kedua nilai tersedia dan tidak negatif, termasuk 0). Karena itu laki-laki + perempuan selalu sama dengan anggota L+P. Tidak ada nilai yang dikoreksi atau diisi perkiraan.
+- **Transparansi:** anggota perempuan bernilai 0 pada 5.371 dari 10.060 rekaman yang dihitung (53%), hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat. Setiap rincian disertai catatan ini dan jumlah rekaman yang mencatat perempuan 0 (`members_female_zero_records`), sehingga pembaca bisa menilai sendiri. Rasio atau persentase perempuan tidak dihitung oleh PDPSI.
+- **Keputusan sebelumnya (2026-11-05):** tidak ada statistik gender agregat di MVP. Diganti oleh keputusan di atas.
 
 ### K3. Nama lembaga dan pemegang izin HTR
 - **Status:** Ditetapkan (dikoreksi 2026-11-04, keputusan E). Menggantikan aturan penyamaran sebelumnya.
@@ -124,7 +127,7 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | Kode | Status |
 |------|--------|
 | K1 | Ditetapkan |
-| K2 | Ditetapkan |
+| K2 | Ditetapkan (diubah 2026-11-06) |
 | K3 | Ditetapkan |
 | K4 | Ditetapkan |
 | K5 | Ditetapkan |
@@ -143,3 +146,4 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | 2026-11-04 | **Konsolidasi sebelum Tahap 2.** Prinsip Source Fidelity & Data Transparency ditetapkan. K1 dikoreksi: L+P dihitung termasuk bila 0. K3 diganti: tidak ada penyamaran nama. K4 ditetapkan: semua dihitung, penanda Duplikat dengan referensi. K5 ditetapkan: ambang hanya penanda. K8 ditetapkan: 7 kategori sumber tidak digabung. Nilai sumber mentah dipertahankan (tanpa perapian spasi atau koreksi ejaan). KPH dan Region dipublikasikan dengan catatan. Rilis `2026-11-02` (draf pertama, dengan penyamaran) digantikan rilis `2026-11-02.r2`. |
 | 2026-11-05 | **K8 diubah.** Instruksi rekap: rekapitulasi penerima persetujuan PS per provinsi, kabupaten/kota, dan jenis PS (HD, HKm, HTR, HA, KK). Kemitraan Kehutanan ditampilkan sebagai satu jenis PS dengan rincian 3 subskema yang selalu terlihat. Tujuh kategori sumber tetap disimpan. Rilis `2026-11-02.r3` menambahkan rekap ini. |
 | 2026-11-05 | Pemilik produk memberi persetujuan umum atas semua rekomendasi. **K2** ditetapkan (tanpa statistik gender di MVP). **K6** ditetapkan lewat sumber alternatif berlisensi jelas (BPS/OCHA, geoBoundaries, CC BY 3.0 IGO); BIG tidak dipakai. K7, K9, K10 tetap menunggu karena butuh tindakan atau informasi dari pihak lain. Rilis draf `2026-11-02` dan `2026-11-02.r2` dihapus dari working tree (masih ada di riwayat git). |
+| 2026-11-06 | **K2 diubah** atas permintaan pemilik produk: anggota L+P selalu disertai jumlah laki-laki dan perempuan, dihitung dari rekaman yang sama, dengan catatan dan jumlah rekaman yang mencatat perempuan 0. Rilis `2026-11-02.r4` (sumber sama) menambahkan `members_male`, `members_female`, dan `members_female_zero_records` ke total kontrol, ringkasan, dan file rekap. Rilis `2026-11-02.r3` dihapus dari working tree (masih ada di riwayat git). |

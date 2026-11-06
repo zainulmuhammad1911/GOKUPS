@@ -64,6 +64,8 @@ def render_markdown(release: dict, q: dict, totals: dict, pending: list[str]) ->
         f"| Rekaman persetujuan/penetapan | {_fmt(nat['records'])} | {_fmt(nat['records'])} | tidak ada |",
         f"| Luas (ha), dari kolom Luas Area Keseluruhan | {_fmt(nat['area_ha'])} | {_fmt(nat['area_records_used'])} | {_reasons(nat['area_records_not_used'])} |",
         f"| Anggota laki-laki + perempuan | {_fmt(nat['members_male_plus_female'])} | {_fmt(nat['members_records_used'])} | {_reasons(nat['members_records_not_used'])} |",
+        f"| … laki-laki | {_fmt(nat['members_male'])} | {_fmt(nat['members_records_used'])} | sama dengan baris di atas |",
+        f"| … perempuan | {_fmt(nat['members_female'])} | {_fmt(nat['members_records_used'])} | sama; {_fmt(nat['members_female_zero_records'])} rekaman bernilai 0 di sumber |",
         f"| Pembanding: jumlah kolom sumber Anggota Keseluruhan | {_fmt(nat['members_source_total_column'])} | {_fmt(nat['members_source_total_column_records'])} | – |",
         "",
         f"Provinsi dengan rekaman: {totals['provinces_with_records']} dari 38. "
