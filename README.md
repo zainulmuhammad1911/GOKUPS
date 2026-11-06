@@ -19,7 +19,7 @@ Portal data terbuka dua bahasa (Indonesia/Inggris) untuk rekapitulasi kelompok p
 | `src/` | Aplikasi Next.js |
 | `tests/` | Uji Vitest (`unit/`) dan Playwright + axe (`e2e/`) |
 
-Tidak pernah masuk git atau image produksi: workbook sumber (`*.xlsx` di akar), `data/source/`, dan `data/releases/*/internal/`. Ketiganya memuat kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping yang tidak dipublikasikan.
+Tidak pernah masuk git atau image produksi: workbook sumber (`*.xlsx` di akar), `data/source/`, dan `data/releases/*/internal/`. Ketiganya memuat kolom Ketua Lembaga dan Pra-Pendamping yang tidak dipublikasikan.
 
 ## Persiapan
 

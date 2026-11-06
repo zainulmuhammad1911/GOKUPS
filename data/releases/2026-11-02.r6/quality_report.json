@@ -43,8 +43,7 @@
   },
   "excluded_columns": [
     "Ketua Lembaga",
-    "Pra-Pendamping",
-    "Pendamping"
+    "Pra-Pendamping"
   ],
   "crosswalk": {
     "pairs": 407,

@@ -97,7 +97,7 @@ Keuntungan:
 id          ID internal stabil (4.4)
 source      semua kolom sumber yang dipublikasikan, nama kolom asli, nilai apa adanya
             (spasi ganda, ejaan, 0, dan kosong/null dipertahankan).
-            Tidak memuat Ketua Lembaga, Pra-Pendamping, Pendamping.
+            Tidak memuat Ketua Lembaga dan Pra-Pendamping (Pendamping dimuat sejak r6, K11).
 derived     hasil pengolahan PDPSI:
             sk_normalized, approval_year, scheme_code (7 kode), scheme_label_id, scheme_parent,
             record_kind (persetujuan|penetapan), province_code, province_name_official,
@@ -233,7 +233,7 @@ Target awal JS tidak realistis: React 19, Next.js 16, dan next-intl sendiri seki
 
 ## 9. Keamanan dan privasi
 
-- Kolom `Ketua Lembaga`, `Pra-Pendamping`, `Pendamping`, dan sheet `Pendamping` tidak pernah masuk `approvals.json`, bundle klien, atau unduhan (PRD §6.5; alasan dan cakupan di DECISIONS.md bagian 1). Nama lembaga, termasuk nama pemegang izin HTR, ditampilkan apa adanya (K3).
+- Kolom `Ketua Lembaga`, `Pra-Pendamping`, dan sheet `Pendamping` tidak pernah masuk `approvals.json`, bundle klien, atau unduhan (PRD §6.5; alasan dan cakupan di DECISIONS.md bagian 1). Kolom `Pendamping` dipublikasikan sejak rilis r6 atas keputusan pemilik produk (K11). Nama lembaga, termasuk nama pemegang izin HTR, ditampilkan apa adanya (K3).
 - Ekspor CSV/XLSX dari aplikasi harus menetralkan sel yang diawali `=`, `+`, `-`, atau `@` agar tidak dieksekusi sebagai rumus spreadsheet. Rilis r2 tidak memuat sel seperti itu (sudah diperiksa); pemeriksaan ini tetap wajib di ekspor terfilter Tahap 4.
 - Workbook sumber dan `internal/` masuk `.gitignore`. Workbook memuat nama orang, sehingga repositori publik tidak boleh berisi file tersebut.
 - Semua parameter filter divalidasi dengan daftar putih (kode wilayah dan skema yang diizinkan, panjang teks pencarian dibatasi); parameter tidak dikenal diabaikan dan disebutkan di halaman.

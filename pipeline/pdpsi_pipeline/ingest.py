@@ -45,7 +45,9 @@ EXPECTED_COLUMNS = [
 
 # Kolom yang dikecualikan dari publikasi (DECISIONS.md bagian 1, PRD §6.5):
 # nama orang yang publikasinya menunggu penilaian kelayakan. Hanya ada di internal/.
-PRIVATE_COLUMNS = ["Ketua Lembaga", "Pra-Pendamping", "Pendamping"]
+# K11 (diubah 2026-11-06): kolom Pendamping dipublikasikan atas keputusan pemilik produk, karena
+# nama pendamping juga disajikan publik di situs GoKUPS. Ketua Lembaga dan Pra-Pendamping tetap tidak.
+PRIVATE_COLUMNS = ["Ketua Lembaga", "Pra-Pendamping"]
 PUBLISHED_COLUMNS = [c for c in EXPECTED_COLUMNS if c not in PRIVATE_COLUMNS]
 EXCLUSION_REASON = (
     "Berisi nama orang. PRD §6.5: tidak ditampilkan secara default sampai ada pemeriksaan "

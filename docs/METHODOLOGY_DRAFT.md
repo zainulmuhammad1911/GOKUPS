@@ -18,7 +18,7 @@ Setiap rekaman di PDPSI terdiri dari tiga bagian yang dipisahkan dengan jelas:
 - PDPSI tidak terhubung langsung ke GoKUPS. Data diperbarui dengan impor terkontrol oleh pengelola.
 
 ## Data yang tidak dipublikasikan
-Data publik PDPSI **bukan salinan mentah sepenuhnya**. Kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping, serta sheet daftar pendamping, berisi nama orang. Kolom-kolom ini tidak ditampilkan sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi (PRD §6.5). Kolom lain, termasuk Nama Lembaga, ditampilkan apa adanya.
+Data publik PDPSI **bukan salinan mentah sepenuhnya**. Kolom Ketua Lembaga dan Pra-Pendamping, serta sheet daftar pendamping, berisi nama orang dan tidak ditampilkan sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi (PRD §6.5). Kolom Pendamping ditampilkan apa adanya sejak rilis 2026-11-02.r6 atas keputusan pemilik produk, karena nama pendamping juga disajikan publik di situs GoKUPS (K11). Kolom lain, termasuk Nama Lembaga, ditampilkan apa adanya.
 
 Nama Lembaga pada sekitar 2.000 rekaman Hutan Tanaman Rakyat berisi nama orang pemegang izin, ditampilkan sesuai sumber (keputusan K3). **[Belum ditetapkan: dasar hukum publikasi dan kontak pengelola untuk permintaan koreksi, K9]**
 
@@ -78,7 +78,7 @@ Laki-laki dan perempuan dijumlahkan dari rekaman yang sama dengan anggota L+P, s
 
 **Filter anggota tercatat.** Halaman Data dan Statistik bisa disaring menurut jumlah anggota laki-laki + perempuan: 1 orang, 2 orang atau lebih, 0 orang, atau tidak dapat dihitung. Pilihan "1 orang" dipakai untuk melihat rekaman yang kemungkinan izin perorangan (2.168 rekaman, 2.167 di antaranya HTR). Ini hasil pengolahan, bukan status resmi; sumber hanya menandai 58 rekaman sebagai "PERORANGAN" di kolom Bentuk Lembaga.
 
-**Filter pendamping.** Rekaman bisa disaring menurut ada atau tidaknya isi kolom Pendamping di sumber (2.233 terisi, 7.828 kosong). Nama pendamping tidak dipublikasikan; kolom kosong bisa berarti tidak ada pendamping atau tidak dicatat (K11).
+**Filter pendamping.** Rekaman bisa disaring menurut ada atau tidaknya isi kolom Pendamping di sumber (2.233 terisi, 7.828 kosong). Nama pendamping tampil di halaman detail dan unduhan; kolom kosong bisa berarti tidak ada pendamping atau tidak dicatat (K11).
 
 ## Penanda ketidaksesuaian
 Penanda tidak mengubah nilai dan tidak mengeluarkan rekaman dari perhitungan.

@@ -39,10 +39,11 @@ Jika data tidak tersedia, katakan tidak tersedia. Jika data tidak konsisten, tam
 |-------|--------|---------|
 | Ketua Lembaga | Nama orang; PRD §6.5 meminta tidak ditampilkan secara default sampai ada pemeriksaan dasar hukum, tujuan, dan risiko privasi | Semua rekaman |
 | Pra-Pendamping | Sama | Semua rekaman |
-| Pendamping | Sama | Semua rekaman |
 | Sheet `Pendamping` | Daftar nama orang dan SK pendamping | Seluruh sheet |
 
-Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasikan, tidak masuk git) dan bisa dipublikasikan bila penilaian kelayakan publikasi menyetujuinya.
+Kolom `Pendamping` **dipublikasikan sejak rilis `2026-11-02.r6`** (K11, diubah 2026-11-06): pemilik produk menilai nama pendamping layak ditampilkan karena juga disajikan publik di situs GoKUPS.
+
+Kolom yang dikecualikan tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasikan, tidak masuk git) dan bisa dipublikasikan bila penilaian kelayakan publikasi menyetujuinya.
 
 ## 2. Daftar K1 sampai K10
 
@@ -68,11 +69,12 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 - **Transparansi:** anggota perempuan bernilai 0 pada 5.371 dari 10.060 rekaman yang dihitung (53%), hampir semuanya SK sebelum 2017. Sumber tidak membedakan 0 dari tidak dicatat. Setiap rincian disertai catatan ini dan jumlah rekaman yang mencatat perempuan 0 (`members_female_zero_records`), sehingga pembaca bisa menilai sendiri. Rasio atau persentase perempuan tidak dihitung oleh PDPSI.
 - **Keputusan sebelumnya (2026-11-05):** tidak ada statistik gender agregat di MVP. Diganti oleh keputusan di atas.
 
-### K11. Status pendamping (tanpa nama)
-- **Status:** Ditetapkan 2026-11-06 atas permintaan pemilik produk.
-- **Keputusan:** kolom sumber `Pendamping` tetap tidak dipublikasikan (berisi nama orang, PRD §6.5). Yang dipublikasikan hanya turunan `derived.pendamping_status`: `tercatat` bila kolom terisi, `kosong` bila tidak. Dipakai untuk filter Pendamping di halaman Data, Statistik, Peta, dan unduhan, serta `pendamping_recorded_records` di total kontrol dan ringkasan.
-- **Cakupan:** 2.233 rekaman tercatat, 7.828 kosong (rilis `2026-11-02.r5`). Kolom `Pra-Pendamping` tidak dipakai: hanya 150 rekaman terisi dan 84 di antaranya bernilai "0".
-- **Batasan yang ditampilkan:** kolom kosong bisa berarti tidak ada pendamping atau tidak dicatat. Pemindaian nama dari kolom yang dikecualikan pada rilis dan build tetap tanpa kebocoran.
+### K11. Kolom Pendamping dan filter pendamping
+- **Status:** Ditetapkan 2026-11-06, diubah pada hari yang sama atas keputusan pemilik produk.
+- **Keputusan (berlaku):** kolom sumber `Pendamping` dipublikasikan apa adanya (halaman detail rekaman, pencarian, unduhan), karena nama pendamping juga disajikan publik di situs GoKUPS. Penilaian kelayakan ini dibuat pemilik produk; konfirmasi institusi pengelola terhadap UU No. 27/2022 tentang Pelindungan Data Pribadi tetap disarankan sebelum rilis publik final (K9). Turunan `derived.pendamping_status` (`tercatat`/`kosong`) dipakai filter Pendamping di Data, Statistik, Peta, dan unduhan, serta `pendamping_recorded_records` di total kontrol dan ringkasan.
+- **Keputusan sebelumnya (r5):** hanya status tercatat/kosong yang terbit, tanpa nama.
+- **Cakupan:** 2.233 rekaman tercatat, 7.828 kosong (rilis `2026-11-02.r6`). Kolom `Ketua Lembaga` dan `Pra-Pendamping` tetap tidak dipublikasikan. Kolom `Pra-Pendamping` tidak dipakai: hanya 150 rekaman terisi dan 84 di antaranya bernilai "0".
+- **Batasan yang ditampilkan:** kolom kosong bisa berarti tidak ada pendamping atau tidak dicatat. Pemindaian nama dari kolom yang masih dikecualikan (Ketua Lembaga, Pra-Pendamping) pada rilis dan build tetap tanpa kebocoran.
 
 ### K3. Nama lembaga dan pemegang izin HTR
 - **Status:** Ditetapkan (dikoreksi 2026-11-04, keputusan E). Menggantikan aturan penyamaran sebelumnya.
@@ -142,7 +144,7 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | K8 | Ditetapkan (diubah 2026-11-05) |
 | K9 | Menunggu |
 | K10 | Sebagian |
-| K11 | Ditetapkan (status saja, tanpa nama) |
+| K11 | Ditetapkan (kolom Pendamping dipublikasikan sejak r6) |
 
 ## 5. Log perubahan
 
@@ -157,3 +159,4 @@ Kolom ini tetap tersimpan di `internal/source_records.jsonl` (tidak dipublikasik
 | 2026-11-06 | **Filter "Anggota tercatat"** ditambahkan atas permintaan pemilik produk (halaman Data, Statistik, dan unduhan sesuai filter; parameter `members` = `1`, `2plus`, `0`, `na`). Tujuannya melihat rekaman yang kemungkinan izin perorangan. Filter memakai anggota laki-laki + perempuan hasil pengolahan K1, bukan status resmi: kolom sumber Bentuk Lembaga hanya mencatat "PERORANGAN" pada 58 rekaman, sedangkan rekaman beranggota 1 orang berjumlah 2.168 (2.167 HTR). Setiap tampilan hasil filter memuat catatan ini. |
 | 2026-11-06 | **K11 ditetapkan:** filter Pendamping (ada/tidak ada pendamping tercatat) atas permintaan pemilik produk; hanya status isi kolom yang dipublikasikan. Filter Anggota tercatat dan Pendamping juga ditambahkan ke halaman Peta (diterapkan di server). Rilis `2026-11-02.r5` (sumber sama) menambahkan `derived.pendamping_status`; rilis r4 dihapus dari working tree (masih ada di riwayat git). |
 | 2026-11-06 | **Filter Region** ditambahkan atas permintaan pemilik produk (Data, Statistik, Peta, unduhan; parameter `region`). Memakai nilai kolom sumber `Region` apa adanya (7 kelompok pulau, terisi di semua rekaman, satu region per provinsi). Kolom ini bukan field GoKUPS, melainkan turunan penyusun workbook dari provinsi; keterangan ini tampil di bawah pilihan filter. Provinsi atau kabupaten/kota di luar region terpilih diabaikan dan dicatat. |
+| 2026-11-06 | **K11 diubah:** pemilik produk memutuskan kolom `Pendamping` dipublikasikan dengan nama apa adanya, karena nama pendamping juga disajikan di situs GoKUPS. Rilis `2026-11-02.r6` (sumber sama) memuat kolom ini; Ketua Lembaga dan Pra-Pendamping tetap dikecualikan. Rilis r5 dihapus dari working tree (masih ada di riwayat git). Aplikasi kini memuat ulang rilis otomatis bila `current.json` berubah, karena server yang sudah berjalan sebelumnya masih menyajikan rilis lama dari memori (filter pendamping tampak 0). |

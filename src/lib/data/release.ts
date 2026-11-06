@@ -1,5 +1,5 @@
 import "server-only";
-import { readFileSync } from "node:fs";
+import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import type {
   AdminArea,
@@ -12,7 +12,9 @@ import type {
 } from "./types";
 
 /**
- * Memuat rilis aktif (data/releases/current.json) sekali per proses server.
+ * Memuat rilis aktif (data/releases/current.json) dan menyimpannya di memori.
+ * Bila current.json berubah (rilis baru dari pipeline), rilis dimuat ulang otomatis tanpa
+ * perlu menyalakan ulang server; pemeriksaannya hanya membaca waktu ubah file kecil itu.
  * Hanya file publik yang dibaca. Folder internal/ tidak pernah dibuka di sini.
  */
 const ROOT = process.cwd();
@@ -22,6 +24,7 @@ function readJson<T>(file: string): T {
 }
 
 let cached: Release | null = null;
+let cachedStamp = "";
 
 export function releaseDir(version: string): string {
   if (!/^[0-9A-Za-z.\-]+$/.test(version)) throw new Error(`Versi rilis tidak valid: ${version}`);
@@ -29,8 +32,15 @@ export function releaseDir(version: string): string {
 }
 
 export function loadRelease(): Release {
-  if (cached) return cached;
-  const { version } = readJson<{ version: string }>(path.join(ROOT, "data", "releases", "current.json"));
+  const currentFile = path.join(ROOT, "data", "releases", "current.json");
+  const stat = statSync(currentFile);
+  const stamp = `${stat.mtimeMs}:${stat.size}`;
+  if (cached && stamp === cachedStamp) return cached;
+  const { version } = readJson<{ version: string }>(currentFile);
+  if (cached && cached.meta.version === version) {
+    cachedStamp = stamp;
+    return cached;
+  }
   const dir = releaseDir(version);
   const approvals = readJson<ApprovalRecord[]>(path.join(dir, "approvals.json"));
   cached = {
@@ -44,6 +54,7 @@ export function loadRelease(): Release {
     ),
     dir,
   };
+  cachedStamp = stamp;
   return cached;
 }
 

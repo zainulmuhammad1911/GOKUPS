@@ -108,7 +108,7 @@ def build(source_path, paths: Paths = Paths()) -> BuildResult:
     compare_cols = [c for c in ingest.EXPECTED_COLUMNS if c != "No"]
     df = df.join(quality.duplicate_info(df, compare_cols, df["id"], sk_norm))
     df = df.join(quality.compute_flags(df, rules, meta.extracted_at, sk_year))
-    # K11: hanya status ada/tidaknya isi kolom Pendamping yang dipublikasikan, bukan isinya (nama orang).
+    # K11: status ada/tidaknya isi kolom Pendamping, dipakai filter Pendamping.
     df["pendamping_status"] = df["Pendamping"].map(
         lambda v: "tercatat" if v is not None and not (isinstance(v, float) and pd.isna(v)) and str(v).strip() != "" else "kosong"
     )

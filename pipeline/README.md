@@ -47,7 +47,7 @@ Wilayah baru di Kepmendagri yang tidak punya padanan nama di sumber harus ditamb
 | `downloads/` | Ya | CSV (ZIP + BACA_SAYA.txt) dan XLSX, lengkap dan ringkasan |
 | `quality_report.md/.json` | Ya | Ringkasan kualitas, tanpa nama |
 | `release.json` | Ya | Metadata rilis, aturan yang dipakai, checksum file |
-| `internal/` | **Tidak** | Salinan baris sumber lengkap, termasuk kolom Ketua, Pra-Pendamping, Pendamping |
+| `internal/` | **Tidak** | Salinan baris sumber lengkap, termasuk kolom Ketua Lembaga dan Pra-Pendamping yang tidak dipublikasikan |
 
 Prinsip yang dijaga pipeline: nilai sumber tidak diubah, rekaman tidak dihapus, kategori tidak digabung, dan penanda tidak mengeluarkan rekaman dari perhitungan. Lihat `docs/DECISIONS.md` bagian 1.
 

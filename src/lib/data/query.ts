@@ -148,7 +148,7 @@ export function parseQuery(params: Params, ctx: QueryContext): { query: DataQuer
 const normalize = (s: string) =>
   s.normalize("NFKD").toUpperCase().replace(/[^A-Z0-9]+/g, " ").trim();
 
-const SEARCH_COLUMNS = ["Nomor Surat Keputusan", "Nama Lembaga", "Provinsi", "Kabupaten Kota", "Kecamatan"];
+const SEARCH_COLUMNS = ["Nomor Surat Keputusan", "Nama Lembaga", "Pendamping", "Provinsi", "Kabupaten Kota", "Kecamatan"];
 const searchIndex = new WeakMap<ApprovalRecord, string>();
 
 function searchText(r: ApprovalRecord): string {

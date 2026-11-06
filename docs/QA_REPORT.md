@@ -9,8 +9,8 @@
 | Lapisan | Alat | Hasil |
 |---------|------|-------|
 | Pipeline data dan batas wilayah | pytest | 42 lulus |
-| Logika web (agregasi, filter, data grafik) | Vitest | 33 lulus |
-| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 115 lulus (diulang setelah desain ulang shadcn/ui dan filter anggota/pendamping); 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
+| Logika web (agregasi, filter, data grafik) | Vitest | 34 lulus |
+| E2E + aksesibilitas (axe WCAG 2.2 AA) | Playwright | 116 lulus (diulang setelah desain ulang shadcn/ui dan filter anggota/pendamping); 19 rute × 3 lebar layar (375, 768, 1280 px) tanpa pelanggaran axe dan tanpa geser horizontal |
 | Tipe | `tsc --noEmit` | lulus |
 
 Cakupan e2e meliputi: tautan lewati-ke-konten, menu ponsel (buka, tutup dengan Escape, fokus kembali), ganti bahasa, filter dan pencarian, urutan kolom, paginasi, unduhan sesuai filter (isi = tabel, kolom = rilis), referensi duplikat, nilai sumber apa adanya (spasi ganda, kosong), grafik (render, pilihan ukuran, tabel data, label di ponsel), peta (render, drill-down, URL, panel, tautan ke data), peta mini, halaman Tentang (daftar isi, angka dari rilis), keamanan rute unduhan, 404, dan regresi pengalihan berulang perutean bahasa.
@@ -45,7 +45,7 @@ Catatan anggaran: target awal TECHNICAL_PLAN §8 (Beranda < 120 KB, Data < 100 K
 
 - Header: `Content-Security-Policy` (produksi; semua sumber dari domain sendiri, tanpa skrip, font, atau tile pihak ketiga), `X-Frame-Options: DENY`, `X-Content-Type-Options: nosniff`, `Referrer-Policy`, `Permissions-Policy`. Diperiksa: tidak ada pelanggaran CSP di konsol pada Beranda, Statistik, Peta, Data, dan Tentang.
 - Tidak ada cookie. Perutean bahasa tidak lagi memakai middleware, jadi cookie `NEXT_LOCALE` juga tidak dipasang.
-- Kolom Ketua Lembaga, Pra-Pendamping, dan Pendamping tidak ikut ke `approvals.json` maupun unduhan (diuji pipeline). Pemindaian ulang build ini: 2.578 nilai dari ketiga kolom (minimal dua kata, tidak sama persis dengan nilai kolom publik mana pun) dicari di seluruh `.next/` (termasuk `standalone/`) dan `public/`. Hasilnya 18 kecocokan, semuanya di `approvals.json`, dan semuanya bagian dari nilai kolom Nama Lembaga, misalnya pemegang izin HTR yang namanya sama dengan nama ketua. Nama di Nama Lembaga ditampilkan sesuai sumber (K3). Tidak ada kecocokan yang berasal dari kolom yang dikecualikan.
+- Kolom Ketua Lembaga dan Pra-Pendamping tidak ikut ke `approvals.json` maupun unduhan (diuji pipeline). Kolom Pendamping dipublikasikan sejak rilis r6 atas keputusan pemilik produk (K11). Pemindaian ulang 2026-11-06 (rilis r6): 1.174 nilai dari Ketua Lembaga dan Pra-Pendamping (minimal dua kata, tidak sama persis dengan nilai kolom publik) dicari di `.next/` (termasuk `standalone/`), `public/`, dan berkas rilis publik. Ada 32 kecocokan, semuanya bagian dari nilai kolom publik: 13 di Nama Lembaga (misalnya pemegang izin HTR yang namanya sama dengan ketua) dan 19 di Pendamping. Tidak ada kecocokan yang hanya berasal dari kolom yang dikecualikan.
 - Rute unduhan hanya melayani file di manifes rilis; `internal/` tidak bisa diakses (diuji).
 - Ekspor CSV menetralkan teks berawalan `=`, `+`, `-`, `@`; rilis saat ini tidak memuat nilai seperti itu (diuji pipeline).
 - Parameter filter divalidasi; parameter tidak dikenal diabaikan dan disebutkan di halaman.

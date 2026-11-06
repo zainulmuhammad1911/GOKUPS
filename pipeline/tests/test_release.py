@@ -276,7 +276,7 @@ def _public_strings(release_dir) -> set[str]:
 
 
 def test_excluded_columns_not_published(release_dir, approvals, source_rows):
-    """Isi kolom Ketua/Pra-Pendamping/Pendamping tidak muncul di keluaran publik,
+    """Isi kolom Ketua Lembaga/Pra-Pendamping tidak muncul di keluaran publik,
     kecuali nilai yang sama memang ada di kolom sumber yang dipublikasikan
     (beberapa sel Ketua berisi nomor SK, nama provinsi, atau nama lembaganya sendiri)."""
     assert not set(PRIVATE_COLUMNS) & set(approvals[0]["source"])
@@ -298,10 +298,11 @@ def test_excluded_columns_not_published(release_dir, approvals, source_rows):
 
 
 def test_pendamping_status_only(approvals, source_rows, totals):
-    """K11: hanya status ada/tidaknya isi kolom Pendamping yang dipublikasikan."""
+    """K11: kolom Pendamping dipublikasikan apa adanya, ditambah status tercatat/kosong untuk filter."""
     by_id = {a["id"]: a for a in approvals}
     for row in source_rows:
         v = row["raw_payload"]["Pendamping"]
+        assert by_id[row["id"]]["source"]["Pendamping"] == v
         expected = "tercatat" if isinstance(v, str) and v.strip() else "kosong"
         assert by_id[row["id"]]["derived"]["pendamping_status"] == expected
     assert {a["derived"]["pendamping_status"] for a in approvals} == {"tercatat", "kosong"}

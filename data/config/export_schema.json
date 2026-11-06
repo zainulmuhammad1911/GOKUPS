@@ -13,7 +13,8 @@
     "Luas Area Keseluruhan (Ha)": "Dibulatkan ke hektare penuh oleh sumber.",
     "Anggota Keseluruhan": "Nilai sumber. Pada sebagian rekaman sama dengan anggota perempuan; lihat penanda. Tidak dipakai untuk perhitungan anggota.",
     "Anggota Perempuan": "Nilai sumber. Nilai 0 bisa berarti tidak dicatat.",
-    "Kecamatan": "Teks sumber. Belum dicocokkan ke kode resmi."
+    "Kecamatan": "Teks sumber. Belum dicocokkan ke kode resmi.",
+    "Pendamping": "Nama pendamping seperti tercatat di sumber (juga disajikan publik di situs GoKUPS). Dipublikasikan sejak rilis 2026-11-02.r6 atas keputusan pemilik produk (K11). Kosong bisa berarti tidak ada pendamping atau tidak dicatat."
   },
   "default_source_note": "Nilai kolom sumber apa adanya.",
   "derived_columns": [
@@ -92,7 +93,7 @@
       "path": "derived.pendamping_status",
       "transform": null,
       "kind": "Olahan PDPSI",
-      "description": "tercatat bila kolom sumber Pendamping terisi, kosong bila tidak. Isi kolom (nama orang) tidak dipublikasikan. Kosong bisa berarti tidak ada pendamping atau tidak dicatat."
+      "description": "tercatat bila kolom sumber Pendamping terisi, kosong bila tidak. Kosong bisa berarti tidak ada pendamping atau tidak dicatat."
     },
     {
       "title": "[Pemeriksaan PDPSI] Jumlah Rekaman dengan Nomor SK Sama",

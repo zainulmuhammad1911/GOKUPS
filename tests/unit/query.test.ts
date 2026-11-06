@@ -79,6 +79,12 @@ describe("filter pendamping (K11)", () => {
     expect(both.every((r) => r.derived.members_male_plus_female === 1 && r.derived.pendamping_status === "tercatat")).toBe(true);
     expect(parseQuery({ pendamping: "ya" }, ctx).ignored).toEqual(["pendamping"]);
   });
+  it("nama pendamping bisa dicari (kolom dipublikasikan sejak r6)", () => {
+    const withName = approvals.find((r) => typeof r.source["Pendamping"] === "string" && (r.source["Pendamping"] as string).trim().split(/\s+/).length >= 2)!;
+    const name = (withName.source["Pendamping"] as string).trim();
+    expect(run({ q: name }).map((r) => r.id)).toContain(withName.id);
+    expect(withName.derived.pendamping_status).toBe("tercatat");
+  });
 });
 
 describe("filter Region (kolom sumber)", () => {
