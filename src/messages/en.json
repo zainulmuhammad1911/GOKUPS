@@ -13,7 +13,8 @@
     "about": "About",
     "groupExplore": "Explore the data",
     "groupInfo": "Information",
-    "record": "Record"
+    "record": "Record",
+    "organizations": "CSO directory"
   },
   "common": {
     "skipToContent": "Skip to content",
@@ -412,5 +413,46 @@
     "total": "Total",
     "ariaRanked": "{title}. Measure: {metric}. Highest: {top}, {value}. Full figures are in the data table.",
     "ariaStacked": "{title}. {count} regions; most records in {top}. Figures per PS type are in the data table."
+  },
+  "oms": {
+    "title": "CSO Facilitator Directory",
+    "lead": "{count} civil society organisations (CSOs) recorded as facilitating or supporting Social Forestry and customary forests, from the directory as of {date}.",
+    "noteTitle": "A different source from the decree data",
+    "noteSeparate": "This directory is not GoKUPS data and not an official list of facilitators. Entries are not linked to specific decrees and are not used in the portal's figures, map, or statistics.",
+    "noteChecked": "Each entry was checked online on {date} with AI assistance. {verified} organisations were verified and {partial} partly verified. {withheld} other entries are not shown because no public evidence was found yet.",
+    "noteLanguage": "Directory entries and check notes are in Indonesian, as in the source.",
+    "filters": "Directory filters",
+    "searchHint": "Organisation name, abbreviation, location, activity, or partner.",
+    "national": "National",
+    "role": "Role",
+    "roleLabel": "Role",
+    "allRoles": "All roles",
+    "roles": {
+      "access": "Pre-permit and access",
+      "post_approval": "Post-approval",
+      "adat": "Customary forest",
+      "support": "Technical or policy support"
+    },
+    "apply": "Apply",
+    "reset": "Clear filters",
+    "resultCount": "{count} of {total} organisations",
+    "empty": "No organisation matches these filters.",
+    "listLabel": "List of organisations",
+    "status": {
+      "verified": "Verified",
+      "partial": "Partly verified"
+    },
+    "schemeText": "PS scheme (as in directory)",
+    "locations": "Example locations",
+    "activity": "Example of facilitation",
+    "partners": "Partners or consortium",
+    "period": "Evidence period",
+    "notStated": "Not stated",
+    "evidenceTitle": "Public evidence links",
+    "website": "Official website",
+    "noEvidence": "No evidence links.",
+    "checkNote": "Check note",
+    "sourceLine": "Source: {name} (as of {date}), checked online {checked}. Directory data version {version}.",
+    "provinceLink": "{count} facilitating CSOs recorded as working in this province"
   }
 }

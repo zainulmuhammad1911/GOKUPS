@@ -3,6 +3,8 @@
   uv run pdpsi crosswalk --source <workbook>          buat draf crosswalk wilayah (sekali)
   uv run pdpsi build --source <workbook> --version V  buat rilis data baru
   uv run pdpsi geo --source <geojson> --version V      buat batas wilayah untuk peta
+  uv run pdpsi oms --source <workbook verifikasi> --version V --directory-date D --checked-date D
+                                                      buat data Direktori OMS pendamping
 """
 from __future__ import annotations
 
@@ -15,7 +17,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from . import PIPELINE_VERSION, aggregate, export, ingest, regions, rekap, report
+from . import PIPELINE_VERSION, aggregate, export, ingest, oms, regions, rekap, report
 from .build import build, public_record
 from .config import Paths, load_json
 
@@ -157,6 +159,20 @@ def cmd_geo(args, paths: Paths) -> int:
     return 0
 
 
+def cmd_oms(args, paths: Paths) -> int:
+    oms_dir = paths.root / "data" / "oms"
+    if (oms_dir / args.version).exists() and not args.force:
+        print(f"Versi direktori OMS {args.version} sudah ada. Pakai versi baru atau --force.")
+        return 1
+    directory = oms.build_directory(
+        Path(args.source), regions.load_kemendagri(paths.kemendagri), args.version, args.directory_date, args.checked_date
+    )
+    out = oms.write_directory(directory, oms_dir)
+    c = directory["counts"]
+    print(f"Direktori OMS {args.version} ditulis ke {out}: {c['published']} terbit, {c['withheld']} ditahan dari {c['rows']} entri.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="pdpsi")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -172,9 +188,15 @@ def main(argv: list[str] | None = None) -> int:
     g = sub.add_parser("geo")
     g.add_argument("--source", required=True)
     g.add_argument("--version", required=True)
+    o = sub.add_parser("oms")
+    o.add_argument("--source", required=True)
+    o.add_argument("--version", required=True)
+    o.add_argument("--directory-date", required=True)
+    o.add_argument("--checked-date", required=True)
+    o.add_argument("--force", action="store_true")
     args = p.parse_args(argv)
     paths = Paths()
-    return {"crosswalk": cmd_crosswalk, "build": cmd_build, "geo": cmd_geo}[args.cmd](args, paths)
+    return {"crosswalk": cmd_crosswalk, "build": cmd_build, "geo": cmd_geo, "oms": cmd_oms}[args.cmd](args, paths)
 
 
 if __name__ == "__main__":

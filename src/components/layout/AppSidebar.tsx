@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { ChartColumnBig, Download, House, Info, Map as MapIcon, Table2 } from "lucide-react";
+import { ChartColumnBig, Download, House, Info, Map as MapIcon, Table2, UsersRound } from "lucide-react";
 import { Link, usePathname } from "@/i18n/navigation";
 import {
   Sidebar,
@@ -24,6 +24,7 @@ const EXPLORE = [
   { href: "/map", key: "map", icon: MapIcon },
   { href: "/statistics", key: "statistics", icon: ChartColumnBig },
   { href: "/data", key: "data", icon: Table2 },
+  { href: "/organizations", key: "organizations", icon: UsersRound },
 ] as const;
 const INFO = [
   { href: "/download", key: "download", icon: Download },

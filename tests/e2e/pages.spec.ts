@@ -7,7 +7,7 @@ import ExcelJS from "exceljs";
 const VERSION: string = JSON.parse(readFileSync("data/releases/current.json", "utf-8")).version;
 
 const DUP_ID = "2d80cb80ba17"; // rekaman dengan nomor SK yang dipakai 3 rekaman (ID stabil antar-rilis)
-const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", "/statistics?province=72", "/statistics?type=KK&year_from=2017", "/map?province=72&indicator=area", `/data/${DUP_ID}`, "/download", "/about"];
+const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", "/statistics?province=72", "/statistics?type=KK&year_from=2017", "/map?province=72&indicator=area", `/data/${DUP_ID}`, "/download", "/about", "/organizations", "/organizations?province=61&type=HD", "/organizations?q=zzzzzz"];
 const ROUTES = [...PATHS, ...PATHS.map((p) => (p === "/" ? "/en" : `/en${p}`))];
 const VIEWPORTS = [
   { name: "ponsel", width: 375, height: 812 },

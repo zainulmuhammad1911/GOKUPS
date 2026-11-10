@@ -6,6 +6,8 @@ import { DataNote, JENIS_COLOR_HEX, PageHeading, SchemeSwatch, SectionCard } fro
 import { DataFilters } from "@/components/data/DataFilters";
 import { MetricChart, StackedChart } from "@/components/charts/ChartFigures";
 import { loadExportSchema, loadRelease } from "@/lib/data/release";
+import { loadOmsDirectory } from "@/lib/data/oms";
+import { omsCountForProvince } from "@/lib/data/oms-query";
 import { aggregate } from "@/lib/data/aggregate";
 import { formatDateTime, formatNumber } from "@/lib/data/format";
 import {
@@ -156,6 +158,17 @@ export default async function StatisticsPage({
           minimal
         />
       </div>
+      {query.province && (() => {
+        // Tautan ke Direktori OMS (sumber terpisah); tidak memengaruhi angka di halaman ini.
+        const count = omsCountForProvince(loadOmsDirectory().entries, query.province.slice(0, 2));
+        return count > 0 ? (
+          <p className="mt-4 text-small">
+            <Link href={{ pathname: "/organizations", query: { province: query.province.slice(0, 2) } }}>
+              {t("oms.provinceLink", { count: n(count) })}
+            </Link>
+          </p>
+        ) : null;
+      })()}
       {parsed.ignored.length > 0 && (
         <div className="mt-4">
           <DataNote>{t("data.ignored", { names: parsed.ignored.join(", ") })}</DataNote>

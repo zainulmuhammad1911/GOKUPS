@@ -71,6 +71,14 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 - **Cakupan (r7):** Ketua Lembaga terisi 1.995 rekaman, Pra-Pendamping 150, Pendamping 2.233.
 - **Batasan yang ditampilkan:** kolom kosong bisa berarti tidak ada atau tidak dicatat.
 
+### K12. Direktori OMS pendamping (sumber kedua)
+- **Status:** Ditetapkan 2026-11-10 atas keputusan pemilik produk.
+- **Sumber:** direktori OMS pendamping PS milik pemilik produk (per 6 November 2026, 67 entri), diperiksa daring pada 10 November 2026 dengan bantuan AI. Hasil pemeriksaan ada di workbook verifikasi (`data/source/oms/`, tidak masuk git). Workbook asli tidak diubah.
+- **Yang terbit:** hanya entri berstatus Terverifikasi (39) dan Sebagian (20). Entri Tidak ditemukan (8) ditahan dan namanya tidak ditulis ke data publik. Isian direktori ditulis apa adanya; koreksi hasil pemeriksaan hanya muncul di catatan pemeriksaan tiap entri.
+- **Tidak terbit:** kolom internal direktori (Tingkat Bukti, Asal Informasi, Catatan / Perlu Verifikasi, Sumber tanpa tautan) dan sheet lain (Rekap, Matriks Pembelajaran, Template Profil Dampingan).
+- **Pemisahan dari data SK:** direktori tidak dihubungkan ke SK mana pun (tidak ada nama organisasi di kolom Pendamping GoKUPS) dan tidak dipakai di angka, peta, statistik, atau unduhan rilis. Hubungannya hanya lewat provinsi: halaman Statistik dengan filter provinsi menautkan ke direktori.
+- **Data:** `pdpsi oms` menulis `data/oms/<versi>/directory.json` dan `data/oms/current.json`; aplikasi memuat ulang otomatis bila `current.json` berubah. Halaman `/organizations` (Direktori OMS).
+
 ### K3. Nama lembaga dan pemegang izin HTR
 - **Status:** Ditetapkan (dikoreksi 2026-11-04, keputusan E). Menggantikan aturan penyamaran sebelumnya.
 - **Aturan:** Semua nama dipertahankan sebagaimana tercatat di sumber, termasuk nama pemegang izin HTR perorangan. Nama tidak disamarkan, tidak diganti inisial atau label lain, dan tidak diubah. Tidak ada pengecualian berdasarkan asumsi sistem.
@@ -157,3 +165,4 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 | 2026-11-06 | **K11 diubah:** pemilik produk memutuskan kolom `Pendamping` dipublikasikan dengan nama apa adanya, karena nama pendamping juga disajikan di situs GoKUPS. Rilis `2026-11-02.r6` (sumber sama) memuat kolom ini; Ketua Lembaga dan Pra-Pendamping tetap dikecualikan. Rilis r5 dihapus dari working tree (masih ada di riwayat git). Aplikasi kini memuat ulang rilis otomatis bila `current.json` berubah, karena server yang sudah berjalan sebelumnya masih menyajikan rilis lama dari memori (filter pendamping tampak 0). |
 | 2026-11-06 | **K11 diubah lagi:** pemilik produk memutuskan kolom `Ketua Lembaga` dan `Pra-Pendamping` juga dipublikasikan. Rilis `2026-11-02.r7` (sumber sama) memuat semua kolom tabular GoKUPS; `PRIVATE_COLUMNS` dikosongkan. CSV rilis kini menetralkan teks berawalan = + - @ seperti unduhan web (10 nilai Ketua Lembaga). Rilis r6 dihapus dari working tree (masih ada di riwayat git). |
 | 2026-11-06 | **K10 ditetapkan:** riwayat git di-push ke `https://github.com/zainulmuhammad1911/GOKUPS` (repositori publik). Sebelum push diperiksa: tidak ada workbook sumber, `data/source/`, `internal/`, atau berkas rahasia di riwayat; berkas terbesar 14,6 MB. |
+| 2026-11-10 | **K12 ditetapkan:** Direktori OMS pendamping diterbitkan sebagai halaman terpisah (`/organizations`) dari direktori pemilik produk yang sudah diperiksa daring. 59 dari 67 entri terbit (39 terverifikasi, 20 sebagian); 8 ditahan karena bukti publik belum ditemukan. Data direktori versi `2026-11-10`. |

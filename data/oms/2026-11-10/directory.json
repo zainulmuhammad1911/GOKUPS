@@ -1,0 +1,2426 @@
+{
+ "version": "2026-11-10",
+ "built_at": "2026-11-10T10:42:30+00:00",
+ "source": {
+  "name": "Direktori OMS Pendamping Perhutanan Sosial",
+  "file_name": "Database_Pendamping_OMS_verifikasi_2026-11-10.xlsx",
+  "sha256": "349883c8632a3cc2c851cc4246ce4af34206273ab73d6937cd2f830484a90cdd",
+  "directory_date": "2026-11-06",
+  "checked_date": "2026-11-10"
+ },
+ "counts": {
+  "rows": 67,
+  "published": 59,
+  "withheld": 8,
+  "by_status": {
+   "Terverifikasi": 39,
+   "Sebagian": 20,
+   "Tidak ditemukan": 8
+  }
+ },
+ "entries": [
+  {
+   "id": 8,
+   "name": "Akar Global Inisiatif (dahulu Akar Foundation)",
+   "short_name": "AKAR",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "17"
+   ],
+   "national": false,
+   "province_text": "Bengkulu",
+   "locations": "Rejang Lebong (Air Lanang, Tanjung Dalam, Tebat Tenong, dll.); Lebong",
+   "scheme_text": "HKm; HA",
+   "scheme_codes": [
+    "HKM",
+    "HA"
+   ],
+   "roles": [
+    "access",
+    "adat",
+    "support"
+   ],
+   "activity": "2010: mendampingi 6 desa di Rejang Lebong untuk HKm. Pendampingan MHA Rejang, advokasi pengakuan daerah, dan pengawalan penetapan hutan adat; publikasi 2026 mendokumentasikan penyerahan enam SK hutan adat MHA Rejang di Lebong.",
+   "partners": "Koalisi Hutan Adat (HuMa)",
+   "period": "2010–2026",
+   "verification": {
+    "status": "verified",
+    "website": "https://akar.or.id/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2016/02/22/di-bengkulu-pemberdayaan-desa-dan-masyarakat-untuk-kelola-hutan-lindung-masih-rendah/",
+      "title": "Di Bengkulu, Pemberdayaan Desa dan Masyarakat untuk Kelola Hutan Lindung Masih Rendah",
+      "year": "2016"
+     },
+     {
+      "url": "https://mongabay.co.id/2015/01/27/rejang-yang-berjuang-untuk-mendapat-pengakuan-hutan-adat/",
+      "title": "Rejang yang Berjuang untuk Mendapat Pengakuan Hutan Adat",
+      "year": "2015"
+     },
+     {
+      "url": "https://www.antaranews.com/berita/5597195/pemerintah-komitmen-selesaikan-penetapan-14-juta-ha-hutan-adat",
+      "title": "Pemerintah komitmen selesaikan penetapan 1,4 juta ha hutan adat",
+      "year": "2026"
+     }
+    ],
+    "note": "Fasilitasi IUPHKm di Rejang Lebong (sekitar 1.486 ha hingga akhir 2015), pemetaan hutan adat Rejang di Lebong (2015), dan penyerahan enam SK hutan adat MHA Rejang di Lebong (6 Juni 2026) terkonfirmasi, tetapi ANTARA tidak menyebut Akar sebagai pendamping. Klaim '2010: 6 desa' hanya ada di buletin Akar sendiri, dan situs Akar menyebut luas hutan adat 248 ha."
+   }
+  },
+  {
+   "id": 36,
+   "name": "Aliansi Masyarakat Adat Nusantara (PW/PD)",
+   "short_name": "AMAN",
+   "org_type": "Organisasi masyarakat adat",
+   "province_codes": [
+    "13",
+    "61",
+    "73"
+   ],
+   "national": true,
+   "province_text": "Berbagai; contoh Sulsel, Kalbar, Mentawai",
+   "locations": "Sesuai pengurus wilayah/daerah",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat",
+    "support"
+   ],
+   "activity": "Pendampingan pengakuan masyarakat adat dan pengusulan hutan adat terdokumentasi pada unit wilayah (mis. AMAN Sulawesi, AMAN Kalbar, AMAN Mentawai).",
+   "partners": "HuMa; BRWA; LBBT; YCMM",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://aman.or.id",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2024/02/24/kolaborasi-percepatan-pengakuan-masyarakat-adat-di-sulsel/",
+      "title": "Kolaborasi Percepatan Pengakuan Masyarakat Adat di Sulsel (Mongabay)",
+      "year": "2024"
+     },
+     {
+      "url": "https://mongabay.co.id/2026/09/06/kembalikan-hutan-mentawai-pada-masyarakat-adat/",
+      "title": "Kembalikan Hutan Mentawai pada Masyarakat Adat (Mongabay)",
+      "year": "2026"
+     }
+    ],
+    "note": "Terkonfirmasi untuk PW AMAN Sulawesi Selatan (171 komunitas; 8 hutan adat diakui di Bulukumba dan Enrekang, 6.363,8 ha per Feb 2024) dan AMAN Mentawai (bersama YCMM mendampingi ≥30 uma). Pendampingan oleh AMAN Kalbar tidak ditemukan dalam sumber yang dibuka, dan BRWA belum diperiksa; sebaiknya sebut PW/PD secara spesifik ('AMAN Sulsel', bukan 'AMAN Sulawesi')."
+   }
+  },
+  {
+   "id": 21,
+   "name": "Aliansi Relawan untuk Penyelamatan Alam",
+   "short_name": "ARuPA",
+   "org_type": "OMS",
+   "province_codes": [
+    "34",
+    "35"
+   ],
+   "national": false,
+   "province_text": "DI Yogyakarta; Jawa Timur",
+   "locations": "Tulungagung (3 desa)",
+   "scheme_text": "IPHPS",
+   "scheme_codes": [
+    "KK"
+   ],
+   "roles": [
+    "access"
+   ],
+   "activity": "Bersama PPLH Mangkubumi mendampingi petani 3 desa mengajukan IPHPS; didokumentasikan dalam buku 'Hutan Memanggil'.",
+   "partners": "PPLH Mangkubumi",
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": "https://arupa.or.id",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2023/11/26/perhutanan-sosial-yang-memberikan-harapan-masyarakat-banyuwangi/",
+      "title": "Perhutanan Sosial yang Memberikan Harapan Masyarakat Banyuwangi (Mongabay)",
+      "year": "2023"
+     }
+    ],
+    "note": "ARuPA terkonfirmasi melakukan pendampingan agroforestri dan insentif pasar PS di Tulungagung dan Banyuwangi bersama BPDLH sejak Nov 2022, tetapi tidak ada sumber yang menyebut ARuPA mendampingi pengajuan IPHPS 3 desa bersama PPLH Mangkubumi. Buku 'Hutan Memanggil' tidak ditemukan (kata 'memanggil' hanya muncul sebagai kutipan PPLH Mangkubumi di ANTARA 2021); situs pplh-mangkubumi.or.id dan arupa.or.id tidak menyebut kerja sama ini."
+   }
+  },
+  {
+   "id": 39,
+   "name": "Badan Registrasi Wilayah Adat",
+   "short_name": "BRWA",
+   "org_type": "Lembaga registrasi",
+   "province_codes": [
+    "61"
+   ],
+   "national": true,
+   "province_text": "Nasional; contoh Kalbar",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat",
+    "support"
+   ],
+   "activity": "Dokumentasi/registrasi wilayah adat dan dukungan proses pengakuan.",
+   "partners": "AMAN; LBBT",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2022/03/27/brwa-rilis-status-terbaru-pengakuan-wilayah-adat-di-indonesia-pemda-diharap-percepat-proses-rekognisi/",
+      "title": "BRWA Rilis Status Terbaru Pengakuan Wilayah Adat di Indonesia (Mongabay)",
+      "year": "2022"
+     }
+    ],
+    "note": "Peran pendukung (registrasi, verifikasi peta wilayah adat, data status pengakuan) terkonfirmasi; bukti khusus Kalbar belum ditemukan. Situs brwa.or.id tidak bisa dibuka saat diperiksa."
+   }
+  },
+  {
+   "id": 59,
+   "name": "Balang Institute",
+   "short_name": "Balang",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "73"
+   ],
+   "national": false,
+   "province_text": "Sulawesi Selatan",
+   "locations": "Bantaeng (HD Campaga); Bulukumba, Jeneponto, Barru, Gowa",
+   "scheme_text": "HD; HKm",
+   "scheme_codes": [
+    "HD",
+    "HKM"
+   ],
+   "roles": [
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Pengelolaan HD dan HKm, pemetaan partisipatif, penguatan LPHD Campaga, dorongan Perda pengakuan masyarakat adat; pengembangan usaha bersama RECOFTC/SCF.",
+   "partners": "RECOFTC; SCF; CEPF",
+   "period": "2010–2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2020/11/15/hutan-desa-campaga-yang-dijaga-tradisi-dan-hidupi-warga-sekitar-hutan/",
+      "title": "Hutan Desa Campaga yang Dijaga Tradisi (Mongabay)",
+      "year": "2020"
+     },
+     {
+      "url": "https://mongabay.co.id/2015/11/18/dua-tahun-molor-perda-masyarakat-adat-ammatoa-kajang-akhirnya-disahkan/",
+      "title": "Perda Masyarakat Adat Ammatoa Kajang Akhirnya Disahkan (Mongabay)",
+      "year": "2015"
+     },
+     {
+      "url": "https://www.recoftc.org/stories/kesatuan-pengelolaan-hutan-jeneberang-ii",
+      "title": "Kesatuan Pengelolaan Hutan Jeneberang II (RECOFTC)",
+      "year": "2018"
+     }
+    ],
+    "note": "Pendampingan LPHD Hutan Desa Campaga dan keterlibatan dalam Perda Ammatoa Kajang terkonfirmasi. Kerja HKm dan lokasi Jeneponto, Barru, Gowa belum terkonfirmasi eksplisit."
+   }
+  },
+  {
+   "id": 30,
+   "name": "Bentara Papua",
+   "short_name": "Bentara Papua",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "96"
+   ],
+   "national": false,
+   "province_text": "Papua Barat Daya",
+   "locations": "Kampung Manggroholo (1.695 ha) & Sira (1.850 ha), Sorong Selatan; MHA Knasaimos",
+   "scheme_text": "HD; HA",
+   "scheme_codes": [
+    "HD",
+    "HA"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Bersama Greenpeace mendampingi HD pertama di Tanah Papua (pemetaan partisipatif; usulan 2013, SK PAK 2014, SK HPHD kemudian); mendukung SK Pengakuan MHA Knasaimos oleh Pemkab Sorong Selatan (Juni 2024).",
+   "partners": "Greenpeace Indonesia; EcoNusa; Packard Foundation",
+   "period": "2013–2024",
+   "verification": {
+    "status": "verified",
+    "website": "https://bentarapapua.org/",
+    "evidence": [
+     {
+      "url": "https://www.antaranews.com/berita/617019/akhirnya-papua-punya-hutan-desa",
+      "title": "Akhirnya Papua punya hutan desa (ANTARA)",
+      "year": "2017"
+     },
+     {
+      "url": "https://mongabay.co.id/2017/03/09/cerita-dari-kampung-sira-manggroholo-upaya-warga-bentengi-hutan-papua-dari-serbuan-sawit/",
+      "title": "Cerita dari Kampung Sira–Manggroholo (Mongabay)",
+      "year": "2017"
+     },
+     {
+      "url": "https://www.greenpeace.org/indonesia/siaran-pers/58499/kabar-baik-masyarakat-adat-knasaimos-terima-sk-pengakuan-wilayah-adat-dari-bupati-sorong-selatan/",
+      "title": "Masyarakat adat Knasaimos terima SK pengakuan wilayah adat (Greenpeace)",
+      "year": "2024"
+     }
+    ],
+    "note": "Semua klaim didukung. Nama lembaga di pemberitaan: Perkumpulan Bentang Nusantara (Bentara) Papua."
+   }
+  },
+  {
+   "id": 31,
+   "name": "Greenpeace Indonesia",
+   "short_name": "Greenpeace",
+   "org_type": "OMS internasional (cabang)",
+   "province_codes": [
+    "14",
+    "96"
+   ],
+   "national": false,
+   "province_text": "Papua Barat Daya; Riau",
+   "locations": "Manggroholo & Sira (Sorong Selatan); Segamai (Riau)",
+   "scheme_text": "HD; HA",
+   "scheme_codes": [
+    "HD",
+    "HA"
+   ],
+   "roles": [
+    "access",
+    "adat",
+    "support"
+   ],
+   "activity": "Mendampingi HD Manggroholo & Sira bersama Bentara Papua; mendukung HD Segamai.",
+   "partners": "Bentara Papua; YMI",
+   "period": "2013–2024",
+   "verification": {
+    "status": "verified",
+    "website": "https://www.greenpeace.org/indonesia/",
+    "evidence": [
+     {
+      "url": "https://www.antaranews.com/berita/617019/akhirnya-papua-punya-hutan-desa",
+      "title": "Akhirnya Papua punya hutan desa (ANTARA)",
+      "year": "2017"
+     },
+     {
+      "url": "https://mongabay.co.id/2017/03/09/cerita-dari-kampung-sira-manggroholo-upaya-warga-bentengi-hutan-papua-dari-serbuan-sawit/",
+      "title": "Cerita dari Kampung Sira–Manggroholo (Mongabay)",
+      "year": "2017"
+     },
+     {
+      "url": "https://mongabay.co.id/2013/07/30/desa-segamai-akhirnya-resmi-menerima-hak-kelola-hutan-desa-dari-kementerian-kehutanan/",
+      "title": "Desa Segamai Akhirnya Resmi Menerima Hak Kelola Hutan Desa (Mongabay)",
+      "year": "2013"
+     }
+    ],
+    "note": "Untuk Segamai (Riau) peran Greenpeace pendukung/kampanye; pendamping tapak Yayasan Mitra Insani. Bukti sampai 2023; periode 2024 belum terkonfirmasi."
+   }
+  },
+  {
+   "id": 2,
+   "name": "Hutan Kita Institute",
+   "short_name": "HaKI",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "16"
+   ],
+   "national": false,
+   "province_text": "Sumatera Selatan",
+   "locations": "Belum dirinci per desa",
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Mendampingi masyarakat sejak sebelum pengajuan izin sampai pelaksanaan. Publikasi 2024 menyebut keterlibatan pada hampir separuh dari 220 unit SK PS di Sumsel.",
+   "partners": null,
+   "period": "2024",
+   "verification": {
+    "status": "partial",
+    "website": "https://hutaninstitute.or.id/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2024/09/24/perhutanan-sosial-dan-utang-pemerintahan-jokowi-pada-masyarakat-sekitar-hutan/",
+      "title": "Perhutanan Sosial dan Utang Pemerintahan Jokowi pada Masyarakat Sekitar Hutan",
+      "year": "2024"
+     },
+     {
+      "url": "https://mongabay.co.id/2022/01/31/hutan-kemasyarakatan-kibuk-upaya-warga-kelola-sekaligus-pulihkan-hutan-gunung-dempo/",
+      "title": "Hutan Kemasyarakatan Kibuk, Upaya Warga Kelola Sekaligus Pulihkan Hutan Gunung Dempo",
+      "year": "2022"
+     }
+    ],
+    "note": "Angka 'hampir 50% dari 220 SK PS' muncul di Mongabay (bukan ANTARA) sebagai pernyataan HaKI sendiri, jadi belum diverifikasi secara independen, dan artikel ANTARA Sumsel yang dirujuk direktori tidak ditemukan. Contoh lokasi yang terbukti: HKm Kibuk, Dempo Utara, Kota Pagar Alam (SK 2017), dengan staf HaKI sebagai pendamping."
+   }
+  },
+  {
+   "id": 65,
+   "name": "IUCN NL / Green Livelihoods Alliance",
+   "short_name": "IUCN NL / GLA",
+   "org_type": "Organisasi internasional/donor",
+   "province_codes": [],
+   "national": true,
+   "province_text": "Nasional",
+   "locations": null,
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "support"
+   ],
+   "activity": "Aliansi GLA mendukung pengamanan izin PS, usaha komunitas, dan advokasi; mitra: NTFP-EP, Sawit Watch, Tropenbos, WALHI, WARSI, WGII, Aksi, Solidaritas Perempuan, Yakkum. GLA tidak berlanjut segera akibat pemangkasan ODA Belanda 2024.",
+   "partners": "Mitra GLA",
+   "period": "2011–2025",
+   "verification": {
+    "status": "verified",
+    "website": "https://www.iucn.nl/en/",
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/en/?p=446575",
+      "title": "Five years of impact (IUCN NL)",
+      "year": "2026"
+     },
+     {
+      "url": "https://www.iucn.nl/en/?p=299028",
+      "title": "15 years of Strategic Partnerships (IUCN NL)",
+      "year": "2025"
+     },
+     {
+      "url": "https://www.iucn.nl/en/story/sustainable-forest-management-in-west-sumatra/",
+      "title": "Sustainable forest management in West Sumatra (IUCN NL)",
+      "year": "2023"
+     }
+    ],
+    "note": "Peran pendukung terkonfirmasi tetapi semua dari situs IUCN NL sendiri. Sebagian mitra yang disebut di direktori belum terverifikasi; GLA dimulai 2016."
+   }
+  },
+  {
+   "id": 57,
+   "name": "Jaringan Kerja Pemetaan Partisipatif",
+   "short_name": "JKPP",
+   "org_type": "Jaringan",
+   "province_codes": [],
+   "national": true,
+   "province_text": "Nasional",
+   "locations": null,
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "access",
+    "adat",
+    "support"
+   ],
+   "activity": "Mendukung pemetaan partisipatif untuk kualitas peta, kesepakatan batas, dan dokumentasi ruang kelola.",
+   "partners": "SLPP daerah",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://jkpp.org",
+    "evidence": [
+     {
+      "url": "https://www.mongabay.co.id/2014/11/27/jkpp-bikin-standar-operasi-pemetaan-partisipatif/",
+      "title": "JKPP Bikin Standar Operasi Pemetaan Partisipatif (Mongabay)",
+      "year": "2014"
+     },
+     {
+      "url": "https://mongabay.co.id/2020/11/26/pemulihan-kedaulatan-wilayah-kelola-rakyat-melalui-pemetaan-partisipatif/",
+      "title": "Pemulihan Kedaulatan Wilayah Kelola Rakyat melalui Pemetaan Partisipatif (Mongabay)",
+      "year": "2020"
+     }
+    ],
+    "note": "Peran pendukung pemetaan partisipatif untuk pengakuan dan PS terkonfirmasi. Kerja kesepakatan batas tidak disebut eksplisit di sumber yang dibuka."
+   }
+  },
+  {
+   "id": 4,
+   "name": "Jaringan Kerja Penyelamat Hutan Riau",
+   "short_name": "Jikalahari",
+   "org_type": "Jaringan OMS",
+   "province_codes": [
+    "14"
+   ],
+   "national": false,
+   "province_text": "Riau",
+   "locations": "Semenanjung Kampar; Pelalawan (Segamai, Teluk Meranti, Pulau Muda)",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access",
+    "support"
+   ],
+   "activity": "Mendampingi penyusunan usulan PS termasuk masyarakat berkonflik dengan korporasi; mengadvokasi pencadangan HD (SK 4234) di Pelalawan; terlibat proses awal HD Segamai.",
+   "partners": "YMI; WALHI Riau; Eyes on the Forest",
+   "period": "2009–2019",
+   "verification": {
+    "status": "verified",
+    "website": "https://jikalahari.or.id/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2012/06/25/warga-palalawan-desak-bupati-cabut-rekomendasi-pt-gcn/",
+      "title": "Warga Palalawan Desak Bupati Cabut Rekomendasi PT GCN",
+      "year": "2012"
+     },
+     {
+      "url": "https://mongabay.co.id/2012/06/18/ketika-suara-warga-pulau-muda-dan-teluk-meranti-diabaikan/",
+      "title": "Ketika Suara Warga Pulau Muda dan Teluk Meranti Diabaikan",
+      "year": "2012"
+     },
+     {
+      "url": "https://mongabay.co.id/2013/03/10/lebih-4-tahun-menanti-akhirnya-hutan-desa-segamai-serapung-terwujud/",
+      "title": "Lebih 4 Tahun Menanti, Akhirnya Hutan Desa Segamai-Serapung Terwujud",
+      "year": "2013"
+     }
+    ],
+    "note": "Advokasi Jikalahari untuk mempertahankan SK 4234 dan perannya sebagai salah satu LSM yang membantu Segamai-Serapung terkonfirmasi. Klaim 'mendampingi penyusunan usulan PS' untuk Pulau Muda/Teluk Meranti dan masyarakat yang berkonflik tidak didukung sumber: perannya tampak sebagai advokasi kebijakan (termasuk keanggotaan di Pokja PS Riau tahun 2018), bukan pendampingan langsung."
+   }
+  },
+  {
+   "id": 40,
+   "name": "Jaringan Komunitas Masyarakat Adat Aceh",
+   "short_name": "JKMA Aceh",
+   "org_type": "Organisasi masyarakat adat",
+   "province_codes": [
+    "11"
+   ],
+   "national": false,
+   "province_text": "Aceh",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat (HuMa) dan koalisi RMI 2024.",
+   "partners": "Koalisi Hutan Adat",
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2023/10/05/eksistensi-mukim-dan-proses-pengakuan-hutan-adat-di-aceh/",
+      "title": "Eksistensi Mukim dan Proses Pengakuan Hutan Adat di Aceh (Mongabay)",
+      "year": "2023"
+     },
+     {
+      "url": "https://aceh.antaranews.com/berita/373797/mbkm-hutan-adat-usk-banda-aceh-upaya-kampus-lestarikan-lingkungan",
+      "title": "MBKM Hutan Adat USK (ANTARA Aceh)",
+      "year": "2024"
+     },
+     {
+      "url": "https://mongabay.co.id/2019/09/13/ruwetnya-urusan-hutan-adat-di-aceh/",
+      "title": "Ruwetnya Urusan Hutan Adat di Aceh (Mongabay)",
+      "year": "2019"
+     }
+    ],
+    "note": "Peran advokasi hutan adat mukim (terutama Pidie) terkonfirmasi; belum ada sumber yang tegas menyebut JKMA sebagai pendamping resmi SK mukim tertentu."
+   }
+  },
+  {
+   "id": 67,
+   "name": "Jurnal Celebes",
+   "short_name": "Jurnal Celebes",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "73"
+   ],
+   "national": false,
+   "province_text": "Sulawesi Selatan",
+   "locations": null,
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "support"
+   ],
+   "activity": "Menyelenggarakan seminar nasional tata kelola hutan dan lahan bersama Dinas Kehutanan Sulsel (2021).",
+   "partners": null,
+   "period": "2021",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://makassar.antaranews.com/berita/324445/pemanfaatan-kawasan-untuk-perhutanan-sosial-di-sulsel-capai-15768-ribu-hektare",
+      "title": "Pemanfaatan kawasan untuk PS di Sulsel (ANTARA Makassar)",
+      "year": "2021"
+     },
+     {
+      "url": "https://mongabay.co.id/2021/07/06/atasi-masalah-kehutanan-di-sulsel-dibutuhkan-sinergi-parapihak/",
+      "title": "Atasi Masalah Kehutanan di Sulsel (Mongabay)",
+      "year": "2021"
+     }
+    ],
+    "note": "Klaim seminar 2021 terkonfirmasi, tetapi perannya pemantauan dan advokasi tata kelola hutan (SVLK), bukan pendampingan PS di tapak. Pertimbangkan apakah layak masuk direktori pendamping."
+   }
+  },
+  {
+   "id": 13,
+   "name": "Kawal Borneo Community Foundation",
+   "short_name": "KBCF",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "64"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Timur",
+   "locations": "Belum dirinci",
+   "scheme_text": "HD; HKm",
+   "scheme_codes": [
+    "HD",
+    "HKM"
+   ],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Konsorsium KBCF–WARSI mencakup pendampingan perizinan dan penguatan kelembagaan; mitra program WRI untuk pemetaan, pendaftaran, dan pengakuan akses.",
+   "partners": "KKI WARSI; WRI Indonesia",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://www.ykrasi.org/wp-content/uploads/2021/04/Kabar-TFCA-Kalimantan.pdf",
+      "title": "Kabar TFCA Kalimantan (Buletin Triwulan Okt–Des 2020), artikel 'Merawat Mimpi dari Hutan Desa'",
+      "year": "2020"
+     }
+    ],
+    "note": "Buletin donor TFCA Kalimantan menyebut Konsorsium KBCF–KKI WARSI mendampingi perizinan, penguatan LPHD dan tata kelola HD Kampung Batok Kelo, Mahakam Ulu (izin HD sejak 2017 bersama 8 kampung lain); ini mengisi lokasi yang 'belum dirinci', tetapi skema HKm tidak terkonfirmasi. Peran sebagai mitra WRI Indonesia belum diverifikasi, dan kerja KBCF di Kutai Timur (proyek Kalfor) menyangkut hutan di dalam konsesi perusahaan, bukan PS."
+   }
+  },
+  {
+   "id": 56,
+   "name": "Kemitraan bagi Pembaruan Tata Pemerintahan",
+   "short_name": "KEMITRAAN",
+   "org_type": "OMS nasional/perantara hibah",
+   "province_codes": [
+    "18",
+    "52",
+    "91"
+   ],
+   "national": true,
+   "province_text": "Nasional; NTB; Lampung; Papua",
+   "locations": "KPH Rinjani Barat (NTB)",
+   "scheme_text": "Kemitraan Kehutanan; HKm; Beragam",
+   "scheme_codes": [
+    "HKM",
+    "KK"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "support"
+   ],
+   "activity": "Uji coba skema kemitraan kehutanan di KPH Rinjani Barat bersama Konsepsi dan Samanta; mendukung WATALA (HKm Lampung) dan Komunitas Kamuki (Papua).",
+   "partners": "Konsepsi; Samanta; WATALA; Kamuki",
+   "period": "2009–2026",
+   "verification": {
+    "status": "verified",
+    "website": "https://www.kemitraan.or.id",
+    "evidence": [
+     {
+      "url": "https://www.locjkt.or.id/application/docliblcjkt/upload/Kegiatan%20KPH%20Rinjani%20Barat_0.pdf",
+      "title": "Kompilasi Pengalaman KPH Rinjani Barat (Kemitraan)",
+      "year": "2015"
+     },
+     {
+      "url": "https://mongabay.co.id/2016/01/04/skema-kemitraan-yang-membuat-warga-desa-rempek-tersenyum/",
+      "title": "Skema Kemitraan yang Membuat Warga Desa Rempek Tersenyum (Mongabay)",
+      "year": "2016"
+     },
+     {
+      "url": "https://katadata.co.id/hanna/analisisdata/61c1a9de77fd0/bergandengan-tangan-untuk-masa-depan-tanah-papua",
+      "title": "Bergandengan Tangan untuk Masa Depan Tanah Papua (Katadata)",
+      "year": "2021"
+     }
+    ],
+    "note": "Pilot kemitraan kehutanan KPH Rinjani Barat bersama Konsepsi dan Samanta (Lombok Utara) terkonfirmasi. Kerja Kamuki di Fakfak masuk Papua Barat, bukan Papua; dukungan untuk WATALA di Lampung belum ditemukan."
+   }
+  },
+  {
+   "id": 1,
+   "name": "Komunitas Konservasi Indonesia WARSI",
+   "short_name": "KKI WARSI",
+   "org_type": "OMS regional",
+   "province_codes": [
+    "13",
+    "15",
+    "17"
+   ],
+   "national": false,
+   "province_text": "Jambi; Sumatera Barat; Bengkulu; Kalimantan",
+   "locations": "Lubuk Beringin (Bungo); Sinar Wajo, Pematang Rahim, Sungai Beras (gambut Jambi); Sumpur Kudus (Sumbar)",
+   "scheme_text": "HD; HKm; HA",
+   "scheme_codes": [
+    "HD",
+    "HKM",
+    "HA"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Mendukung penerbitan SK Menhut No. 109/Menhut-II/2009 Hutan Desa Lubuk Beringin (HD pertama di Indonesia) via Forum Diskusi Multi-Pihak Muara Bungo. Tiga desa gambut dampingan memperoleh izin PS 2014–2017. Fasilitasi intensif di tapak di Sumbar.",
+   "partners": "Forum Multi-Pihak Muara Bungo; ICRAF; WRI Indonesia; KBCF; IUCN NL (GLA)",
+   "period": "2009–2026",
+   "verification": {
+    "status": "verified",
+    "website": "https://warsi.or.id/",
+    "evidence": [
+     {
+      "url": "https://www.locjkt.or.id/application/docliblcjkt/upload/Bersama%20menjaga%20hutan.pdf",
+      "title": "Bersama Menjaga Hutan: Upaya Mengurangi Emisi dari Deforestasi dan Degradasi di Desa Lubuk Beringin (ICRAF SEA)",
+      "year": "2010"
+     },
+     {
+      "url": "https://mongabay.co.id/2014/12/24/tiga-hutan-desa-tanjung-jabung-timur-terima-sk/",
+      "title": "Tiga Hutan Desa Tanjung Jabung Timur Terima SK",
+      "year": "2014"
+     },
+     {
+      "url": "https://news.mongabay.com/2023/08/in-sumatras-jambi-community-forest-managers-fish-to-protect-peatlands/",
+      "title": "In Sumatra's Jambi, community forest managers fish to protect peatlands",
+      "year": "2023"
+     }
+    ],
+    "note": "Buku ICRAF 2010 mendukung SK 109/Menhut-II/2009 dan peran KKI-WARSI di Lubuk Beringin, dan Mongabay 2021 mendukung fasilitasi intensif di tapak di Sumbar (Sumpur Kudus hanya disebut sebagai lokasi). Untuk desa gambut, klaim '2014–2017' tidak tepat: SK PAK Desember 2014 diberikan ke Sinarwajo, Sungai Beras dan Kota Kandis Dendang (Pematang Rahim belum), hak kelola tiga desa baru diserahkan akhir 2018, dan kedua artikel tidak menyebut WARSI sebagai pendamping."
+   }
+  },
+  {
+   "id": 38,
+   "name": "Lembaga Bela Banua Talino",
+   "short_name": "LBBT",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat",
+   "locations": "Belum dirinci",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat",
+    "support"
+   ],
+   "activity": "Bersama AMAN Kalbar dan BRWA bekerja sama dengan Pemprov Kalbar untuk percepatan pengakuan MHA dan penetapan hutan adat. Anggota koalisi hutan adat.",
+   "partners": "AMAN Kalbar; BRWA",
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": "https://lbbt.or.id",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2015/07/31/jalur-kembar-menuju-pintu-hutan-adat/",
+      "title": "Jalur Kembar Menuju Pintu Hutan Adat (Mongabay)",
+      "year": "2015"
+     }
+    ],
+    "note": "Kerja hutan adat LBBT terkonfirmasi (Sekadau); angka 15 SK HA dan sekitar 78 ribu ha hanya dari situs LBBT sendiri. Kerja bersama AMAN Kalbar, BRWA, dan Pemprov Kalbar belum ditemukan sumbernya."
+   }
+  },
+  {
+   "id": 11,
+   "name": "Lembaga Gemawan",
+   "short_name": "Gemawan",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat",
+   "locations": "Melawi (11 desa); Sekabuk, Mempawah; Kapuas Hulu",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Bersama Suar Institute memfasilitasi usulan HD 11 desa di Melawi yang memperoleh izin; fasilitasi HD Sekabuk (SK 2021, 689 ha).",
+   "partners": "Suar Institute",
+   "period": "2015–2021",
+   "verification": {
+    "status": "partial",
+    "website": "https://gemawan.org/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2015/06/30/hutan-adat-subah-yang-menanti-sentuhan-negara/",
+      "title": "Hutan Adat Subah yang Menanti Sentuhan Negara",
+      "year": "2015"
+     },
+     {
+      "url": "https://www.ykrasi.org/wp-content/uploads/2021/04/Kabar-TFCA-Kalimantan.pdf",
+      "title": "Kabar TFCA Kalimantan (Buletin Triwulan Okt–Des 2020)",
+      "year": "2020"
+     }
+    ],
+    "note": "Yang terkonfirmasi hanya kerja Gemawan di hutan adat (pemetaan partisipatif Desa Subah, Sanggau, sejak 2013) dan namanya dalam daftar mitra TFCA Kalimantan. Klaim HD 11 desa di Melawi, HD Sekabuk (SK 2021, 689 ha) dan Kapuas Hulu tidak ditemukan dalam sumber publik, dan halaman Dashboard Perhutanan Sosial di gemawan.org tidak menampilkan data."
+   }
+  },
+  {
+   "id": 18,
+   "name": "NTFP-EP Indonesia (Yayasan Pengembangan Sumberdaya Hutan Indonesia/YaPSHI)",
+   "short_name": "NTFP-EP Indonesia",
+   "org_type": "OMS",
+   "province_codes": [
+    "61"
+   ],
+   "national": true,
+   "province_text": "Kalimantan Barat; Nasional",
+   "locations": "Labian–Leboyan, Kapuas Hulu",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Bersama Yayasan Sandriumi dan Riak Bumi mendampingi masyarakat adat; Hutan Adat Menua Ngaung Keruh diakui 2023 (591 ha). Mitra GLA; juga mendukung PGS rotan bersama Imunitas.",
+   "partners": "Yayasan Sandriumi; Riak Bumi; IUCN NL (GLA)",
+   "period": "2023–2026",
+   "verification": {
+    "status": "partial",
+    "website": "https://ntfp.org/?p=154",
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia, bab 3 dan 20 (IUCN NL dkk.)",
+      "year": "2026"
+     },
+     {
+      "url": "https://www.aman.or.id/files/publication-documentation/72791SK%20Bupati%20Kapuas%20Hulu%20No%20346%20%20DPPLH%20%202023%20Tentang%20PPMHA%20Dayak%20Iban%20Menua%20Ngaung%20Keruh%20Ketemenggungan%20Iban%20Batang%20Lupar.pdf",
+      "title": "Keputusan Bupati Kapuas Hulu No. 346/DPPLH/2023 (pengakuan MHA Menua Ngaung Keruh)",
+      "year": "2023"
+     },
+     {
+      "url": "https://www.iied.org/22689g",
+      "title": "Agrobiodiversity management in Labian and Labian Ira'ang (IIED)",
+      "year": "2025"
+     }
+    ],
+    "note": "Dokumen publik 2023 adalah SK Bupati pengakuan MHA, bukan penetapan hutan adat oleh KLHK; angka 591 ha hanya ada di laporan IUCN NL. Usul: tulis 'MHA diakui Bupati 2023'."
+   }
+  },
+  {
+   "id": 44,
+   "name": "PADI Indonesia",
+   "short_name": "PADI",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "64"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Timur",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat dan koalisi RMI 2024.",
+   "partners": "Koalisi Hutan Adat",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2017/01/18/akhirnya-masyarakat-pandumaan-sipituhuta-dapatkan-hutan-adat-mereka/",
+      "title": "Akhirnya Masyarakat Pandumaan-Sipituhuta Dapatkan Hutan Adat Mereka (Mongabay)",
+      "year": "2017"
+     },
+     {
+      "url": "https://kaltim.antaranews.com/berita/163489/kampung-adat-mului-kabupaten-paser-dapat-penghargaan-kalpataru",
+      "title": "Kampung Adat Mului dapat penghargaan Kalpataru (ANTARA Kaltim)",
+      "year": "2022"
+     }
+    ],
+    "note": "Peran pendamping masyarakat adat Muluy (Paser) terkonfirmasi; nomor SK hutan adat belum terverifikasi dari sumber yang terbuka."
+   }
+  },
+  {
+   "id": 50,
+   "name": "Panah Papua",
+   "short_name": "Panah Papua",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "92"
+   ],
+   "national": false,
+   "province_text": "Papua Barat",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat.",
+   "partners": "Koalisi Hutan Adat",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://panahpapua.or.id/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2023/10/16/bupati-teluk-bintuni-keluarkan-sk-pengakuan-masyarakat-adat-langkah-lanjutan/",
+      "title": "Bupati Teluk Bintuni Keluarkan SK Pengakuan Masyarakat Adat (Mongabay)",
+      "year": "2023"
+     },
+     {
+      "url": "https://ombudsman.go.id/perwakilan/news/r/pwk--perkumpulan-panah-papua-dan-masyarakat-adat-apresiasi-kinerja-ombudsman-papua-barat",
+      "title": "Perkumpulan Panah Papua dan Masyarakat Adat Apresiasi Kinerja Ombudsman Papua Barat (Ombudsman RI)",
+      "year": "2021"
+     }
+    ],
+    "note": "Peran dalam pengakuan MHA di Teluk Bintuni terkonfirmasi; belum ada SK penetapan hutan adat."
+   }
+  },
+  {
+   "id": 47,
+   "name": "Perkumpulan Bantaya",
+   "short_name": "Bantaya",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "72"
+   ],
+   "national": false,
+   "province_text": "Sulawesi Tengah",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat dan publikasi PPMA 2026.",
+   "partners": "Koalisi Hutan Adat",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2018/08/09/cerita-orang-marena-berjuang-peroleh-hak-kelola-hutan/amp/",
+      "title": "Cerita Orang Marena Berjuang Peroleh Hak Kelola Hutan (Mongabay)",
+      "year": "2018"
+     },
+     {
+      "url": "https://mongabay.co.id/2017/10/24/sembilan-komunitas-peroleh-penetapan-hutan-adat/",
+      "title": "Pemerintah Tetapkan Lagi Sembilan Hutan Adat (Mongabay)",
+      "year": "2017"
+     }
+    ],
+    "note": "Contoh lokasi yang bisa diisi: Hutan Adat Marena, Sigi (penetapan 2017). Sumber 'PPMA Papua 2026' di direktori tidak relevan untuk entri Sulteng."
+   }
+  },
+  {
+   "id": 35,
+   "name": "Perkumpulan HuMa Indonesia",
+   "short_name": "HuMa",
+   "org_type": "OMS nasional (hukum)",
+   "province_codes": [],
+   "national": true,
+   "province_text": "Nasional via mitra daerah",
+   "locations": "Koalisi Hutan Adat",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat",
+    "support"
+   ],
+   "activity": "Mengorganisasi Koalisi Hutan Adat yang bekerja memperjuangkan permohonan penetapan hutan adat; pintu masuk ke mitra daerah.",
+   "partners": "Koalisi Hutan Adat",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://www.huma.or.id",
+    "evidence": [
+     {
+      "url": "https://www.huma.or.id/p/koalisi-hutan-adat",
+      "title": "Koalisi Hutan Adat (Perkumpulan HuMa)",
+      "year": null
+     }
+    ],
+    "note": "Halaman portofolio HuMa memuat Koalisi Hutan Adat (sekitar 20 anggota daerah, antara lain JKMA Aceh, Qbar, AKAR, RMI, LBBT, AMAN Sulsel, Warsi, YCM Mentawai) yang bekerja memperjuangkan permohonan penetapan hutan adat, tetapi peran HuMa sebagai koordinator tidak dinyatakan eksplisit. 'Naskah Bersama Pelambatan Hutan Adat' (rmibogor.id, 2024) dan halaman RMI terkait gagal dibuka (403)."
+   }
+  },
+  {
+   "id": 27,
+   "name": "Perkumpulan Imunitas",
+   "short_name": "Imunitas",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "72"
+   ],
+   "national": false,
+   "province_text": "Sulawesi Tengah",
+   "locations": "Desa Namo, Kulawi (Sigi) – HD 490 ha",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "post_approval"
+   ],
+   "activity": "Mendampingi LPHD Topolingkuata Ngata (HD Namo, ditetapkan 2011): peraturan hutan, rencana kelola, pemetaan potensi, PGS Rotan Lestari.",
+   "partners": "NTFP-EP Indonesia",
+   "period": "2011–2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia, bab 17 (IUCN NL dkk.)",
+      "year": "2026"
+     },
+     {
+      "url": "https://ntfp.org/?p=3037",
+      "title": "ROLES rotan di Desa Namo (NTFP-EP)",
+      "year": "2016"
+     },
+     {
+      "url": "https://mongabay.co.id/2014/09/29/mengapa-pilihan-desa-namo-adalah-ajukan-hutan-desa/",
+      "title": "Mengapa pilihan Desa Namo adalah ajukan hutan desa? (Mongabay)",
+      "year": "2014"
+     }
+    ],
+    "note": "Peran pascapersetujuan di Namo terkonfirmasi sejak sekitar 2016; pengusulan HD 2011 didampingi Yayasan Jambata menurut Mongabay. Usul periode: 2016–2026."
+   }
+  },
+  {
+   "id": 60,
+   "name": "Perkumpulan KONSEPSI NTB",
+   "short_name": "KONSEPSI",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "52"
+   ],
+   "national": false,
+   "province_text": "Nusa Tenggara Barat",
+   "locations": "Sumbawa; Sumbawa Barat; KPH Rinjani Barat",
+   "scheme_text": "HKm; Kemitraan Kehutanan",
+   "scheme_codes": [
+    "HKM",
+    "KK"
+   ],
+   "roles": [
+    "post_approval",
+    "support"
+   ],
+   "activity": "Program PERTAMAS, pemetaan partisipatif, zonasi, penguatan kelompok, HHBK; uji coba kemitraan kehutanan KPH Rinjani Barat bersama Kemitraan; sejarah perencanaan HKm NTB (LP3ES NTB/Konsepsi).",
+   "partners": "KEMITRAAN; Samanta",
+   "period": "2009–2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://www.locjkt.or.id/application/docliblcjkt/upload/Working_Paper_Epistema_Institute_05-2012.pdf",
+      "title": "Kertas Kerja Epistema 05/2012: HKm Santong, Lombok Utara",
+      "year": "2012"
+     },
+     {
+      "url": "https://www.locjkt.or.id/application/docliblcjkt/upload/Kegiatan%20KPH%20Rinjani%20Barat_0.pdf",
+      "title": "Kompilasi Pengalaman KPH Rinjani Barat (Kemitraan)",
+      "year": "2015"
+     }
+    ],
+    "note": "Fasilitasi HKm Santong, Salut, Munder (SK 447/Menhut-II/2009) dan pilot KPH Rinjani Barat (Lombok Utara) terkonfirmasi. PERTAMAS dan kerja di Sumbawa belum ditemukan; situs resmi tidak tersedia."
+   }
+  },
+  {
+   "id": 41,
+   "name": "Perkumpulan Qbar",
+   "short_name": "Qbar",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "13"
+   ],
+   "national": false,
+   "province_text": "Sumatera Barat",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat",
+    "support"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat; advokasi tata kelola didukung TAF/SETAPAK.",
+   "partners": "Koalisi Hutan Adat; TAF",
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2016/12/12/serahkan-puluhan-usulan-hutan-kelola-rakyat-sumbar-menanti-respon-menteri/",
+      "title": "Serahkan Puluhan Usulan Hutan Kelola Rakyat (Mongabay)",
+      "year": "2016"
+     },
+     {
+      "url": "https://mongabay.co.id/2015/06/17/pemkab-tanah-datar-gamang-menetapkan-hutan-adat/",
+      "title": "Pemkab Tanah Datar Gamang Menetapkan Hutan Adat (Mongabay)",
+      "year": "2015"
+     }
+    ],
+    "note": "Fasilitasi usulan Hutan Nagari/HKm di Sumbar bersama KKI WARSI dan advokasi hutan adat terkonfirmasi; belum ada bukti pendampingan penetapan hutan adat tertentu."
+   }
+  },
+  {
+   "id": 9,
+   "name": "Perkumpulan Sampan Kalimantan (Sahabat Masyarakat Pantai)",
+   "short_name": "SAMPAN",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat",
+   "locations": "Kubu Raya; bentang pesisir Pulau Padang Tikar (Batu Ampar, Nipah Panjang)",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Mengawal usulan HD Pulau Padang Tikar sejak Oktober 2014; pemetaan dan analisis tutupan lahan untuk pengajuan HD di 10 desa bersama SIAR.",
+   "partners": "SIAR; The Asia Foundation",
+   "period": "2014–2016+",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2015/08/27/hebat-warga-di-pulau-kecil-padang-tikar-siap-kelola-61-ribu-hektar-hutan-desa/",
+      "title": "Hebat! Warga di Pulau Kecil Padang Tikar Siap Kelola 61 Ribu Hektar Hutan Desa",
+      "year": "2015"
+     }
+    ],
+    "note": "Mongabay mendukung pendampingan 10 desa se-Pulau Padang Tikar (Kec. Batu Ampar, Kubu Raya) dengan usulan HD sejak Oktober 2014. Nipah Panjang adalah desa di Batu Ampar, bukan lokasi setara, dan peran SIAR dalam pemetaan tidak disebut di artikel; domain sampan.or.id tidak aktif."
+   }
+  },
+  {
+   "id": 49,
+   "name": "Perkumpulan Wallacea",
+   "short_name": "Wallacea",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "73"
+   ],
+   "national": false,
+   "province_text": "Sulawesi Selatan",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat dan publikasi PPMA 2026.",
+   "partners": "Koalisi Hutan Adat",
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2022/11/09/upaya-perempuan-adat-to-cerekeng-luwu-timur-menjual-warisan-leluhur/",
+      "title": "Upaya Perempuan Adat To Cerekeng Luwu Timur (Mongabay)",
+      "year": "2022"
+     },
+     {
+      "url": "https://journal.unhas.ac.id/index.php/fs/article/view/15176",
+      "title": "Poured from the Sky: TEK in Cérékang Forest Conservation (Forest and Society)",
+      "year": "2022"
+     }
+    ],
+    "note": "Pendampingan MHA To Cerekeng (Luwu Timur) terkonfirmasi; perannya dalam SK Bupati 2019 tidak eksplisit, dan SK itu mengakui kearifan lokal, bukan penetapan hutan adat."
+   }
+  },
+  {
+   "id": 22,
+   "name": "PPLH Mangkubumi",
+   "short_name": "PPLH Mangkubumi",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "35"
+   ],
+   "national": false,
+   "province_text": "Jawa Timur",
+   "locations": "Tulungagung (3 desa)",
+   "scheme_text": "IPHPS",
+   "scheme_codes": [
+    "KK"
+   ],
+   "roles": [
+    "access"
+   ],
+   "activity": "Terlibat langsung bersama ARuPA dalam pendampingan pengajuan IPHPS di tiga desa.",
+   "partners": "ARuPA",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://pplh-mangkubumi.or.id",
+    "evidence": [
+     {
+      "url": "https://jatim.antaranews.com/berita/465418/pplh-mangkubumi-dorong-pemerintah-percepat-izin-perhutanan-sosial-di-tulungagung",
+      "title": "PPLH Mangkubumi dorong pemerintah percepat izin perhutanan sosial di Tulungagung (ANTARA Jatim)",
+      "year": "2021"
+     },
+     {
+      "url": "https://jatimtimes.com/baca/238310/20210325/152800/kth-argo-makmur-lestari-besole-terima-60-ribu-bibit-untuk-rehabilitasi-hutan",
+      "title": "KTH Argo Makmur Lestari Besole Terima 60 Ribu Bibit untuk Rehabilitasi Hutan (JatimTIMES)",
+      "year": "2021"
+     }
+    ],
+    "note": "Tiga pengajuan IPHPS di Tulungagung (Besole: disetujui, 845 ha/714 petani; Tenggarejo dan Jengglungharjo: belum terbit per Maret 2021) diadvokasi PPLH Mangkubumi, dan JatimTIMES menyebutnya pendamping kelompok Besole. Kedua sumber tidak menyebut ARuPA (lokakarya 2021 digelar bersama The Samdhana Institute), dan buku 'Hutan Memanggil' tidak ditemukan."
+   }
+  },
+  {
+   "id": 14,
+   "name": "PRCF Indonesia",
+   "short_name": "PRCF",
+   "org_type": "OMS",
+   "province_codes": [
+    "12",
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat; Sumatera Utara",
+   "locations": "Kapuas Hulu; 8 desa di Sumut",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Pendampingan HD di Kapuas Hulu; program Sumatera menyiapkan usulan 8 desa tambahan untuk izin PS.",
+   "partners": null,
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://www.theclimategroup.org/our-work/publications/nanga-lauk-village-forest-management",
+      "title": "Nanga Lauk village forest management (The Climate Group)",
+      "year": "2021"
+     },
+     {
+      "url": "https://sourceup.org/initiatives/forest-conservation-fund-lobu-tayas-forest",
+      "title": "Forest Conservation Fund – Lobu Tayas Forest (SourceUp)",
+      "year": null
+     }
+    ],
+    "note": "Peran PRCF Indonesia sebagai koordinator pendampingan LPHD Hutan Desa Nanga Lauk (wilayah KPH Kapuas Hulu Utara, Kalbar) terkonfirmasi; untuk Sumut, sumber menyebut pilot HD Pepatang Raya (4.600 ha, sejak Maret 2022) plus 4 HD lain dalam proses (termasuk Lobu Tayas, Tapanuli Selatan), bukan '8 desa', dan belum ada SK yang terkonfirmasi. Situs prcfoundation.org gagal dibuka (HTTP 503), laporan Plan Vivo 403, jadi tidak dipakai sebagai bukti."
+   }
+  },
+  {
+   "id": 52,
+   "name": "PT Pengembangan Pembelaan Masyarakat Adat (PPMA) Papua",
+   "short_name": "PtPPMA",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "91"
+   ],
+   "national": false,
+   "province_text": "Papua",
+   "locations": "Jayapura: Nambloung, Klesi, Kemtuik",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat",
+    "support"
+   ],
+   "activity": "Mengajukan permohonan skema hutan adat untuk wilayah Nambloung, Klesi, Kemtuik ke Ditjen PSKL; anggota Koalisi Hutan Adat; menerbitkan daftar koalisi 2026.",
+   "partners": "Koalisi Hutan Adat",
+   "period": "2020–2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2020/12/24/catatan-akhir-tahun-perhutanan-sosial-dan-sulitnya-penetapan-hutan-adat-di-tanah-papua/",
+      "title": "Catatan Akhir Tahun: PS dan Sulitnya Penetapan Hutan Adat di Tanah Papua (Mongabay)",
+      "year": "2020"
+     },
+     {
+      "url": "https://mongabay.co.id/2023/02/15/kala-masyarakat-lembah-grime-nawa-tolak-sawit-pemerintah-jayapura-evaluasi-izin-perusahaan/",
+      "title": "Kala Masyarakat Lembah Grime Nawa Tolak Sawit (Mongabay)",
+      "year": "2023"
+     }
+    ],
+    "note": "Pengajuan hutan adat Nambloung, Klesi, dan Kemtuik terkonfirmasi. Nama lengkap di Mongabay: Perkumpulan Terbatas untuk Pengkajian dan Pemberdayaan Masyarakat Adat (berbeda dari direktori); SK HA Yano Akrua 2022 dikreditkan ke GTMA Jayapura."
+   }
+  },
+  {
+   "id": 63,
+   "name": "RECOFTC",
+   "short_name": "RECOFTC",
+   "org_type": "Organisasi internasional",
+   "province_codes": [
+    "73"
+   ],
+   "national": true,
+   "province_text": "Sulsel; Nasional",
+   "locations": null,
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "post_approval",
+    "support"
+   ],
+   "activity": "Penguatan kapasitas dan pembelajaran usaha PS bersama SCF, Balang, dan KPH.",
+   "partners": "SCF; Balang; KPH",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://www.recoftc.org",
+    "evidence": [
+     {
+      "url": "https://www.recoftc.org/recoftcs-landscapes/securing-indonesias-threatened-south-sulawesi-landscape-and-well-being-its-people",
+      "title": "Securing Indonesia's threatened South Sulawesi landscape (RECOFTC)",
+      "year": null
+     },
+     {
+      "url": "https://www.recoftc.org/regional/stories/smallholder-farmers-and-local-businesses-work-together-protect-indonesias-forests",
+      "title": "Smallholder farmers and local businesses work together (RECOFTC)",
+      "year": "2021"
+     }
+    ],
+    "note": "Peran pendukung di Sulsel sejak 2010 bersama SCF, Balang, dan KPH Jeneberang II terkonfirmasi, tetapi semua sumber dari RECOFTC sendiri."
+   }
+  },
+  {
+   "id": 20,
+   "name": "Riak Bumi",
+   "short_name": "Riak Bumi",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat",
+   "locations": "Kapuas Hulu",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Mitra lokal NTFP-EP dalam pendampingan hutan adat Labian–Leboyan.",
+   "partners": "NTFP-EP Indonesia",
+   "period": "2023–2026",
+   "verification": {
+    "status": "partial",
+    "website": "https://riakbumi.or.id/?p=6",
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia, bab 20 (IUCN NL dkk.)",
+      "year": "2026"
+     },
+     {
+      "url": "https://www.iied.org/22689g",
+      "title": "Agrobiodiversity management in Labian and Labian Ira'ang (IIED)",
+      "year": "2025"
+     }
+    ],
+    "note": "Organisasi dan kemitraannya dengan NTFP-EP di Labian terkonfirmasi; peran spesifik dalam pengakuan hutan adat belum terdokumentasi (baru sebatas pengakuan MHA oleh Bupati 2023)."
+   }
+  },
+  {
+   "id": 42,
+   "name": "Rimbawan Muda Indonesia",
+   "short_name": "RMI",
+   "org_type": "OMS",
+   "province_codes": [
+    "32",
+    "36"
+   ],
+   "national": false,
+   "province_text": "Jawa Barat; Banten",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat",
+    "support"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat; penerbit naskah 'Pelambatan Hutan Adat' (2024).",
+   "partners": "Koalisi Hutan Adat",
+   "period": "2024",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2024/12/18/kasepuhan-cibedug-potret-perjuangan-warga-adat-yang-hidup-dalam-tradisi/",
+      "title": "Kasepuhan Cibedug (Mongabay)",
+      "year": "2024"
+     },
+     {
+      "url": "https://www.mongabay.co.id/2025/02/20/akses-terbatas-masyarakat-kasepuhan-jamrut-tuntut-pengakuan-wilayah-adat/",
+      "title": "Masyarakat Kasepuhan Jamrut Tuntut Pengakuan Wilayah Adat (Mongabay)",
+      "year": "2025"
+     }
+    ],
+    "note": "Bukti untuk Banten (Lebak); kerja hutan adat di Jawa Barat belum terkonfirmasi."
+   }
+  },
+  {
+   "id": 26,
+   "name": "Sawit Watch",
+   "short_name": "Sawit Watch",
+   "org_type": "OMS nasional",
+   "province_codes": [
+    "75"
+   ],
+   "national": true,
+   "province_text": "Gorontalo; Nasional",
+   "locations": "Pohuwato (DAS Papayato & Randangan)",
+   "scheme_text": "HD; HKm",
+   "scheme_codes": [
+    "HD",
+    "HKM"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "support"
+   ],
+   "activity": "Akses kelola atas >15 areal PS yang ada dan 8 areal usulan (~15.600 ha) di Pohuwato; pemetaan partisipatif dan peningkatan kapasitas. Mitra GLA.",
+   "partners": "Mitra lokal; IUCN NL (GLA)",
+   "period": "2021–2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/en/story/social-forestry-supports-communities-and-biodiversity-in-popayato-indonesia/",
+      "title": "Social forestry supports communities and biodiversity in Popayato (IUCN NL)",
+      "year": "2025"
+     },
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia, bab 3 dan 10 (IUCN NL dkk.)",
+      "year": "2026"
+     }
+    ],
+    "note": "Kedua sumber dari IUCN NL (penyandang dana); skema dan nomor SK tidak disebut. Situs sawitwatch.or.id gagal dibuka."
+   }
+  },
+  {
+   "id": 23,
+   "name": "Serikat Hijau Indonesia",
+   "short_name": "SHI",
+   "org_type": "Organisasi massa/OMS",
+   "province_codes": [
+    "32"
+   ],
+   "national": false,
+   "province_text": "Jawa Barat",
+   "locations": "Desa Harumansari, Garut (LMDH Buana Mukti)",
+   "scheme_text": "Kemitraan Kehutanan (Kulin KK)",
+   "scheme_codes": [
+    "KK"
+   ],
+   "roles": [
+    "access"
+   ],
+   "activity": "Mendampingi LMDH Buana Mukti hingga memperoleh SK Kulin KK di wilayah Perhutani KPH Garut.",
+   "partners": null,
+   "period": "2017–2019",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://ejournal-skpm.ipb.ac.id/index.php/jskpm/article/download/810/382",
+      "title": "Respons masyarakat desa hutan terhadap program PS skema Kulin KK di Desa Harumansari (Jurnal SKPM IPB)",
+      "year": "2021"
+     },
+     {
+      "url": "https://eprints.umm.ac.id/id/eprint/15903/1/Wibowo-Perhutanan%20Sosial%2C%20P.392017%2C%20Perhutani.pdf",
+      "title": "Dinamika penetapan IPHPS dan Kulin-KK di KPH Garut (GJFR)",
+      "year": "2021"
+     }
+    ],
+    "note": "Pendampingan LMDH Buana Mukti, Kadungora, Garut (SK Kulin KK Juli 2018) didukung dua sumber akademik. Situs resmi tidak ditemukan."
+   }
+  },
+  {
+   "id": 54,
+   "name": "Silva Papua Lestari",
+   "short_name": null,
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "93"
+   ],
+   "national": false,
+   "province_text": "Papua Selatan",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat (ditulis 'Silvia Lestari Papua').",
+   "partners": "Koalisi Hutan Adat",
+   "period": "2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2015/10/31/penguatan-hutan-adat-papua-demi-menjaga-wilayah-warga-dan-pelindung-kawasan/",
+      "title": "Penguatan Hutan Adat Papua (Mongabay)",
+      "year": "2015"
+     },
+     {
+      "url": "https://news.mongabay.com/2018/10/with-a-feast-of-grubs-a-tribe-makes-its-case-for-forest-stewardship/",
+      "title": "With a feast of grubs, a tribe makes its case for forest stewardship (Mongabay)",
+      "year": "2018"
+     }
+    ],
+    "note": "Nama resmi Perkumpulan Silva Papua Lestari. Bukti 2015–2018 tanpa SK penetapan; periode 2026 di direktori tidak didukung. Yahukimo kini masuk Papua Pegunungan."
+   }
+  },
+  {
+   "id": 25,
+   "name": "Sulawesi Community Foundation",
+   "short_name": "SCF",
+   "org_type": "OMS",
+   "province_codes": [
+    "72",
+    "73"
+   ],
+   "national": false,
+   "province_text": "Sulawesi Selatan; Sulawesi Tengah",
+   "locations": "Belum dirinci",
+   "scheme_text": "HD; HKm",
+   "scheme_codes": [
+    "HD",
+    "HKM"
+   ],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Kerja sama dengan KPH dalam fasilitasi pengurusan izin; perluasan akses dan pembelajaran usaha PS.",
+   "partners": "KPH; RECOFTC; Balang Institute",
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://www.recoftc.org/events/lokakarya-skema-pembiayaan-usaha-perhutanan-sosial",
+      "title": "Lokakarya Skema Pembiayaan Usaha Perhutanan Sosial (RECOFTC)",
+      "year": "2018"
+     },
+     {
+      "url": "https://www.burung.org/en/?p=6276",
+      "title": "Workshop Pokja Percepatan Perhutanan Sosial Sulsel (Burung Indonesia)",
+      "year": "2017"
+     },
+     {
+      "url": "https://mongabay.co.id/2019/05/01/wanti-wanti-untuk-jaga-lahan-perhutanan-sosial-lampako/",
+      "title": "Wanti-wanti untuk Jaga Lahan Perhutanan Sosial Lampoko (Mongabay)",
+      "year": "2019"
+     }
+    ],
+    "note": "SCF terkonfirmasi aktif di PS Sulawesi Selatan (memfasilitasi lokakarya Pokja PPS 2017, menyelenggarakan lokakarya pembiayaan usaha PS bersama RECOFTC 2018, mengevaluasi PS di Lampoko, Bone), tetapi kerja sama dengan KPH dalam fasilitasi izin dan kegiatan di Sulawesi Tengah tidak terkonfirmasi. Publikasi 'Concern to Community Engagement' tidak ditemukan; halaman hibah Ford Foundation (captcha) dan laporan CEPF (403) gagal dibuka."
+   }
+  },
+  {
+   "id": 6,
+   "name": "Telapak (Badan Teritorial Riau)",
+   "short_name": "Telapak",
+   "org_type": "Perkumpulan",
+   "province_codes": [
+    "14"
+   ],
+   "national": false,
+   "province_text": "Riau",
+   "locations": "Segamai, Pelalawan",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access"
+   ],
+   "activity": "Disebut sebagai LSM pendukung pengajuan Hutan Desa Segamai bersama YMI dan Jikalahari.",
+   "partners": "YMI; Jikalahari",
+   "period": "2009–2013",
+   "verification": {
+    "status": "verified",
+    "website": "https://telapak.org/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2013/03/10/lebih-4-tahun-menanti-akhirnya-hutan-desa-segamai-serapung-terwujud/",
+      "title": "Lebih 4 Tahun Menanti, Akhirnya Hutan Desa Segamai-Serapung Terwujud",
+      "year": "2013"
+     },
+     {
+      "url": "https://mongabay.co.id/2013/07/30/desa-segamai-akhirnya-resmi-menerima-hak-kelola-hutan-desa-dari-kementerian-kehutanan/",
+      "title": "Desa Segamai Akhirnya Resmi Menerima Hak Kelola Hutan Desa dari Kementerian Kehutanan",
+      "year": "2013"
+     }
+    ],
+    "note": "Mongabay hanya menyebut Telapak BT Riau sebagai salah satu LSM pendukung Segamai-Serapung tanpa merinci perannya. Situs telapak.org adalah situs Telapak nasional (Bogor) dan tidak menyebut Badan Teritorial Riau."
+   }
+  },
+  {
+   "id": 64,
+   "name": "The Asia Foundation (program SETAPAK)",
+   "short_name": "TAF",
+   "org_type": "Organisasi internasional/donor",
+   "province_codes": [
+    "11",
+    "17",
+    "61",
+    "72",
+    "92"
+   ],
+   "national": false,
+   "province_text": "Aceh; Bengkulu; Kalbar; Sulteng; Papua Barat",
+   "locations": null,
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "support"
+   ],
+   "activity": "Mendukung kerja mitra: pemetaan pengajuan HD (SAMPAN–SIAR), advokasi tata kelola (Qbar), dan jaringan pendamping OMS di lima provinsi.",
+   "partners": "SAMPAN; SIAR; Qbar",
+   "period": "2015–2021",
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://indonesianfeministjournal.org/index.php/IFJ/article/download/666/459/2253",
+      "title": "Partisipasi Perempuan dalam Perhutanan Sosial: Studi Kasus di Lima Provinsi (Jurnal Perempuan)",
+      "year": "2022"
+     },
+     {
+      "url": "https://www.industry.co.id/read/20678/mitra-setapak-kontribusikan-34-pengakuan-kawasan-dalam-agenda-perhutanan-sosial-hingga-akhir-2017",
+      "title": "Mitra SETAPAK Kontribusikan 34% Pengakuan Kawasan dalam Agenda PS (Industry.co.id)",
+      "year": "2017"
+     }
+    ],
+    "note": "Program SETAPAK dan jaringan mitra PS-nya terkonfirmasi (5 provinsi sesuai direktori). Contoh mitra SAMPAN–SIAR dan Qbar belum terkonfirmasi sebagai mitra SETAPAK."
+   }
+  },
+  {
+   "id": 17,
+   "name": "Tropenbos Indonesia",
+   "short_name": "Tropenbos",
+   "org_type": "Lembaga riset/OMS",
+   "province_codes": [
+    "61"
+   ],
+   "national": true,
+   "province_text": "Kalimantan Barat; Nasional",
+   "locations": "Ketapang (±26.000 ha HD; 23 desa)",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "post_approval",
+    "support"
+   ],
+   "activity": "Memfasilitasi implementasi PS di Ketapang (didanai Lestari Capital/Rimba Collective, skema RaCP RSPO); menggelar lokakarya nasional peran OMS dalam PS (2015, 2026); policy brief kriteria PIAPS.",
+   "partners": "IUCN NL; UNTAN; Lestari Capital",
+   "period": "2015–2026",
+   "verification": {
+    "status": "partial",
+    "website": "https://www.tropenbos-indonesia.org/",
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia (IUCN NL dkk.)",
+      "year": "2026"
+     },
+     {
+      "url": "https://www.eco-business.com/news/billion-dollar-forest-conservation-scheme-rimba-collective-scrambles-to-meet-first-year-targets",
+      "title": "Rimba Collective scrambles to meet first-year targets (Eco-Business)",
+      "year": "2022"
+     },
+     {
+      "url": "https://lestari.kompas.com/read/2025/09/04/173100886/tropenbos-libatkan-masyarakat-untuk-redam-karhutla-di-lanskap-pawan-kalbar",
+      "title": "Tropenbos libatkan masyarakat untuk redam karhutla di lanskap Pawan (Kompas)",
+      "year": "2025"
+     }
+    ],
+    "note": "'23 desa' adalah seluruh wilayah kerja di Kalbar, bukan desa hutan desa di Ketapang. Luas proyek berbeda antarsumber (14.000 ha vs ±26.000 ha); belum ada sumber independen yang menyebut Tropenbos sebagai pelaksana."
+   }
+  },
+  {
+   "id": 7,
+   "name": "Wahana Lestari Persada (WATALA)",
+   "short_name": "WATALA",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "18"
+   ],
+   "national": false,
+   "province_text": "Lampung",
+   "locations": "Lampung Barat: Sumberjaya, Way Tenong; kelompok Waremtahu; Lampung Tengah",
+   "scheme_text": "HKm",
+   "scheme_codes": [
+    "HKM"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "support"
+   ],
+   "activity": "Rekam jejak panjang HKm: fasilitasi pencadangan HKm kelompok Waremtahu; penguatan kelompok; publikasi 'Catatan 10 Tahun Program HKm Lampung' bersama Kemitraan dan refleksi percepatan HKm bersama Dishut Lampung; memfasilitasi Asosiasi Petani Hutan Lampung.",
+   "partners": "Kemitraan; ICRAF; Dishut Lampung; Unila",
+   "period": "1999–2012",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://koreascience.or.kr/article/JAKO201415642603033.pdf",
+      "title": "Present State of Community Forestry (HKm) Program in a Protection Forest and Its Challenges: Case Study in Lampung Province (Journal of Forest Science 30(1))",
+      "year": "2014"
+     }
+    ],
+    "note": "Jurnal ini mendukung bimbingan kelembagaan dan pelatihan oleh WATALA untuk kelompok HKm Bina Wana di Kebun Tebu, Lampung Barat. Kelompok Waremtahu, publikasi 'Catatan 10 Tahun', Asosiasi Petani Hutan Lampung, sumber norad.no dan prosiding LOC (file >10 MB, gagal dibuka) belum terverifikasi, dan domain watala.org tidak aktif."
+   }
+  },
+  {
+   "id": 5,
+   "name": "Wahana Lingkungan Hidup Indonesia – Riau",
+   "short_name": "WALHI Riau",
+   "org_type": "OMS (eksekutif daerah WALHI)",
+   "province_codes": [
+    "14"
+   ],
+   "national": false,
+   "province_text": "Riau",
+   "locations": "Kep. Meranti: Sungai Tohor, Sungai Tohor Barat, Nipah Sendanu, Sendanu Dahrul Ikhsan, Tanjung Sari, Lukun, dll.",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "support"
+   ],
+   "activity": "Mendampingi tujuh desa Kep. Meranti yang memperoleh SK hak kelola (2017) dan menyatakan melanjutkan pendampingan pengelolaan. WALHI juga mitra GLA.",
+   "partners": "IUCN NL (GLA)",
+   "period": "2017",
+   "verification": {
+    "status": "verified",
+    "website": "https://walhiriau.or.id/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2017/04/03/kala-desa-desa-di-riau-ini-peroleh-hak-kelola-hutan/",
+      "title": "Kala Desa-desa di Riau Ini Peroleh Hak Kelola Hutan (Mongabay)",
+      "year": "2017"
+     },
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia (IUCN NL dkk.)",
+      "year": "2026"
+     }
+    ],
+    "note": "Tujuh desa di Tebing Tinggi Timur, Kep. Meranti (SK Maret 2017); desa ketujuh adalah Kepau Baru. Pembagian peran dengan mitra lain belum ditemukan."
+   }
+  },
+  {
+   "id": 55,
+   "name": "WRI Indonesia",
+   "short_name": "WRI",
+   "org_type": "Lembaga riset internasional (cabang)",
+   "province_codes": [
+    "11",
+    "13",
+    "15",
+    "64",
+    "65"
+   ],
+   "national": false,
+   "province_text": "Aceh; Sumbar; Jambi; Kaltim; Kaltara",
+   "locations": "HKm Bukit Sultan, Lamtanjong, Aceh Besar",
+   "scheme_text": "HD; HKm",
+   "scheme_codes": [
+    "HD",
+    "HKM"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "support"
+   ],
+   "activity": "Program bersama WARSI dan KBCF untuk pemetaan, pendaftaran izin, dan pengakuan akses; pendampingan kelompok HKm Bukit Sultan (Aceh Besar).",
+   "partners": "KKI WARSI; KBCF",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://repository.ar-raniry.ac.id/57592/1/180401070.pdf",
+      "title": "Strategi Komunikasi WRI Indonesia dalam Pendampingan HKm Bukit Sultan, Aceh Besar (skripsi UIN Ar-Raniry)",
+      "year": "2025"
+     },
+     {
+      "url": "https://aceh.antaranews.com/berita/382729/bupati-aceh-besar-wri-bahas-potensi-ekonomi-hutan-lestari",
+      "title": "Bupati Aceh Besar-WRI bahas potensi ekonomi hutan lestari (ANTARA Aceh)",
+      "year": "2025"
+     }
+    ],
+    "note": "Dukungan untuk HKm Bukit Sultan (Aceh Besar) sejak 2021 terkonfirmasi. Program bersama WARSI/KBCF dan kerja di Sumbar, Jambi, Kaltim, Kaltara belum terkonfirmasi."
+   }
+  },
+  {
+   "id": 66,
+   "name": "WWF Indonesia",
+   "short_name": "WWF",
+   "org_type": "OMS internasional (cabang)",
+   "province_codes": [
+    "52",
+    "53",
+    "61",
+    "93"
+   ],
+   "national": false,
+   "province_text": "NTB/NTT; Papua (Merauke); Kalbar",
+   "locations": null,
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "post_approval",
+    "adat",
+    "support"
+   ],
+   "activity": "WWF Nusa Tenggara mengadvokasi percepatan dan penyederhanaan izin PS di NTB; fasilitator WWF mendampingi praktik pengelolaan masyarakat adat di Merauke.",
+   "partners": "Dinas LHK NTB; Dishut Papua",
+   "period": "2014–2019",
+   "verification": {
+    "status": "partial",
+    "website": "https://www.wwf.id/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2019/05/28/forum-diskusi-mongabay-banyak-banyak-hambatan-potensi-perhutanan-sosial-di-ntb-belum-digarap-optimal/",
+      "title": "Forum Diskusi Mongabay: PS di NTB (Mongabay)",
+      "year": "2019"
+     },
+     {
+      "url": "https://mongabay.co.id/2014/04/01/penguatan-warga-buat-kelola-hutan-adat-di-papua/",
+      "title": "Penguatan Warga buat Kelola Hutan Adat di Papua (Mongabay)",
+      "year": "2014"
+     }
+    ],
+    "note": "NTB (2019) dan Merauke (2014) didukung, tetapi Merauke adalah izin kayu masyarakat adat menurut Pergub Papua, bukan skema PS. NTT dan Kalbar belum terverifikasi."
+   }
+  },
+  {
+   "id": 29,
+   "name": "Yayasan Bambu Lingkungan Lestari",
+   "short_name": "YBLL",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "53"
+   ],
+   "national": false,
+   "province_text": "Nusa Tenggara Timur",
+   "locations": "Flores: Sikka; Manggarai",
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "access"
+   ],
+   "activity": "Mendampingi kelompok perempuan dari pengajuan sampai verifikasi lapangan; pemberitaan 2026 mengaitkan dengan akses PS ±648 ha.",
+   "partners": null,
+   "period": "2026",
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://rri.co.id/toli-toli/info-kementerian/2401273/kemen-pppa-apresiasi-enam-sk-perhutanan-sosial-perempuan",
+      "title": "Kemen PPPA Apresiasi Enam SK Perhutanan Sosial Perempuan (RRI)",
+      "year": "2026"
+     },
+     {
+      "url": "https://mongabay.co.id/2026/05/17/upaya-mama-mama-manggarai-berdaulat-pangan-sampai-konservasi-lahan/",
+      "title": "Upaya Mama-mama Manggarai Berdaulat Pangan sampai Konservasi Lahan (Mongabay)",
+      "year": "2026"
+     }
+    ],
+    "note": "Angka 648,65 ha berasal dari 6 SK HKm kelompok perempuan (terbit 21 April 2026) di Manggarai, Manggarai Barat, Manggarai Timur, dan Sikka; RRI menyebut YBLL hanya sebagai penyelenggara forum bersama Kemen PPPA, sedangkan Mongabay menyebut YBLL mendampingi kelompok perempuan (Wela Nara, Teka Iku). Peran YBLL 'dari pengajuan sampai verifikasi lapangan' tidak terkonfirmasi, sumber 'Oke Flores' tidak ditemukan, dan skemanya HKm (bukan 'Beragam')."
+   }
+  },
+  {
+   "id": 37,
+   "name": "Yayasan Citra Mandiri Mentawai",
+   "short_name": "YCMM",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "13"
+   ],
+   "national": false,
+   "province_text": "Sumatera Barat",
+   "locations": "Kepulauan Mentawai (≥30 uma)",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Bersama AMAN Mentawai mendampingi ≥30 uma; per Sept 2026, 9 telah memperoleh pengakuan MHA dan mengusulkan penetapan hutan adat.",
+   "partners": "AMAN Mentawai",
+   "period": "2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2026/09/06/kembalikan-hutan-mentawai-pada-masyarakat-adat/",
+      "title": "Kembalikan Hutan Mentawai pada Masyarakat Adat (Mongabay)",
+      "year": "2026"
+     },
+     {
+      "url": "https://www.huma.or.id/p/koalisi-hutan-adat",
+      "title": "Koalisi Hutan Adat (Perkumpulan HuMa) – YCM Mentawai sebagai anggota",
+      "year": null
+     }
+    ],
+    "note": "Mongabay (6 Sept 2026) mengonfirmasi YCMM dan AMAN Mentawai mendampingi sedikitnya 30 uma; 9 di antaranya sudah ber-SK pengakuan masyarakat adat dan mengusulkan penetapan hutan adat, yang masih menunggu proses (belum ada SK hutan adat). Situs resmi YCMM tidak ditemukan."
+   }
+  },
+  {
+   "id": 32,
+   "name": "Yayasan EcoNusa",
+   "short_name": "EcoNusa",
+   "org_type": "OMS",
+   "province_codes": [
+    "81",
+    "91",
+    "92"
+   ],
+   "national": false,
+   "province_text": "Papua; Papua Barat; Maluku",
+   "locations": "Fakfak (KUPS pala); hutan desa Papua Barat",
+   "scheme_text": "HD; HKm; HA",
+   "scheme_codes": [
+    "HD",
+    "HKM",
+    "HA"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "adat"
+   ],
+   "activity": "PKS dengan BPS Ambon dan Manokwari (Agustus 2025) mencakup pendampingan permohonan izin, kelembagaan, kawasan, dan usaha; penyusunan rencana kelola HD Papua Barat (2025); pelatihan KUPS bersama KPHP Fakfak.",
+   "partners": "BPSKL Maluku-Papua; KPHP Fakfak",
+   "period": "2024–2026",
+   "verification": {
+    "status": "verified",
+    "website": "https://econusa.id",
+    "evidence": [
+     {
+      "url": "https://econusa.id/en/gallery/cooperation-agreement-to-strengthen-and-accelerate-social-forestry-management-in-tanah-papua-and-the-maluku-islands/",
+      "title": "Cooperation Agreement to Strengthen and Accelerate Social Forestry Management in Tanah Papua and the Maluku Islands (EcoNusa)",
+      "year": "2025"
+     },
+     {
+      "url": "https://econusa.id/id/galeri/koordinasi-program-perhutanan-sosial-dan-pertemuan-awal-rencana-pemetaan-wilayah-adat-di-distrik-kokas-kabupaten-fakfak/",
+      "title": "Koordinasi Program Perhutanan Sosial dan Pertemuan Awal Rencana Pemetaan Wilayah Adat di Distrik Kokas, Kabupaten Fakfak (EcoNusa)",
+      "year": "2026"
+     }
+    ],
+    "note": "PKS dengan BPS Ambon dan Manokwari (ditandatangani 20 Agustus 2025 di PESONA 2025) mencakup dukungan izin, kawasan, kelembagaan, dan usaha; di Fakfak, EcoNusa bersama KPH memperkuat LPHD dan menjajaki pala (Maret 2026). Semua bukti dari situs EcoNusa sendiri; berita ANTARA, pelatihan KUPS bersama KPHP Fakfak, dan artikel rencana kelola HD Papua Barat (Sept 2025, hanya judulnya terlihat di hasil pencarian) belum bisa dibuka atau dikonfirmasi."
+   }
+  },
+  {
+   "id": 62,
+   "name": "Yayasan Hutan, Alam dan Lingkungan Aceh",
+   "short_name": "HAkA",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "11"
+   ],
+   "national": false,
+   "province_text": "Aceh",
+   "locations": "Mendale dan hutan kampung lain",
+   "scheme_text": "HD/Hutan kampung",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "post_approval"
+   ],
+   "activity": "Pendampingan kelompok hutan kampung dan perempuan penjaga hutan.",
+   "partners": null,
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": "https://haka.or.id/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2020/02/25/mpu-uteun-ranger-perempuan-penjaga-hutan-aceh/",
+      "title": "MpU Uteun, Ranger Perempuan Penjaga Hutan Aceh (Mongabay)",
+      "year": "2020"
+     },
+     {
+      "url": "https://mongabay.co.id/2024/08/18/para-perempuan-penjaga-hutan-aceh/",
+      "title": "Para Perempuan Penjaga Hutan Aceh (Mongabay)",
+      "year": "2024"
+     },
+     {
+      "url": "https://rri.co.id/takengon/info-pemda/1938937/peresmian-sekretariat-lphk-peteri-pukes",
+      "title": "Peresmian Sekretariat LPHK Peteri Pukes (RRI)",
+      "year": "2025"
+     }
+    ],
+    "note": "Pendampingan terbukti untuk HD Damaran Baru (Bener Meriah), termasuk tahap pengajuan SK 2019; untuk Mendale hanya terbukti kehadiran. Usul: ganti contoh lokasi ke Damaran Baru."
+   }
+  },
+  {
+   "id": 24,
+   "name": "Yayasan JAVLEC Indonesia",
+   "short_name": "JAVLEC",
+   "org_type": "OMS",
+   "province_codes": [
+    "34",
+    "51"
+   ],
+   "national": false,
+   "province_text": "DI Yogyakarta; Bali",
+   "locations": "Cempaga (Bali); DIY",
+   "scheme_text": "HKm; HA",
+   "scheme_codes": [
+    "HKM",
+    "HA"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Memfasilitasi pengajuan penetapan hutan adat dan penguatan kelembagaan di Bali (termasuk pengukuran wilayah Cempaga); aktif dalam pendampingan PS di DIY.",
+   "partners": null,
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://javlec.org",
+    "evidence": [
+     {
+      "url": "https://javlec.org/pendampingan-dan-peningkatan-kapasitas-pengelolaan-hutan-adat-di-bali/",
+      "title": "Pendampingan dan Peningkatan Kapasitas Pengelolaan Hutan Adat di Bali (Yayasan JAVLEC)",
+      "year": "2025"
+     },
+     {
+      "url": "https://javlec.org/javlec-dampingi-kups-dalam-konsolidasi-perempuan-pengelola-perhutanan-sosial/",
+      "title": "JAVLEC Dampingi KUPS dalam Konsolidasi Perempuan Pengelola Perhutanan Sosial",
+      "year": "2026"
+     }
+    ],
+    "note": "Bukti hanya dari situs JAVLEC sendiri: fasilitasi pengajuan penetapan hutan adat dan penyusunan RKPS untuk 5 MHA di Bali termasuk Cempaga (Buleleng), dana TERRA-CF/BPDLH, serta pendampingan KTHKm di Gunungkidul dan Kulon Progo (DIY). Kegiatan 'pengukuran wilayah Cempaga' tidak disebut, sumber 'FKT UGM 2024' tidak ditemukan, dan belum ada liputan independen."
+   }
+  },
+  {
+   "id": 33,
+   "name": "Yayasan Komunitas Kamuki",
+   "short_name": "Kamuki",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "91"
+   ],
+   "national": false,
+   "province_text": "Papua",
+   "locations": "Belum dirinci",
+   "scheme_text": "Beragam",
+   "scheme_codes": [],
+   "roles": [
+    "access",
+    "adat"
+   ],
+   "activity": "Mitra KEMITRAAN untuk mendampingi masyarakat adat memperoleh kepastian hukum dan izin PS.",
+   "partners": "KEMITRAAN",
+   "period": null,
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://katadata.co.id/hanna/analisisdata/61c1a9de77fd0/bergandengan-tangan-untuk-masa-depan-tanah-papua",
+      "title": "Bergandengan Tangan untuk Masa Depan Tanah Papua (Katadata)",
+      "year": "sekitar 2021"
+     }
+    ],
+    "note": "Satu sumber saja. Lokasi yang disebut (Fakfak) ada di Provinsi Papua Barat, bukan Papua seperti di direktori; nomor SK tidak disebut."
+   }
+  },
+  {
+   "id": 48,
+   "name": "Yayasan Merah Putih",
+   "short_name": "YMP",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "72"
+   ],
+   "national": false,
+   "province_text": "Sulawesi Tengah",
+   "locations": null,
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "adat"
+   ],
+   "activity": "Tercantum dalam direktori Koalisi Hutan Adat dan publikasi PPMA 2026.",
+   "partners": "Koalisi Hutan Adat",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://www.ymp.or.id/tentang-kami/",
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2016/12/20/lambannya-pemerintah-tetapkan-hutan-adat/",
+      "title": "Lambannya Pemerintah Tetapkan Hutan Adat (Mongabay)",
+      "year": "2016"
+     },
+     {
+      "url": "https://mongabay.co.id/2016/03/29/sinergi-para-pihak-percepat-pengakuan-wilayah-adat/",
+      "title": "Sinergi Para Pihak Percepat Pengakuan Wilayah Adat (Mongabay)",
+      "year": "2016"
+     }
+    ],
+    "note": "Contoh lokasi yang bisa diisi: Hutan Adat Wana Posangke, Morowali Utara (2016). Luas 6.212 ha hanya dari situs organisasi."
+   }
+  },
+  {
+   "id": 3,
+   "name": "Yayasan Mitra Insani",
+   "short_name": "YMI",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "14"
+   ],
+   "national": false,
+   "province_text": "Riau",
+   "locations": "Segamai & Serapung, Pelalawan",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Mendampingi Desa Segamai & Serapung ±3 tahun hingga memperoleh hak kelola Hutan Desa (2013); pengajuan sejak 2009. Program juga mencakup penyelesaian konflik dan penguatan pengelolaan.",
+   "partners": "Jikalahari; BT Telapak Riau; Greenpeace",
+   "period": "2009–2013+",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2013/03/10/lebih-4-tahun-menanti-akhirnya-hutan-desa-segamai-serapung-terwujud/",
+      "title": "Lebih 4 Tahun Menanti, Akhirnya Hutan Desa Segamai-Serapung Terwujud",
+      "year": "2013"
+     },
+     {
+      "url": "https://mongabay.co.id/2013/07/30/desa-segamai-akhirnya-resmi-menerima-hak-kelola-hutan-desa-dari-kementerian-kehutanan/",
+      "title": "Desa Segamai Akhirnya Resmi Menerima Hak Kelola Hutan Desa dari Kementerian Kehutanan",
+      "year": "2013"
+     },
+     {
+      "url": "https://mongabay.co.id/2018/09/14/pemberian-hak-kelola-hutan-rakyat-di-riau-lamban/",
+      "title": "Pemberian Hak Kelola Hutan Rakyat di Riau Lamban",
+      "year": "2018"
+     }
+    ],
+    "note": "Yang terbit pada 2013 adalah SK Menhut 154 dan 155/Menhut-II/2013 (penetapan areal kerja, sekitar 2.000 ha per desa), sedangkan HPHD dari gubernur masih menjadi langkah berikutnya, jadi frasa 'memperoleh hak kelola' perlu dibedakan. Artikel Juli 2013 menyebut pendampingan 3 tahun, artikel Maret 2013 menyebut perjuangan sejak 2009, dan Mongabay 2018 menyebut YMI mendampingi sejak 2008."
+   }
+  },
+  {
+   "id": 15,
+   "name": "Yayasan Palung (Gunung Palung Orangutan Conservation Program)",
+   "short_name": "Yayasan Palung / GPOCP",
+   "org_type": "OMS",
+   "province_codes": [
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat",
+   "locations": "Ketapang; Kayong Utara (LPHD Matan Jaya)",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "access",
+    "post_approval"
+   ],
+   "activity": "Membantu masyarakat mengikuti program HD dan mengamankan hak; mendampingi LPHD Matan Jaya setelah persetujuan terbit.",
+   "partners": "Darwin Initiative",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": "https://savegporangutans.org",
+    "evidence": [
+     {
+      "url": "https://www.darwininitiative.org.uk/documents/DAR31015/27782/31-015%20AR1%20-%20edited.pdf",
+      "title": "Darwin Initiative 31-015 Annual Report 1: Community-based Orangutan Conservation through Science, Land Rights, and Livelihoods (2025 (periode Apr 2024–Mar 2025))",
+      "year": null
+     }
+    ],
+    "note": "Laporan resmi Darwin Initiative (lead: GPOCP/Yayasan Palung) menyebut Hutan Desa Matan Jaya selesai ditetapkan berdasarkan SK pemerintah pusat, LPHD-nya dibentuk (25 orang) lalu dilatih dan didampingi patroli; GPOCP membantu masyarakat melalui tahapan permohonan HD sejak 2012. Laporan tidak memuat nomor SK per desa; Matan Jaya berada di wilayah KPH Kayong (Kayong Utara)."
+   }
+  },
+  {
+   "id": 16,
+   "name": "Yayasan Planet Indonesia",
+   "short_name": "Planet Indonesia",
+   "org_type": "OMS",
+   "province_codes": [
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat",
+   "locations": "Sintang & Sekadau (HL Gunung Naning); >50 komunitas",
+   "scheme_text": "HD; HA",
+   "scheme_codes": [
+    "HD",
+    "HA"
+   ],
+   "roles": [
+    "access",
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Mendukung >50 komunitas termasuk 8 hutan desa; di Sintang–Sekadau 3 desa sudah berizin dan 2 mengejar status hutan adat. Pilar: hak & akses, tata kelola inklusif, pengelolaan, penghidupan.",
+   "partners": null,
+   "period": "2026",
+   "verification": {
+    "status": "partial",
+    "website": "https://www.planetindonesia.org/",
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia, bab 12 (IUCN NL dkk.)",
+      "year": "2026"
+     },
+     {
+      "url": "https://adam-miller-vrmw.squarespace.com/news/2020/9/27/introducing-our-newest-project-site",
+      "title": "Introducing our newest project site (blog Planet Indonesia)",
+      "year": "2020"
+     }
+    ],
+    "note": "Angka spesifik (8 hutan desa, 3 izin di Sintang–Sekadau) hanya dari prosiding lokakarya yang berisi presentasi organisasi sendiri; belum ada sumber independen dengan nama desa dan SK."
+   }
+  },
+  {
+   "id": 61,
+   "name": "Yayasan SAMANTA",
+   "short_name": "SAMANTA",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "52"
+   ],
+   "national": false,
+   "province_text": "Nusa Tenggara Barat",
+   "locations": "Lombok Tengah; KPH Rinjani Barat",
+   "scheme_text": "HKm; HTR; Kemitraan Kehutanan",
+   "scheme_codes": [
+    "HKM",
+    "HTR",
+    "KK"
+   ],
+   "roles": [
+    "post_approval",
+    "support"
+   ],
+   "activity": "Konsorsium KEMITRAAN–SAMANTA mendukung usaha PS pada HKm dan HTR di Lombok Tengah; uji coba kemitraan kehutanan KPH Rinjani Barat.",
+   "partners": "KEMITRAAN; Konsepsi",
+   "period": null,
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2016/01/04/skema-kemitraan-yang-membuat-warga-desa-rempek-tersenyum/",
+      "title": "Skema Kemitraan yang Membuat Warga Desa Rempek Tersenyum (Mongabay)",
+      "year": "2016"
+     },
+     {
+      "url": "https://www.locjkt.or.id/application/docliblcjkt/upload/KPH%20Mengurai%20Sengketa.pdf",
+      "title": "Upaya KPH Mengurai Sengketa (Kemitraan)",
+      "year": "2015"
+     },
+     {
+      "url": "https://www.locjkt.or.id/application/docliblcjkt/upload/Kegiatan%20KPH%20Rinjani%20Barat_0.pdf",
+      "title": "Kompilasi Pengalaman KPH Rinjani Barat (Kemitraan)",
+      "year": "2015"
+     }
+    ],
+    "note": "Fasilitasi kemitraan kehutanan dan HTR di Desa Rempek sejak 2011 terkonfirmasi, tetapi lokasinya Lombok Utara, bukan Lombok Tengah seperti di direktori."
+   }
+  },
+  {
+   "id": 28,
+   "name": "Yayasan SANDI FLORATA",
+   "short_name": "SANDI FLORATA",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "53"
+   ],
+   "national": false,
+   "province_text": "Nusa Tenggara Timur",
+   "locations": "Alor: Wasbila & Sirung Lalang Gasang (9 desa)",
+   "scheme_text": "HKm",
+   "scheme_codes": [
+    "HKM"
+   ],
+   "roles": [
+    "access"
+   ],
+   "activity": "Bersama SLPP NTT mengawal HKm 9 desa; pengajuan sejak 2014, izin diterima 2017.",
+   "partners": "SLPP NTT (JKPP)",
+   "period": "2014–2017",
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://mongabay.co.id/2019/08/22/berada-di-hutan-lindung-egon-ilimendo-cerita-warga-dusun-berjuang-dapatkan-izin-kelola-lahan-bagian-1/",
+      "title": "Berada di Hutan Lindung Egon Ilimedo, Cerita Warga Dusun Berjuang Dapatkan Izin Kelola Lahan (Bagian 1) (Mongabay)",
+      "year": "2019"
+     },
+     {
+      "url": "https://mongabay.co.id/2019/08/23/hkm-beri-dampak-bagi-masyarakat-yang-hidup-di-dalam-hutan-lindung-tapi-pendampingan-tetap-diperlukan-bagian-2/",
+      "title": "HKm Beri Dampak bagi Masyarakat yang Hidup di Dalam Hutan Lindung (Bagian 2) (Mongabay)",
+      "year": "2019"
+     }
+    ],
+    "note": "Sumber independen mengonfirmasi Sandi Florata (Kasih Mandiri Flores Alor Lembata) mendampingi HKm di Kabupaten Sikka, bukan Alor: lima kelompok HKm diterima pada Desember 2017, termasuk IUP HKm Wairtopo (SK 6639/2017, sekitar 1.000 ha). Klaim Alor (Wasbila dan Sirung Lalang Gasang, 9 desa) tidak bisa dipastikan karena dokumen CEPF tentang Pantar/Alor ditolak (403) dan buku JKPP tidak ditemukan; periode 2014–2017 mungkin merujuk ke kasus Sikka."
+   }
+  },
+  {
+   "id": 19,
+   "name": "Yayasan Sandriumi",
+   "short_name": "Sandriumi",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "61"
+   ],
+   "national": false,
+   "province_text": "Kalimantan Barat",
+   "locations": "Kapuas Hulu",
+   "scheme_text": "HA",
+   "scheme_codes": [
+    "HA"
+   ],
+   "roles": [
+    "post_approval",
+    "adat"
+   ],
+   "activity": "Mitra lokal NTFP-EP dalam pendampingan hutan adat Labian–Leboyan.",
+   "partners": "NTFP-EP Indonesia",
+   "period": "2023–2026",
+   "verification": {
+    "status": "partial",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://www.iucn.nl/app/uploads/2026/06/Strengthening-Social-Forestry-in-Peatlands-in-Indonesia-Experiences-from-Civil-Society-Organizations.pdf",
+      "title": "Strengthening social forestry in peatlands in Indonesia, bab 20 (IUCN NL dkk.)",
+      "year": "2026"
+     }
+    ],
+    "note": "Hanya satu penyebutan; tidak ditemukan situs, profil badan hukum, atau liputan media. Sebaiknya ditahan sampai dikonfirmasi ke NTFP-EP Indonesia."
+   }
+  },
+  {
+   "id": 34,
+   "name": "Yayasan Wahana Sarmi Sejahtera",
+   "short_name": "YWSS",
+   "org_type": "OMS lokal",
+   "province_codes": [
+    "91"
+   ],
+   "national": false,
+   "province_text": "Papua",
+   "locations": "Kampung Nengke II, Sarmi",
+   "scheme_text": "HD",
+   "scheme_codes": [
+    "HD"
+   ],
+   "roles": [
+    "post_approval"
+   ],
+   "activity": "Program PaPeDa 4: pendampingan pengelolaan hutan desa dan optimalisasi lahan.",
+   "partners": null,
+   "period": "2025–2026",
+   "verification": {
+    "status": "verified",
+    "website": null,
+    "evidence": [
+     {
+      "url": "https://papua.brmp.pertanian.go.id/berita/brmp-papua-hadiri-panen-perdana-padi-ladang-di-kampung-nengke-ii-sarmi",
+      "title": "BRMP Papua Hadiri Panen Perdana Padi Ladang di Kampung Nengke II Sarmi",
+      "year": "2025"
+     },
+     {
+      "url": "https://papua.brmp.pertanian.go.id/berita/dari-pelatihan-ke-aksi-petani-nengke-ii-siap-kembangkan-kopi-robusta",
+      "title": "Dari Pelatihan ke Aksi: Petani Nengke II Siap Kembangkan Kopi Robusta (BRMP Papua)",
+      "year": "2026"
+     }
+    ],
+    "note": "Pendampingan pengelolaan HD Nengke II (SK.8153/MENLHK-PSKL/PSL0/10/2022) terkonfirmasi dari situs instansi pemerintah; peran saat pengajuan HD belum diketahui; situs resmi tidak ditemukan."
+   }
+  }
+ ]
+}

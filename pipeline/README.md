@@ -36,6 +36,16 @@ uv run pdpsi geo --source ../data/source/geo/geoBoundaries-IDN-ADM2.geojson --ve
 
 Wilayah baru di Kepmendagri yang tidak punya padanan nama di sumber harus ditambahkan ke `geo_aliases.csv`; perintah berhenti bila ada kabupaten/kota tanpa geometri.
 
+## Direktori OMS pendamping
+
+Sumber kedua yang terpisah dari data SK (DECISIONS.md K12). Masukannya workbook verifikasi di `data/source/oms/` (tidak masuk git). Hanya entri berstatus Terverifikasi atau Sebagian yang ditulis; entri lain ditahan, dan perintah berhenti bila masih ada entri yang belum diperiksa daring.
+
+```bash
+uv run pdpsi oms --source ../data/source/oms/<workbook-verifikasi>.xlsx --version <YYYY-MM-DD> --directory-date <tanggal direktori> --checked-date <tanggal pemeriksaan>
+```
+
+Keluaran: `data/oms/<versi>/directory.json` dan `data/oms/current.json`.
+
 ## Isi folder rilis
 
 | File | Publik | Isi |

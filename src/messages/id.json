@@ -13,7 +13,8 @@
     "about": "Tentang",
     "groupExplore": "Jelajahi data",
     "groupInfo": "Informasi",
-    "record": "Rekaman"
+    "record": "Rekaman",
+    "organizations": "Direktori OMS"
   },
   "common": {
     "skipToContent": "Langsung ke konten",
@@ -412,5 +413,46 @@
     "total": "Total",
     "ariaRanked": "{title}. Ukuran: {metric}. Tertinggi: {top}, {value}. Rincian lengkap ada di tabel data.",
     "ariaStacked": "{title}. {count} wilayah; rekaman terbanyak di {top}. Rincian per jenis PS ada di tabel data."
+  },
+  "oms": {
+    "title": "Direktori OMS Pendamping",
+    "lead": "{count} organisasi masyarakat sipil (OMS) yang tercatat mendampingi atau mendukung Perhutanan Sosial dan hutan adat, dari direktori per {date}.",
+    "noteTitle": "Sumber berbeda dari data SK",
+    "noteSeparate": "Direktori ini bukan data GoKUPS dan bukan daftar resmi pendamping. Isinya tidak dihubungkan ke SK tertentu dan tidak dipakai dalam angka, peta, atau statistik portal.",
+    "noteChecked": "Setiap entri diperiksa daring pada {date} dengan bantuan AI. Hasilnya {verified} organisasi terverifikasi dan {partial} terverifikasi sebagian. {withheld} entri lain belum ditampilkan karena bukti publiknya belum ditemukan.",
+    "noteLanguage": "",
+    "filters": "Filter direktori",
+    "searchHint": "Nama organisasi, singkatan, lokasi, kegiatan, atau mitra.",
+    "national": "Nasional",
+    "role": "Peran",
+    "roleLabel": "Peran",
+    "allRoles": "Semua peran",
+    "roles": {
+      "access": "Pra-izin dan akses",
+      "post_approval": "Pascapersetujuan",
+      "adat": "Hutan adat",
+      "support": "Pendukung teknis atau kebijakan"
+    },
+    "apply": "Terapkan",
+    "reset": "Hapus filter",
+    "resultCount": "{count} dari {total} organisasi",
+    "empty": "Tidak ada organisasi yang cocok dengan filter ini.",
+    "listLabel": "Daftar organisasi",
+    "status": {
+      "verified": "Terverifikasi",
+      "partial": "Terverifikasi sebagian"
+    },
+    "schemeText": "Skema PS (isian direktori)",
+    "locations": "Contoh lokasi dampingan",
+    "activity": "Contoh pendampingan",
+    "partners": "Mitra atau konsorsium",
+    "period": "Periode bukti",
+    "notStated": "Tidak diisi",
+    "evidenceTitle": "Tautan bukti publik",
+    "website": "Situs resmi",
+    "noEvidence": "Tidak ada tautan bukti.",
+    "checkNote": "Catatan pemeriksaan",
+    "sourceLine": "Sumber: {name} (per {date}), diperiksa daring {checked}. Versi data direktori {version}.",
+    "provinceLink": "{count} OMS pendamping tercatat bekerja di provinsi ini"
   }
 }
