@@ -1,4 +1,12 @@
-# DESIGN.md: Pusat Data Perhutanan Sosial Indonesia (PDPSI)
+# DESIGN.md: Data KUPS (sebelumnya PDPSI)
+
+**v0.5, 2026-11-10 (berlaku, menggantikan bagian yang bertentangan di bawah):** atas permintaan pemilik produk, nama produk menjadi Data KUPS dan tampilan didesain ulang. Ringkasnya:
+- **Palet TRI:** TRI Red `#E3063B` (primer: tombol utama, penanda aktif), Forest Green `#173F35` (permukaan gelap: hero, footer, menu ponsel), Deep Green `#28664F` (tautan, aksen), Light Green `#DCE9DF` (permukaan), Background `#F4F6F2`, Text `#25332D`. Merah TRI di atas latar hanya 4,43:1, jadi teks merah kecil memakai `--color-tri-ink` `#C4052F` (5,66:1). Teks putih di atas merah 4,82:1. Teks sekunder `#56645C` (5,73:1 pada latar). Warna 5 jenis PS dan ramp peta tidak berubah.
+- **Tipografi:** Plus Jakarta Sans untuk judul, Atkinson Hyperlegible Next untuk teks, JetBrains Mono untuk label kecil (eyebrow, versi).
+- **Tata letak:** navigasi atas dengan sorotan yang bergeser (gaya VengeanceUI) menggantikan sidebar; menu ponsel berupa panel hijau hutan dari kanan. Footer hijau hutan memuat logo Data KUPS dan TRI.
+- **Gerak (MOTION 1 → 3), mengacu pada VengeanceUI, Animmaster, dan React Bits:** judul muncul per kata, kartu muncul saat digulir, angka utama menghitung naik, lingkaran sorot mengikuti kursor di kartu, latar titik/grid dan dua cahaya yang bergerak pelan di hero, sapuan radar di sekitar tanda Data KUPS, pita provinsi berjalan, transisi masuk halaman, dan penanda memuat lima batang. Semua gerak mati bila pengguna meminta gerak dikurangi, dan konten tetap tampil tanpa JavaScript (`src/components/motion/`).
+- Prinsip lembar data, kontras, keyboard, dan ponsel 375 px tetap berlaku.
+
 
 **Status:** v0.4, 2026-11-06. v0.4: atas permintaan pemilik produk, tampilan memakai komponen **shadcn/ui** (Radix, gaya `radix-nova`) dengan tata letak dasbor bersidebar. Identitas PDPSI tetap: palet hijau hutan, putih hangat, abu-abu netral, aksen cokelat tanah, palet 5 jenis PS, skala peta, dan Atkinson Hyperlegible Next.
 v0.3, 2026-11-05. v0.3: palet diganti menjadi 5 warna jenis PS yang divalidasi untuk urutan rekap.

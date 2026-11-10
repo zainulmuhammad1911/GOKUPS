@@ -1,5 +1,5 @@
 {
-  "_doc": "Aturan pemeriksaan pipeline PDPSI. Prinsip Source Fidelity (docs/DECISIONS.md bagian 1): aturan di sini hanya menambah penanda dan menentukan apakah nilai bisa dihitung. Tidak ada nilai sumber yang diubah dan tidak ada rekaman yang dihapus.",
+  "_doc": "Aturan pemeriksaan pipeline Data KUPS. Prinsip Source Fidelity (docs/DECISIONS.md bagian 1): aturan di sini hanya menambah penanda dan menentukan apakah nilai bisa dihitung. Tidak ada nilai sumber yang diubah dan tidak ada rekaman yang dihapus.",
   "area": {
     "flag_component_diff_above_ha": 5,
     "_decision": "K5: ambang hanya penanda; semua luas yang tersedia dan tidak negatif tetap dihitung"

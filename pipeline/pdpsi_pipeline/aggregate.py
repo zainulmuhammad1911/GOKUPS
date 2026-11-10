@@ -1,4 +1,4 @@
-"""Agregat hasil pengolahan PDPSI dari data sumber.
+"""Agregat hasil pengolahan Data KUPS dari data sumber.
 
 Aplikasi web menghitung ulang agregat yang sama dari approvals.json. Uji otomatis
 membandingkan keduanya. Definisi di bawah juga ditulis ke control_totals.json
@@ -11,7 +11,7 @@ import pandas as pd
 from .quality import AREA_TOTAL, F, M, T
 
 DEFINITIONS = {
-    "label": "Hasil pengolahan PDPSI dari data sumber GoKUPS. Bukan angka resmi nasional.",
+    "label": "Hasil pengolahan Data KUPS dari data sumber GoKUPS. Bukan angka resmi nasional.",
     "records": "Jumlah rekaman (baris sumber). Semua rekaman dihitung, termasuk rekaman bernomor SK sama.",
     "area_ha": "Jumlah kolom sumber 'Luas Area Keseluruhan (Ha)' pada rekaman yang nilainya tersedia dan tidak negatif. Penanda selisih luas tidak mengeluarkan rekaman.",
     "members_male_plus_female": "Jumlah (Anggota Laki-Laki + Anggota Perempuan) pada rekaman yang kedua nilainya tersedia dan tidak negatif, termasuk yang hasilnya 0.",

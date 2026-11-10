@@ -95,7 +95,7 @@ export function DataFilters({
     <div data-slot="card" className="rounded-xl bg-card ring-1 ring-border">
       <button
         type="button"
-        className="flex min-h-12 w-full items-center gap-2 px-4 text-left font-bold text-primary lg:hidden"
+        className="flex min-h-12 w-full items-center gap-2 px-4 text-left font-bold text-deep lg:hidden"
         aria-expanded={open}
         aria-controls={panelId}
         onClick={() => setOpen((v) => !v)}
@@ -111,7 +111,7 @@ export function DataFilters({
         <ChevronDown aria-hidden="true" className={`size-4 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       <p className="hidden items-center gap-2 px-5 pt-4 text-small font-bold lg:flex" aria-hidden="true">
-        <SlidersHorizontal className="size-4 text-primary" />
+        <SlidersHorizontal className="size-4 text-deep" />
         {t("filters")}
         {activeCount > 0 && <Badge>{activeCount}</Badge>}
       </p>
@@ -322,7 +322,7 @@ export function DataFilters({
           <Button type="submit" size="lg" className="h-10 px-5 text-small font-bold">
             {t("apply")}
           </Button>
-          <Button asChild variant="ghost" size="lg" className="h-10 px-3 text-small text-primary">
+          <Button asChild variant="ghost" size="lg" className="h-10 px-3 text-small text-deep">
             <a href={resetHref}>{t("reset")}</a>
           </Button>
         </div>

@@ -63,7 +63,7 @@ export function describeQuery(q: DataQuery, admin: AdminArea[], schemes: SchemeI
     (q.yearFrom !== null || q.yearTo !== null) && `Tahun SK: ${q.yearFrom ?? "awal"} sampai ${q.yearTo ?? "akhir"}`,
     q.flag && `Catatan pemeriksaan: ${q.flag} (${schema.flag_docs[q.flag]})`,
     q.members &&
-      `Anggota tercatat (laki-laki + perempuan, hasil pengolahan PDPSI): ${
+      `Anggota tercatat (laki-laki + perempuan, hasil pengolahan Data KUPS): ${
         { "1": "1 orang", "2plus": "2 orang atau lebih", "0": "0 orang", na: "tidak dapat dihitung" }[q.members]
       } (members=${q.members})`,
     q.pendamping &&
@@ -158,7 +158,7 @@ export async function buildXlsx(
   dictionary: [string, string, string][],
 ): Promise<Uint8Array> {
   const wb = new ExcelJS.Workbook();
-  wb.creator = "PDPSI";
+  wb.creator = "Data KUPS";
   const bold = { bold: true };
   const fill = { type: "pattern" as const, pattern: "solid" as const, fgColor: { argb: "FFF1EEE6" } };
 

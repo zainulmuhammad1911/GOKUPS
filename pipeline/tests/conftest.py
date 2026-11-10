@@ -10,7 +10,7 @@ from pdpsi_pipeline.build import build
 from pdpsi_pipeline.config import PROJECT_ROOT, Paths
 
 SOURCE = PROJECT_ROOT / "data" / "source" / "gokups_2026-11-02" / "Data_SK_Perhutanan_Sosial_GoKUPS.xlsx"
-CURRENT_RELEASE = PROJECT_ROOT / "data" / "releases" / "2026-11-02.r7"
+CURRENT_RELEASE = PROJECT_ROOT / "data" / "releases" / "2026-11-02.r8"
 
 
 def _require_source() -> None:

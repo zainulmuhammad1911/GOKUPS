@@ -52,7 +52,7 @@ export default async function RecordPage({ params }: { params: Params }) {
 
   return (
     <>
-      <Button asChild variant="ghost" size="lg" className="mb-3 -ml-2 h-10 px-2 text-small text-primary">
+      <Button asChild variant="ghost" size="lg" className="mb-3 -ml-2 h-10 px-2 text-small text-deep">
         <Link href="/data">
           <ChevronLeft aria-hidden="true" />
           {t("detail.back")}

@@ -3,50 +3,52 @@
 @import "shadcn/tailwind.css";
 
 /*
- * Tema PDPSI untuk komponen shadcn/ui (DESIGN.md §3 sampai §6).
- * Variabel shadcn (--primary, --muted, --border, ...) diisi palet PDPSI: hijau hutan,
- * putih hangat, abu-abu netral, aksen cokelat tanah untuk fokus. Semua pasangan teks
- * diuji kontras (WCAG AA). Mode terang saja (DESIGN.md §10), jadi tidak ada tema .dark.
+ * Tema Data KUPS untuk komponen shadcn/ui (DESIGN.md §3, v0.5).
+ * Palet utama: TRI Red #E3063B (primer), Forest Green #173F35 (sekunder), Deep Green #28664F
+ * (aksen dan tautan), Light Green #DCE9DF (permukaan), Background #F4F6F2, Text #25332D.
+ * Semua pasangan teks diuji kontras (WCAG AA). Teks merah kecil memakai --color-tri-ink, karena
+ * #E3063B di atas latar hanya 4,43:1. Mode terang saja.
  */
 :root {
-  --background: #faf8f3;
-  --foreground: #1f2420;
+  --background: #f4f6f2;
+  --foreground: #25332d;
   --card: #ffffff;
-  --card-foreground: #1f2420;
+  --card-foreground: #25332d;
   --popover: #ffffff;
-  --popover-foreground: #1f2420;
-  --primary: #1e5a3a;
+  --popover-foreground: #25332d;
+  --primary: #e3063b;
   --primary-foreground: #ffffff;
-  --secondary: #f1eee6;
-  --secondary-foreground: #1f2420;
-  --muted: #f1eee6;
-  --muted-foreground: #575e58;
-  --accent: #e7eee8;
-  --accent-foreground: #174a2f;
-  --destructive: #b42318;
-  --border: #dad5ca;
-  --input: #8c8f87;
-  --ring: #8a4b1e;
+  --secondary: #dce9df;
+  --secondary-foreground: #173f35;
+  --muted: #e8efe8;
+  --muted-foreground: #56645c;
+  --accent: #dce9df;
+  --accent-foreground: #173f35;
+  --destructive: #c4052f;
+  --border: #d3ddd4;
+  --input: #7a8880;
+  --ring: #173f35;
   /* Warna 5 jenis PS (DESIGN.md §3.2): HD, HKm, HTR, HA, KK. Hanya untuk tanda warna, bukan teks. */
   --chart-1: #2f8f5b;
   --chart-2: #2f6fb0;
   --chart-3: #cf5f3a;
   --chart-4: #9a5aa8;
   --chart-5: #d08a1a;
-  --radius: 0.5rem;
-  --sidebar: #f1eee6;
-  --sidebar-foreground: #1f2420;
-  --sidebar-primary: #1e5a3a;
+  --radius: 0.75rem;
+  --sidebar: #173f35;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #e3063b;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e3ddd0;
-  --sidebar-accent-foreground: #1f2420;
-  --sidebar-border: #dad5ca;
-  --sidebar-ring: #8a4b1e;
+  --sidebar-accent: #1f4f42;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #2c5a4c;
+  --sidebar-ring: #dce9df;
 }
 
 @theme inline {
   --font-sans: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-jakarta), var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-jb), ui-monospace, SFMono-Regular, monospace;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -88,15 +90,19 @@
 }
 
 /*
- * Token PDPSI di luar variabel shadcn: tautan (hijau hutan), aksen cokelat tanah (fokus, penanda
- * Duplikat), abu-abu garis kontrol, dan warna 5 jenis PS. Warna permukaan dan teks memakai
- * variabel shadcn di atas (DESIGN.md §3.1).
+ * Token Data KUPS di luar variabel shadcn: hijau hutan (permukaan gelap), hijau tua (tautan),
+ * hijau muda (permukaan), merah TRI dan versi gelapnya untuk teks, serta warna 5 jenis PS.
+ * --color-earth dipertahankan sebagai nama penanda (Duplikat, draf) dan kini memakai merah teks.
  */
 @theme {
-  --color-rule-strong: #8c8f87;
-  --color-forest: #1e5a3a;
-  --color-forest-hover: #174a2f;
-  --color-earth: #8a4b1e;
+  --color-rule-strong: #7a8880;
+  --color-forest: #173f35;
+  --color-forest-hover: #0f2c25;
+  --color-deep: #28664f;
+  --color-leaf: #dce9df;
+  --color-tri: #e3063b;
+  --color-tri-ink: #c4052f;
+  --color-earth: #c4052f;
 
   --color-jenis-hd: #2f8f5b;
   --color-jenis-hkm: #2f6fb0;
@@ -134,8 +140,12 @@
     min-height: 100dvh;
   }
   /* Tautan dalam teks. Komponen shadcn (data-slot) memakai gayanya sendiri. */
+  h1, h2, h3 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+  }
   a:not([data-slot]) {
-    color: var(--color-forest);
+    color: var(--color-deep);
     text-decoration-line: underline;
     text-underline-offset: 0.18em;
   }
@@ -148,12 +158,116 @@
 }
 
 /*
- * Cincin fokus tunggal di seluruh UI, termasuk komponen shadcn: aksen tanah 2 px (DESIGN.md §6).
+ * Cincin fokus tunggal di seluruh UI, termasuk komponen shadcn: 2 px warna --ring (DESIGN.md §6).
+ * Di permukaan hutan (.surface-forest) --ring berganti hijau muda agar tetap terlihat.
  * Sengaja di luar @layer agar mengalahkan kelas outline-none/ring bawaan komponen.
  */
 :focus-visible {
-  outline: 2px solid var(--color-earth);
+  outline: 2px solid var(--ring);
   outline-offset: 2px;
+}
+
+/* Permukaan gelap hijau hutan: hero beranda, footer, menu ponsel. */
+.surface-forest {
+  --ring: #dce9df;
+  --muted-foreground: #b9cdbf;
+  --border: #2c5a4c;
+  background-color: var(--color-forest);
+  color: #ffffff;
+}
+.surface-forest a:not([data-slot]),
+.surface-forest a:not([data-slot]):hover {
+  color: #ffffff;
+}
+
+/* ---------- Gerak (DESIGN.md §7, v0.5) ----------
+ * Semua animasi hanya berjalan bila pengguna tidak meminta gerak dikurangi. Tanpa JavaScript,
+ * semua konten langsung terlihat: penyembunyian awal hanya aktif setelah skrip kecil di <head>
+ * memberi html[data-motion].
+ */
+@keyframes kups-rise {
+  from { opacity: 0; transform: translateY(14px); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes kups-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes kups-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(4%, -6%, 0) scale(1.08); }
+}
+@keyframes kups-shine { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+@keyframes kups-spin { to { transform: rotate(360deg); } }
+@keyframes kups-bar { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+@keyframes kups-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Teks dipecah per kata (komponen SplitWords), muncul berurutan. */
+  .split-word {
+    display: inline-block;
+    animation: kups-rise 700ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 70ms + 80ms);
+  }
+  /* Masuk halaman (template.tsx). */
+  .page-enter { animation: kups-rise 450ms cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+  /* Muncul saat digulir (komponen Reveal). */
+  /* Keadaan awal; motion-script.ts memunculkannya dengan animasi (fill: forwards). */
+  html[data-motion] [data-reveal] { opacity: 0; }
+  .aurora-blob { animation: kups-drift 18s ease-in-out infinite; }
+  .aurora-blob:nth-child(2) { animation-duration: 24s; animation-direction: reverse; }
+  .shiny-text {
+    background-image: linear-gradient(110deg, #dce9df 40%, #ffffff 50%, #dce9df 60%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: kups-shine 4.5s linear infinite;
+  }
+  .radar-sweep { animation: kups-spin 7s linear infinite; }
+  .kinetic-bar { animation: kups-bar 900ms ease-in-out infinite; transform-origin: bottom; }
+  .marquee-track { animation: kups-marquee 40s linear infinite; }
+  .marquee:hover .marquee-track, .marquee:focus-within .marquee-track { animation-play-state: paused; }
+}
+
+/* Sapuan radar di hero beranda (hiasan). */
+.radar-sweep {
+  background: conic-gradient(from 0deg, rgb(227 6 59 / 0.35), transparent 22%, transparent);
+  mask-image: radial-gradient(circle, transparent 34%, #000 35%, #000 70%, transparent 71%);
+}
+
+/* Latar titik dan garis grid (gaya React Bits / VengeanceUI), memudar ke tepi. */
+.bg-dots {
+  background-image: radial-gradient(currentColor 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at 50% 40%, #000 30%, transparent 75%);
+}
+.bg-grid {
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to bottom, #000, transparent 85%);
+}
+
+/* Kartu sorot: lingkaran cahaya mengikuti kursor (SpotlightLayer mengisi --mx/--my). */
+[data-spotlight] { position: relative; isolation: isolate; }
+[data-spotlight]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms ease;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(227 6 59 / 0.09), transparent 45%);
+}
+[data-spotlight]:hover::before { opacity: 1; }
+.surface-forest [data-spotlight]::before,
+[data-spotlight].on-dark::before {
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(220 233 223 / 0.14), transparent 45%);
+}
+[data-spotlight] { transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease; }
+@media (prefers-reduced-motion: no-preference) {
+  a[data-spotlight]:hover { transform: translateY(-2px); }
 }
 
 @utility tabular {

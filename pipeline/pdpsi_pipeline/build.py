@@ -2,7 +2,7 @@
 
 Setiap rekaman publik terdiri dari tiga bagian yang tidak dicampur:
   source  : nilai kolom sumber apa adanya, dengan nama kolom asli (kecuali kolom yang dikecualikan)
-  derived : hasil pengolahan PDPSI (kode wilayah resmi, kode skema, L+P, tahun, dan seterusnya)
+  derived : hasil pengolahan Data KUPS (kode wilayah resmi, kode skema, L+P, tahun, dan seterusnya)
   quality : hasil pemeriksaan sistem (penanda, referensi duplikat, status dapat-dihitung)
 """
 from __future__ import annotations

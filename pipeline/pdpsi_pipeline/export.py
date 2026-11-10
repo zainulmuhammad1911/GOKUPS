@@ -13,8 +13,8 @@ from .ingest import ALL_PUBLISHED_NOTE, EXCLUSION_REASON, EXPECTED_COLUMNS, PRIV
 from .quality import FLAG_DOCS
 
 NOT_SET_ID = "Belum ditetapkan"
-DERIVED = "[Olahan PDPSI]"
-CHECK = "[Pemeriksaan PDPSI]"
+DERIVED = "[Olahan Data KUPS]"
+CHECK = "[Pemeriksaan Data KUPS]"
 
 # Definisi kolom unduhan dibaca dari config bersama (juga dipakai aplikasi web untuk unduhan sesuai filter).
 SCHEMA: dict = json.loads((PROJECT_ROOT / "data" / "config" / "export_schema.json").read_text(encoding="utf-8"))

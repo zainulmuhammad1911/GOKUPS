@@ -79,6 +79,12 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 - **Pemisahan dari data SK:** direktori tidak dihubungkan ke SK mana pun (tidak ada nama organisasi di kolom Pendamping GoKUPS) dan tidak dipakai di angka, peta, statistik, atau unduhan rilis. Hubungannya hanya lewat provinsi: halaman Statistik dengan filter provinsi menautkan ke direktori.
 - **Data:** `pdpsi oms` menulis `data/oms/<versi>/directory.json` dan `data/oms/current.json`; aplikasi memuat ulang otomatis bila `current.json` berubah. Halaman `/organizations` (Direktori OMS).
 
+### K13. Nama produk Data KUPS dan desain ulang
+- **Status:** Ditetapkan 2026-11-10 atas permintaan pemilik produk.
+- **Nama:** produk berganti nama dari PDPSI (Pusat Data Perhutanan Sosial Indonesia) menjadi **Data KUPS** di semua teks yang dilihat pengguna: antarmuka, metadata halaman, berkas unduhan (awalan `datakups_`), catatan unduhan, dan label "hasil pengolahan". Nama paket dan perintah pipeline (`pdpsi_pipeline`, `pdpsi`) serta dokumen riwayat tetap, karena tidak terlihat pengguna.
+- **Rilis:** `2026-11-02.r8` dibangun ulang dari sumber yang sama hanya untuk nama baru; isi rekaman, olahan, penanda, dan total kontrol identik dengan r7 (diperiksa). Folder r7 masih ada di working tree karena berisi `internal/` yang tidak tersimpan di git.
+- **Desain:** palet TRI (DESIGN.md v0.5), navigasi atas menggantikan sidebar, dan gerak halus yang mengacu pada VengeanceUI, Animmaster, dan React Bits. Teks antarmuka ditulis ulang agar lebih mudah dibaca (pedoman humanizer).
+
 ### K3. Nama lembaga dan pemegang izin HTR
 - **Status:** Ditetapkan (dikoreksi 2026-11-04, keputusan E). Menggantikan aturan penyamaran sebelumnya.
 - **Aturan:** Semua nama dipertahankan sebagaimana tercatat di sumber, termasuk nama pemegang izin HTR perorangan. Nama tidak disamarkan, tidak diganti inisial atau label lain, dan tidak diubah. Tidak ada pengecualian berdasarkan asumsi sistem.
@@ -121,7 +127,8 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 - **Unit rekap:** jumlah rekaman SK penerima persetujuan/penetapan, bukan jumlah kelompok. Sekitar 2.000 rekaman HTR adalah izin perorangan, dan 240 nama lembaga muncul pada lebih dari satu nomor SK. Hal ini dicatat di setiap rekap.
 
 ### K9. Identitas institusi, logo, kontak, atribusi, lisensi data
-- **Status:** Menunggu. Persetujuan umum pemilik produk (2026-11-05) tidak bisa mengisi nama institusi, kontak, atau lisensi data, karena nilai-nilai ini harus berasal dari institusi pengelola; mengarangnya melanggar keputusan G.
+- **Status 2026-11-10:** sebagian terisi. Pemilik produk menetapkan **The Reform Initiatives (TRI)** sebagai institusi pengelola dan menyerahkan logo TRI serta logo Data KUPS (`public/brand/`). Kontak, situs, dan lisensi data masih `null`, sehingga rilis tetap `draft`.
+- **Status awal:** Menunggu. Persetujuan umum pemilik produk (2026-11-05) tidak bisa mengisi nama institusi, kontak, atau lisensi data, karena nilai-nilai ini harus berasal dari institusi pengelola; mengarangnya melanggar keputusan G.
 - Semua nilai dibaca dari `config/site.json`. Nilai `null` tampil sebagai "Belum ditetapkan". Rilis berstatus `draft` dan tidak boleh diterbitkan sebagai rilis publik final sampai K9 terisi.
 
 ### K10. Git dan repositori
@@ -166,3 +173,4 @@ Di unduhan CSV, teks yang diawali `=`, `+`, `-`, atau `@` diberi awalan `'` agar
 | 2026-11-06 | **K11 diubah lagi:** pemilik produk memutuskan kolom `Ketua Lembaga` dan `Pra-Pendamping` juga dipublikasikan. Rilis `2026-11-02.r7` (sumber sama) memuat semua kolom tabular GoKUPS; `PRIVATE_COLUMNS` dikosongkan. CSV rilis kini menetralkan teks berawalan = + - @ seperti unduhan web (10 nilai Ketua Lembaga). Rilis r6 dihapus dari working tree (masih ada di riwayat git). |
 | 2026-11-06 | **K10 ditetapkan:** riwayat git di-push ke `https://github.com/zainulmuhammad1911/GOKUPS` (repositori publik). Sebelum push diperiksa: tidak ada workbook sumber, `data/source/`, `internal/`, atau berkas rahasia di riwayat; berkas terbesar 14,6 MB. |
 | 2026-11-10 | **K12 ditetapkan:** Direktori OMS pendamping diterbitkan sebagai halaman terpisah (`/organizations`) dari direktori pemilik produk yang sudah diperiksa daring. 59 dari 67 entri terbit (39 terverifikasi, 20 sebagian); 8 ditahan karena bukti publik belum ditemukan. Data direktori versi `2026-11-10`. |
+| 2026-11-10 | **K13 ditetapkan dan K9 sebagian terisi:** nama produk menjadi Data KUPS; The Reform Initiatives ditetapkan sebagai institusi pengelola. Desain ulang dengan palet TRI, navigasi atas, dan gerak halus. Rilis `2026-11-02.r8` (sumber sama, isi identik dengan r7) memakai nama berkas `datakups_`. |

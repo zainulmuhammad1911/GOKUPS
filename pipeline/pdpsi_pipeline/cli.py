@@ -1,4 +1,4 @@
-"""Perintah pipeline PDPSI.
+"""Perintah pipeline Data KUPS.
 
   uv run pdpsi crosswalk --source <workbook>          buat draf crosswalk wilayah (sekali)
   uv run pdpsi build --source <workbook> --version V  buat rilis data baru
@@ -107,13 +107,13 @@ def cmd_build(args, paths: Paths) -> int:
     table = export.records_table(records)
     meta_full = export.metadata_lines(release, result.site, "seluruh rekaman")
     dictionary = export.dictionary_table()
-    base = f"pdpsi_{version}"
+    base = f"datakups_{version}"
     export.write_csv_zip(table, meta_full, dl / f"{base}_rekaman_lengkap_csv.zip", f"{base}_rekaman_lengkap.csv", dictionary)
     export.write_xlsx(table, meta_full, dl / f"{base}_rekaman_lengkap.xlsx", dictionary)
     names = dict(zip(result.admin_areas["code"], result.admin_areas["name"]))
     for level, rows, label in (("province", totals["by_province"], "provinsi"), ("regency", totals["by_regency"], "kabkota")):
         st = export.summary_table(rows, names, level)
-        meta = export.metadata_lines(release, result.site, f"ringkasan per {label} (hasil pengolahan PDPSI)")
+        meta = export.metadata_lines(release, result.site, f"ringkasan per {label} (hasil pengolahan Data KUPS)")
         export.write_csv_zip(st, meta, dl / f"{base}_ringkasan_{label}_csv.zip", f"{base}_ringkasan_{label}.csv", None)
         export.write_xlsx(st, meta, dl / f"{base}_ringkasan_{label}.xlsx", None)
 
@@ -122,7 +122,7 @@ def cmd_build(args, paths: Paths) -> int:
     rekap_meta = [
         ("Sumber", "Tabular Perhutanan Sosial GoKUPS (https://gokups.hutsos.kehutanan.go.id)"),
         ("Waktu pengambilan data sumber (UTC)", release["source"]["extracted_at"]),
-        ("Versi rilis PDPSI", f"{version} ({status})"),
+        ("Versi rilis Data KUPS", f"{version} ({status})"),
     ]
     rekap.write_rekap_xlsx(df, result.admin_areas, dl / f"{base}_rekap_jenis_ps.xlsx", rekap_meta, long)
     meta_rekap = export.metadata_lines(release, result.site, "rekapitulasi per provinsi, kabupaten/kota, dan jenis PS")

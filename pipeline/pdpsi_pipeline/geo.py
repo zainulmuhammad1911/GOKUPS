@@ -1,4 +1,4 @@
-"""Batas wilayah untuk peta PDPSI (DECISIONS.md K6).
+"""Batas wilayah untuk peta Data KUPS (DECISIONS.md K6).
 
 Sumber: batas kabupaten/kota BPS lewat OCHA/HDX, versi geoBoundaries gbOpen IDN ADM2
 (CC BY 3.0 IGO). Geometri BIG tidak dipakai karena lisensinya belum terkonfirmasi.
@@ -34,8 +34,8 @@ SOURCE = {
     "url": "https://www.geoboundaries.org/ (IDN ADM2, gbOpen, commit 9469f09)",
     "hdx_url": "https://data.humdata.org/dataset/cod-ab-idn",
     "year_represented": "2020 (34 provinsi); dibentuk ulang menjadi 38 provinsi dengan kode Kepmendagri 300.2.2-2138/2025",
-    "attribution_id": "Batas wilayah: BPS, OCHA ROAP, geoBoundaries (CC BY 3.0 IGO). Diolah PDPSI; batas bersifat indikatif.",
-    "attribution_en": "Boundaries: BPS, OCHA ROAP, geoBoundaries (CC BY 3.0 IGO). Processed by PDPSI; boundaries are indicative.",
+    "attribution_id": "Batas wilayah: BPS, OCHA ROAP, geoBoundaries (CC BY 3.0 IGO). Diolah Data KUPS; batas bersifat indikatif.",
+    "attribution_en": "Boundaries: BPS, OCHA ROAP, geoBoundaries (CC BY 3.0 IGO). Processed by Data KUPS; boundaries are indicative.",
 }
 
 # Parameter penyederhanaan (persen titik yang dipertahankan, metode weighted Visvalingam).

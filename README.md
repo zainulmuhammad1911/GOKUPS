@@ -1,4 +1,6 @@
-# PDPSI: Pusat Data Perhutanan Sosial Indonesia
+# Data KUPS
+
+Sebelumnya bernama PDPSI (Pusat Data Perhutanan Sosial Indonesia). Dikelola oleh The Reform Initiatives (TRI).
 
 Portal data terbuka dua bahasa (Indonesia/Inggris) untuk rekapitulasi kelompok penerima persetujuan Perhutanan Sosial per provinsi, kabupaten/kota, dan jenis PS (Hutan Desa, Hutan Kemasyarakatan, Hutan Tanaman Rakyat, Hutan Adat, Kemitraan Kehutanan beserta tiga subskemanya). Sumber datanya satu: ekstraksi situs GoKUPS.
 

@@ -2,7 +2,7 @@
   "name": "pdpsi-web",
   "version": "0.1.0",
   "private": true,
-  "description": "Pusat Data Perhutanan Sosial Indonesia (PDPSI): aplikasi web",
+  "description": "Data KUPS: aplikasi web data persetujuan Perhutanan Sosial",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

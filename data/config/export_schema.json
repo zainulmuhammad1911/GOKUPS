@@ -1,10 +1,10 @@
 {
-  "_doc": "Definisi kolom unduhan PDPSI. Dipakai pipeline (unduhan rilis) dan aplikasi web (unduhan sesuai filter) agar kolom dan keterangannya selalu sama. Lihat docs/DECISIONS.md bagian 1.",
+  "_doc": "Definisi kolom unduhan Data KUPS. Dipakai pipeline (unduhan rilis) dan aplikasi web (unduhan sesuai filter) agar kolom dan keterangannya selalu sama. Lihat docs/DECISIONS.md bagian 1.",
   "id_column": {
-    "title": "[Olahan PDPSI] ID Rekaman",
+    "title": "[Olahan Data KUPS] ID Rekaman",
     "path": "id",
-    "kind": "Olahan PDPSI",
-    "description": "ID internal PDPSI dari isi rekaman; tidak bergantung pada urutan baris."
+    "kind": "Olahan Data KUPS",
+    "description": "ID internal Data KUPS dari isi rekaman; tidak bergantung pada urutan baris."
   },
   "source_column_notes": {
     "No": "Nomor urut baris di workbook ekstraksi. Bukan ID resmi dan tidak stabil antar-ekstraksi.",
@@ -19,123 +19,123 @@
   "default_source_note": "Nilai kolom sumber apa adanya.",
   "derived_columns": [
     {
-      "title": "[Olahan PDPSI] Kode Skema",
+      "title": "[Olahan Data KUPS] Kode Skema",
       "path": "derived.scheme_code",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "Kode untuk 7 kategori skema sumber; kategori tidak digabung."
     },
     {
-      "title": "[Olahan PDPSI] Jenis Rekaman",
+      "title": "[Olahan Data KUPS] Jenis Rekaman",
       "path": "derived.record_kind",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "persetujuan, atau penetapan untuk Hutan Adat."
     },
     {
-      "title": "[Olahan PDPSI] Tahun SK",
+      "title": "[Olahan Data KUPS] Tahun SK",
       "path": "derived.approval_year",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "Tahun dari kolom Tanggal Surat Keputusan."
     },
     {
-      "title": "[Olahan PDPSI] Kode Provinsi",
+      "title": "[Olahan Data KUPS] Kode Provinsi",
       "path": "derived.province_code",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "Kode Kepmendagri 300.2.2-2138/2025."
     },
     {
-      "title": "[Olahan PDPSI] Provinsi (nama resmi)",
+      "title": "[Olahan Data KUPS] Provinsi (nama resmi)",
       "path": "derived.province_name_official",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "Nama resmi untuk kode di atas."
     },
     {
-      "title": "[Olahan PDPSI] Kode Kabupaten/Kota",
+      "title": "[Olahan Data KUPS] Kode Kabupaten/Kota",
       "path": "derived.regency_code",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "Kode Kepmendagri 300.2.2-2138/2025."
     },
     {
-      "title": "[Olahan PDPSI] Kabupaten/Kota (nama resmi)",
+      "title": "[Olahan Data KUPS] Kabupaten/Kota (nama resmi)",
       "path": "derived.regency_name_official",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "Nama resmi untuk kode di atas."
     },
     {
-      "title": "[Olahan PDPSI] Anggota Laki-Laki + Perempuan",
+      "title": "[Olahan Data KUPS] Anggota Laki-Laki + Perempuan",
       "path": "derived.members_male_plus_female",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "Hasil penjumlahan; kosong bila tidak dapat dihitung."
     },
     {
-      "title": "[Olahan PDPSI] Status Perhitungan Anggota",
+      "title": "[Olahan Data KUPS] Status Perhitungan Anggota",
       "path": "derived.members_calc_status",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "dihitung, nilai_negatif, atau komponen_kosong."
     },
     {
-      "title": "[Olahan PDPSI] Status Perhitungan Luas",
+      "title": "[Olahan Data KUPS] Status Perhitungan Luas",
       "path": "derived.area_calc_status",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "dihitung, nilai_negatif, atau kosong."
     },
     {
-      "title": "[Olahan PDPSI] Pendamping Tercatat",
+      "title": "[Olahan Data KUPS] Pendamping Tercatat",
       "path": "derived.pendamping_status",
       "transform": null,
-      "kind": "Olahan PDPSI",
+      "kind": "Olahan Data KUPS",
       "description": "tercatat bila kolom sumber Pendamping terisi, kosong bila tidak. Kosong bisa berarti tidak ada pendamping atau tidak dicatat."
     },
     {
-      "title": "[Pemeriksaan PDPSI] Jumlah Rekaman dengan Nomor SK Sama",
+      "title": "[Pemeriksaan Data KUPS] Jumlah Rekaman dengan Nomor SK Sama",
       "path": "quality.duplicate.record_count",
       "transform": "default_1",
-      "kind": "Pemeriksaan PDPSI",
+      "kind": "Pemeriksaan Data KUPS",
       "description": "1 berarti nomor SK tidak dipakai rekaman lain."
     },
     {
-      "title": "[Pemeriksaan PDPSI] Tipe Duplikat",
+      "title": "[Pemeriksaan Data KUPS] Tipe Duplikat",
       "path": "quality.duplicate.type",
       "transform": null,
-      "kind": "Pemeriksaan PDPSI",
+      "kind": "Pemeriksaan Data KUPS",
       "description": "identik atau atribut_berbeda; kosong bila bukan duplikat."
     },
     {
-      "title": "[Pemeriksaan PDPSI] ID Rekaman dengan Nomor SK Sama",
+      "title": "[Pemeriksaan Data KUPS] ID Rekaman dengan Nomor SK Sama",
       "path": "quality.duplicate.related_ids",
       "transform": "join",
-      "kind": "Pemeriksaan PDPSI",
+      "kind": "Pemeriksaan Data KUPS",
       "description": "Semua ID rekaman lain dengan nomor SK sama."
     },
     {
-      "title": "[Pemeriksaan PDPSI] ID Rekaman dengan Nomor SK Beda Penulisan",
+      "title": "[Pemeriksaan Data KUPS] ID Rekaman dengan Nomor SK Beda Penulisan",
       "path": "quality.sk_spacing_variant_ids",
       "transform": "join",
-      "kind": "Pemeriksaan PDPSI",
+      "kind": "Pemeriksaan Data KUPS",
       "description": "Nomor SK hanya berbeda spasi atau huruf besar/kecil."
     },
     {
-      "title": "[Pemeriksaan PDPSI] Penanda",
+      "title": "[Pemeriksaan Data KUPS] Penanda",
       "path": "quality.flags",
       "transform": "join",
-      "kind": "Pemeriksaan PDPSI",
+      "kind": "Pemeriksaan Data KUPS",
       "description": "Kode penanda, dipisah titik koma. Arti tiap kode ada di metadata."
     },
     {
-      "title": "[Olahan PDPSI] Versi Rilis",
+      "title": "[Olahan Data KUPS] Versi Rilis",
       "path": "release_version",
       "transform": null,
-      "kind": "Olahan PDPSI",
-      "description": "Versi rilis data PDPSI."
+      "kind": "Olahan Data KUPS",
+      "description": "Versi rilis data Data KUPS."
     }
   ],
   "flag_docs": {
@@ -160,8 +160,8 @@
   },
   "texts": {
     "unit": "Satu baris = satu rekaman persetujuan/penetapan Perhutanan Sosial pada tabular GoKUPS. Bukan jumlah kelompok atau lembaga.",
-    "fidelity": "Kolom sumber disajikan apa adanya dengan nama kolom asli. Kolom berawalan [Olahan PDPSI] dan [Pemeriksaan PDPSI] adalah hasil pengolahan dan pemeriksaan PDPSI, bukan bagian dari sumber.",
-    "aggregates": "Hasil pengolahan PDPSI dari data sumber, bukan angka resmi nasional.",
+    "fidelity": "Kolom sumber disajikan apa adanya dengan nama kolom asli. Kolom berawalan [Olahan Data KUPS] dan [Pemeriksaan Data KUPS] adalah hasil pengolahan dan pemeriksaan Data KUPS, bukan bagian dari sumber.",
+    "aggregates": "Hasil pengolahan Data KUPS dari data sumber, bukan angka resmi nasional.",
     "csv_format": "Format CSV: UTF-8 dengan BOM, pemisah koma, desimal titik. Pengguna Excel berlokal Indonesia sebaiknya memakai file XLSX.",
     "not_set": "Belum ditetapkan"
   }

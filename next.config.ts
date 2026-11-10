@@ -37,7 +37,7 @@ const nextConfig: NextConfig = {
       beforeFiles: [
         { source: "/", destination: "/id" },
         {
-          source: "/:path((?!en$|en/|id$|id/|_next/|geo/|vendor/|unduh-berkas/|unduh-hasil$|icon\\.svg$|favicon\\.ico$|robots\\.txt$).+)",
+          source: "/:path((?!en$|en/|id$|id/|_next/|geo/|vendor/|brand/|unduh-berkas/|unduh-hasil$|icon\\.png$|apple-icon\\.png$|favicon\\.ico$|robots\\.txt$).+)",
           destination: "/id/:path",
         },
       ],

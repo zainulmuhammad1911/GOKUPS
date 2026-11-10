@@ -61,7 +61,7 @@ function Figure({
         </CardContent>
         <CardFooter className="mt-auto block bg-transparent py-1">
           <Collapsible>
-            <CollapsibleTrigger className="group/trigger inline-flex min-h-11 cursor-pointer items-center gap-1.5 text-small font-bold text-primary">
+            <CollapsibleTrigger className="group/trigger inline-flex min-h-11 cursor-pointer items-center gap-1.5 text-small font-bold text-deep">
               <ChevronDown aria-hidden="true" className="size-4 transition-transform group-data-[state=open]/trigger:rotate-180" />
               {t("showTable")}
             </CollapsibleTrigger>
@@ -133,7 +133,7 @@ export function MetricChart({
           <ToggleGroupItem
             key={m.key}
             value={m.key}
-            className="px-3 text-small data-[state=on]:bg-primary data-[state=on]:font-bold data-[state=on]:text-primary-foreground"
+            className="px-3 text-small data-[state=on]:bg-forest data-[state=on]:font-bold data-[state=on]:text-white"
           >
             {m.label}
           </ToggleGroupItem>

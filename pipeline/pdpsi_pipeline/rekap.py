@@ -25,7 +25,7 @@ KK_SUB = [("KK_KULIN", "KK ~ Kulin KK"), ("KK_KONSERVASI", "KK ~ Konservasi"), (
 COLUMN_GROUPS = [(c, n, "jenis_ps_code") for c, n in JENIS] + [(c, n, "scheme_code") for c, n in KK_SUB]
 
 NOTES = [
-    "Hasil pengolahan PDPSI dari data sumber GoKUPS. Bukan angka resmi nasional.",
+    "Hasil pengolahan Data KUPS dari data sumber GoKUPS. Bukan angka resmi nasional.",
     "Unit: rekaman SK penerima persetujuan/penetapan Perhutanan Sosial (satu baris di tabular GoKUPS), bukan jumlah kelompok. "
     "Sebagian rekaman Hutan Tanaman Rakyat adalah izin perorangan, dan sebagian lembaga tercatat pada lebih dari satu nomor SK.",
     "Kemitraan Kehutanan = jumlah tiga subskema yang di sumber berlabel 'KEMITRAAN KEHUTANAN ~' (Kulin KK, Konservasi, IPHPS). "

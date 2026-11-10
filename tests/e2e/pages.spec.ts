@@ -17,7 +17,8 @@ const VIEWPORTS = [
 
 for (const vp of VIEWPORTS) {
   test.describe(`${vp.name} ${vp.width}px`, () => {
-    test.use({ viewport: { width: vp.width, height: vp.height } });
+    // Axe memeriksa tampilan akhir; animasi masuk (pudar/blur) dimatikan agar warna tidak terbaca setengah jadi.
+    test.use({ viewport: { width: vp.width, height: vp.height }, reducedMotion: "reduce" });
     for (const route of ROUTES) {
       test(`${route}: tanpa pelanggaran axe dan tanpa overflow horizontal`, async ({ page }) => {
         const res = await page.goto(route);
@@ -107,7 +108,7 @@ test("paginasi data", async ({ page }) => {
 });
 
 test("unduhan: file manifes tersedia, file lain dan folder internal ditolak", async ({ request }) => {
-  const ok = await request.get(`/unduh-berkas/pdpsi_${VERSION}_rekap_jenis_ps.xlsx`);
+  const ok = await request.get(`/unduh-berkas/datakups_${VERSION}_rekap_jenis_ps.xlsx`);
   expect(ok.status()).toBe(200);
   expect(ok.headers()["content-type"]).toContain("spreadsheetml");
   for (const bad of ["source_records.jsonl", "..%2Finternal%2Fsource_records.jsonl", "approvals.json"]) {
@@ -165,7 +166,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     const files = unzipSync(new Uint8Array(await res.body()));
     const csv = strFromU8(files[Object.keys(files).find((n) => n.endsWith(".csv"))!]!);
     expect(csv.trimEnd().split("\r\n").length).toBe(oneHtr + 1);
-    expect(strFromU8(files["BACA_SAYA.txt"]!)).toContain("Anggota tercatat (laki-laki + perempuan, hasil pengolahan PDPSI): 1 orang");
+    expect(strFromU8(files["BACA_SAYA.txt"]!)).toContain("Anggota tercatat (laki-laki + perempuan, hasil pengolahan Data KUPS): 1 orang");
 
     await page.goto("/statistics?members=1&type=HTR");
     await expect(page.getByText(`${id(oneHtr)} rekaman · Indonesia`, { exact: true })).toBeVisible();
@@ -190,7 +191,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     const csv = strFromU8(files[Object.keys(files).find((n) => n.endsWith(".csv"))!]!).replace(/^\uFEFF/, "");
     const lines = csv.trimEnd().split("\r\n");
     expect(lines.length).toBe(10061 - ada + 1);
-    expect(lines[0]).toContain("[Olahan PDPSI] Pendamping Tercatat");
+    expect(lines[0]).toContain("[Olahan Data KUPS] Pendamping Tercatat");
     // K11 (2026-11-06): semua kolom sumber dipublikasikan, termasuk nama ketua dan pendamping.
     expect(lines[0]).toMatch(/(^|,)"?Pendamping"?(,|$)/);
     expect(lines[0]).toContain("Ketua Lembaga");
@@ -274,7 +275,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     expect(readme).toContain("Jumlah rekaman dalam file: 1085");
     expect(readme).toContain("Semua kolom tabular GoKUPS dipublikasikan apa adanya");
     // Judul kolom sama persis dengan file rilis lengkap dari pipeline.
-    const full = unzipSync(readFileSync(`data/releases/${VERSION}/downloads/pdpsi_${VERSION}_rekaman_lengkap_csv.zip`));
+    const full = unzipSync(readFileSync(`data/releases/${VERSION}/downloads/datakups_${VERSION}_rekaman_lengkap_csv.zip`));
     const fullCsv = strFromU8(full[Object.keys(full).find((n) => n.endsWith(".csv"))!]!).replace(/^\uFEFF/, "");
     expect(lines[0]).toBe(fullCsv.split(/\r?\n/)[0]);
   });
@@ -454,7 +455,7 @@ test.describe("Tahap 3: peta", () => {
 
 test.describe("perutean bahasa (regresi pengalihan berulang)", () => {
   test("halaman Indonesia tanpa prefiks berhasil untuk host apa pun, tanpa cookie", async ({ request }) => {
-    for (const host of ["localhost:3200", "127.0.0.1:3200", "pdpsi.contoh.test"]) {
+    for (const host of ["localhost:3200", "127.0.0.1:3200", "datakups.contoh.test"]) {
       const res = await request.get("/statistics", { headers: { host }, maxRedirects: 0 });
       expect(res.status(), host).toBe(200);
       expect(res.headers()["set-cookie"], host).toBeUndefined();

@@ -57,7 +57,7 @@ def render_markdown(release: dict, q: dict, totals: dict, pending: list[str]) ->
         f"- Pengambilan data sumber: {release['source']['extracted_at']}",
         f"- Dibuat: {release['built_at']} dengan pipeline {release['pipeline_version']}",
         "",
-        "## Angka nasional (hasil pengolahan PDPSI dari data sumber)",
+        "## Angka nasional (hasil pengolahan Data KUPS dari data sumber)",
         "",
         "| Indikator | Nilai | Rekaman dipakai | Rekaman tidak dipakai (alasan) |",
         "|-----------|------:|----------------:|--------------------------------|",

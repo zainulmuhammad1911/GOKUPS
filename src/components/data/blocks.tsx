@@ -3,6 +3,7 @@ import { Info } from "lucide-react";
 import { Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
+import { SplitWords } from "@/components/motion/SplitWords";
 
 /**
  * Kartu angka (motif "lembar data", DESIGN.md §1): label, angka + satuan, keterangan, baris sumber.
@@ -15,16 +16,19 @@ export function DataSheetStat({
   source,
 }: {
   label: string;
-  value: string;
+  value: ReactNode;
   unit?: string;
   children?: ReactNode;
   source?: ReactNode;
 }) {
   return (
-    <Card className="gap-3">
+    <Card data-spotlight="" data-reveal="" className="gap-3 transition-shadow hover:shadow-[0_18px_40px_-24px_rgb(23_63_53/0.45)]">
       <CardHeader>
-        <CardDescription className="text-sm font-bold text-foreground">{label}</CardDescription>
-        <p className="text-[2rem] leading-[2.375rem] font-bold tracking-tight tabular md:text-[2.5rem] md:leading-[2.75rem]">
+        <CardDescription className="flex items-center gap-2 text-sm font-bold text-foreground">
+          <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-tri" />
+          {label}
+        </CardDescription>
+        <p className="font-heading text-[2rem] leading-[2.375rem] font-extrabold tracking-tight text-forest tabular md:text-[2.5rem] md:leading-[2.75rem]">
           {value}
           {unit && <span className="ml-2 text-h3 font-normal text-muted-foreground">{unit}</span>}
         </p>
@@ -46,12 +50,23 @@ export function DataNote({ title, children }: { title?: string; children: ReactN
   );
 }
 
-export function PageHeading({ title, lead, actions }: { title: string; lead?: ReactNode; actions?: ReactNode }) {
+/**
+ * Judul halaman: label kecil (eyebrow), judul yang muncul per kata, dan pengantar.
+ * Di belakangnya ada garis grid tipis yang memudar (gaya VengeanceUI).
+ */
+export function PageHeading({ title, lead, actions, eyebrow }: { title: string; lead?: ReactNode; actions?: ReactNode; eyebrow?: string }) {
   return (
-    <div className="flex flex-col gap-3 pb-6 md:flex-row md:items-end md:justify-between">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-[1.75rem] leading-9 font-bold tracking-tight md:text-h1 md:leading-[var(--text-h1--line-height)]">
-          {title}
+    <div className="relative isolate flex flex-col gap-4 pb-8 md:flex-row md:items-end md:justify-between">
+      <div aria-hidden="true" className="bg-grid pointer-events-none absolute -inset-x-4 -top-10 -z-10 h-56 text-forest/[0.07] md:-inset-x-8" />
+      <div className="flex flex-col gap-3">
+        {eyebrow && (
+          <p className="flex items-center gap-2 font-mono text-xs font-bold tracking-[0.14em] text-deep uppercase">
+            <span aria-hidden="true" className="h-px w-6 bg-tri" />
+            {eyebrow}
+          </p>
+        )}
+        <h1 className="font-heading text-[2rem] leading-10 font-extrabold tracking-tight text-forest md:text-[2.625rem] md:leading-[3.125rem]">
+          <SplitWords text={title} />
         </h1>
         {lead && <p className="max-w-[72ch] text-muted-foreground">{lead}</p>}
       </div>
@@ -62,7 +77,7 @@ export function PageHeading({ title, lead, actions }: { title: string; lead?: Re
 
 export function SectionHeading({ id, children }: { id?: string; children: ReactNode }) {
   return (
-    <h2 id={id} className="mt-10 scroll-mt-20 text-h2 font-bold tracking-tight">
+    <h2 id={id} className="mt-12 scroll-mt-24 text-h2 font-bold tracking-tight text-forest">
       {children}
     </h2>
   );
@@ -90,9 +105,9 @@ export function SectionCard({
   className?: string;
 }) {
   return (
-    <Card className={`mt-6 ${className}`}>
+    <Card data-reveal="" className={`mt-6 ${className}`}>
       <CardHeader>
-        <h2 id={id} className="scroll-mt-20 text-h3 font-bold tracking-tight">{title}</h2>
+        <h2 id={id} className="scroll-mt-24 text-h3 font-bold tracking-tight text-forest">{title}</h2>
         {description && <CardDescription className="text-caption">{description}</CardDescription>}
         {action && <CardAction>{action}</CardAction>}
       </CardHeader>

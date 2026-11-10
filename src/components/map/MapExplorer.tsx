@@ -51,11 +51,11 @@ interface Props {
 
 // DESIGN.md §3.3–3.4: skala hijau 5 kelas, netral untuk "tidak ada rekaman", arsir untuk "tidak tersedia".
 const RAMP = ["#8fbb76", "#68a058", "#458343", "#276633", "#104524"];
-const NO_RECORDS = "#e2ded5";
+const NO_RECORDS = "#dde3dd";
 const SEA = "#e6eceb";
-const EDGE = "#faf8f3";
-const INK = "#1f2420";
-const EARTH = "#8a4b1e";
+const EDGE = "#f4f6f2";
+const INK = "#25332d";
+const EARTH = "#c4052f";
 const IDX: Record<Indicator, number> = { records: 0, area: 1, members: 2 };
 
 type Feature = { type: "Feature"; properties: Record<string, unknown>; geometry: Geometry };
@@ -235,7 +235,7 @@ export function MapExplorer({
           const canvas = document.createElement("canvas");
           canvas.width = canvas.height = size;
           const ctx = canvas.getContext("2d")!;
-          ctx.fillStyle = "#f1eee6";
+          ctx.fillStyle = "#e8efe8";
           ctx.fillRect(0, 0, size, size);
           ctx.strokeStyle = "#8c8f87";
           ctx.lineWidth = 1.5;
@@ -376,7 +376,7 @@ export function MapExplorer({
               <ToggleGroupItem
                 key={k}
                 value={k}
-                className="h-10 px-3 text-small data-[state=on]:bg-primary data-[state=on]:font-bold data-[state=on]:text-primary-foreground"
+                className="h-10 px-3 text-small data-[state=on]:bg-forest data-[state=on]:font-bold data-[state=on]:text-white"
               >
                 {{ records: tc("records"), area: tc("area"), members: tc("members") }[k]}
               </ToggleGroupItem>
@@ -469,7 +469,7 @@ export function MapExplorer({
             type="button"
             variant="ghost"
             size="lg"
-            className="-ml-2 h-10 px-2 text-small font-bold text-primary"
+            className="-ml-2 h-10 px-2 text-small font-bold text-deep"
             onClick={() => setState((s) => ({ ...s, province: null, regency: null }))}
           >
             <ChevronLeft aria-hidden="true" />
@@ -533,7 +533,7 @@ export function MapExplorer({
               </li>
               {hasInvalid && (
                 <li className="flex items-center gap-2">
-                  <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: "repeating-linear-gradient(135deg,#f1eee6 0 3px,#8c8f87 3px 4px)" }} />
+                  <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: "repeating-linear-gradient(135deg,#e8efe8 0 3px,#7a8880 3px 4px)" }} />
                   {t("notAvailable")}
                 </li>
               )}
@@ -616,7 +616,7 @@ export function MapExplorer({
                   <th scope="row" className="px-3 py-1 text-left font-normal">
                     <button
                       type="button"
-                      className="min-h-10 text-left text-primary underline underline-offset-[0.18em]"
+                      className="min-h-10 text-left text-deep underline underline-offset-[0.18em]"
                       onClick={() =>
                         setState((s) => (level === "province" ? { ...s, province: row.code, regency: null } : { ...s, regency: row.code }))
                       }

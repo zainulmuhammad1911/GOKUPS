@@ -47,7 +47,7 @@ export default async function DownloadPage({ params }: { params: Promise<{ local
                 const Icon = isZip ? FileArchive : FileSpreadsheet;
                 return (
                   <li key={name} className="flex items-center gap-3 px-3 py-2.5">
-                    <Icon aria-hidden="true" className="size-5 shrink-0 text-primary" />
+                    <Icon aria-hidden="true" className="size-5 shrink-0 text-deep" />
                     <span className="flex min-w-0 flex-1 flex-col">
                       <span className="text-small font-bold break-all">{name}</span>
                       <span className="text-caption text-muted-foreground">

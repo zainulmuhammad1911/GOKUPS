@@ -1,8 +1,8 @@
 /**
- * Struktur rilis data PDPSI (dihasilkan pipeline Python, lihat docs/TECHNICAL_PLAN.md §4.2).
+ * Struktur rilis data Data KUPS (dihasilkan pipeline Python, lihat docs/TECHNICAL_PLAN.md §4.2).
  *
  * `source`  : nilai kolom sumber apa adanya, nama kolom asli. Jangan diubah untuk tampilan.
- * `derived` : hasil pengolahan PDPSI; selalu diberi label "olahan PDPSI" di UI.
+ * `derived` : hasil pengolahan Data KUPS; selalu diberi label "olahan Data KUPS" di UI.
  * `quality` : hasil pemeriksaan sistem (penanda, referensi duplikat).
  */
 
@@ -123,7 +123,7 @@ export interface ReleaseMeta {
 }
 
 export interface SiteConfig {
-  product: { name_id: string; name_en: string; short_name: string };
+  product: { name_id: string; name_en: string; short_name: string; logo_path: string; mark_path: string };
   institution: {
     name_id: string | null;
     name_en: string | null;

@@ -23,7 +23,7 @@ export async function GET(req: Request) {
   const table = exportTable(records, meta, schema);
   const dictionary = dictionaryRows(meta, schema);
   const filter = describeQuery(query, adminAreas, schemes, schema);
-  const base = `pdpsi_${meta.version}_hasil_filter`;
+  const base = `datakups_${meta.version}_hasil_filter`;
 
   if (format === "csv") {
     const body = buildCsvZip(

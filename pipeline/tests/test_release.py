@@ -244,7 +244,7 @@ def test_aggregates_traceable_to_records(approvals, totals, block, key, fields):
 
 
 def test_aggregates_labeled_as_processed(totals):
-    assert "Hasil pengolahan PDPSI" in totals["definitions"]["label"]
+    assert "Hasil pengolahan Data KUPS" in totals["definitions"]["label"]
     assert "Bukan angka resmi nasional" in totals["definitions"]["label"]
 
 

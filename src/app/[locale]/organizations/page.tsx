@@ -222,7 +222,7 @@ function OrgCard({
             {e.name}
             {showShort && <span className="font-normal text-muted-foreground"> ({e.short_name})</span>}
           </h2>
-          <Badge variant="outline" className={v.status === "verified" ? "border-primary text-primary" : "border-earth text-earth"}>
+          <Badge variant="outline" className={v.status === "verified" ? "border-deep bg-accent text-forest" : "border-earth text-earth"}>
             {t(`oms.status.${v.status}`)}
           </Badge>
         </div>
@@ -256,7 +256,7 @@ function OrgCard({
           </p>
         )}
         <details className="rounded-lg bg-muted/50 px-4 py-2 [&[open]]:pb-4">
-          <summary className="flex min-h-10 cursor-pointer items-center font-bold text-primary">{t("oms.evidenceTitle")}</summary>
+          <summary className="flex min-h-10 cursor-pointer items-center font-bold text-deep">{t("oms.evidenceTitle")}</summary>
           <div className="mt-2 flex flex-col gap-3">
             {v.website && (
               <p>

@@ -1,3 +1,3 @@
-"""Pipeline data PDPSI."""
+"""Pipeline data Data KUPS."""
 
 PIPELINE_VERSION = "0.1.0"
