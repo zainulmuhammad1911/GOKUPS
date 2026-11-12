@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import { DataFilters } from "@/components/data/DataFilters";
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Download, FileText } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Download, ExternalLink, FileText } from "lucide-react";
 import { BreakableText, DataNote, DuplicateBadge, EmptyValue, PageHeading } from "@/components/data/blocks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -78,8 +78,10 @@ export default async function DataPage({
       );
     if (link?.detail)
       return (
-        <a href={link.detail} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap">
+        <a href={link.detail} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1 whitespace-nowrap">
+          <ExternalLink aria-hidden="true" className="size-3.5" />
           {t("data.skDetail")}
+          <span className="sr-only">, {t("data.skDetailLabel", { sk: String(r.source["Nomor Surat Keputusan"] ?? "") })}</span>
         </a>
       );
     return <EmptyValue>{t("data.skNone")}</EmptyValue>;

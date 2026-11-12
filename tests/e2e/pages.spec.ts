@@ -532,3 +532,13 @@ test.describe("cakupan kabupaten/kota (2026-11-12)", () => {
     await expect(page).toHaveURL(/\/statistics\?province=16#cakupan-kabupaten$/);
   });
 });
+
+test("tautan SK ke halaman detail GoKUPS di tabel Data dan halaman rekaman", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.goto("/data");
+  const first = page.locator("table tbody tr").first().getByRole("link", { name: /Lihat di GoKUPS/ });
+  await expect(first).toHaveAttribute("href", /^https:\/\/gokups\.hutsos\.kehutanan\.go\.id\/public\/society\/detail\//);
+  await expect(first).toHaveAttribute("rel", /noopener/);
+  await page.goto(`/data/${DUP_ID}`);
+  await expect(page.getByRole("link", { name: "Halaman SK di GoKUPS" })).toHaveAttribute("href", /\/public\/society\/detail\//);
+});

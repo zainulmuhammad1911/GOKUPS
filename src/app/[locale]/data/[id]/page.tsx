@@ -86,7 +86,6 @@ export default async function RecordPage({ params }: { params: Params }) {
                 </a>
               </Button>
             )}
-            {link.pdf.length === 0 && <p className="self-center text-small text-muted-foreground">{t("detail.skNoPdf")}</p>}
           </div>
         );
       })()}

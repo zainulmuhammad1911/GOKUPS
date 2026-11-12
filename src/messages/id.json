@@ -254,7 +254,8 @@
     "skColumn": "Dokumen SK",
     "skPdfLabel": "buka PDF SK {sk} di GoKUPS",
     "skDetail": "Lihat di GoKUPS",
-    "skNone": "Belum ada"
+    "skNone": "Belum ada",
+    "skDetailLabel": "SK {sk}"
   },
   "detail": {
     "title": "Rekaman {id}",
@@ -298,8 +299,7 @@
     },
     "skPdf": "Buka PDF SK di GoKUPS",
     "skPdfN": "PDF SK {n} di GoKUPS",
-    "skGokups": "Halaman SK di GoKUPS",
-    "skNoPdf": "GoKUPS belum memuat PDF SK untuk rekaman ini."
+    "skGokups": "Halaman SK di GoKUPS"
   },
   "download": {
     "title": "Unduh data",

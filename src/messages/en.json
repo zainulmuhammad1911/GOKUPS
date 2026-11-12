@@ -254,7 +254,8 @@
     "skColumn": "Decree document",
     "skPdfLabel": "open decree PDF {sk} on GoKUPS",
     "skDetail": "View on GoKUPS",
-    "skNone": "Not yet"
+    "skNone": "Not yet",
+    "skDetailLabel": "decree {sk}"
   },
   "detail": {
     "title": "Record {id}",
@@ -298,8 +299,7 @@
     },
     "skPdf": "Open decree PDF on GoKUPS",
     "skPdfN": "Decree PDF {n} on GoKUPS",
-    "skGokups": "Decree page on GoKUPS",
-    "skNoPdf": "GoKUPS has no decree PDF for this record yet."
+    "skGokups": "Decree page on GoKUPS"
   },
   "download": {
     "title": "Download data",

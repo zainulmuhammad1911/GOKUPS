@@ -42,3 +42,22 @@ def test_matches_by_content_not_order(tmp_path):
     assert doc["links"][approvals[1]] == {"detail": DETAIL_1, "pdf": [PDF_1]}
     assert doc["links"][approvals[2]] == {"detail": DETAIL_2, "pdf": []}
     assert summary["matched"] == 2 and summary["unmatched_links"] == 1 and summary["with_pdf"] == 1
+
+
+def test_list_name_badge_and_truncation():
+    # Daftar Tabular GoKUPS menambahkan angka di depan nama dan memotong teks panjang dengan "...".
+    assert sk_links.link_name("1LPHD BUDO") == "LPHD BUDO"
+    assert sk_links.compatible("GAPOKTANHUT KAHAYAN TENGAH HAPAKAT", "GAPOKTANHUT KAHAYAN TENGAH HAP...")
+    assert sk_links.compatible("SK.5260/MENLHK-PSKL/PKPS/PSL.0/5/2023 J.O SK.1995", "SK.5260/MENLHK-PSKL/PKPS/PSL.0/5/2023 J.O SK....")
+    assert not sk_links.compatible("LPHD BUDO", "LPHD BUD")
+
+
+def test_current_links_cover_every_record():
+    links_dir = PROJECT_ROOT / "data" / "links"
+    if not (links_dir / "current.json").exists():
+        pytest.skip("Belum ada data tautan SK")
+    version = json.loads((links_dir / "current.json").read_text())["version"]
+    doc = json.loads((links_dir / version / "sk_links.json").read_text())
+    ids = {a["id"] for a in json.loads((RELEASE / "approvals.json").read_text())}
+    assert set(doc["links"]) <= ids
+    assert all(v["detail"].startswith(sk_links.GOKUPS_PREFIX + "public/society/detail/") for v in doc["links"].values())
