@@ -67,8 +67,8 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={clientMessages}>
           <div className="flex min-h-dvh flex-col overflow-x-clip">
             {meta.status === "draft" && (
-              <p className="bg-forest px-4 py-1.5 text-center text-[0.75rem] leading-snug text-[#dce9df] sm:font-mono">
-                {t("draft.banner", { version: meta.version })}
+              <p className="bg-forest px-4 py-1.5 text-center text-[0.75rem] leading-snug text-[#ffe3ea] sm:font-mono">
+                {t("draft.banner")}
               </p>
             )}
             <SiteNav

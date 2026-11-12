@@ -25,7 +25,6 @@ export default async function DownloadPage({ params }: { params: Promise<{ local
     <>
       <PageHeading title={t("download.title")} lead={t("download.lead", { version: meta.version })} />
       <div className="flex flex-col gap-3">
-        {meta.status === "draft" && <DataNote>{t("download.draftNote")}</DataNote>}
         <DataNote>{t("download.notRaw")}</DataNote>
       </div>
 

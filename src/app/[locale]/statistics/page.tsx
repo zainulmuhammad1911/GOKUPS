@@ -215,7 +215,7 @@ export default async function StatisticsPage({
             caption={caption}
             metrics={metrics}
             categoryHeader={t("statistics.jenis")}
-            color="#28664f"
+            color="#c4052f"
             rows={jenisStats(records)
               .filter((j) => j.records > 0)
               .map((j) => toRow({ ...j, name: jenisLabel(j.code) }, dataHref({ type: j.code })))}
@@ -227,7 +227,7 @@ export default async function StatisticsPage({
               caption={caption}
               metrics={metrics}
               categoryHeader={t("data.regency")}
-              color="#28664f"
+              color="#c4052f"
               topN={10}
               rows={regencies.map((r) =>
                 toRow(
@@ -243,7 +243,7 @@ export default async function StatisticsPage({
             caption={caption}
             metrics={metrics}
             categoryHeader={level === "province" ? t("map.province") : t("data.regency")}
-            color="#28664f"
+            color="#c4052f"
             rows={regions.map((r) => toRow(r, dataHref(regionQuery(r.code))))}
           />
           <StackedChart

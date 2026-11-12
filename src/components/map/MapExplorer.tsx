@@ -50,12 +50,12 @@ interface Props {
 }
 
 // DESIGN.md §3.3–3.4: skala hijau 5 kelas, netral untuk "tidak ada rekaman", arsir untuk "tidak tersedia".
-const RAMP = ["#8fbb76", "#68a058", "#458343", "#276633", "#104524"];
-const NO_RECORDS = "#dde3dd";
+const RAMP = ["#fcd0da", "#f78fa8", "#ec4d74", "#c4052f", "#7a0f26"];
+const NO_RECORDS = "#ebe3e4";
 const SEA = "#e6eceb";
-const EDGE = "#f4f6f2";
-const INK = "#25332d";
-const EARTH = "#c4052f";
+const EDGE = "#f8f5f5";
+const INK = "#2a2426";
+const EARTH = "#2a2426";
 const IDX: Record<Indicator, number> = { records: 0, area: 1, members: 2 };
 
 type Feature = { type: "Feature"; properties: Record<string, unknown>; geometry: Geometry };
@@ -235,7 +235,7 @@ export function MapExplorer({
           const canvas = document.createElement("canvas");
           canvas.width = canvas.height = size;
           const ctx = canvas.getContext("2d")!;
-          ctx.fillStyle = "#e8efe8";
+          ctx.fillStyle = "#f3eced";
           ctx.fillRect(0, 0, size, size);
           ctx.strokeStyle = "#8c8f87";
           ctx.lineWidth = 1.5;
@@ -533,7 +533,7 @@ export function MapExplorer({
               </li>
               {hasInvalid && (
                 <li className="flex items-center gap-2">
-                  <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: "repeating-linear-gradient(135deg,#e8efe8 0 3px,#7a8880 3px 4px)" }} />
+                  <span aria-hidden="true" className="inline-block h-3 w-5 rounded-[1px]" style={{ background: "repeating-linear-gradient(135deg,#f3eced 0 3px,#85777a 3px 4px)" }} />
                   {t("notAvailable")}
                 </li>
               )}

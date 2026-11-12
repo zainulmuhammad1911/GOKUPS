@@ -39,7 +39,7 @@
     "loading": "Memuat data"
   },
   "draft": {
-    "banner": "Versi pengembangan. Data ini berasal dari rilis draf {version} yang belum diterbitkan sebagai rilis publik."
+    "banner": "Seluruh data berdasarkan scraping dari GoKUPS"
   },
   "footer": {
     "about": "Data KUPS menampilkan data persetujuan dan penetapan Perhutanan Sosial dari tabular GoKUPS seperti tercatat di sumber. Data yang tidak konsisten diberi catatan.",
@@ -280,7 +280,6 @@
   "download": {
     "title": "Unduh data",
     "lead": "File rilis {version}. Kolom sumber memakai nama dan nilai aslinya. Kolom yang diawali [Olahan Data KUPS] atau [Pemeriksaan Data KUPS] berisi hasil pengolahan Data KUPS.",
-    "draftNote": "Rilis ini masih draf dan belum diterbitkan sebagai rilis publik. Lisensi data belum ditetapkan.",
     "notRaw": "File ini memuat semua kolom tabular GoKUPS apa adanya, termasuk nama ketua lembaga, pra-pendamping, dan pendamping. Di file CSV, teks yang diawali = + - @ diberi tanda ' di depannya agar program spreadsheet tidak menjalankannya sebagai rumus. Nilai aslinya ada di file Excel.",
     "csvNote": "CSV memakai UTF-8, pemisah koma, dan desimal titik. Untuk Excel berlokal Indonesia, gunakan file XLSX.",
     "format": "Format",

@@ -246,11 +246,6 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <dt className="text-muted-foreground">{t("about.contact")}</dt>
         <dd>{site.institution.contact_email ?? notSet}</dd>
       </dl>
-      {meta.status === "draft" && (
-        <div className="mt-6">
-          <DataNote>{t("download.draftNote")}</DataNote>
-        </div>
-      )}
     </article>
     </div>
   );

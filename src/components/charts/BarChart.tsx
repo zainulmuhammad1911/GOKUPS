@@ -22,10 +22,10 @@ export interface BarChartProps {
 }
 
 // Token DESIGN.md: teks tidak pernah memakai warna data (dataviz: text wears text tokens).
-const INK = "#25332d";
-const INK_MUTED = "#56645c";
-const RULE = "#d3ddd4";
-const SURFACE = "#f4f6f2";
+const INK = "#2a2426";
+const INK_MUTED = "#6e6265";
+const RULE = "#eadcdf";
+const SURFACE = "#f8f5f5";
 const ROW = 28;
 
 const escapeHtml = (s: string) =>

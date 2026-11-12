@@ -39,7 +39,7 @@
     "loading": "Loading data"
   },
   "draft": {
-    "banner": "Development version. This data comes from draft release {version}, which has not been published as a public release."
+    "banner": "All data is based on scraping from GoKUPS"
   },
   "footer": {
     "about": "Data KUPS shows Social Forestry approval and designation records from the GoKUPS register as recorded in the source. Inconsistent data is marked with a note.",
@@ -280,7 +280,6 @@
   "download": {
     "title": "Download data",
     "lead": "Files for release {version}. Source columns keep their original names and values. Columns starting with [Olahan Data KUPS] or [Pemeriksaan Data KUPS] contain values calculated by Data KUPS.",
-    "draftNote": "This is a draft release and has not been published as a public release. The data licence has not been specified yet.",
     "notRaw": "These files contain every GoKUPS register column as recorded, including the names of chairs, pre-facilitators, and facilitators. In CSV files, text starting with = + - @ gets a leading ' so spreadsheets do not run it as a formula. The original value is in the Excel file.",
     "csvNote": "CSV files use UTF-8, comma separators, and a dot as the decimal mark.",
     "format": "Format",

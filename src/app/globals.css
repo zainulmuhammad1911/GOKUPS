@@ -3,31 +3,31 @@
 @import "shadcn/tailwind.css";
 
 /*
- * Tema Data KUPS untuk komponen shadcn/ui (DESIGN.md §3, v0.5).
- * Palet utama: TRI Red #E3063B (primer), Forest Green #173F35 (sekunder), Deep Green #28664F
- * (aksen dan tautan), Light Green #DCE9DF (permukaan), Background #F4F6F2, Text #25332D.
- * Semua pasangan teks diuji kontras (WCAG AA). Teks merah kecil memakai --color-tri-ink, karena
- * #E3063B di atas latar hanya 4,43:1. Mode terang saja.
+ * Tema Data KUPS untuk komponen shadcn/ui (DESIGN.md §3, v0.6): palet logo TRI.
+ * Merah logo TRI #FC0F47 (--color-tri) untuk aksen dan hiasan; tombol utama #E3063B (teks putih 4,82:1);
+ * merah tua #A3042A untuk permukaan gelap (hero, footer, menu ponsel; teks putih 8,05:1);
+ * merah teks #C4052F untuk tautan dan label kecil; merah muda #FDE8ED untuk permukaan terang;
+ * latar #F8F5F5 dan teks #2A2426. Semua pasangan teks diuji kontras (WCAG AA). Mode terang saja.
  */
 :root {
-  --background: #f4f6f2;
-  --foreground: #25332d;
+  --background: #f8f5f5;
+  --foreground: #2a2426;
   --card: #ffffff;
-  --card-foreground: #25332d;
+  --card-foreground: #2a2426;
   --popover: #ffffff;
-  --popover-foreground: #25332d;
+  --popover-foreground: #2a2426;
   --primary: #e3063b;
   --primary-foreground: #ffffff;
-  --secondary: #dce9df;
-  --secondary-foreground: #173f35;
-  --muted: #e8efe8;
-  --muted-foreground: #56645c;
-  --accent: #dce9df;
-  --accent-foreground: #173f35;
+  --secondary: #fde8ed;
+  --secondary-foreground: #a3042a;
+  --muted: #f3eced;
+  --muted-foreground: #6e6265;
+  --accent: #fde8ed;
+  --accent-foreground: #a3042a;
   --destructive: #c4052f;
-  --border: #d3ddd4;
-  --input: #7a8880;
-  --ring: #173f35;
+  --border: #eadcdf;
+  --input: #85777a;
+  --ring: #a3042a;
   /* Warna 5 jenis PS (DESIGN.md §3.2): HD, HKm, HTR, HA, KK. Hanya untuk tanda warna, bukan teks. */
   --chart-1: #2f8f5b;
   --chart-2: #2f6fb0;
@@ -79,12 +79,12 @@
  * --color-earth dipertahankan sebagai nama penanda (Duplikat, draf) dan kini memakai merah teks.
  */
 @theme {
-  --color-rule-strong: #7a8880;
-  --color-forest: #173f35;
-  --color-forest-hover: #0f2c25;
-  --color-deep: #28664f;
-  --color-leaf: #dce9df;
-  --color-tri: #e3063b;
+  --color-rule-strong: #85777a;
+  --color-forest: #a3042a;
+  --color-forest-hover: #7a0f26;
+  --color-deep: #c4052f;
+  --color-leaf: #fde8ed;
+  --color-tri: #fc0f47;
   --color-tri-ink: #c4052f;
   --color-earth: #c4052f;
 
@@ -143,7 +143,7 @@
 
 /*
  * Cincin fokus tunggal di seluruh UI, termasuk komponen shadcn: 2 px warna --ring (DESIGN.md §6).
- * Di permukaan hutan (.surface-forest) --ring berganti hijau muda agar tetap terlihat.
+ * Di permukaan hutan (.surface-forest) --ring berganti merah muda agar tetap terlihat.
  * Sengaja di luar @layer agar mengalahkan kelas outline-none/ring bawaan komponen.
  */
 :focus-visible {
@@ -153,9 +153,9 @@
 
 /* Permukaan gelap hijau hutan: hero beranda, footer, menu ponsel. */
 .surface-forest {
-  --ring: #dce9df;
-  --muted-foreground: #b9cdbf;
-  --border: #2c5a4c;
+  --ring: #ffe3ea;
+  --muted-foreground: #ffd0db;
+  --border: #c2284f;
   background-color: var(--color-forest);
   color: #ffffff;
 }
@@ -198,7 +198,7 @@
   .aurora-blob { animation: kups-drift 18s ease-in-out infinite; }
   .aurora-blob:nth-child(2) { animation-duration: 24s; animation-direction: reverse; }
   .shiny-text {
-    background-image: linear-gradient(110deg, #dce9df 40%, #ffffff 50%, #dce9df 60%);
+    background-image: linear-gradient(110deg, #ffe3ea 40%, #ffffff 50%, #ffe3ea 60%);
     background-size: 250% 100%;
     -webkit-background-clip: text;
     background-clip: text;
@@ -213,7 +213,7 @@
 
 /* Sapuan radar di hero beranda (hiasan). */
 .radar-sweep {
-  background: conic-gradient(from 0deg, rgb(227 6 59 / 0.35), transparent 22%, transparent);
+  background: conic-gradient(from 0deg, rgb(255 255 255 / 0.4), transparent 22%, transparent);
   mask-image: radial-gradient(circle, transparent 34%, #000 35%, #000 70%, transparent 71%);
 }
 
@@ -247,7 +247,7 @@
 [data-spotlight]:hover::before { opacity: 1; }
 .surface-forest [data-spotlight]::before,
 [data-spotlight].on-dark::before {
-  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(220 233 223 / 0.14), transparent 45%);
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgb(255 227 234 / 0.14), transparent 45%);
 }
 [data-spotlight] { transition: border-color 200ms ease, transform 200ms ease, box-shadow 200ms ease; }
 @media (prefers-reduced-motion: no-preference) {

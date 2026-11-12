@@ -22,7 +22,7 @@ export function DataSheetStat({
   source?: ReactNode;
 }) {
   return (
-    <Card data-spotlight="" data-reveal="" className="gap-3 transition-shadow hover:shadow-[0_18px_40px_-24px_rgb(23_63_53/0.45)]">
+    <Card data-spotlight="" data-reveal="" className="gap-3 transition-shadow hover:shadow-[0_18px_40px_-24px_rgb(163_4_42/0.45)]">
       <CardHeader>
         <CardDescription className="flex items-center gap-2 text-sm font-bold text-foreground">
           <span aria-hidden="true" className="size-1.5 shrink-0 rounded-full bg-tri" />

@@ -70,13 +70,15 @@ export function SiteNav({ productName, logoSrc, version, draft }: { productName:
   return (
     <header
       className={`sticky top-0 z-30 border-b transition-[background-color,box-shadow] duration-300 ${
-        scrolled ? "bg-background/85 shadow-[0_8px_30px_-18px_rgb(23_63_53/0.45)] backdrop-blur-md" : "bg-background/95"
+        scrolled ? "bg-background/85 shadow-[0_8px_30px_-18px_rgb(163_4_42/0.35)] backdrop-blur-md" : "bg-background/95"
       }`}
     >
       <div className="mx-auto flex h-16 w-full max-w-[1400px] items-center gap-3 px-4 md:px-6 lg:px-8">
         <Link href="/" data-slot="brand" className="flex shrink-0 items-center no-underline" aria-label={t("nav.homeLabel", { name: productName })}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logoSrc} alt="" width={639} height={234} className="h-10 w-auto" />
+          <img src={logoSrc} alt="" width={631} height={234} className="h-10 w-auto" />
+          <span aria-hidden="true" className="mx-3 h-7 w-px bg-border" />
+          <span className="font-heading text-lg font-extrabold tracking-tight whitespace-nowrap text-foreground">{productName}</span>
         </Link>
         {draft && (
           <span className="hidden rounded-full border border-tri-ink/40 px-2 py-0.5 font-mono text-[0.6875rem] font-bold text-tri-ink sm:inline-block">
@@ -151,7 +153,7 @@ export function SiteNav({ productName, logoSrc, version, draft }: { productName:
             </SheetTrigger>
             <SheetContent side="right" showCloseButton={false} className="surface-forest w-[85%] max-w-sm gap-0 border-l-0 p-0 text-white">
               <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
-                <SheetTitle className="font-mono text-xs font-bold tracking-[0.14em] text-[#dce9df] uppercase">{t("nav.label")}</SheetTitle>
+                <SheetTitle className="font-mono text-xs font-bold tracking-[0.14em] text-[#ffe3ea] uppercase">{t("nav.label")}</SheetTitle>
                 <SheetClose asChild>
                   <button type="button" className="flex size-10 items-center justify-center rounded-full bg-white/10 text-white" aria-label={t("common.close")}>
                     <X aria-hidden="true" className="size-5" />

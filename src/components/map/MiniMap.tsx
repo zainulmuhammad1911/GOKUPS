@@ -9,8 +9,8 @@ import type { FeatureCollection, Geometry } from "geojson";
  * yang sangat disederhanakan. Tidak memuat MapLibre, jadi Beranda tetap ringan.
  * Warna memakai skala yang sama dengan peta interaktif (DESIGN.md §3.3).
  */
-const RAMP = ["#8fbb76", "#68a058", "#458343", "#276633", "#104524"];
-const NO_RECORDS = "#dde3dd";
+const RAMP = ["#fcd0da", "#f78fa8", "#ec4d74", "#c4052f", "#7a0f26"];
+const NO_RECORDS = "#ebe3e4";
 const W = 640;
 const H = 250;
 
@@ -51,7 +51,7 @@ export function MiniMap({
       <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={label} className="h-auto w-full">
         <rect width={W} height={H} fill="#e6eceb" rx={4} />
         {fc.features.map((f) => (
-          <path key={f.properties.code} d={pathGen(f) ?? ""} fill={color(values[f.properties.code])} stroke="#f4f6f2" strokeWidth={0.6}>
+          <path key={f.properties.code} d={pathGen(f) ?? ""} fill={color(values[f.properties.code])} stroke="#f8f5f5" strokeWidth={0.6}>
             <title>{f.properties.name}</title>
           </path>
         ))}

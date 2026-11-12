@@ -68,12 +68,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="flex flex-col gap-5">
             <p className="flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[0.6875rem] font-bold tracking-[0.06em] uppercase sm:text-xs sm:tracking-[0.12em]">
               <span aria-hidden="true" className="size-1.5 rounded-full bg-tri" />
-              <span className="shiny-text text-[#dce9df]">{t("home.eyebrow", { version: meta.version })}</span>
+              <span className="shiny-text text-[#ffe3ea]">{t("home.eyebrow", { version: meta.version })}</span>
             </p>
             <h1 id="hero-title" className="font-heading text-[2.25rem] leading-[2.75rem] font-extrabold tracking-tight md:text-[3.5rem] md:leading-[4rem]">
               <SplitWords text={t("home.title")} />
             </h1>
-            <p className="max-w-[58ch] text-[1.0625rem] leading-7 text-[#dce9df]">{t("home.lead")}</p>
+            <p className="max-w-[58ch] text-[1.0625rem] leading-7 text-[#ffe3ea]">{t("home.lead")}</p>
             <div className="mt-2 flex flex-wrap gap-3">
               <Button asChild size="lg" className="h-12 rounded-full px-5 text-[0.9375rem]">
                 <Link href="/map">
@@ -96,7 +96,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <span className="radar-sweep absolute inset-0 rounded-full" />
             <span className="absolute inset-[36%] flex items-center justify-center rounded-[1.75rem] bg-white p-3 shadow-[0_20px_60px_-20px_rgb(0_0_0/0.6)]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={site.product.mark_path} alt="" width={228} height={234} className="h-full w-auto" />
+              <img src={site.product.mark_path} alt="" width={235} height={235} className="h-full w-auto" />
             </span>
           </div>
         </div>
@@ -189,7 +189,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           caption={`${processed} ${source}`}
           metrics={metrics}
           categoryHeader={t("statistics.jenis")}
-          color="#28664f"
+          color="#c4052f"
           rows={jenisStats(approvals).map((j) => ({
             label: jenisLabel(j.code),
             href: getPathname({ href: { pathname: "/data", query: { type: j.code } }, locale }),
@@ -203,7 +203,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         caption={`${processed} ${source}`}
         metrics={metrics}
         categoryHeader={t("map.province")}
-        color="#28664f"
+        color="#c4052f"
         topN={10}
         rows={byProvince.map((r) => ({
           label: r.name,
@@ -237,12 +237,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                     </span>
                     <ArrowUpRight
                       aria-hidden="true"
-                      className={`size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${i === 0 ? "text-[#dce9df]" : "text-tri-ink"}`}
+                      className={`size-5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${i === 0 ? "text-[#ffe3ea]" : "text-tri-ink"}`}
                     />
                   </span>
                   <span className="mt-auto flex flex-col gap-1">
                     <span className={`font-heading text-xl font-bold ${i === 0 ? "text-white" : "text-forest"}`}>{t(`nav.${item.key}`)}</span>
-                    <span className={`text-small ${i === 0 ? "text-[#dce9df]" : "text-muted-foreground"}`}>
+                    <span className={`text-small ${i === 0 ? "text-[#ffe3ea]" : "text-muted-foreground"}`}>
                       {t(`home.explore.${item.key}`, { records: n(nat.records), orgs: n(oms.counts.published) })}
                     </span>
                   </span>
