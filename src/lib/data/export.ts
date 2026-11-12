@@ -70,7 +70,7 @@ export function describeQuery(q: DataQuery, admin: AdminArea[], schemes: SchemeI
       `Pendamping: ${q.pendamping === "ada" ? "kolom sumber Pendamping terisi" : "kolom sumber Pendamping kosong"} (pendamping=${q.pendamping})`,
   ].filter(Boolean) as string[];
   const order = q.sort === "no" && q.dir === "asc" ? "urutan sumber" : `${q.sort}, ${q.dir === "asc" ? "naik" : "turun"}`;
-  return `${parts.length ? parts.join("; ") : "Tanpa filter (seluruh rekaman)"}. Urutan: ${order}.`;
+  return `${parts.length ? parts.join("; ") : "Tanpa filter (seluruh dokumen SK)"}. Urutan: ${order}.`;
 }
 
 export function metadataLines(
@@ -83,7 +83,7 @@ export function metadataLines(
 ): [string, string][] {
   const notSet = schema.texts.not_set;
   const lines: [string, string][] = [
-    ["Dataset", `${site.product.name_id} (${site.product.short_name}): rekaman sesuai filter`],
+    ["Dataset", `${site.product.name_id} (${site.product.short_name}): dokumen SK sesuai filter`],
     ["Versi rilis", meta.version],
     ["Status rilis", meta.status === "draft" ? "draft (bukan rilis publik final)" : meta.status],
     ["Sumber data", meta.source.description ?? notSet],
@@ -91,7 +91,7 @@ export function metadataLines(
     ["Waktu pembuatan rilis (UTC)", meta.built_at],
     ["Waktu unduhan (UTC)", new Date().toISOString().replace(/\.\d+Z$/, "+00:00")],
     ["Filter", filter],
-    ["Jumlah rekaman dalam file", String(count)],
+    ["Jumlah dokumen SK dalam file", String(count)],
     ["Unit analisis", schema.texts.unit],
     ["Kesetiaan pada sumber", schema.texts.fidelity],
     [

@@ -6,7 +6,7 @@ import ExcelJS from "exceljs";
 
 const VERSION: string = JSON.parse(readFileSync("data/releases/current.json", "utf-8")).version;
 
-const DUP_ID = "2d80cb80ba17"; // rekaman dengan nomor SK yang dipakai 3 rekaman (ID stabil antar-rilis)
+const DUP_ID = "2d80cb80ba17"; // dokumen SK dengan nomor SK yang dipakai 3 dokumen SK (ID stabil antar-rilis)
 const PATHS = ["/", "/map", "/statistics", "/data", "/data?province=72&type=HTR&sort=area&dir=desc", "/data?q=zzzzzz", "/statistics?province=72", "/statistics?type=KK&year_from=2017", "/map?province=72&indicator=area", `/data/${DUP_ID}`, "/download", "/about", "/organizations", "/organizations?province=61&type=HD", "/organizations?q=zzzzzz"];
 const ROUTES = [...PATHS, ...PATHS.map((p) => (p === "/" ? "/en" : `/en${p}`))];
 const VIEWPORTS = [
@@ -61,11 +61,11 @@ test.describe("menu ponsel", () => {
     await page.getByRole("button", { name: "Menu" }).click();
     await page.getByRole("link", { name: "Data", exact: true }).click();
     await expect(page).toHaveURL(/\/data$/);
-    await expect(page.locator("h1")).toHaveText("Data rekaman");
+    await expect(page.locator("h1")).toHaveText("Daftar dokumen SK");
   });
 });
 
-test("referensi duplikat menaut ke semua rekaman terkait dan saling menaut balik", async ({ page }) => {
+test("referensi duplikat menaut ke semua dokumen SK terkait dan saling menaut balik", async ({ page }) => {
   await page.goto(`/data/${DUP_ID}`);
   const links = page.locator("section[aria-labelledby=duplikat] a");
   await expect(links).toHaveCount(2);
@@ -116,7 +116,7 @@ test("unduhan: file manifes tersedia, file lain dan folder internal ditolak", as
   }
 });
 
-test("rekaman tidak dikenal menghasilkan 404", async ({ page }) => {
+test("dokumen SK tidak dikenal menghasilkan 404", async ({ page }) => {
   const res = await page.goto("/data/000000000000");
   expect(res?.status()).toBe(404);
   await expect(page.locator("h1")).toHaveText("Halaman tidak ditemukan");
@@ -143,7 +143,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await form.getByLabel("Jenis PS", { exact: true }).selectOption("HTR");
     await form.getByRole("button", { name: "Terapkan" }).click();
     await expect(page).toHaveURL(/\/data\?province=72&type=HTR$/);
-    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 dokumen SK/ })).toBeVisible();
   });
 
   test("filter anggota tercatat 1 orang: form, jumlah, catatan, unduhan, Statistik", async ({ page, request }) => {
@@ -159,7 +159,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await form.getByLabel("Anggota tercatat", { exact: true }).selectOption("1");
     await form.getByRole("button", { name: "Terapkan" }).click();
     await expect(page).toHaveURL(/\/data\?members=1$/);
-    await expect(page.getByRole("heading", { name: new RegExp(`${id(one.length).replace(".", "\\.")} dari 10\\.061 rekaman`) })).toBeVisible();
+    await expect(page.getByRole("heading", { name: new RegExp(`${id(one.length).replace(".", "\\.")} dari 10\\.061 dokumen SK`) })).toBeVisible();
     await expect(page.getByText(/bukan status resmi/)).toBeVisible();
 
     const res = await request.get("/unduh-hasil?members=1&type=HTR&format=csv");
@@ -169,7 +169,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     expect(strFromU8(files["BACA_SAYA.txt"]!)).toContain("Anggota tercatat (laki-laki + perempuan, hasil pengolahan Data KUPS): 1 orang");
 
     await page.goto("/statistics?members=1&type=HTR");
-    await expect(page.getByText(`${id(oneHtr)} rekaman · Indonesia`, { exact: true })).toBeVisible();
+    await expect(page.getByText(`${id(oneHtr)} dokumen SK · Indonesia`, { exact: true })).toBeVisible();
   });
 
   test("filter pendamping: form, jumlah, catatan, unduhan, Peta", async ({ page, request }) => {
@@ -183,8 +183,8 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await form.getByLabel("Pendamping", { exact: true }).selectOption("ada");
     await form.getByRole("button", { name: "Terapkan" }).click();
     await expect(page).toHaveURL(/\/data\?pendamping=ada$/);
-    await expect(page.getByRole("heading", { name: `${id(ada)} dari 10.061 rekaman cocok dengan filter` })).toBeVisible();
-    await expect(page.getByText(/Nama pendamping tampil di halaman detail rekaman/)).toBeVisible();
+    await expect(page.getByRole("heading", { name: `${id(ada)} dari 10.061 dokumen SK cocok dengan filter` })).toBeVisible();
+    await expect(page.getByText(/Nama pendamping tampil di halaman detail dokumen SK/)).toBeVisible();
 
     const res = await request.get("/unduh-hasil?pendamping=tidak&format=csv");
     const files = unzipSync(new Uint8Array(await res.body()));
@@ -197,7 +197,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     expect(lines[0]).toContain("Ketua Lembaga");
     expect(lines[0]).toContain("Pra-Pendamping");
 
-    // Peta: filter diterapkan di server; angka panel = jumlah rekaman berpendamping di provinsi itu.
+    // Peta: filter diterapkan di server; angka panel = jumlah dokumen SK berpendamping di provinsi itu.
     await page.goto("/map?province=72");
     await page.getByLabel("Pendamping", { exact: true }).selectOption("ada");
     await expect(page).toHaveURL(/province=72.*pendamping=ada|pendamping=ada.*province=72/);
@@ -205,10 +205,10 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await page.getByLabel("Anggota tercatat", { exact: true }).selectOption("1");
     await expect(page).toHaveURL(/members=1/);
     await expect(page).toHaveURL(/pendamping=ada/);
-    // Tidak ada rekaman beranggota 1 orang dengan pendamping di Sulawesi Tengah: panel kosong.
-    await expect(page.locator("aside")).toContainText("Tidak ada rekaman untuk pilihan ini.");
+    // Tidak ada dokumen SK beranggota 1 orang dengan pendamping di Sulawesi Tengah: panel kosong.
+    await expect(page.locator("aside")).toContainText("Tidak ada dokumen SK untuk pilihan ini.");
     await page.getByRole("button", { name: "Kembali ke Indonesia" }).click();
-    await expect(page.locator("aside").getByRole("link", { name: /Lihat .* rekaman ini/ })).toHaveAttribute("href", /members=1&pendamping=ada/);
+    await expect(page.locator("aside").getByRole("link", { name: /Lihat .* dokumen SK ini/ })).toHaveAttribute("href", /members=1&pendamping=ada/);
   });
 
   test("filter Region: daftar provinsi menyempit, jumlah, Statistik, unduhan, Peta", async ({ page, request }) => {
@@ -223,14 +223,14 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     await expect(form.getByLabel("Provinsi", { exact: true }).locator("option")).toHaveCount(7);
     await form.getByRole("button", { name: "Terapkan" }).click();
     await expect(page).toHaveURL(/\/data\?region=Sulawesi$/);
-    await expect(page.getByRole("heading", { name: `${id(sulawesi)} dari 10.061 rekaman cocok dengan filter` })).toBeVisible();
+    await expect(page.getByRole("heading", { name: `${id(sulawesi)} dari 10.061 dokumen SK cocok dengan filter` })).toBeVisible();
 
     const res = await request.get("/unduh-hasil?region=Bali%20dan%20Nusa%20Tenggara&format=csv");
     const files = unzipSync(new Uint8Array(await res.body()));
     expect(strFromU8(files["BACA_SAYA.txt"]!)).toContain("Region (kolom sumber, kelompok pulau): Bali dan Nusa Tenggara");
 
     await page.goto("/statistics?region=Sulawesi");
-    await expect(page.getByText(`${id(sulawesi)} rekaman · Region Sulawesi`, { exact: true })).toBeVisible();
+    await expect(page.getByText(`${id(sulawesi)} dokumen SK · Region Sulawesi`, { exact: true })).toBeVisible();
 
     await page.goto("/map");
     await page.getByLabel("Region", { exact: true }).selectOption("Sulawesi");
@@ -258,8 +258,8 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
 
   test("hasil kosong menampilkan keadaan kosong", async ({ page }) => {
     await page.goto("/data?q=zzzzzz");
-    await expect(page.getByText("Tidak ada rekaman yang cocok")).toBeVisible();
-    await expect(page.getByRole("link", { name: /rekaman ini/ })).toHaveCount(0);
+    await expect(page.getByText("Tidak ada dokumen SK yang cocok")).toBeVisible();
+    await expect(page.getByRole("link", { name: /dokumen SK ini/ })).toHaveCount(0);
   });
 
   test("unduhan CSV sesuai filter: jumlah baris, kolom sama dengan rilis, metadata filter", async ({ request }) => {
@@ -272,7 +272,7 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     expect(lines.length).toBe(1085 + 1);
     const readme = strFromU8(files["BACA_SAYA.txt"]!);
     expect(readme).toContain("Provinsi: Sulawesi Tengah (72)");
-    expect(readme).toContain("Jumlah rekaman dalam file: 1085");
+    expect(readme).toContain("Jumlah dokumen SK dalam file: 1085");
     expect(readme).toContain("Semua kolom tabular GoKUPS dipublikasikan apa adanya");
     // Judul kolom sama persis dengan file rilis lengkap dari pipeline.
     const full = unzipSync(readFileSync(`data/releases/${VERSION}/downloads/datakups_${VERSION}_rekaman_lengkap_csv.zip`));
@@ -295,11 +295,11 @@ test.describe("Tahap 4: filter, pencarian, urutan, unduhan", () => {
     expect((await request.get("/unduh-hasil?format=exe")).status()).toBe(400);
   });
 
-  test("angka di Statistik menaut ke rekaman pembentuknya", async ({ page }) => {
+  test("angka di Statistik menaut ke dokumen SK pembentuknya", async ({ page }) => {
     await page.goto("/statistics");
-    await page.getByRole("link", { name: /rekaman: Hutan Tanaman Rakyat, Sulawesi Tengah/ }).click();
+    await page.getByRole("link", { name: /dokumen SK: Hutan Tanaman Rakyat, Sulawesi Tengah/ }).click();
     await expect(page).toHaveURL(/province=72/);
-    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 dokumen SK/ })).toBeVisible();
   });
 
   test.describe("ponsel", () => {
@@ -346,10 +346,10 @@ test.describe("Tahap 5: grafik", () => {
 
   test("filter provinsi mengubah tingkat wilayah ke kabupaten/kota", async ({ page }) => {
     await page.goto("/statistics?province=72&type=HTR");
-    await expect(page.getByText("1.085 rekaman · Sulawesi Tengah")).toBeVisible();
+    await expect(page.getByText("1.085 dokumen SK · Sulawesi Tengah")).toBeVisible();
     await expect(page.getByRole("heading", { name: "Sebaran per kabupaten/kota, Sulawesi Tengah" })).toBeVisible();
-    await page.getByRole("link", { name: "Lihat 1.085 rekaman ini di halaman Data" }).click();
-    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+    await page.getByRole("link", { name: "Lihat 1.085 dokumen SK ini di halaman Data" }).click();
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 dokumen SK/ })).toBeVisible();
   });
 
   test("Beranda: dua grafik tampil", async ({ page }) => {
@@ -385,17 +385,17 @@ test.describe("Tahap 6: halaman Tentang", () => {
 
   test("angka di halaman Tentang dihitung dari rilis", async ({ page }) => {
     await page.goto("/about");
-    await expect(page.getByText(/136 nomor SK dipakai lebih dari satu rekaman, dengan total 282 rekaman/)).toBeVisible();
-    await expect(page.getByText(/24 rekaman isinya identik/)).toBeVisible();
-    await expect(page.getByRole("link", { name: "3.907 rekaman" })).toBeVisible();
-    await expect(page.getByText(/Total 6\.892\.023 ha dari 10\.061 rekaman/)).toBeVisible();
+    await expect(page.getByText(/136 nomor SK dipakai lebih dari satu dokumen SK, dengan total 282 dokumen SK/)).toBeVisible();
+    await expect(page.getByText(/24 dokumen SK isinya identik/)).toBeVisible();
+    await expect(page.getByRole("link", { name: "3.907 dokumen SK" })).toBeVisible();
+    await expect(page.getByText(/Total 6\.892\.023 ha dari 10\.061 dokumen SK/)).toBeVisible();
   });
 
-  test("jumlah catatan pemeriksaan menaut ke rekaman yang sama", async ({ page }) => {
+  test("jumlah catatan pemeriksaan menaut ke dokumen SK yang sama", async ({ page }) => {
     await page.goto("/about");
-    await page.getByRole("link", { name: /rekaman: Anggota Keseluruhan = perempuan/ }).click();
+    await page.getByRole("link", { name: /dokumen SK: Anggota Keseluruhan = perempuan/ }).click();
     await expect(page).toHaveURL(/flag=members_total_equals_female/);
-    await expect(page.getByRole("heading", { name: /1\.127 dari 10\.061 rekaman/ })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /1\.127 dari 10\.061 dokumen SK/ })).toBeVisible();
   });
 
   test("versi Inggris memakai nama skema Indonesia dengan penjelasan", async ({ page }) => {
@@ -436,8 +436,8 @@ test.describe("Tahap 3: peta", () => {
     await page.getByRole("radio", { name: "Luas" }).click();
     await page.getByLabel("Jenis PS", { exact: true }).selectOption("HTR");
     await expect(page).toHaveURL(/indicator=area&type=HTR&province=72/);
-    await page.locator("aside").getByRole("link", { name: /Lihat 1\.085 rekaman ini/ }).click();
-    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 rekaman/ })).toBeVisible();
+    await page.locator("aside").getByRole("link", { name: /Lihat 1\.085 dokumen SK ini/ }).click();
+    await expect(page.getByRole("heading", { name: /1\.085 dari 10\.061 dokumen SK/ })).toBeVisible();
   });
 
   test("Beranda: peta mini memuat 38 provinsi", async ({ page }) => {
@@ -481,7 +481,7 @@ test.describe("rincian anggota laki-laki dan perempuan (K2, 2026-11-06)", () => 
   test("Beranda menampilkan rincian dan catatan perempuan 0, dalam dua bahasa", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByText(`Laki-laki ${id(nat.members_male)}, perempuan ${id(nat.members_female)}.`)).toBeVisible();
-    await expect(page.getByText(new RegExp(`Pada ${id(nat.members_female_zero_records)} dari ${id(nat.members_records_used)} rekaman, anggota perempuan tercatat 0`))).toBeVisible();
+    await expect(page.getByText(new RegExp(`Pada ${id(nat.members_female_zero_records)} dari ${id(nat.members_records_used)} dokumen SK, anggota perempuan tercatat 0`))).toBeVisible();
     await page.goto("/en");
     await expect(page.getByText(`Men ${en(nat.members_male)}, women ${en(nat.members_female)}.`)).toBeVisible();
   });
@@ -533,7 +533,7 @@ test.describe("cakupan kabupaten/kota (2026-11-12)", () => {
   });
 });
 
-test("tautan SK ke halaman detail GoKUPS di tabel Data dan halaman rekaman", async ({ page }) => {
+test("tautan SK ke halaman detail GoKUPS di tabel Data dan halaman dokumen SK", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/data");
   const first = page.locator("table tbody tr").first().getByRole("link", { name: /Lihat di GoKUPS/ });
