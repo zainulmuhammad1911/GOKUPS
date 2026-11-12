@@ -250,7 +250,11 @@
     "pendampingNote": "This filter checks whether the Pendamping (facilitator) column in the GoKUPS data is filled in. Facilitator names appear on the record detail page and in downloads, as recorded in the source. An empty column may mean the group has no facilitator, or that the facilitator was not recorded.",
     "region": "Region",
     "regionHint": "Island group from the workbook's Region column. This column is not a GoKUPS field.",
-    "allRegions": "All regions"
+    "allRegions": "All regions",
+    "skColumn": "Decree document",
+    "skPdfLabel": "open decree PDF {sk} on GoKUPS",
+    "skDetail": "View on GoKUPS",
+    "skNone": "Not yet"
   },
   "detail": {
     "title": "Record {id}",
@@ -291,7 +295,11 @@
       "nilai_negatif": "Not calculated: negative value",
       "komponen_kosong": "Not available: empty component",
       "kosong": "Not available: empty in source"
-    }
+    },
+    "skPdf": "Open decree PDF on GoKUPS",
+    "skPdfN": "Decree PDF {n} on GoKUPS",
+    "skGokups": "Decree page on GoKUPS",
+    "skNoPdf": "GoKUPS has no decree PDF for this record yet."
   },
   "download": {
     "title": "Download data",

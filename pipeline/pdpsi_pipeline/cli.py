@@ -5,6 +5,8 @@
   uv run pdpsi geo --source <geojson> --version V      buat batas wilayah untuk peta
   uv run pdpsi oms --source <workbook verifikasi> --version V --directory-date D --checked-date D
                                                       buat data Direktori OMS pendamping
+  uv run pdpsi links --source <tautan.csv> --version V --collected-at D
+                                                      cocokkan tautan SK GoKUPS ke rilis aktif
 """
 from __future__ import annotations
 
@@ -17,7 +19,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from . import PIPELINE_VERSION, aggregate, export, ingest, oms, regions, rekap, report
+from . import PIPELINE_VERSION, aggregate, export, ingest, oms, regions, rekap, report, sk_links
 from .build import build, public_record
 from .config import Paths, load_json
 
@@ -173,6 +175,19 @@ def cmd_oms(args, paths: Paths) -> int:
     return 0
 
 
+def cmd_links(args, paths: Paths) -> int:
+    links_dir = paths.root / "data" / "links"
+    if (links_dir / args.version).exists() and not args.force:
+        print(f"Versi tautan SK {args.version} sudah ada. Pakai versi baru atau --force.")
+        return 1
+    current = json.loads((paths.releases_dir / "current.json").read_text())["version"]
+    out, s = sk_links.write_links(paths.releases_dir / current, Path(args.source), links_dir, args.version, args.collected_at)
+    print(f"Tautan SK {args.version} untuk rilis {current} ditulis ke {out}")
+    print(f"  {s['matched']} dari {s['records']} rekaman punya tautan ({s['with_pdf']} dengan PDF SK); "
+          f"{s['unmatched_links']} baris tautan tidak cocok dengan rekaman mana pun.")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="pdpsi")
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -194,9 +209,14 @@ def main(argv: list[str] | None = None) -> int:
     o.add_argument("--directory-date", required=True)
     o.add_argument("--checked-date", required=True)
     o.add_argument("--force", action="store_true")
+    k = sub.add_parser("links")
+    k.add_argument("--source", required=True)
+    k.add_argument("--version", required=True)
+    k.add_argument("--collected-at", required=True)
+    k.add_argument("--force", action="store_true")
     args = p.parse_args(argv)
     paths = Paths()
-    return {"crosswalk": cmd_crosswalk, "build": cmd_build, "geo": cmd_geo, "oms": cmd_oms}[args.cmd](args, paths)
+    return {"crosswalk": cmd_crosswalk, "build": cmd_build, "geo": cmd_geo, "oms": cmd_oms, "links": cmd_links}[args.cmd](args, paths)
 
 
 if __name__ == "__main__":

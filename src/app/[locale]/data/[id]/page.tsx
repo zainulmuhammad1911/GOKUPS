@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { DataNote, DuplicateBadge, EmptyValue, PageHeading, SectionCard } from "@/components/data/blocks";
-import { ChevronLeft } from "lucide-react";
+import { loadSkLinks } from "@/lib/data/sk-links";
+import { ChevronLeft, ExternalLink, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { loadRelease } from "@/lib/data/release";
 import { displaySourceValue, formatNumber } from "@/lib/data/format";
@@ -64,6 +65,31 @@ export default async function RecordPage({ params }: { params: Params }) {
         {dup && <DuplicateBadge label={t("data.duplicate")} />}
       </div>
       <p className="text-caption text-muted-foreground">{t("detail.release")} {record.release_version}</p>
+      {(() => {
+        const link = loadSkLinks()?.links[record.id];
+        if (!link) return null;
+        return (
+          <div className="mt-4 flex flex-wrap gap-2">
+            {link.pdf.map((url, i) => (
+              <Button key={url} asChild size="lg" className="h-11 rounded-full px-4 text-small">
+                <a href={url} target="_blank" rel="noopener noreferrer">
+                  <FileText aria-hidden="true" />
+                  {link.pdf.length > 1 ? t("detail.skPdfN", { n: i + 1 }) : t("detail.skPdf")}
+                </a>
+              </Button>
+            ))}
+            {link.detail && (
+              <Button asChild variant="outline" size="lg" className="h-11 rounded-full px-4 text-small">
+                <a href={link.detail} target="_blank" rel="noopener noreferrer">
+                  <ExternalLink aria-hidden="true" />
+                  {t("detail.skGokups")}
+                </a>
+              </Button>
+            )}
+            {link.pdf.length === 0 && <p className="self-center text-small text-muted-foreground">{t("detail.skNoPdf")}</p>}
+          </div>
+        );
+      })()}
 
       {(dup || record.quality.sk_spacing_variant_ids.length > 0) && (
         <section aria-labelledby="duplikat" className="mt-6 flex flex-col gap-4">

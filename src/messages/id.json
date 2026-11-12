@@ -250,7 +250,11 @@
     "pendampingNote": "Filter ini melihat apakah kolom Pendamping di data GoKUPS terisi. Nama pendamping tampil di halaman detail rekaman dan di file unduhan, seperti tercatat di sumber. Kolom yang kosong bisa berarti kelompok tidak didampingi, atau pendampingnya tidak dicatat.",
     "region": "Region",
     "regionHint": "Kelompok pulau dari kolom Region di workbook. Kolom ini bukan field GoKUPS.",
-    "allRegions": "Semua region"
+    "allRegions": "Semua region",
+    "skColumn": "Dokumen SK",
+    "skPdfLabel": "buka PDF SK {sk} di GoKUPS",
+    "skDetail": "Lihat di GoKUPS",
+    "skNone": "Belum ada"
   },
   "detail": {
     "title": "Rekaman {id}",
@@ -291,7 +295,11 @@
       "nilai_negatif": "Tidak dihitung: ada nilai negatif",
       "komponen_kosong": "Tidak tersedia: komponen kosong",
       "kosong": "Tidak tersedia: kosong di sumber"
-    }
+    },
+    "skPdf": "Buka PDF SK di GoKUPS",
+    "skPdfN": "PDF SK {n} di GoKUPS",
+    "skGokups": "Halaman SK di GoKUPS",
+    "skNoPdf": "GoKUPS belum memuat PDF SK untuk rekaman ini."
   },
   "download": {
     "title": "Unduh data",

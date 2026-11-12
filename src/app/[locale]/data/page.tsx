@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import { DataFilters } from "@/components/data/DataFilters";
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronLeft, ChevronRight, Download, FileText } from "lucide-react";
 import { BreakableText, DataNote, DuplicateBadge, EmptyValue, PageHeading } from "@/components/data/blocks";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { loadExportSchema, loadRelease } from "@/lib/data/release";
+import { loadSkLinks } from "@/lib/data/sk-links";
 import { aggregate, AREA_COLUMN } from "@/lib/data/aggregate";
 import { displaySourceValue, formatNumber } from "@/lib/data/format";
 import {
@@ -64,6 +65,25 @@ export default async function DataPage({
   const n = (v: number) => formatNumber(v, locale);
   const empty = t("common.emptyInSource");
   const active = activeFilterCount(query);
+  const skLinks = loadSkLinks()?.links ?? null;
+  const skCell = (r: ApprovalRecord) => {
+    const link = skLinks?.[r.id];
+    const pdf = link?.pdf[0];
+    if (pdf)
+      return (
+        <a href={pdf} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center gap-1 font-bold whitespace-nowrap">
+          <FileText aria-hidden="true" className="size-4" />
+          PDF<span className="sr-only">, {t("data.skPdfLabel", { sk: String(r.source["Nomor Surat Keputusan"] ?? "") })}</span>
+        </a>
+      );
+    if (link?.detail)
+      return (
+        <a href={link.detail} target="_blank" rel="noopener noreferrer" className="whitespace-nowrap">
+          {t("data.skDetail")}
+        </a>
+      );
+    return <EmptyValue>{t("data.skNone")}</EmptyValue>;
+  };
 
   const provinces = adminAreas
     .filter((a) => a.level === "province")
@@ -244,6 +264,7 @@ export default async function DataPage({
                           </th>
                         );
                       })}
+                      {skLinks && <th scope="col" className="px-3 py-1 pr-5 font-medium text-muted-foreground">{t("data.skColumn")}</th>}
                     </tr>
                   </thead>
                   <tbody>
@@ -256,6 +277,7 @@ export default async function DataPage({
                         {COLUMNS.slice(1).map((c) => (
                           <td key={c.key} className={`px-3 py-2.5 last:pr-5 ${c.className ?? "whitespace-pre-wrap"}`}>{cell(r, c.source)}</td>
                         ))}
+                        {skLinks && <td className="px-3 py-1.5 pr-5">{skCell(r)}</td>}
                       </tr>
                     ))}
                   </tbody>
@@ -277,6 +299,7 @@ export default async function DataPage({
                     <span className="tabular text-muted-foreground">
                       {cell(r, "Tanggal Surat Keputusan")} · {cell(r, AREA_COLUMN)} {t("common.hectare")}
                     </span>
+                    {skLinks && <span>{skCell(r)}</span>}
                   </li>
                 ))}
               </ul>

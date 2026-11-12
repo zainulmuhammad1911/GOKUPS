@@ -46,6 +46,26 @@ uv run pdpsi oms --source ../data/source/oms/<workbook-verifikasi>.xlsx --versio
 
 Keluaran: `data/oms/<versi>/directory.json` dan `data/oms/current.json`.
 
+## Tautan dokumen SK di GoKUPS
+
+Situs menautkan ke halaman detail dan PDF SK di GoKUPS; dokumen tidak diunduh atau disimpan. Masukannya CSV (UTF-8) dengan kolom:
+
+| Kolom | Isi |
+|-------|-----|
+| `Nomor Surat Keputusan`, `Nama Lembaga`, `Provinsi`, `Kabupaten Kota`, `Kecamatan` | Seperti tampil di GoKUPS |
+| `Tanggal Surat Keputusan` | ISO (`2026-04-21`) atau format GoKUPS (`Selasa, 21 April 2026`) |
+| `Luas Area Keseluruhan (Ha)` | Angka, boleh dengan "Ha" (`732.00 Ha`) |
+| `Tautan Detail GoKUPS` | `https://gokups.hutsos.kehutanan.go.id/public/society/detail/<kode>` |
+| `Tautan PDF SK` | `https://gokups.hutsos.kehutanan.go.id/storage/surat-keputusan/<kode>.pdf`; lebih dari satu dipisah `|`; kosong bila tidak ada |
+
+Kode halaman detail ada di daftar Tabular (`detail('<kode>')`); alamat PDF ada di pratinjau dokumen kategori "Surat Keputusan" di halaman detail. Baris dicocokkan ke rekaman rilis aktif berdasarkan isi, bukan urutan. Hanya alamat `https://gokups.hutsos.kehutanan.go.id/` yang diterima.
+
+```bash
+uv run pdpsi links --source ../data/source/gokups_links/<file>.csv --version <YYYY-MM-DD> --collected-at <YYYY-MM-DD>
+```
+
+Keluaran: `data/links/<versi>/sk_links.json` dan `data/links/current.json`. Kolom "Dokumen SK" di halaman Data dan tombol PDF di halaman rekaman baru muncul bila file ini ada.
+
 ## Isi folder rilis
 
 | File | Publik | Isi |
