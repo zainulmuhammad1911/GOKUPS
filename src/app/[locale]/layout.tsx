@@ -74,8 +74,6 @@ export default async function LocaleLayout({
             <SiteNav
               productName={locale === "en" ? site.product.name_en : site.product.name_id}
               logoSrc={site.product.logo_path}
-              version={meta.version}
-              draft={meta.status === "draft"}
             />
             <main id="konten" tabIndex={-1} className="mx-auto w-full max-w-[1400px] flex-1 px-4 pt-6 pb-4 md:px-6 md:pt-10 lg:px-8">
               {children}

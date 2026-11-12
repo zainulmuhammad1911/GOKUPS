@@ -22,7 +22,7 @@
     "emptyInSource": "Empty in source",
     "notSet": "Not yet specified",
     "processed": "Calculated by Data KUPS from the source data. This is not an official national figure.",
-    "sourceLine": "Source: GoKUPS, retrieved {date}. Release {version}.",
+    "sourceLine": "Source: GoKUPS, retrieved {date}.",
     "hectare": "ha",
     "records": "records",
     "reason": {
@@ -34,7 +34,6 @@
     "female": "Women",
     "membersSplit": "Men {male}, women {female}.",
     "femaleZeroNote": "In {zero} of {used} records the number of women is 0, almost all of them decrees issued before 2017. The source does not distinguish 0 from not recorded, so the recorded number of women is probably lower than the real number.",
-    "draftBadge": "Draft",
     "close": "Close",
     "loading": "Loading data"
   },
@@ -56,7 +55,7 @@
     "lead": "This site shows Social Forestry approval and designation records from the GoKUPS register, as recorded in the source. Data KUPS calculated the summary figures on this page from those records.",
     "recordsLabel": "Approval/designation records",
     "recordsNote": "One record is one row in the GoKUPS register. This is not a count of groups or institutions.",
-    "provincesLabel": "Provinces with records",
+    "provincesLabel": "Areas with decrees",
     "provincesValue": "{count} of {total}",
     "provincesNote": "No records in the source: {names}.",
     "areaLabel": "Recorded area",
@@ -71,7 +70,7 @@
     "miniMapTitle": "Records per province",
     "miniMapLabel": "Map of Indonesia shading {count} provinces by number of records. Figures per province are in the top 10 provinces chart and on the Map page.",
     "openMap": "Open the interactive map",
-    "eyebrow": "Data KUPS · release {version}",
+    "eyebrow": "Data KUPS",
     "tickerTitle": "Provinces by number of records",
     "tickerCount": "{count} records",
     "nextEyebrow": "Explore",
@@ -82,7 +81,10 @@
       "organizations": "{orgs} CSOs recorded as facilitating Social Forestry.",
       "download": "Full release files in Excel and CSV.",
       "about": "How the data was collected, processed, and checked."
-    }
+    },
+    "provincesUnit": "provinces",
+    "regenciesUnit": "regencies/cities",
+    "regenciesLink": "See by province and regency/city"
   },
   "map": {
     "title": "Distribution map",
@@ -139,7 +141,21 @@
     "chartComposition": "PS type composition {level}, {scope}",
     "regionTableCaption": "Records {level} and PS type, {scope}",
     "sexTableCaption": "Members by sex {level}, {scope}",
-    "sexTableNote": "Men and women are counted over the same records as Members (M+W), so the two always add up to Members (M+W). The last column shows how many records list 0 women."
+    "sexTableNote": "Men and women are counted over the same records as Members (M+W), so the two always add up to Members (M+W). The last column shows how many records list 0 women.",
+    "coverage": {
+      "title": "Regencies/cities with decrees, {scope}",
+      "lead": "Number of regencies/cities in the official 2025 Ministry of Home Affairs list, and how many already have a Social Forestry decree under the filters above.",
+      "total": "Regencies/cities",
+      "withSk": "With a Social Forestry decree",
+      "ofTotal": "of {total}",
+      "area": "Decree area",
+      "groups": "Group names",
+      "seeGroups": "See {count} decrees and group names",
+      "none": "No decree yet",
+      "colTotal": "Regencies/cities",
+      "colWithSk": "With decree",
+      "pickProvince": "Click a province name to see each regency/city and the list of groups that received decrees."
+    }
   },
   "columns": {
     "records": "Records",

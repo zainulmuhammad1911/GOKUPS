@@ -510,3 +510,25 @@ test.describe("rincian anggota laki-laki dan perempuan (K2, 2026-11-06)", () => 
     await expect(panel).toContainText(id(p.members_female));
   });
 });
+
+test.describe("cakupan kabupaten/kota (2026-11-12)", () => {
+  test("Beranda menampilkan jumlah kabupaten/kota yang punya SK", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText("407 dari 514", { exact: true })).toBeVisible();
+  });
+  test("Statistik per provinsi: jumlah kabupaten/kota, yang punya SK, dan tautan ke daftar kelompok", async ({ page }) => {
+    await page.goto("/statistics?province=16");
+    const card = page.locator('[data-slot=card]:has(#cakupan-kabupaten)');
+    await expect(card.getByRole("heading", { name: /Sumatera Selatan/ })).toBeVisible();
+    await expect(card.getByText("dari 17")).toBeVisible();
+    const link = card.getByRole("link", { name: /^Lihat \d+ SK dan nama kelompoknya.*Kabupaten Ogan Komering Ulu$/ });
+    await link.click();
+    await expect(page).toHaveURL(/\/data\?regency=16\.01/);
+  });
+  test("Statistik nasional: provinsi menaut ke rincian kabupaten/kota", async ({ page }) => {
+    await page.goto("/statistics");
+    const card = page.locator('[data-slot=card]:has(#cakupan-kabupaten)');
+    await card.getByRole("link", { name: "Sumatera Selatan", exact: true }).click();
+    await expect(page).toHaveURL(/\/statistics\?province=16#cakupan-kabupaten$/);
+  });
+});

@@ -25,6 +25,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const n = (v: number) => formatNumber(v, locale);
 
   const provinces = adminAreas.filter((a) => a.level === "province");
+  const regencyTotal = adminAreas.filter((a) => a.level === "regency").length;
   const covered = new Set(totals.by_province.map((p) => p.province_code));
   const missing = provinces.filter((p) => !covered.has(p.code)).map((p) => p.name);
   const notUsedMembers = Object.values(nat.members_records_not_used).reduce((a, b) => a + b, 0);
@@ -68,7 +69,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="flex flex-col gap-5">
             <p className="flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 font-mono text-[0.6875rem] font-bold tracking-[0.06em] uppercase sm:text-xs sm:tracking-[0.12em]">
               <span aria-hidden="true" className="size-1.5 rounded-full bg-tri" />
-              <span className="shiny-text text-[#ffe3ea]">{t("home.eyebrow", { version: meta.version })}</span>
+              <span className="shiny-text text-[#ffe3ea]">{t("home.eyebrow")}</span>
             </p>
             <h1 id="hero-title" className="font-heading text-[2.25rem] leading-[2.75rem] font-extrabold tracking-tight md:text-[3.5rem] md:leading-[4rem]">
               <SplitWords text={t("home.title")} />
@@ -110,9 +111,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <DataSheetStat
           label={t("home.provincesLabel")}
           value={t("home.provincesValue", { count: totals.provinces_with_records, total: provinces.length })}
+          unit={t("home.provincesUnit")}
           source={source}
         >
-          {missing.length > 0 && t("home.provincesNote", { names: missing.join(", ") })}
+          <span className="flex items-baseline gap-2">
+            <span className="font-heading text-[1.75rem] leading-8 font-extrabold tracking-tight text-forest tabular">
+              {t("home.provincesValue", { count: n(totals.regencies_with_records), total: n(regencyTotal) })}
+            </span>
+            <span className="text-muted-foreground">{t("home.regenciesUnit")}</span>
+          </span>
+          {missing.length > 0 && <span className="block">{t("home.provincesNote", { names: missing.join(", ") })}</span>}
+          <Link href={{ pathname: "/statistics", hash: "cakupan-kabupaten" }} className="inline-flex min-h-10 items-center gap-1.5 font-bold">
+            {t("home.regenciesLink")}
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </Link>
         </DataSheetStat>
         <DataSheetStat label={t("home.areaLabel")} value={<CountUp value={nat.area_ha} locale={locale} digits={2} />} unit={t("common.hectare")} source={`${processed} ${source}`}>
           {t("home.areaNote", { used: n(nat.area_records_used), flagged: n(countFlag(approvals, "area_component_mismatch")) })}

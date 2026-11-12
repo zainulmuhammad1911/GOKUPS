@@ -11,7 +11,7 @@ import { Sheet, SheetClose, SheetContent, SheetDescription, SheetTitle, SheetTri
  * Bilah navigasi atas. Di layar lebar, sorotan (pill) bergeser ke menu yang sedang ditunjuk
  * atau difokus, lalu kembali ke halaman aktif. Di layar kecil, menu dibuka dari samping.
  */
-export function SiteNav({ productName, logoSrc, version, draft }: { productName: string; logoSrc: string; version: string; draft: boolean }) {
+export function SiteNav({ productName, logoSrc }: { productName: string; logoSrc: string }) {
   const t = useTranslations();
   const pathname = usePathname();
   const locale = useLocale();
@@ -77,14 +77,7 @@ export function SiteNav({ productName, logoSrc, version, draft }: { productName:
         <Link href="/" data-slot="brand" className="flex shrink-0 items-center no-underline" aria-label={t("nav.homeLabel", { name: productName })}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={logoSrc} alt="" width={631} height={234} className="h-10 w-auto" />
-          <span aria-hidden="true" className="mx-3 h-7 w-px bg-border" />
-          <span className="font-heading text-lg font-extrabold tracking-tight whitespace-nowrap text-foreground">{productName}</span>
         </Link>
-        {draft && (
-          <span className="hidden rounded-full border border-tri-ink/40 px-2 py-0.5 font-mono text-[0.6875rem] font-bold text-tri-ink sm:inline-block">
-            {t("common.draftBadge")} · {version}
-          </span>
-        )}
 
         <nav aria-label={t("nav.label")} className="ml-auto hidden lg:block">
           <ul

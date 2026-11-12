@@ -22,7 +22,7 @@
     "emptyInSource": "Kosong di sumber",
     "notSet": "Belum ditetapkan",
     "processed": "Angka ini dihitung Data KUPS dari data sumber dan bukan angka resmi nasional.",
-    "sourceLine": "Sumber: GoKUPS, diambil {date}. Rilis {version}.",
+    "sourceLine": "Sumber: GoKUPS, diambil {date}.",
     "hectare": "ha",
     "records": "rekaman",
     "reason": {
@@ -34,7 +34,6 @@
     "female": "Perempuan",
     "membersSplit": "Laki-laki {male}, perempuan {female}.",
     "femaleZeroNote": "Pada {zero} dari {used} rekaman, anggota perempuan tercatat 0, hampir semuanya SK sebelum 2017. Sumber tidak membedakan angka 0 dengan data yang tidak dicatat, jadi jumlah perempuan yang tercatat kemungkinan lebih rendah dari jumlah sebenarnya.",
-    "draftBadge": "Draf",
     "close": "Tutup",
     "loading": "Memuat data"
   },
@@ -56,7 +55,7 @@
     "lead": "Situs ini menampilkan rekaman persetujuan dan penetapan Perhutanan Sosial dari tabular GoKUPS, seperti tercatat di sumber. Angka ringkasan di halaman ini dihitung Data KUPS dari rekaman tersebut.",
     "recordsLabel": "Rekaman persetujuan/penetapan",
     "recordsNote": "Satu rekaman adalah satu baris di tabular GoKUPS. Angka ini bukan jumlah kelompok atau lembaga.",
-    "provincesLabel": "Provinsi dengan rekaman",
+    "provincesLabel": "Wilayah dengan SK",
     "provincesValue": "{count} dari {total}",
     "provincesNote": "Tanpa rekaman di sumber: {names}.",
     "areaLabel": "Luas tercatat",
@@ -71,7 +70,7 @@
     "miniMapTitle": "Jumlah rekaman per provinsi",
     "miniMapLabel": "Peta Indonesia yang mewarnai {count} provinsi menurut jumlah rekaman. Angka per provinsi ada di grafik 10 provinsi teratas dan di halaman Peta.",
     "openMap": "Buka peta interaktif",
-    "eyebrow": "Data KUPS · rilis {version}",
+    "eyebrow": "Data KUPS",
     "tickerTitle": "Provinsi menurut jumlah rekaman",
     "tickerCount": "{count} rekaman",
     "nextEyebrow": "Jelajahi",
@@ -82,7 +81,10 @@
       "organizations": "{orgs} OMS yang tercatat mendampingi Perhutanan Sosial.",
       "download": "Berkas rilis lengkap dalam Excel dan CSV.",
       "about": "Cara data diambil, diolah, dan diperiksa."
-    }
+    },
+    "provincesUnit": "provinsi",
+    "regenciesUnit": "kabupaten/kota",
+    "regenciesLink": "Lihat per provinsi dan kabupaten/kota"
   },
   "map": {
     "title": "Peta sebaran",
@@ -139,7 +141,21 @@
     "chartComposition": "Komposisi jenis PS {level}, {scope}",
     "regionTableCaption": "Jumlah rekaman {level} dan jenis PS, {scope}",
     "sexTableCaption": "Anggota laki-laki dan perempuan {level}, {scope}",
-    "sexTableNote": "Jumlah laki-laki dan perempuan dihitung dari rekaman yang sama dengan Anggota L+P, jadi keduanya selalu berjumlah sama dengan Anggota L+P. Kolom terakhir berisi jumlah rekaman yang mencatat 0 perempuan."
+    "sexTableNote": "Jumlah laki-laki dan perempuan dihitung dari rekaman yang sama dengan Anggota L+P, jadi keduanya selalu berjumlah sama dengan Anggota L+P. Kolom terakhir berisi jumlah rekaman yang mencatat 0 perempuan.",
+    "coverage": {
+      "title": "Kabupaten/kota yang punya SK, {scope}",
+      "lead": "Jumlah kabupaten/kota menurut daftar resmi Kemendagri 2025, dan berapa yang sudah punya SK Perhutanan Sosial sesuai filter di atas.",
+      "total": "Jumlah kabupaten/kota",
+      "withSk": "Punya SK Perhutanan Sosial",
+      "ofTotal": "dari {total}",
+      "area": "Luas SK",
+      "groups": "Nama kelompok",
+      "seeGroups": "Lihat {count} SK dan nama kelompoknya",
+      "none": "Belum ada SK",
+      "colTotal": "Kabupaten/kota",
+      "colWithSk": "Punya SK",
+      "pickProvince": "Klik nama provinsi untuk melihat setiap kabupaten/kotanya dan daftar kelompok penerima SK."
+    }
   },
   "columns": {
     "records": "Rekaman",

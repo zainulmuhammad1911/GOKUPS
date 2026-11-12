@@ -121,6 +121,36 @@ export default async function StatisticsPage({
       <td className="px-3 py-2 text-right tabular">{n(row.members_female)}</td>
     </>
   );
+  // Cakupan kabupaten/kota: berapa kabupaten/kota (Kepmendagri 2025) yang punya SK, dari rekaman yang lolos filter.
+  const regencyAreas = adminAreas.filter((a) => a.level === "regency");
+  const regencyByCode = new Map(regencies.map((r) => [r.code, r]));
+  const coverageProvince = query.province && !query.regency ? query.province : null;
+  const coverageProvinces = adminAreas
+    .filter((a) => a.level === "province")
+    .filter((a) => !query.region || ctx.provinceRegion.get(a.code) === query.region)
+    .map((p) => {
+      const regs = regencyAreas.filter((r) => r.parent_code === p.code);
+      const withSk = regs.filter((r) => regencyByCode.has(r.code));
+      const area = withSk.reduce((sum, r) => sum + (regencyByCode.get(r.code)?.area ?? 0), 0);
+      const sk = withSk.reduce((sum, r) => sum + (regencyByCode.get(r.code)?.records ?? 0), 0);
+      return { code: p.code, name: p.name, total: regs.length, withSk: withSk.length, area, sk };
+    });
+  const coverageRegencies = coverageProvince
+    ? regencyAreas
+        .filter((r) => r.parent_code === coverageProvince)
+        .map((r) => ({ code: r.code, name: r.name, stat: regencyByCode.get(r.code) }))
+    : [];
+  const coverageSummary = coverageProvince
+    ? {
+        total: coverageRegencies.length,
+        withSk: coverageRegencies.filter((r) => r.stat).length,
+        area: coverageRegencies.reduce((sum, r) => sum + (r.stat?.area ?? 0), 0),
+      }
+    : {
+        total: coverageProvinces.reduce((sum, p) => sum + p.total, 0),
+        withSk: coverageProvinces.reduce((sum, p) => sum + p.withSk, 0),
+        area: coverageProvinces.reduce((sum, p) => sum + p.area, 0),
+      };
   const regionKey = (code: string) => (r: (typeof records)[number]) =>
     (level === "province" ? r.derived.province_code : r.derived.regency_code) === code;
 
@@ -198,6 +228,101 @@ export default async function StatisticsPage({
       <p className="mt-1 text-small">
         <Link href={{ pathname: "/data", query: toSearchParams(query) }}>{t("statistics.toRecords", { count: n(records.length) })}</Link>
       </p>
+
+      {!query.regency && (
+        <SectionCard
+          id="cakupan-kabupaten"
+          title={t("statistics.coverage.title", { scope })}
+          description={`${t("statistics.coverage.lead")} ${caption}`}
+        >
+          <div className="mb-5 grid gap-3 sm:grid-cols-3">
+            <div className="rounded-xl bg-muted px-5 py-4">
+              <p className="text-small text-muted-foreground">{t("statistics.coverage.total")}</p>
+              <p className="font-heading text-[1.75rem] leading-9 font-extrabold text-forest tabular">{n(coverageSummary.total)}</p>
+            </div>
+            <div className="rounded-xl bg-muted px-5 py-4">
+              <p className="text-small text-muted-foreground">{t("statistics.coverage.withSk")}</p>
+              <p className="font-heading text-[1.75rem] leading-9 font-extrabold text-forest tabular">
+                {n(coverageSummary.withSk)}
+                <span className="ml-2 text-h3 font-normal text-muted-foreground">
+                  {t("statistics.coverage.ofTotal", { total: n(coverageSummary.total) })}
+                </span>
+              </p>
+            </div>
+            <div className="rounded-xl bg-muted px-5 py-4">
+              <p className="text-small text-muted-foreground">{t("statistics.coverage.area")}</p>
+              <p className="font-heading text-[1.75rem] leading-9 font-extrabold text-forest tabular">
+                {n(coverageSummary.area)} <span className="text-h3 font-normal text-muted-foreground">{t("common.hectare")}</span>
+              </p>
+            </div>
+          </div>
+          <div className="relative overflow-x-auto rounded-md border" role="region" aria-labelledby="cakupan-kabupaten" tabIndex={0}>
+            {coverageProvince ? (
+              <table className="w-full min-w-[640px] border-collapse text-small">
+                <thead className="bg-muted text-left">
+                  <tr>
+                    <th scope="col" className="px-3 py-2">{t("data.regency")}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{t("columns.records")}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{t("columns.area")}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{t("columns.members")}</th>
+                    <th scope="col" className="px-3 py-2">{t("statistics.coverage.groups")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {coverageRegencies.map((r) => (
+                    <tr key={r.code} className="border-b border-border align-top hover:bg-muted/40">
+                      <th scope="row" className="px-3 py-2 text-left font-normal">{r.name}</th>
+                      {r.stat ? (
+                        <>
+                          <td className="px-3 py-2 text-right tabular">{n(r.stat.records)}</td>
+                          <td className="px-3 py-2 text-right tabular">{n(r.stat.area)}</td>
+                          <td className="px-3 py-2 text-right tabular">{n(r.stat.members)}</td>
+                          <td className="px-3 py-2">
+                            <Link href={{ pathname: "/data", query: toSearchParams({ ...query, province: null, regency: r.code }) }} className="font-bold">
+                              {t("statistics.coverage.seeGroups", { count: n(r.stat.records) })}
+                              <span className="sr-only">, {r.name}</span>
+                            </Link>
+                          </td>
+                        </>
+                      ) : (
+                        <td colSpan={4} className="px-3 py-2 text-muted-foreground italic">{t("statistics.coverage.none")}</td>
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <table className="w-full min-w-[640px] border-collapse text-small">
+                <thead className="bg-muted text-left">
+                  <tr>
+                    <th scope="col" className="px-3 py-2">{t("map.province")}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{t("statistics.coverage.colTotal")}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{t("statistics.coverage.colWithSk")}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{t("columns.records")}</th>
+                    <th scope="col" className="px-3 py-2 text-right">{t("columns.area")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {coverageProvinces.map((p) => (
+                    <tr key={p.code} className="border-b border-border hover:bg-muted/40">
+                      <th scope="row" className="px-3 py-2 text-left font-normal">
+                        <Link href={{ pathname: "/statistics", query: toSearchParams({ ...query, province: p.code, regency: null }), hash: "cakupan-kabupaten" }}>
+                          {p.name}
+                        </Link>
+                      </th>
+                      <td className="px-3 py-2 text-right tabular">{n(p.total)}</td>
+                      <td className="px-3 py-2 text-right tabular font-bold">{n(p.withSk)}</td>
+                      <td className="px-3 py-2 text-right tabular">{n(p.sk)}</td>
+                      <td className="px-3 py-2 text-right tabular">{n(p.area)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+          {!coverageProvince && <p className="mt-3 text-small text-muted-foreground">{t("statistics.coverage.pickProvince")}</p>}
+        </SectionCard>
+      )}
 
       {records.length === 0 ? (
         <div className="mt-6">
