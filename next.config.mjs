@@ -1,12 +1,15 @@
-import type { NextConfig } from "next";
+// Konfigurasi ditulis sebagai JavaScript (bukan next.config.ts) agar Next.js tidak perlu
+// menerjemahkannya dengan SWC. Di server dengan glibc lama, SWC gagal dimuat dan build berhenti
+// saat membaca next.config.ts ("Cannot find module '<hash>.next.config'").
 import createNextIntlPlugin from "next-intl/plugin";
 import { readFileSync } from "node:fs";
 
-const maplibreVersion: string = JSON.parse(readFileSync("node_modules/maplibre-gl/package.json", "utf-8")).version;
+const maplibreVersion = JSON.parse(readFileSync("node_modules/maplibre-gl/package.json", "utf-8")).version;
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
-const nextConfig: NextConfig = {
+/** @type {import("next").NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
   // Build mandiri untuk hosting institusi (Docker atau server Node), lihat Dockerfile dan README.
   output: "standalone",

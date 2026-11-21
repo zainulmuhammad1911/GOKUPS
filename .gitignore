@@ -35,3 +35,7 @@ playwright-report/
 next-env.d.ts
 *.tsbuildinfo
 public/vendor/
+
+# --- Berkas sementara Next.js saat membaca konfigurasi ---
+*.next.config.*
+next.config.compiled.js

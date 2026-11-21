@@ -102,7 +102,7 @@ cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/ && 
 ```
 
 Catatan:
-- Perutean bahasa memakai `rewrites` di `next.config.ts`, bukan middleware, sehingga aman di belakang reverse proxy dengan host apa pun.
+- Perutean bahasa memakai `rewrites` di `next.config.mjs`, bukan middleware, sehingga aman di belakang reverse proxy dengan host apa pun.
 - Header keamanan dan CSP dipasang oleh aplikasi. CSP hanya mengizinkan sumber dari domain sendiri.
 - Build image Docker belum diuji di mesin pengembangan (daemon Docker tidak berjalan); build standalone sudah diuji.
 
