@@ -108,18 +108,18 @@ Catatan:
 
 ### Hostinger (Node.js Web App)
 
-Server build Hostinger memakai glibc lama, sehingga Turbopack (bawaan `next build` di Next.js 16) dan binari SWC asli tidak bisa berjalan ("Turbopack is not supported on this platform"). Pakai build webpack; bila SWC asli gagal dimuat, Next.js beralih ke `@next/swc-wasm-nodejs` yang sudah terpasang sebagai dependensi opsional.
+Server build Hostinger memakai glibc lama, sehingga Turbopack dan binari SWC asli tidak bisa berjalan ("Turbopack is not supported on this platform"). Karena itu `npm run build` memakai webpack (`next build --webpack`) di semua tempat, termasuk Vercel; bila SWC asli gagal dimuat, Next.js beralih ke `@next/swc-wasm-nodejs` yang sudah terpasang sebagai dependensi opsional.
 
 | Setelan | Nilai |
 |---------|-------|
 | Framework | Next.js |
 | Versi Node | 20 atau 22 |
 | Package manager | npm |
-| Build command | `npm run build:hostinger` |
+| Build command | `npm run build` |
 | Start command | `npm start` |
 | Output directory | `.next` |
 
-Folder `data/` dan `config/` harus ikut ter-deploy, karena aplikasi membaca rilis data dari sana saat berjalan. Vercel tetap memakai `npm run build` (Turbopack).
+Folder `data/` dan `config/` harus ikut ter-deploy, karena aplikasi membaca rilis data dari sana saat berjalan.
 
 ## Sebelum publikasi
 

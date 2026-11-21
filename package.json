@@ -5,14 +5,13 @@
   "description": "Data KUPS: aplikasi web data persetujuan Perhutanan Sosial",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:e2e": "playwright test",
     "predev": "node scripts/copy-vendor.mjs",
-    "prebuild": "node scripts/copy-vendor.mjs",
-    "build:hostinger": "node scripts/copy-vendor.mjs && next build --webpack"
+    "prebuild": "node scripts/copy-vendor.mjs"
   },
   "engines": {
     "node": ">=20.9"
