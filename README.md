@@ -106,6 +106,21 @@ Catatan:
 - Header keamanan dan CSP dipasang oleh aplikasi. CSP hanya mengizinkan sumber dari domain sendiri.
 - Build image Docker belum diuji di mesin pengembangan (daemon Docker tidak berjalan); build standalone sudah diuji.
 
+### Hostinger (Node.js Web App)
+
+Server build Hostinger memakai glibc lama, sehingga Turbopack (bawaan `next build` di Next.js 16) dan binari SWC asli tidak bisa berjalan ("Turbopack is not supported on this platform"). Pakai build webpack; bila SWC asli gagal dimuat, Next.js beralih ke `@next/swc-wasm-nodejs` yang sudah terpasang sebagai dependensi opsional.
+
+| Setelan | Nilai |
+|---------|-------|
+| Framework | Next.js |
+| Versi Node | 20 atau 22 |
+| Package manager | npm |
+| Build command | `npm run build:hostinger` |
+| Start command | `npm start` |
+| Output directory | `.next` |
+
+Folder `data/` dan `config/` harus ikut ter-deploy, karena aplikasi membaca rilis data dari sana saat berjalan. Vercel tetap memakai `npm run build` (Turbopack).
+
 ## Sebelum publikasi
 
 Daftar lengkap ada di `docs/QA_REPORT.md` bagian 6. Ringkasnya:
